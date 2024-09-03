@@ -7,6 +7,7 @@ library(tidyr)
 library(rstatix)
 library(readr)
 library(presto)
+library(svglite)
 
 ### Remove all special characters
 data_colnames <- c(
