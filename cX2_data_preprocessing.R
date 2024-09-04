@@ -22,8 +22,8 @@ data_colnames <- c(
   "CD45", "Cytokeratin"
 )
 
-data_folder <- "/home/ubuntu/project/temp/Benchmarking_tissue_preparation_data"
-out_folder <- "./"
+data_folder <- "/bmbl_data/shaohong/sizun_benchmark/"
+out_folder <- "./out/"
 
 ### What data to load?
 data_type <- "cX2" ### MESMER or cX2
@@ -49,7 +49,7 @@ std_features <- c(
   "area:mask:cell_region"
 )
 
-data <- load_cX2_data(all_of(c(std_features, feature_names)), 'data')
+data <- load_cX2_data(all_of(c(std_features, feature_names)), data_folder)
 
 colnames(data) <- c(
   "cellLabel", "Y_cent", "X_cent", "cellSize",
@@ -58,9 +58,11 @@ colnames(data) <- c(
 )
 
 
-df_norm = normalize_data(data)
-### Arcsinh (Inverse hyperbolic Sine) Transformation
+result <- normalize_data(data)
+df_norm <- result$data
+marker_names <- result$marker_names
 
+### Arcsinh (Inverse hyperbolic Sine) Transformation
 df_arcsinh <- df_norm %>% 
   mutate(across(all_of(marker_names), ~asinh(.x/0.001)))
 

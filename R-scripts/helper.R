@@ -3,11 +3,11 @@
 load_mesmer_data <- function(data_colnames, data_folder) {
   data_slide <- function(slide_num, staining_condition) {
     data_slide_FOV1 <- read.csv(
-      paste0(data_folder, "/dataScaleSize_slide", slide_num, "_FOV1.csv"),
+      paste0(data_folder, "dataScaleSize_slide", slide_num, "_FOV1.csv"),
       col.names = data_colnames, header = TRUE
     )
     data_slide_FOV2 <- read.csv(
-      paste0(data_folder, "/dataScaleSize_slide", slide_num, "_FOV2.csv"),
+      paste0(data_folder, "dataScaleSize_slide", slide_num, "_FOV2.csv"),
       col.names = data_colnames, header = TRUE
     )
     data_slide <- rbind(data_slide_FOV1, data_slide_FOV2)
@@ -29,7 +29,7 @@ load_cX2_data <- function(data_colnames, data_folder) {
   
   load_data <- function(slide_num, staining_condition) {
     data_slide <- read_csv(
-      file = paste0(data_folder, "/cX2_Slide", slide_num, "_rawdata.csv"),
+      file = paste0(data_folder, "cX2_Slide", slide_num, "_rawdata.csv"),
       col_sel = data_colnames,
       show_col_types = FALSE
       ) |>
@@ -88,10 +88,10 @@ normalize_data <- function (data) {
     }
     str(df_norm)
 
-    return df_norm
+    return(list(data=df_norm, marker_names=marker_names))
   } else {
     print("Column 'Hoechst' not found in the dataset.")
-    return data
+    return(list(data=data, marker_names=marker_names))
   }  
 }
 
@@ -154,17 +154,17 @@ perform_statistical_and_kruskal_wallis_tests <- function(data, marker_names) {
     adjust_pvalue(method = "BH") %>%
     add_significance()
 
-  return kruskal_results
+  return(kruskal_results)
 }
 
 plot_heatmap <- function(data) {
-  df_trans <- df_trans %>% mutate(id = str_c("c", 1:nrow(.)))
-  counts <- df_trans %>%
+  data <- data %>% mutate(id = str_c("c", 1:nrow(.)))
+  counts <- data %>%
     column_to_rownames("id") %>%
     select(Hoechst:Cytokeratin) %>%
     t()
-  group.by <- df_trans$Staining_condition
-  comb_2 <- combn(unique(sr$Staining_condition), 2)
+  group.by <- data$Staining_condition
+  comb_2 <- combn(unique(data$Staining_condition), 2)
   res <- vector("list", ncol(comb_2))
   for (i in seq_along(res)) {
     res[[i]] <- wilcoxauc(counts, group.by, comb_2[, 1]) %>%
@@ -174,17 +174,17 @@ plot_heatmap <- function(data) {
   
   #Prepare data for Cohen's d effect size test
   # Calculate mean of each marker for each staining condition
-  mean_df <- df_trans %>%
+  mean_df <- data %>%
     group_by(Staining_condition) %>%
     summarise(across(.cols = Hoechst:Cytokeratin, .fns = \(x) mean(x, na.rm = TRUE)))
   
   # Calculate sd of each marker for each staining condition
-  sd_df <- df_trans %>%
+  sd_df <- data %>%
     group_by(Staining_condition) %>%
     summarise(across(.cols = Hoechst:Cytokeratin, .fns = \(x) sd(x, na.rm = TRUE)))
   
   # Calculate the number of cells for each staining condition
-  n_df <- df_trans %>%
+  n_df <- data %>%
     group_by(Staining_condition) %>%
     summarise(n = n()) %>%
     ungroup()
@@ -296,7 +296,7 @@ plot_heatmap <- function(data) {
   ####Calculate Z scores and plot heatmap
   
   # Calculate mean of each marker for each staining condition
-  mean_df_2 <- df_trans %>%
+  mean_df_2 <- data %>%
     group_by(Staining_condition) %>%
     summarise(across(.cols = CD3:Cytokeratin, .fns = \(x) mean(x, na.rm = TRUE)))
   
@@ -334,7 +334,7 @@ plot_heatmap <- function(data) {
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     labs(x = "Staining Condition", y = "Marker", fill = "Z-Score")
   
-  return heatmap
+  return(heatmap)
 }
 
 

@@ -22,52 +22,23 @@ data_colnames <- c(
   "CD45", "Cytokeratin"
 )
 
-data_folder <- "/home/ubuntu/project/temp/Benchmarking_tissue_preparation_data"
-out_folder <- "./"
+data_folder <- "/bmbl_data/shaohong/sizun_benchmark/"
+out_folder <- "./out/"
 
 ### What data to load?
 data_type <- "MESMER" ### MESMER or cX2
 
-if (data_type == "MESMER") {
   ### Use MESMER data
   data <- load_mesmer_data(data_colnames, data_folder)
   
   marker_names <- colnames(data[, 6:33])
   
-} else {
-  ### Use cX2 data
-  marker_names <- c(
-    "DAPI", "CD3", "aSMA", "CD15", "CD4", "CD8",
-    "CD11b", "CD11c", "CD20", "CD21", "H3K27me3",
-    "Ki67", "HLADRA", "HistoneH3", "CD68", "DCSIGN",
-    "Foxp3", "PD1", "CD163", "H3K27ac", "GranzymeB",
-    "CD31", "CD206", "CD138", "NaKATPase", "CD45RA",
-    "CD45", "Cytokeratin"
-  )
-  
-  feature_names <- paste0(
-    "mean_intensity:", marker_names, ":cell_region"
-  )
-  
-  std_features <- c(
-    "label:mask:cell_region",
-    "pos_y:mask:cell_region",
-    "pos_x:mask:cell_region",
-    "area:mask:cell_region"
-  )
-  
-  data <- load_cX2_data(all_of(c(std_features, feature_names)), 'data')
-  
-  colnames(data) <- c(
-    "cellLabel", "Y_cent", "X_cent", "cellSize",
-    marker_names,
-    "Staining_condition"
-  )
-}
 
-df_form = normalize_data(data)
+result = normalize_data(data)
+df_norm <- result$data
+marker_names <- result$marker_names
+
 ### Arcsinh (Inverse hyperbolic Sine) Transformation
-
 df_arcsinh <- df_norm %>% 
   mutate(across(all_of(marker_names), ~asinh(.x/0.001)))
 
@@ -98,13 +69,13 @@ ggsave(
 kruskal_results <- perform_statistical_and_kruskal_wallis_tests(df_trans, marker_names)
 
 # Save Kruskal-Wallis p-values to CSV
-write_csv(kruskal_results, paste0(out_folder, "/kruskal_pvals.csv"))
+write_csv(kruskal_results, paste0(out_folder, "kruskal_pvals.csv"))
 
 heatmap <- plot_heatmap(df_trans)
 
 #Save the plot as svg
 ggsave(
-  filename = paste0(out_folder, "/Heatmap of arcsinh transform normalised data Z scores_with excluded values.svg"), 
+  filename = paste0(out_folder, "Heatmap of arcsinh transform normalised data Z scores_with excluded values.svg"), 
   width = 10, 
   height = 8
 )
