@@ -3,8 +3,8 @@
 ### Table of Contents
 - [Abstract](#abstract)
 - [Environment](#environment)
-- [Reproducing manuscript figure](reproducing)
-- [Directory structure](directory)
+- [Reproducing manuscript figure](#reproducing)
+- [Directory structure](#directory)
 
 <a name="abstract"></a>
 # Abstract
