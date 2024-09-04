@@ -22,17 +22,15 @@ data_colnames <- c(
   "CD45", "Cytokeratin"
 )
 
-data_folder <- "/bmbl_data/shaohong/sizun_benchmark/"
+data_folder <- "./data/"
 out_folder <- "./out/"
 
 ### What data to load?
 data_type <- "MESMER" ### MESMER or cX2
 
-  ### Use MESMER data
-  data <- load_mesmer_data(data_colnames, data_folder)
-  
-  marker_names <- colnames(data[, 6:33])
-  
+### Use MESMER data
+data <- load_mesmer_data(data_colnames, data_folder)
+marker_names <- colnames(data[, 6:33])
 
 result = normalize_data(data)
 df_norm <- result$data

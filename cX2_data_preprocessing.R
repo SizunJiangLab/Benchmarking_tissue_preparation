@@ -22,7 +22,7 @@ data_colnames <- c(
   "CD45", "Cytokeratin"
 )
 
-data_folder <- "/bmbl_data/shaohong/sizun_benchmark/"
+data_folder <- "./data/"
 out_folder <- "./out/"
 
 ### What data to load?
