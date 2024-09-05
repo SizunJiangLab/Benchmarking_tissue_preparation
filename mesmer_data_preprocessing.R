@@ -73,7 +73,7 @@ heatmap <- plot_heatmap(df_trans)
 
 #Save the plot as svg
 ggsave(
-  filename = paste0(out_folder, "Heatmap of arcsinh transform normalised data Z scores_with excluded values.svg"), 
+  filename = paste0(out_folder, "Heatmap of arcsinh transform normalised data Z scores of CV_with excluded values.svg"), 
   width = 10, 
   height = 8
 )

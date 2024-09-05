@@ -19,8 +19,7 @@ pip install -r ./requirements.txt
  - R environment:
 ```
 install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
-```
-```
+
 devtools::install_github("immunogenomics/presto")
 ```
 
@@ -29,7 +28,7 @@ devtools::install_github("immunogenomics/presto")
 
 To reproduce the figures in manuscript, please first download original data from [Zenodo](https://doi.org/10.5281/zenodo.11391050) to `./data` folder.
 
- 1. Run segmentation_scFeature_extraction_4slides.ipynb:
+ 1. Run the `segmentation_scFeature_extraction_4slides.ipynb` notebook:
 
 This script generate cell masks for Fig. 1E and input for Fig. 1C, Fig. 1D, Supp Fig. 1F.
 

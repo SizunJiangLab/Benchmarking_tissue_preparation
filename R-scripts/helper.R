@@ -293,49 +293,47 @@ plot_heatmap <- function(data) {
   # Write the filtered results to a new CSV file
   write.csv(large_effect_results, "large_effect_results.csv", row.names = FALSE)
   
-  ####Calculate Z scores and plot heatmap
+  ####Calculate Coefficient of Variation (CV) and plot heatmap
   
   # Calculate mean of each marker for each staining condition
-  mean_df_2 <- data %>%
+  cv_df_1 <- df_trans %>%
     group_by(Staining_condition) %>%
-    summarise(across(.cols = CD3:Cytokeratin, .fns = \(x) mean(x, na.rm = TRUE)))
-  
+    summarise(across(.cols = CD3:Cytokeratin, .fns = function(x) {
+      sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+    }))
   excluded_values <- list(
     '20 min HIER, 1h 37C stain' = c("DCSIGN"),  # Exclude Marker1 values for Condition1
     '10 min HIER, ON 4C stain' = c("DCSIGN", "Cytokeratin")   # Exclude Marker2 values for Condition3
   )
-  
+
   #Replace values to exclude with NA
   for (condition in names(excluded_values)) {
     for (marker in excluded_values[[condition]]) {
-      mean_df_2[mean_df$Staining_condition == condition, marker] <- NA
+      cv_df_1[mean_df$Staining_condition == condition, marker] <- NA
     }
   }
+
   #Calculate Z-scores, excluding NA values
-  means <- mean_df_2 %>%
+  means <- cv_df_1 %>%
     summarise(across(-Staining_condition, mean, na.rm = TRUE))
   
-  sds <- mean_df_2 %>%
+  sds <- cv_df_1 %>%
     summarise(across(-Staining_condition, sd, na.rm = TRUE))
   
-  z_scores <- mean_df_2 %>%
+  z_scores <- cv_df_1 %>%
     mutate(across(-Staining_condition, ~ (.-means[[cur_column()]]) / sds[[cur_column()]]))
   
-  
   #Plot the heatmap
-  z_scores_long <- z_scores %>%
+  cv_z_scores_long <- z_scores %>%
     pivot_longer(cols = -Staining_condition, names_to = "Marker", values_to = "Z_score")
-  
-  
-  heatmap <- ggplot(z_scores_long, aes(x = Staining_condition, y = Marker, fill = Z_score)) +
+
+  heatmap <- ggplot(cv_z_scores_long, aes(x = Staining_condition, y = Marker, fill = Z_score)) +
     geom_tile(color = "black", lwd = 0.4) +
-    scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+    scale_fill_distiller(palette = 'PiYG', direction = -1) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     labs(x = "Staining Condition", y = "Marker", fill = "Z-Score")
   
   return(heatmap)
 }
-
-
 
