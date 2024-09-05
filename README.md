@@ -85,3 +85,5 @@ out_folder = "/project/temp/Benchmarking_tissue_preparation_out/"
 * [Johanna Schaffenrath](https://github.com/johannaschaffenrath)
 * [Shaohong Feng](https://github.com/fengsh27)
 * [Cankun Wang](https://github.com/Wang-Cankun)
+
+If you have any questions or feedback regarding this repository, please contact Sizun Jiang via sjiang3@bidmc.harvard.edu.
