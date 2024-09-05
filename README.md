@@ -67,18 +67,6 @@ Benchmark_tissue_preparation
 |---cX2_data_preprocessing.R: R script to generate the figures for cellXpress2 cell segmentations
 |---README.md: this file
 ```
-The default data and output directory can be overriden in python notebook `segmentation_scFeature_extraction_4slides.ipynb`:
-
-```
-# To set data folder and out folder, un-comment the following code
-# os.environ["DATA_FOLDER"] = "/project/temp/Benchmarking_tissue_preparation_data/"
-# os.environ["OUT_FOLDER"] = "/project/temp/Benchmarking_tissue_preparation_out/"
-```
-and in `mesmer_data_preprocessing.R` and `cX2_data_preprocessing.R`:
-```
-data_folder = "/project/temp/Benchmarking_tissue_preparation_data/"
-out_folder = "/project/temp/Benchmarking_tissue_preparation_out/"
-```
 
 <a name="contributor"></a>
 # Contributor

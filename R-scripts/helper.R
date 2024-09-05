@@ -157,7 +157,7 @@ perform_statistical_and_kruskal_wallis_tests <- function(data, marker_names) {
   return(kruskal_results)
 }
 
-plot_heatmap <- function(data) {
+plot_heatmap <- function(data, out_folder) {
   data <- data %>% mutate(id = str_c("c", 1:nrow(.)))
   counts <- data %>%
     column_to_rownames("id") %>%
@@ -280,7 +280,7 @@ plot_heatmap <- function(data) {
   print(cohens_d_results)
   
   # Export the results to a CSV file
-  write.csv(cohens_d_results, "cohens_d_results.csv", row.names = FALSE)
+  write.csv(cohens_d_results, paste0(out_folder, "cohens_d_results.csv"), row.names = FALSE)
   
   # Filter rows where the Size_of_effect is "large"
   large_effect_results <- cohens_d_results %>%
@@ -291,7 +291,7 @@ plot_heatmap <- function(data) {
   print(large_effect_results)
   
   # Write the filtered results to a new CSV file
-  write.csv(large_effect_results, "large_effect_results.csv", row.names = FALSE)
+  write.csv(large_effect_results, paste0(out_folder, "large_effect_results.csv"), row.names = FALSE)
   
   ####Calculate Coefficient of Variation (CV) and plot heatmap
   

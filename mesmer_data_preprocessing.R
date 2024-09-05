@@ -69,7 +69,8 @@ kruskal_results <- perform_statistical_and_kruskal_wallis_tests(df_trans, marker
 # Save Kruskal-Wallis p-values to CSV
 write_csv(kruskal_results, paste0(out_folder, "kruskal_pvals.csv"))
 
-heatmap <- plot_heatmap(df_trans)
+# plot heatmap
+heatmap <- plot_heatmap(df_trans, out_folder)
 
 #Save the plot as svg
 ggsave(
