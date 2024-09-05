@@ -82,6 +82,6 @@ out_folder = "/project/temp/Benchmarking_tissue_preparation_out/"
 
 <a name="contributor"></a>
 # Contributor
-* Johanna Schaffenrath
-* Shaohong Feng
-* Cankun Wang
+* [Johanna Schaffenrath](https://github.com/johannaschaffenrath)
+* [Shaohong Feng](https://github.com/fengsh27)
+* [Cankun Wang](https://github.com/Wang-Cankun)
