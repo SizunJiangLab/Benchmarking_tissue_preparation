@@ -40,13 +40,13 @@ The results are written to `./out/extracted_features/dataScaleSize_slide{1,2,3,4
 
 This notebook is compatible with python 3.9.12
 
-2. Run mesmer_data_preprocessing.R:
+2. Run `mesmer_data_preprocessing.R`:
 
 This script produces Fig. 1C, Fig. 1D, Supp Fig. 1F. It processes extracted per-cell signals (in .csv format) from Mesmer for outlier removal, normalization, transformation, and statistical analysis. Visualizations include density plots and heatmaps. 
 
 This script is compatible with R 4.3.2.
 
-3. Run cX2_data_preprocessing.R:
+3. Run `cX2_data_preprocessing.R`:
 
 This script produces Supp Fig. 1G. It processes extracted per-cell signals (in .csv format) from cellXpress2 for outlier removal, normalization, transformation. Visualizations include density plots. 
 
