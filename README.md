@@ -4,6 +4,7 @@
 - [Environment](#environment)
 - [Reproducing Manuscript Figures](#reproducing)
 - [Directory Structure](#directory)
+- [Contributor](#contributor)
 
 <a name="environment"></a>
 # Environment
@@ -80,3 +81,8 @@ data_folder = "/project/temp/Benchmarking_tissue_preparation_data/"
 out_folder = "/project/temp/Benchmarking_tissue_preparation_out/"
 ```
 
+<a name="contributor"></a>
+# Contributor
+* Johanna Schaffenrath
+* Shaohong Feng
+* Cankun Wang
