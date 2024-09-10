@@ -21,6 +21,9 @@ pip install -r ./requirements.txt
 install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
 
 devtools::install_github("immunogenomics/presto")
+
+# To run balagan_analysis.R:
+devtools::install_github("PierreBSC/Balagan")
 ```
 
 <a name="reproducing"></a>
@@ -50,6 +53,10 @@ This script is compatible with R 4.3.2.
 
 This script produces Supp Fig. 1G. It processes extracted per-cell signals (in .csv format) from cellXpress2 for outlier removal, normalization, transformation. Visualizations include density plots. 
 
+4. Run `balagan_analysis.R`:
+
+This script produces Supp Fig. 1I. It processes "dataScaleSize_slide2_FOV1.csv" using the balagan R package to run spatial clustering and subsampling analysis. The heatmap, clustering scatter plot, and subsampling plot were generated. 
+
 <a name="directory"></a>
 # Directory Structure
 
@@ -65,6 +72,8 @@ Benchmark_tissue_preparation
 |---segmentation_scFeature_extraction_4slides: python notebook
 |---mesmer_data_preprocessing.R: R script to generate the figures for MESMER cell segmentations
 |---cX2_data_preprocessing.R: R script to generate the figures for cellXpress2 cell segmentations
+|---balagan_analysis.R: R script to generate the supplementary fig 1I using the balagan R package
+|---Random.seed.txt: Random seed used to reproduce balagan_analysis.R
 |---README.md: this file
 ```
 
