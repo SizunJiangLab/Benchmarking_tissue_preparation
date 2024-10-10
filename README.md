@@ -51,7 +51,7 @@ It processes stitched and background subtracted images in qptiff format and is d
 
 The results are written to `./out/extracted_features/dataScaleSize_slide{1,2,3,4}.csv` and `./out/extracted_features/data_slide{1,2,3,4}.csv`. 
 
-**Note**: the result files `dataScaleSize_slide{1,2,3,4}.csv` have been included in the original data downloaded from [Zenodo](https://doi.org/10.5281/zenodo.11391050).
+**Note**: Pre-processed result files (`dataScaleSize_slide{1,2,3,4}.csv`) are already included in the dataset downloaded from [Zenodo](https://doi.org/10.5281/zenodo.11391050)., should you wish to skip this step.
 
 This notebook is compatible with Python 3.9.12
 
