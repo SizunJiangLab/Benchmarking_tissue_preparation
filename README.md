@@ -12,11 +12,11 @@
 2. R: should be equal to or greater than 4.3.2
 3. Pre-installation:
    
- - Python environment:
+ - Python packages install (~10 mins):
 ```
 pip install -r ./requirements.txt
 ```
- - R environment:
+ - R environment (~10 mins):
 ```
 install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
 
@@ -31,7 +31,7 @@ devtools::install_github("PierreBSC/Balagan")
 
 To reproduce the figures in manuscript, please first download original data from [Zenodo](https://doi.org/10.5281/zenodo.11391050) to `./data` folder.
 
- 1. Run the `segmentation_scFeature_extraction_4slides.ipynb` notebook:
+ 1. Run the `segmentation_scFeature_extraction_4slides.ipynb` notebook (~5 mins):
 
 This script generate cell masks for Fig. 1E and input for Fig. 1C, Fig. 1D, Supp Fig. 1F.
 
@@ -41,19 +41,19 @@ The results are written to `./out/extracted_features/dataScaleSize_slide{1,2,3,4
 
 **Note**: the result files `dataScaleSize_slide{1,2,3,4}.csv` have been included in the original data downloaded from [Zenodo](https://doi.org/10.5281/zenodo.11391050).
 
-This notebook is compatible with python 3.9.12
+This notebook is compatible with Python 3.9.12
 
-2. Run `mesmer_data_preprocessing.R`:
+2. Run `mesmer_data_preprocessing.R`(~3 mins):
 
 This script produces Fig. 1C, Fig. 1D, Supp Fig. 1F. It processes extracted per-cell signals (in .csv format) from Mesmer for outlier removal, normalization, transformation, and statistical analysis. Visualizations include density plots and heatmaps. 
 
 This script is compatible with R 4.3.2.
 
-3. Run `cX2_data_preprocessing.R`:
+3. Run `cX2_data_preprocessing.R`(~3 mins):
 
 This script produces Supp Fig. 1G. It processes extracted per-cell signals (in .csv format) from cellXpress2 for outlier removal, normalization, transformation. Visualizations include density plots. 
 
-4. Run `balagan_analysis.R`:
+4. Run `balagan_analysis.R`(~15 mins):
 
 This script produces Supp Fig. 1I. It processes "dataScaleSize_slide2_FOV1.csv" using the balagan R package to run spatial clustering and subsampling analysis. The heatmap, clustering scatter plot, and subsampling plot were generated. 
 
