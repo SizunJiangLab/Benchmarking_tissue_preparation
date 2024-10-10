@@ -10,18 +10,25 @@
 # Environment
 
 This repository has been tested on the following operating systems:
+
 - MacOS 14.6.1
 - Red Hat Enterprise Linux 8.10 (Ootpa)
 
-1. Python: should be compatible with Python ^3.9.12
-2. R: should be equal to or greater than 4.3.2
-3. Required software dependencies to run code in this repository:
+To ensure compatibility and reproducibility, the following software versions and packages are recommended:
 
-- Python packages (~10 mins to install):
+1. Python: should be compatible with Python ^3.9.12
+2. R: >= 4.3.2
+3. Required Software Dependencies:
+
+The software dependencies necessary to run the code in this repository can be installed using the following steps.
+
+- Python Dependencies (approx. ~10 mins to install):
+
 ```
 pip install -r ./requirements.txt
 ```
- - R packages (~15 mins to install):
+- R Dependencies (approx. ~15 mins to install):
+
 ```
 install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
 
@@ -34,7 +41,7 @@ devtools::install_github("PierreBSC/Balagan")
 <a name="reproducing"></a>
 # Reproducing Manuscript Figures
 
-To reproduce the figures in manuscript, please first download original data from [Zenodo](https://doi.org/10.5281/zenodo.11391050) to `./data` folder.
+To reproduce the figures presented in the manuscript, you will need to download the original dataset from [Zenodo](https://doi.org/10.5281/zenodo.11391050) and place them in the `./data` folder.
 
  1. Run the `segmentation_scFeature_extraction_4slides.ipynb` notebook (~5 mins):
 
