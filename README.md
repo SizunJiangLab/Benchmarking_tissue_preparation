@@ -8,15 +8,20 @@
 
 <a name="environment"></a>
 # Environment
+
+This repository has been tested on the following operating systems:
+- MacOS 14.6.1
+- Red Hat Enterprise Linux 8.10 (Ootpa)
+
 1. Python: should be compatible with Python ^3.9.12
 2. R: should be equal to or greater than 4.3.2
-3. Pre-installation:
-   
- - Python packages install (~10 mins):
+3. Required software dependencies to run code in this repository:
+
+- Python packages (~10 mins to install):
 ```
 pip install -r ./requirements.txt
 ```
- - R environment (~10 mins):
+ - R packages (~15 mins to install):
 ```
 install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
 
