@@ -3,3 +3,6 @@ data/*.qptiff
 data/*.svg
 .DS_Store
 out/*
+MESMER_workflow/**/*.csv
+MESMER_workflow/**/*.svg
+MESMER_workflow/**/*.Rhistory
