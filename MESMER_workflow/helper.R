@@ -85,7 +85,12 @@ normalize_data <- function (data) {
 }
 
 # Function to plot density plots for each staining condition and marker
-plot_density_plots2 <- function(data, marker_names) {
+plot_density_plots2 <- function(data,
+                                marker_names,
+                                legend.position = "bottom",
+                                legend.direction = "horizontal",
+                                legend.justification = "center",
+                                legend.rows = 2) {
   p <- data %>%
     select(Staining_condition, all_of(marker_names)) %>%
     pivot_longer(
@@ -104,14 +109,14 @@ plot_density_plots2 <- function(data, marker_names) {
     theme_classic() +
     theme(
       strip.background = element_blank(),
-      legend.position = "bottom",
-      legend.justification = "center",
-      legend.direction = "horizontal"
+      legend.position = legend.position,
+      legend.justification = legend.justification,
+      legend.direction = legend.direction
     ) +
     labs(x = "Signal", y = "Density", fill = "Staining Condition") +
     guides(
       fill = guide_legend(
-        nrow = 2, byrow = TRUE, title.position = "top", title.hjust = 0.5
+        nrow = legend.rows, byrow = TRUE, title.position = "top", title.hjust = 0.5
       )
     )
   
@@ -134,186 +139,6 @@ perform_statistical_and_kruskal_wallis_tests <- function(data, marker_names) {
   return(kruskal_results)
 }
 
-plot_heatmap <- function(data, out_folder) {
-  data <- data %>% mutate(id = str_c("c", 1:nrow(.)))
-  counts <- data %>%
-    column_to_rownames("id") %>%
-    select(Hoechst:Cytokeratin) %>%
-    t()
-  
-  group.by <- data$Staining_condition
-  comb_2 <- combn(unique(data$Staining_condition), 2)
-  res <- vector("list", ncol(comb_2))
-  for (i in seq_along(res)) {
-    res[[i]] <- wilcoxauc(counts, group.by, comb_2[, 1]) %>%
-      mutate(ident.1 = comb_2[1, i], ident.2 = comb_2[2, i], )
-  }
-  res %>% bind_rows() -> wilcox_results
-  
-  #Prepare data for Cohen's d effect size test
-  # Calculate mean of each marker for each staining condition
-  mean_df <- data %>%
-    group_by(Staining_condition) %>%
-    summarise(across(.cols = Hoechst:Cytokeratin, .fns = \(x) mean(x, na.rm = TRUE)))
-  
-  # Calculate sd of each marker for each staining condition
-  sd_df <- data %>%
-    group_by(Staining_condition) %>%
-    summarise(across(.cols = Hoechst:Cytokeratin, .fns = \(x) sd(x, na.rm = TRUE)))
-  
-  # Calculate the number of cells for each staining condition
-  n_df <- data %>%
-    group_by(Staining_condition) %>%
-    summarise(n = n()) %>%
-    ungroup()
-  
-  # Combine mean, sd, and sample size data frames
-  combined_df <- mean_df %>%
-    rename_with(~ paste0(., "_mean"), -Staining_condition) %>%
-    left_join(sd_df %>% rename_with(~ paste0(., "_sd"), -Staining_condition), by = "Staining_condition") %>%
-    left_join(n_df, by = "Staining_condition")
-  
-  # Define Cohen's d calculation function
-  calculate_cohens_d <- function(mean1, mean2, sd1, sd2, n1, n2) {
-    pooled_sd <- sqrt(((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2) / (n1 + n2 - 2))
-    cohens_d <- (mean1 - mean2) / pooled_sd
-    return(cohens_d)
-  }
-  
-  # Define function to categorize effect size
-  categorize_effect_size <- function(d) {
-    if (d < 0) {
-      return("")
-    } else if (d >= 0 & d <= 0.2) {
-      return("small")
-    } else if (d > 0.2 & d < 0.8) {
-      return("medium")
-    } else if (d >= 0.8) {
-      return("large")
-    }
-  }
-  
-  # Define pairs of staining conditions
-  pairs <- list(
-    c("10 min HIER, ON 4C stain", "20 min HIER, 1h 37C stain"),
-    c("20 min HIER, 1h 37C stain", "10 min HIER, ON 4C stain"),
-    c("10 min HIER, ON 4C stain", "20 min HIER, ON 4C stain"),
-    c("20 min HIER, ON 4C stain", "10 min HIER, ON 4C stain"),
-    c("10 min HIER, ON 4C stain", "40 min HIER, ON 4C stain"),
-    c("40 min HIER, ON 4C stain", "10 min HIER, ON 4C stain"),
-    c("20 min HIER, 1h 37C stain", "20 min HIER, ON 4C stain"),
-    c("20 min HIER, ON 4C stain", "20 min HIER, 1h 37C stain"),
-    c("20 min HIER, 1h 37C stain", "40 min HIER, ON 4C stain"),
-    c("40 min HIER, ON 4C stain", "20 min HIER, 1h 37C stain"),
-    c("20 min HIER, ON 4C stain", "40 min HIER, ON 4C stain"),
-    c("40 min HIER, ON 4C stain", "20 min HIER, ON 4C stain")
-  )
-  
-  
-  # Define function to calculate the standard error of Cohen's d
-  calculate_se_cohens_d <- function(d, n1, n2) {
-    se_d <- sqrt(((n1 + n2) / (n1 * n2)) + (d^2 / (2 * (n1 + n2))))
-    return(se_d)
-  }
-  
-  # Calculate Cohen's d for each marker and pair of staining conditions, including 95% CI
-  cohens_d_results <- data.frame()
-  
-  for (pair in pairs) {
-    condition1 <- pair[1]
-    condition2 <- pair[2]
-    
-    data1 <- combined_df %>% filter(Staining_condition == condition1)
-    data2 <- combined_df %>% filter(Staining_condition == condition2)
-    
-    for (marker in colnames(mean_df)[-1]) {
-      mean1 <- as.numeric(data1[[paste0(marker, "_mean")]])
-      mean2 <- as.numeric(data2[[paste0(marker, "_mean")]])
-      sd1 <- as.numeric(data1[[paste0(marker, "_sd")]])
-      sd2 <- as.numeric(data2[[paste0(marker, "_sd")]])
-      n1 <- as.numeric(data1$n)
-      n2 <- as.numeric(data2$n)
-      
-      cohens_d <- calculate_cohens_d(mean1, mean2, sd1, sd2, n1, n2)
-      
-      size_of_effect <- categorize_effect_size(cohens_d)
-      
-      se_d <- calculate_se_cohens_d(cohens_d, n1, n2)
-      lower_ci <- cohens_d - 1.96 * se_d
-      upper_ci <- cohens_d + 1.96 * se_d
-      
-      cohens_d_results <- rbind(cohens_d_results,
-                                data.frame(Marker = marker,
-                                           Condition1 = condition1,
-                                           Condition2 = condition2,
-                                           Cohens_d = cohens_d,
-                                           Size_of_effect = size_of_effect,
-                                           Lower_CI = lower_ci,
-                                           Upper_CI = upper_ci)) %>%
-        arrange(Marker)
-    }
-  }
-  
-  # View the Cohen's d results with 95% confidence intervals
-  print(cohens_d_results)
-  
-  # Export the results to a CSV file
-  write.csv(cohens_d_results, paste0(out_folder, "cohens_d_results.csv"), row.names = FALSE)
-  
-  # Filter rows where the Size_of_effect is "large"
-  large_effect_results <- cohens_d_results %>%
-    filter(Size_of_effect == "large") %>%
-    arrange(Marker)
-  
-  # View the filtered results
-  print(large_effect_results)
-  
-  # Write the filtered results to a new CSV file
-  write.csv(large_effect_results, paste0(out_folder, "large_effect_results.csv"), row.names = FALSE)
-  
-  ####Calculate Coefficient of Variation (CV) and plot heatmap
-  
-  # Calculate mean of each marker for each staining condition
-  cv_df_1 <- df_trans %>%
-    group_by(Staining_condition) %>%
-    summarise(across(.cols = CD3:Cytokeratin, .fns = function(x) {
-      sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
-    }))
-  excluded_values <- list(
-    '20 min HIER, 1h 37C stain' = c("DCSIGN"),  # Exclude Marker1 values for Condition1
-    '10 min HIER, ON 4C stain' = c("DCSIGN", "Cytokeratin")   # Exclude Marker2 values for Condition3
-  )
-  
-  #Replace values to exclude with NA
-  for (condition in names(excluded_values)) {
-    for (marker in excluded_values[[condition]]) {
-      cv_df_1[mean_df$Staining_condition == condition, marker] <- NA
-    }
-  }
-  
-  #Calculate Z-scores, excluding NA values
-  means <- cv_df_1 %>%
-    summarise(across(-Staining_condition, mean, na.rm = TRUE))
-  
-  sds <- cv_df_1 %>%
-    summarise(across(-Staining_condition, sd, na.rm = TRUE))
-  
-  z_scores <- cv_df_1 %>%
-    mutate(across(-Staining_condition, ~ (.-means[[cur_column()]]) / sds[[cur_column()]]))
-  
-  #Plot the heatmap
-  cv_z_scores_long <- z_scores %>%
-    pivot_longer(cols = -Staining_condition, names_to = "Marker", values_to = "Z_score")
-  
-  heatmap <- ggplot(cv_z_scores_long, aes(x = Staining_condition, y = Marker, fill = Z_score)) +
-    geom_tile(color = "black", lwd = 0.4) +
-    scale_fill_distiller(palette = 'PiYG', direction = -1) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    labs(x = "Staining Condition", y = "Marker", fill = "Z-Score")
-  
-  return(heatmap)
-}
 
 plot_heatmap2 <- function(data, out_folder, pairs, excluded_values) {
   data <- data %>% mutate(id = str_c("c", 1:nrow(.)))
@@ -328,18 +153,21 @@ plot_heatmap2 <- function(data, out_folder, pairs, excluded_values) {
     res[[i]] <- wilcoxauc(counts, group.by, comb_2[, 1]) %>%
       mutate(ident.1 = comb_2[1, i], ident.2 = comb_2[2, i], )
   }
-  res %>% bind_rows() -> wilcox_results
+  wilcox_results <- res %>% bind_rows()
+  # Export the wilcox_results to a CSV file
+  write.csv(wilcox_results, paste0(out_folder, "wilcox_results.csv"), row.names = FALSE)
   
   #Prepare data for Cohen's d effect size test
   # Calculate mean of each marker for each staining condition
+  cols <- names(data)[5:(ncol(data) - 3)]
+  
   mean_df <- data %>%
     group_by(Staining_condition) %>%
-    summarise(across(.cols = Hoechst:IDO1, .fns = \(x) mean(x, na.rm = TRUE)))
-  
+    summarise(across(.cols = all_of(cols), .fns = \(x) mean(x, na.rm = TRUE)))
   # Calculate sd of each marker for each staining condition
   sd_df <- data %>%
     group_by(Staining_condition) %>%
-    summarise(across(.cols = Hoechst:IDO1, .fns = \(x) sd(x, na.rm = TRUE)))
+    summarise(across(.cols = all_of(cols), .fns = \(x) sd(x, na.rm = TRUE)))
   
   # Calculate the number of cells for each staining condition
   n_df <- data %>%

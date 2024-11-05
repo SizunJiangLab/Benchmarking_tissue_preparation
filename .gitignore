@@ -6,3 +6,4 @@ out/*
 MESMER_workflow/**/*.csv
 MESMER_workflow/**/*.svg
 MESMER_workflow/**/*.Rhistory
+!MESMER_workflow/grouping_metadata.csv
