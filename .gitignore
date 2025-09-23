@@ -1,5 +1,51 @@
-data/*.csv
-data/*.qptiff
-data/*.svg
 .DS_Store
-out/*
+
+# R artifacts
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# Python/Jupyter artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Cached inputs
+qsave_input/
+*.qsave
+
+# Outputs (large, regenerated)
+out/
+out_*/
+
+# Raw data (not tracked)
+# MESMER inputs
+data_mesmer/**
+!data_mesmer/
+!data_mesmer/README.md
+!data_mesmer/Slide_metadata.csv
+!data_mesmer/Slide_exclude_markers.csv
+!data_mesmer/Slide_remove_markers.csv
+!data_mesmer/Registered_Report_marker_sequence.csv
+# Generated during runs; keep ignored
+data_mesmer/Slide_compare_pairs.csv
+data_mesmer/Slide_exclude_cells.csv
+
+# cellXpress inputs
+data_cellXpress/**
+!data_cellXpress/
+!data_cellXpress/README.md
+!data_cellXpress/Slide_metadata.csv
+!data_cellXpress/Slide_exclude_markers.csv
+!data_cellXpress/Slide_remove_markers.csv
+!data_cellXpress/Registered_Report_marker_sequence.csv
+
+# Large binary/raw anywhere
+*.qs
+*.qptiff
+*.zip
+*.tar
+*.tar.gz
+*.tgz

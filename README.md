@@ -1,98 +1,317 @@
-# Benchmark Tissue Preparation
+### Benchmark Tissue Preparation
 
-### Table of Contents
+#### Table of Contents
+
+- [Project Overview](#project-overview)
 - [Environment](#environment)
-- [Reproducing Manuscript Figures](#reproducing)
-- [Directory Structure](#directory)
-- [Contributor](#contributor)
+- [Data and Metadata](#data-and-metadata)
+- [Quickstart](#quickstart)
+- [Selecting a Configuration](#selecting-a-configuration)
+- [Outputs](#outputs)
+- [Optional Workflows](#optional-workflows)
+- [Utilities](#utilities)
+- [Troubleshooting and Tips](#troubleshooting-and-tips)
+- [Directory Structure](#directory-structure)
+- [Contributors](#contributors)
 
-<a name="environment"></a>
-# Environment
+## Project Overview
 
-This repository has been tested on the following operating systems:
+This repository contains code and analysis workflows for processing and analyzing data slides using the MESMER workflow. The project focuses on optimizing staining conditions across multiple datasets via heatmaps, statistical testing, scoring, and advanced analyses.
+
+Primary workflows:
+
+- MESMER data-slide analysis: `MESMER_dataSlide_workflow.R`
+- SNR analysis (optional): `MESMER_SignalNoise_workflow.R`
+- Balagan spatial analysis (optional): `balagan_analysis.R`
+- cellXpress workflow (optional): `cellXpress_dataSlide_workflow.R`
+
+## Environment
+
+Tested on:
 
 - MacOS 14.6.1
 - Red Hat Enterprise Linux 8.10 (Ootpa)
 
-To ensure compatibility and reproducibility, the following software versions and packages are recommended:
+Recommended versions:
 
-1. Python: should be compatible with Python ^3.9.12
-2. R: >= 4.3.2
-3. Required Software Dependencies:
+- Python: 3.9.12 (optional, for segmentation)
+- R: >= 4.3.2
 
-The software dependencies necessary to run the code in this repository can be installed using the following steps.
+Install dependencies:
 
-- Python Dependencies (approx. ~10 mins to install):
+- Python (optional, for segmentation notebook)
 
-```
+```bash
 pip install -r ./requirements.txt
 ```
-- R Dependencies (approx. ~15 mins to install):
 
-```
-install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools"))
+- R packages
+
+```r
+install.packages(c(
+  "dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr",
+  "rstatix", "readr", "svglite", "devtools", "qs"
+))
 
 devtools::install_github("immunogenomics/presto")
 
-# To run balagan_analysis.R:
+# Optional: to run balagan_analysis.R
 devtools::install_github("PierreBSC/Balagan")
 ```
 
-<a name="reproducing"></a>
-# Reproducing Manuscript Figures
+## Data and Metadata
 
-To reproduce the figures presented in the manuscript, you will need to download the original dataset from [Zenodo](https://doi.org/10.5281/zenodo.11391050) and place them in the `./data` folder.
+Place inputs under `./data_mesmer/` (preferred MESMER workflow) or `./data_cellXpress/` (cellXpress workflow). Raw data should not be committed to the repository.
 
- 1. Run the `segmentation_scFeature_extraction_4slides.ipynb` notebook (~5 mins):
-
-This script generate cell masks for Fig. 1E and input for Fig. 1C, Fig. 1D, Supp Fig. 1F.
-
-It processes stitched and background subtracted images in qptiff format and is designed for segmentation and single cell feature extraction of four slides simultaneously. It processes stitched and background-subtracted images in qptiff format for segmentation and single-cell feature extraction across four slides simultaneously.
-
-The results are written to `./out/extracted_features/dataScaleSize_slide{1,2,3,4}.csv` and `./out/extracted_features/data_slide{1,2,3,4}.csv`. 
-
-**Note**: Pre-processed result files (`dataScaleSize_slide{1,2,3,4}.csv`) are already included in the dataset downloaded from [Zenodo](https://doi.org/10.5281/zenodo.11391050)., should you wish to skip this step.
-
-This notebook is compatible with Python 3.9.12
-
-2. Run `mesmer_data_preprocessing.R`(~3 mins):
-
-This script produces Fig. 1C, Fig. 1D, Supp Fig. 1F. It processes extracted per-cell signals (in .csv format) from Mesmer for outlier removal, normalization, transformation, and statistical analysis. Visualizations include density plots and heatmaps. 
-
-This script is compatible with R 4.3.2.
-
-3. Run `cX2_data_preprocessing.R`(~3 mins):
-
-This script produces Supp Fig. 1G. It processes extracted per-cell signals (in .csv format) from cellXpress2 for outlier removal, normalization, transformation. Visualizations include density plots. 
-
-4. Run `balagan_analysis.R`(~15 mins):
-
-This script produces Supp Fig. 1I. It processes "dataScaleSize_slide2_FOV1.csv" using the balagan R package to run spatial clustering and subsampling analysis. The heatmap, clustering scatter plot, and subsampling plot were generated. 
-
-<a name="directory"></a>
-# Directory Structure
+MESMER example structure:
 
 ```
-Benchmark_tissue_preparation
-|---data: default data directory
-|---out: default output directory
-|---pylibs
-| |---tissue_preparation.py: python module containing reusable functions
-|---R-scripts
-| |---helper.R: R scripts containing reusable functions
-|---requirements.txt: dependent python packages
-|---segmentation_scFeature_extraction_4slides: python notebook
-|---mesmer_data_preprocessing.R: R script to generate the figures for MESMER cell segmentations
-|---cX2_data_preprocessing.R: R script to generate the figures for cellXpress2 cell segmentations
-|---balagan_analysis.R: R script to generate the supplementary fig 1I using the balagan R package
-|---Random.seed.txt: Random seed used to reproduce balagan_analysis.R
-|---README.md: this file
+./data_mesmer/
+  BIDMC/                    # CSVs per Source
+  Roche/
+  Stanford/
+  ...
+  Slide_metadata.csv
+  Slide_compare_pairs.csv   # auto-generated by build_compare_pairs.R
+  Slide_exclude_markers.csv
+  Slide_remove_markers.csv
+  Registered_Report_marker_sequence.csv
+  Slide_exclude_cells.csv   # optional
 ```
 
-<a name="contributor"></a>
-# Contributor
-* [Johanna Schaffenrath](https://github.com/johannaschaffenrath)
-* [Cankun Wang](https://github.com/Wang-Cankun)
-* [Shaohong Feng](https://github.com/fengsh27)
+cellXpress example structure:
 
-If you have any questions or feedback regarding this repository, please contact Sizun Jiang via sjiang3@bidmc.harvard.edu.
+```
+./data_cellXpress/
+  BIDMC/                    # CSVs per Source
+  Roche/
+  Stanford/
+  ...
+  Slide_metadata.csv
+  Slide_exclude_markers.csv
+  Slide_remove_markers.csv
+  Registered_Report_marker_sequence.csv
+```
+
+Key metadata CSVs:
+
+- Slide_metadata.csv
+
+  - Maps filenames to source, type, FOV, and sample name
+  - Columns: `Filename, Source, Type, FOV, Name`
+  - Example:
+    ```
+    Filename,Source,Type,FOV,Name
+    dataScaleSize_slide10_FOV1.csv,Roche,dataScaleSize,FOV1,Roche_10
+    dataScaleSize_slide10_FOV2.csv,Roche,dataScaleSize,FOV2,Roche_10
+    ```
+
+- Slide_compare_pairs.csv
+
+  - Defines pairs used for Cohen’s d and Wilcoxon tests
+  - Auto-generated by `build_compare_pairs.R` from unique `Name` per `Source` where `Type == dataScaleSize`
+  - Columns: `Source, Compare1, Compare2`
+
+- Slide_exclude_markers.csv
+
+  - Markers to gray out (non-working) for specific sources
+  - Columns: `Source, Exclude_type, Exclude_value`
+  - Example:
+    ```
+    Source,Exclude_type,Exclude_value
+    Roche,Marker,CD68
+    Roche,Marker,Pan-Cytokeratin
+    ```
+
+- Slide_remove_markers.csv
+
+  - Markers to remove entirely before analysis
+  - Columns: `Source, Exclude_type, Exclude_value`
+
+- Registered_Report_marker_sequence.csv
+
+  - One-column CSV specifying desired marker order
+
+- Slide_exclude_cells.csv (optional)
+  - Per-slide cell exclusions used by helper logic
+  - Columns: `Source, Slide, Marker` (Marker name normalization removes `.` and `-`)
+
+## Quickstart
+
+1. Update metadata
+
+- Ensure `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, and `Registered_Report_marker_sequence.csv` are up to date in `./data_mesmer/`.
+
+2. Generate comparison pairs
+
+```bash
+Rscript build_compare_pairs.R
+```
+
+- This writes `./data_mesmer/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for rows with `Type == dataScaleSize`.
+
+3. Select a configuration in the workflow
+
+- Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to the dataset you want to analyze.
+
+Code location:
+
+```r
+current_config_name <- "Stanford_all" # Set to run your chosen configuration
+current_config <- configurations[[current_config_name]]
+```
+
+4. Run the MESMER workflow
+
+```bash
+Rscript MESMER_dataSlide_workflow.R
+```
+
+- The script caches loaded inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
+
+## Selecting a Configuration
+
+Set `current_config_name` to one of the following (see script for the full list):
+
+- Adjusted_RareCyte_LN_all, Adjusted_RareCyte_TMA_all
+- ASTAR_COMET_CRC_all, ASTAR_COMET_Tonsil_all
+- BIDMC_all, BIDMC_DLBCL_all, BIDMC_Tonsil_all, BIDMC_Tonsil_compare_all, BIDMC_subset
+- Double_all
+- Novartis_Lung_Cancer_all, Novartis_Tonsil_all
+- Roche_all, Roche_intestine_all, Roche_Tonsil_all
+- Stanford_all, Stanford_Tonsil_all, Stanford_scan1_all
+- Stanford_MIBI_Colon_all, Stanford_MIBI_Liver_all
+- Stanford_MIBI_LymphNode_Tile1_all, \_Tile2_all, \_Tile3_all, \_Tile4_all
+- Stanford_MIBI_LymphNode_pooled_all
+- Stanford_OSCC_all
+- Stanford_RareCyte_LN_all, Stanford_RareCyte_TMA_all
+- UKentucky_SCC_all, UKentucky_Tonsil_all
+
+Notes:
+
+- Standard loading uses `load_mesmer_data()` which merges FOV1 and FOV2.
+- `Stanford_MIBI_LymphNode_pooled_all` uses `load_mesmer_data_pooled()` to pool tiles.
+
+## Outputs
+
+Outputs are written to a per-configuration folder under the project root, e.g. `./out_Stanford_all/`.
+
+Key files:
+
+- Visualizations
+
+  - `Arcsinh_transformed_Hoechst_normalised_density_plots.svg`
+  - `Heatmap_mean_white_to_red.svg`
+  - `Heatmap_mean_zscore_blue_white_red.svg`
+  - `Heatmap_CV_zscore_purple_green.svg`
+  - `Heatmap_CV_raw_values.svg` (raw CVs annotated)
+  - Score heatmap and average score barplot for conditions
+
+- Statistics
+
+  - `kruskal_pvals.csv` (Kruskal–Wallis)
+  - `wilcox_results.csv` (Wilcoxon between pairs)
+  - `cohens_d_results.csv` and `large_effect_results.csv`
+
+- Processed data
+
+  - `mean_values.csv`, `mean_z_scores.csv`
+  - `cv_values.csv`, `cv_z_scores.csv`
+
+- Scoring system exports
+
+  - `condition_summary.csv` (average scores, working markers count, ranks)
+  - `marker_summary.csv`
+  - `total_z_ranks.csv`
+  - `cv_values_long.csv`, `cv_z_scores_long.csv`
+  - `cv_ranks_and_scores.csv`, `cv_ranks_wide.csv`, `cv_scores_wide.csv`
+
+- Configuration and provenance
+  - `config_summary.csv`, `processed_files.csv`, `comparison_pairs.csv`
+  - `session_info.txt`
+
+## Optional Workflows
+
+- SNR workflow
+
+  - Script: `MESMER_SignalNoise_workflow.R`
+  - Features: DAPI/Hoechst normalization for SNR; purple–yellow heatmap option; barplot of mean SNR
+  - Outputs (example): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
+
+- Balagan spatial analysis
+
+  - Script: `balagan_analysis.R`
+  - Install: `devtools::install_github("PierreBSC/Balagan")`
+  - Input example: `dataScaleSize_slide2_FOV1.csv`
+  - Outputs: spatial clustering heatmap, scatter, and subsampling plots
+
+- cellXpress workflow
+
+  - Script: `cellXpress_dataSlide_workflow.R`
+  - Input location: `./data_cellXpress/` (mirrors MESMER structure)
+  - Produces analogous density plots and summaries
+
+- Segmentation and feature extraction (optional, Python)
+  - Notebook: `segmentation_scFeature_extraction_4slides.ipynb`
+  - Produces per-cell features for slides 1–4 to `./out/extracted_features/`
+
+## Utilities
+
+- `check_norm_column.R`: Quick verification that expected normalization columns are present in input CSVs per configuration. Reports which nuclear marker is found first by priority (DNA1 > HH3 > DAPI > Nucleus) across all configured datasets.
+- `process_cell_counts.R`: Computes cell counts per FOV and per staining condition from `dataScaleSize` CSVs and derives totals and proportions. Useful for signal-to-noise style summaries normalized by FOV and total counts.
+
+## Troubleshooting and Tips
+
+- File not found / empty outputs
+  - Check `Slide_metadata.csv` paths and that `Type == dataScaleSize` entries point to existing CSVs
+- No comparison pairs generated
+  - Re-run: `Rscript build_compare_pairs.R`; ensure `Name` values exist per `Source`
+- Missing packages
+  - Install R packages above; for Cohen’s d/Wilcoxon we rely on `rstatix` and `presto`
+- Caching
+  - Remove `./qsave_input/<CONFIG>_input.qsave` to force re-loading
+- Marker naming
+  - The workflow normalizes names (removes `.` and `-`) and maps nuclear markers to `Hoechst` (prefers `DNA1`, then `HH3`, then `DAPI`, then `Nucleus`)
+- Reproducibility
+  - Each run writes `session_info.txt`; Balagan uses `Random.seed.txt`
+
+## Directory Structure
+
+Representative layout in this repository:
+
+```
+.
+├── data_mesmer/
+│   ├── <Source folders with CSV files>
+│   ├── Slide_metadata.csv
+│   ├── Slide_compare_pairs.csv
+│   ├── Slide_exclude_markers.csv
+│   ├── Slide_remove_markers.csv
+│   └── Registered_Report_marker_sequence.csv
+├── data_cellXpress/
+│   ├── <Source folders with CSV files>
+│   ├── Slide_metadata.csv
+│   ├── Slide_exclude_markers.csv
+│   ├── Slide_remove_markers.csv
+│   └── Registered_Report_marker_sequence.csv
+├── qsave_input/
+│   └── <CONFIG>_input.qsave
+├── out_<CONFIG>_.../
+│   └── [output CSVs/SVGs]
+├── MESMER_dataSlide_workflow.R
+├── MESMER_SignalNoise_workflow.R
+├── cellXpress_dataSlide_workflow.R
+├── build_compare_pairs.R
+├── balagan_analysis.R
+├── helper.R
+├── Random.seed.txt
+└── README.md (this file)
+```
+
+## Contributors
+
+- Johanna Schaffenrath
+- Cankun Wang
+- Shaohong Feng
+
+For questions or feedback, contact Sizun Jiang: sjiang3@bidmc.harvard.edu.
