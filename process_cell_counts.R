@@ -6,7 +6,7 @@ library(qs)
 ########################################## Configuration Begin  #############################################################################
 
 # Define paths for metadata files
-metadata_file <- "./data_03272025/Slide_metadata.csv"
+metadata_file <- "./data_mesmer/Slide_metadata.csv"
 
 #metadata_file <- "./data_cellXpress/Slide_metadata.csv"
 

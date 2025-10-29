@@ -1,4 +1,4 @@
-### Benchmark Tissue Preparation
+### Benchmarking Tissue Preparation
 
 #### Table of Contents
 
@@ -10,20 +10,19 @@
 - [Outputs](#outputs)
 - [Optional Workflows](#optional-workflows)
 - [Utilities](#utilities)
-- [Troubleshooting and Tips](#troubleshooting-and-tips)
 - [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
 
 ## Project Overview
 
-This repository contains code and analysis workflows for processing and analyzing data slides using the MESMER workflow. The project focuses on optimizing staining conditions across multiple datasets via heatmaps, statistical testing, scoring, and advanced analyses.
+This repository hosts analysis workflows to benchmark tissue preparation and staining conditions across multiple platforms. It provides publication-ready figures and statistics across many datasets and sources.
 
 Primary workflows:
 
 - MESMER data-slide analysis: `MESMER_dataSlide_workflow.R`
-- SNR analysis (optional): `MESMER_SignalNoise_workflow.R`
-- Balagan spatial analysis (optional): `balagan_analysis.R`
-- cellXpress workflow (optional): `cellXpress_dataSlide_workflow.R`
+- CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
+- Signal-to-Noise Ratio (SNR) analysis: `MESMER_SignalNoise_workflow.R`
+- Optional spatial analysis: `balagan_analysis.R`
 
 ## Environment
 
@@ -61,7 +60,7 @@ devtools::install_github("PierreBSC/Balagan")
 
 ## Data and Metadata
 
-Place inputs under `./data_mesmer/` (preferred MESMER workflow) or `./data_cellXpress/` (cellXpress workflow). Raw data should not be committed to the repository.
+Place inputs under `./data_mesmer/` (MESMER workflow) or `./data_cellXpress/` (CellXpress workflow). Raw data should not be committed to the repository.
 
 MESMER example structure:
 
@@ -138,36 +137,37 @@ Key metadata CSVs:
 
 ## Quickstart
 
-1. Update metadata
+Standard end-to-end for MESMER and CellXpress:
 
-- Ensure `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, and `Registered_Report_marker_sequence.csv` are up to date in `./data_mesmer/`.
+1. Update metadata and marker lists
 
-2. Generate comparison pairs
+- Ensure these files are current: `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, `Registered_Report_marker_sequence.csv`.
+
+2. Build comparison pairs for statistical testing
 
 ```bash
 Rscript build_compare_pairs.R
 ```
 
-- This writes `./data_mesmer/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for rows with `Type == dataScaleSize`.
+- Writes `./data_mesmer/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
 
-3. Select a configuration in the workflow
+3. Select a configuration to run
 
-- Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to the dataset you want to analyze.
-
-Code location:
+- Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to your target dataset.
 
 ```r
-current_config_name <- "Stanford_all" # Set to run your chosen configuration
+current_config_name <- "BIDMC_all"  # choose your config
 current_config <- configurations[[current_config_name]]
 ```
 
-4. Run the MESMER workflow
+4. Run the workflow
 
 ```bash
 Rscript MESMER_dataSlide_workflow.R
 ```
 
-- The script caches loaded inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
+- The script caches inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
+- Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes. CellXpress is similar in scale to MESMER.
 
 ## Selecting a Configuration
 
@@ -189,8 +189,7 @@ Set `current_config_name` to one of the following (see script for the full list)
 
 Notes:
 
-- Standard loading uses `load_mesmer_data()` which merges FOV1 and FOV2.
-- `Stanford_MIBI_LymphNode_pooled_all` uses `load_mesmer_data_pooled()` to pool tiles.
+- Standard loading uses `load_mesmer_data()` (FOV-based). `Stanford_MIBI_LymphNode_pooled_all` uses `load_mesmer_data_pooled()` to pool tiles.
 
 ## Outputs
 
@@ -230,50 +229,48 @@ Key files:
   - `config_summary.csv`, `processed_files.csv`, `comparison_pairs.csv`
   - `session_info.txt`
 
-## Optional Workflows
+## Complementary Workflows
 
-- SNR workflow
+- SNR workflow (MESMER sources with SNR raw data: BIDMC, Roche, Stanford)
 
-  - Script: `MESMER_SignalNoise_workflow.R`
-  - Features: DAPI/Hoechst normalization for SNR; purple–yellow heatmap option; barplot of mean SNR
-  - Outputs (example): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
+  1. Normalize raw SNR cell counts
 
-- Balagan spatial analysis
+     ```bash
+     Rscript process_cell_counts.R
+     ```
 
-  - Script: `balagan_analysis.R`
-  - Install: `devtools::install_github("PierreBSC/Balagan")`
-  - Input example: `dataScaleSize_slide2_FOV1.csv`
-  - Outputs: spatial clustering heatmap, scatter, and subsampling plots
+  2. Generate SNR figures and summaries
 
-- cellXpress workflow
+     ```bash
+     Rscript MESMER_SignalNoise_workflow.R
+     ```
+
+  - Features: Hoechst normalization, SNR heatmaps, mean SNR barplots
+  - Outputs (examples): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
+  - Runtime estimate: a few seconds per run.
+
+- CellXpress workflow
 
   - Script: `cellXpress_dataSlide_workflow.R`
   - Input location: `./data_cellXpress/` (mirrors MESMER structure)
   - Produces analogous density plots and summaries
 
-- Segmentation and feature extraction (optional, Python)
-  - Notebook: `segmentation_scFeature_extraction_4slides.ipynb`
-  - Produces per-cell features for slides 1–4 to `./out/extracted_features/`
+- Balagan spatial analysis (optional)
+
+  - Script: `balagan_analysis.R`
+  - Install: `devtools::install_github("PierreBSC/Balagan")`
+  - Outputs: spatial clustering heatmaps and related figures
 
 ## Utilities
 
-- `check_norm_column.R`: Quick verification that expected normalization columns are present in input CSVs per configuration. Reports which nuclear marker is found first by priority (DNA1 > HH3 > DAPI > Nucleus) across all configured datasets.
-- `process_cell_counts.R`: Computes cell counts per FOV and per staining condition from `dataScaleSize` CSVs and derives totals and proportions. Useful for signal-to-noise style summaries normalized by FOV and total counts.
+- `check_norm_column.R`: Verifies expected normalization columns and nuclear marker priority (DNA1 > HH3 > DAPI > Nucleus).
+- `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `MESMER_SignalNoise_workflow.R`.
 
-## Troubleshooting and Tips
+## Manual Annotation (independent step)
 
-- File not found / empty outputs
-  - Check `Slide_metadata.csv` paths and that `Type == dataScaleSize` entries point to existing CSVs
-- No comparison pairs generated
-  - Re-run: `Rscript build_compare_pairs.R`; ensure `Name` values exist per `Source`
-- Missing packages
-  - Install R packages above; for Cohen’s d/Wilcoxon we rely on `rstatix` and `presto`
-- Caching
-  - Remove `./qsave_input/<CONFIG>_input.qsave` to force re-loading
-- Marker naming
-  - The workflow normalizes names (removes `.` and `-`) and maps nuclear markers to `Hoechst` (prefers `DNA1`, then `HH3`, then `DAPI`, then `Nucleus`)
-- Reproducibility
-  - Each run writes `session_info.txt`; Balagan uses `Random.seed.txt`
+Manual clustering and annotation are maintained in `./manual_annotation/` and are independent from the R-based workflows above.
+
+- See `manual_annotation/DOCUMENTATION.md` for the complete Python-based pipeline and SLURM submission scripts.
 
 ## Directory Structure
 
@@ -296,6 +293,13 @@ Representative layout in this repository:
 │   └── Registered_Report_marker_sequence.csv
 ├── qsave_input/
 │   └── <CONFIG>_input.qsave
+├── manual_annotation/
+│   ├── 01_clustering.py
+│   ├── 02_annotation.py
+│   ├── 03_phenotype_map.py
+│   ├── 04_stacked_bar_plots.py
+│   ├── 05_enrichment_plots.py
+│   └── DOCUMENTATION.md
 ├── out_<CONFIG>_.../
 │   └── [output CSVs/SVGs]
 ├── MESMER_dataSlide_workflow.R
@@ -304,7 +308,6 @@ Representative layout in this repository:
 ├── build_compare_pairs.R
 ├── balagan_analysis.R
 ├── helper.R
-├── Random.seed.txt
 └── README.md (this file)
 ```
 

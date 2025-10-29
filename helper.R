@@ -42,7 +42,7 @@ load_mesmer_data <- function(data_folder, input_filenames, input_note) {
   return(data)
 }
 
-# New function for helper.R to pool by sample name (e.g., Tiles)
+# New function for helper.R to pool by sample name (e.g., Tiles) # In case of Stanford_MIBI_LymphNode
 load_mesmer_data_pooled <- function(data_folder, input_filenames, input_note) {
   # Create a grouping dataframe. The 'staining_condition' is the true group ID.
   file_groups <- data.frame(
@@ -142,6 +142,79 @@ load_cellXpress_data <- function(data_folder, input_filenames, input_note) {
   
   # Log the columns that were kept
   message("Final columns: ", paste(head(colnames(data), 10), collapse=", "), 
+          "... (", length(colnames(data)), " total columns)")
+  
+  return(data)
+}
+
+load_cellXpress_data_pooled <- function(data_folder, input_filenames, input_note) { #Stanford_MIBI_LymphNode
+  # Create a grouping dataframe where 'staining_condition' is the key to pool by.
+  file_groups <- data.frame(
+    filename = input_filenames,
+    staining_condition = input_note,
+    stringsAsFactors = FALSE
+  )
+  
+  # Group files by the staining_condition (e.g., 'Stanford_MIBI_Slide4')
+  grouped_files <- file_groups %>%
+    group_by(staining_condition) %>%
+    summarize(filenames = list(filename), .groups = 'drop')
+  
+  # Load and combine data for each group
+  data_list <- vector("list", nrow(grouped_files))
+  
+  for (i in seq_along(data_list)) {
+    group_filenames <- unlist(grouped_files$filenames[i])
+    group_condition <- grouped_files$staining_condition[i]
+    
+    message("Pooling ", length(group_filenames), " file(s) for sample: ", group_condition)
+    
+    # Load, process, and combine all files (e.g., Tiles) for this sample group
+    file_data_list <- lapply(group_filenames, function(fname) {
+      
+      # Find the specific file in the data folder. We use a pattern match for flexibility.
+      pattern <- paste0(fname, ".*-raw_data\\.qs$")
+      file_path <- list.files(
+        path = data_folder, 
+        pattern = pattern, 
+        full.names = TRUE,
+        recursive = TRUE # Search in subdirectories if needed
+      )
+      
+      if (length(file_path) == 0) {
+        message("  - File not found for pattern: ", pattern)
+        return(NULL)
+      }
+      
+      message("  - Loading file: ", basename(file_path[1]))
+      
+      # Load the data using qs package
+      slide_data <- qs::qread(file_path[1])
+      
+      # Process: keep first 4 columns and only whole-cell markers
+      processed_data <- slide_data %>%
+        # Step 1: Select only first 4 columns and those containing "whole-cell"
+        select(c(1,3,2,4), contains("whole-cell")) %>%
+        # Step 2: Rename columns to remove "(whole-cell)" suffix
+        rename_with(~ str_replace(.x, " \\(whole-cell\\)", ""), 
+                    contains("whole-cell"))
+      
+      return(processed_data)
+    })
+    
+    # Combine all data frames for this group and add the staining condition
+    combined_data <- bind_rows(file_data_list)
+    if (nrow(combined_data) > 0) {
+      combined_data <- mutate(combined_data, Staining_condition = group_condition)
+      data_list[[i]] <- combined_data
+    }
+  }
+  
+  # Combine data from all groups into a single dataframe
+  data <- bind_rows(data_list)
+  
+  # Log the columns that were kept
+  message("Final pooled columns: ", paste(head(colnames(data), 10), collapse=", "), 
           "... (", length(colnames(data)), " total columns)")
   
   return(data)
@@ -414,7 +487,7 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     ))
   
   # MODIFIED: Conditional ordering for heatmap columns
-  if (!is.null(current_config_name) && grepl("UKentucky", current_config_name)) {
+  if (!is.null(current_config_name) && grepl("^UKentucky", current_config_name)) {
     # --- Logic for UKentucky ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(mean_df$Staining_condition)
@@ -423,6 +496,17 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     # Reorder the full condition names by matching their endings to the suffix_order
     condition_order <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
+    }))
+    
+  } else if (!is.null(current_config_name) && grepl("B1_ASTAR_COMET|B2_Stanford_Rarecyte|B1_Roche|B1_UKentucky|B2_Stanford_MIBI_Colon|B2_Stanford_MIBI_Liver|B3_Novartis_LuCa|B3_Novartis_tonsil|B3_Stanford_OSCC|B2_Stanford_IMC_Tonsil", current_config_name)) {
+    # --- NEW: Logic for new B1/B2 ASTAR & RareCyte naming conventions ---
+    # Get the unique conditions present in the data for this run
+    all_conditions <- unique(mean_df$Staining_condition)
+    # Define the desired logical suffix order with underscores
+    suffix_order <- c('Tris_20min', 'Tris_40min', 'Tris_10min', 'Citra_20min')
+    # Reorder the full condition names by matching their endings to the suffix_order
+    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+      grep(paste0(sfx, "$"), all_conditions, value = TRUE, ignore.case = TRUE)
     }))
     
   } else if (!is.null(current_config_name) && grepl("ASTAR_COMET|RareCyte", current_config_name)) {
@@ -558,13 +642,25 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
   mean_z_heatmap <- ggplot(mean_z_long,
                            aes(x = Staining_condition, y = Marker, fill = Z_score)) +
     geom_tile(color = "black", lwd = 0.4) +
-    scale_fill_gradient2(
-      low = "#5657A4",     # Custom blue
-      mid = "white",       # White for 0 values
-      high = "#EB2024",    # Custom red
-      midpoint = 0,        # Ensure 0 is white
+    scale_fill_gradientn(
+      colors = c("#3D2B62",      # Very dark purple-blue (slightly less saturated)
+                 "#4E3C89",      # Dark purple-blue
+                 "#5F4DAE",      # Medium-dark purple-blue
+                 "#7B6DC8",      # Medium purple-blue
+                 "#9A8FD8",      # Light purple-blue
+                 "#C4BBEC",      # Very light purple-blue
+                 "#FFFFFF",      # Pure white at zero
+                 "#FFC8C5",      # Very light pink-red
+                 "#FFA2A0",      # Light red
+                 "#FF7B76",      # Medium-light red
+                 "#FF4D47",      # Medium red
+                 "#F01010",      # Vibrant red (slightly less saturated)
+                 "#C81010"),     # Deep vibrant red (slightly less saturated)
+      values = scales::rescale(c(-3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3)),
+      limits = c(-3, 3),
+      oob = scales::squish,
       na.value = "grey60"
-    )  +
+    ) +
     theme_minimal() +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
@@ -686,18 +782,18 @@ load_signal_ratio_data <- function(data_folder, input_filenames, input_note) {
     data_file <- read_csv(file_path, show_col_types = FALSE)
     
     # Check if we have the expected columns
-    if("Filename" %in% colnames(data_file) && 
-       "Signal_withinvsoutsidecellmask" %in% colnames(data_file)) {
+    if("Marker" %in% colnames(data_file) && 
+       "Normalized_signal_invsout" %in% colnames(data_file)) {
       
       # Clean up filenames to remove extensions
       data_file <- data_file %>%
-        mutate(Filename = gsub("\\.tiff$|\\.tif$|\\.jpg$|\\.png$", "", Filename))
+        mutate(Marker = gsub("\\.tiff$|\\.tif$|\\.jpg$|\\.png$", "", Marker))
       
       # Pivot to wide format
       data_wide <- data_file %>%
         pivot_wider(
-          names_from = Filename,
-          values_from = Signal_withinvsoutsidecellmask
+          names_from = Marker,
+          values_from = Normalized_signal_invsout
         )
       
       # Add staining condition
@@ -731,360 +827,6 @@ load_signal_ratio_data <- function(data_folder, input_filenames, input_note) {
   }
 }
 
-# Function to create multiple heatmap visualizations for signal-to-noise ratio data
-create_snr_heatmaps1 <- function(snr_data, out_folder, remove_values = c()) {
-  # First, identify marker columns (all except Staining_condition)
-  marker_cols <- setdiff(names(snr_data), "Staining_condition")
-  
-  # Remove specified markers if requested
-  if(length(remove_values) > 0) {
-    marker_cols <- setdiff(marker_cols, remove_values)
-  }
-  
-  # Clean marker names (remove special characters)
-  snr_data <- snr_data %>%
-    rename_with(~ gsub("[.-]", "", .), all_of(marker_cols))
-  
-  snr_data <- snr_data %>%
-    select(-any_of(remove_values))
-  
-  # Update marker_cols with cleaned names
-  marker_cols <- setdiff(names(snr_data), "Staining_condition")
-  
-  # Get original marker names for display
-  old_marker_names <- marker_cols
-  
-  # Get numeric ordering of staining conditions
-  condition_order <- snr_data %>%
-    mutate(
-      condition_num = as.numeric(gsub("\\D", "", Staining_condition))
-    ) %>%
-    arrange(condition_num) %>%
-    pull(Staining_condition) %>%
-    unique()
-  
-  # Convert data to long format for ggplot
-  snr_long <- snr_data %>%
-    pivot_longer(
-      cols = all_of(marker_cols),
-      names_to = "Marker",
-      values_to = "SNR"
-    ) %>%
-    # Set factor levels to ensure correct ordering
-    mutate(Staining_condition = factor(Staining_condition, levels = condition_order))
-  
-  # Check if nuclear marker (DAPI/Hoechst/Nucleus) is available for normalization
-  has_nuclear_marker <- "DAPI" %in% marker_cols || "Hoechst" %in% marker_cols || "Nucleus" %in% marker_cols
-  
-  # Determine which nuclear marker column to use
-  nuclear_marker_col <- if ("Hoechst" %in% marker_cols) {
-    "Hoechst"
-  } else if ("DAPI" %in% marker_cols) {
-    "DAPI"
-  } else if ("Nucleus" %in% marker_cols) {
-    "Nucleus"
-  } else {
-    NULL
-  }
-  
-  # Create normalized versions of all visualizations if DAPI/Hoechst is available
-  if (!is.null(nuclear_marker_col)) {
-    # Create a wide format dataset by marker for normalization
-    snr_wide_by_marker <- snr_long %>%
-      pivot_wider(
-        names_from = Marker,
-        values_from = SNR
-      )
-    
-    # Normalize each marker by DAPI
-    snr_dapi_normalized <- snr_wide_by_marker %>%
-      mutate(across(all_of(setdiff(marker_cols, nuclear_marker_col)), 
-                    ~ . / .data[[nuclear_marker_col]], 
-                    .names = "{.col}_norm"))
-    
-    # Extract normalized columns
-    norm_cols <- names(snr_dapi_normalized)[grepl("_norm$", names(snr_dapi_normalized))]
-    
-    # Convert back to long format for visualization
-    snr_norm_long <- snr_dapi_normalized %>%
-      select(Staining_condition, all_of(norm_cols)) %>%
-      pivot_longer(
-        cols = -Staining_condition,
-        names_to = "Marker",
-        values_to = "Normalized_SNR"
-      ) %>%
-      # Clean up marker names
-      mutate(Marker = gsub("_norm$", "", Marker))
-    
-    # Calculate min/max for consistent scales
-    min_norm_snr <- min(snr_norm_long$Normalized_SNR, na.rm = TRUE)
-    max_norm_snr <- max(snr_norm_long$Normalized_SNR, na.rm = TRUE)
-    
-    # 1. Normalized heatmap with blue-white-red color scheme
-    heatmap_dapi_norm <- ggplot(snr_norm_long, 
-                                aes(x = Staining_condition, y = Marker, fill = Normalized_SNR)) +
-      geom_tile(color = "black", linewidth = 0.4) +
-      scale_fill_gradient2(
-        low = "blue", 
-        mid = "white", 
-        high = "red", 
-        midpoint = median(snr_norm_long$Normalized_SNR, na.rm = TRUE),
-        na.value = "grey80",
-        limits = c(min_norm_snr, max_norm_snr)
-      ) +
-      geom_text(aes(label = sprintf("%.2f", Normalized_SNR)), size = 3) +
-      theme_minimal() +
-      theme(
-        axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5)
-      ) +
-      labs(
-        title = paste0("Signal-to-Noise Ratio Normalized to ", nuclear_marker_col),
-        x = "Staining Condition",
-        y = "Marker",
-        fill = "Normalized SNR"
-      )
-    
-    # 2. Normalized threshold-based heatmap
-    # Define thresholds for normalized values
-    norm_threshold_colors <- c(
-      "<0.5" = "#FF9999",   # Light red
-      "0.5-0.8" = "#FFCC99", # Light orange
-      "0.8-1.0" = "#FFFF99", # Light yellow
-      "1.0-1.5" = "#CCFF99", # Light green
-      "1.5-2.0" = "#99FF99", # Medium green
-      ">2.0" = "#009900"     # Dark green
-    )
-    
-    # Add normalized threshold category
-    snr_norm_long <- snr_norm_long %>%
-      mutate(SNR_category = case_when(
-        Normalized_SNR < 0.5 ~ "<0.5",
-        Normalized_SNR >= 0.5 & Normalized_SNR < 0.8 ~ "0.5-0.8",
-        Normalized_SNR >= 0.8 & Normalized_SNR < 1.0 ~ "0.8-1.0",
-        Normalized_SNR >= 1.0 & Normalized_SNR < 1.5 ~ "1.0-1.5",
-        Normalized_SNR >= 1.5 & Normalized_SNR < 2.0 ~ "1.5-2.0",
-        Normalized_SNR >= 2.0 ~ ">2.0",
-        TRUE ~ NA_character_
-      ))
-    
-    # Convert to ordered factor for proper legend ordering
-    snr_norm_long$SNR_category <- factor(
-      snr_norm_long$SNR_category,
-      levels = names(norm_threshold_colors)
-    )
-    
-    heatmap_norm_threshold <- ggplot(snr_norm_long, 
-                                     aes(x = Staining_condition, y = Marker, fill = SNR_category)) +
-      geom_tile(color = "black", linewidth = 0.4) +
-      scale_fill_manual(
-        values = norm_threshold_colors,
-        na.value = "grey80",
-        drop = FALSE
-      ) +
-      geom_text(aes(label = sprintf("%.2f", Normalized_SNR)), size = 3) +
-      theme_minimal() +
-      theme(
-        axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5)
-      ) +
-      labs(
-        title = paste0(nuclear_marker_col, "-Normalized SNR Heatmap (Threshold-Based)"),
-        subtitle = "Values > 1.0 indicate better SNR than nuclear marker",
-        x = "Staining Condition",
-        y = "Marker",
-        fill = "Normalized SNR Range"
-      )
-    
-    # 3. Normalized bar plot of mean SNR per marker
-    norm_marker_means <- snr_norm_long %>%
-      group_by(Marker) %>%
-      summarize(mean_norm_SNR = mean(Normalized_SNR, na.rm = TRUE)) %>%
-      arrange(desc(mean_norm_SNR))
-    
-    barplot_norm_means <- ggplot(norm_marker_means, 
-                                 aes(x = reorder(Marker, mean_norm_SNR), y = mean_norm_SNR)) +
-      geom_bar(stat = "identity", fill = "steelblue") +
-      geom_text(aes(label = sprintf("%.2f", mean_norm_SNR)), hjust = -0.1, size = 3) +
-      geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
-      coord_flip() +
-      theme_minimal() +
-      labs(
-        title = paste0("Mean Signal-to-Noise Ratio Normalized to ", nuclear_marker_col),
-        subtitle = "Values > 1.0 indicate better SNR than nuclear marker",
-        x = "Marker",
-        y = paste0("Mean ", nuclear_marker_col, "-Normalized SNR"),
-        caption = "Red line indicates equal performance to nuclear marker"
-      )
-    
-    # Save the normalized visualizations
-    ggsave(
-      filename = paste0(out_folder, "SNR_heatmap_DAPI_normalized.svg"),
-      plot = heatmap_dapi_norm,
-      width = 10,
-      height = 8
-    )
-    
-    ggsave(
-      filename = paste0(out_folder, "SNR_heatmap_DAPI_norm_threshold.svg"),
-      plot = heatmap_norm_threshold,
-      width = 10,
-      height = 8
-    )
-    
-    ggsave(
-      filename = paste0(out_folder, "SNR_barplot_DAPI_normalized.svg"),
-      plot = barplot_norm_means,
-      width = 8,
-      height = 8
-    )
-    
-    # Save the normalized data
-    write_csv(snr_dapi_normalized, paste0(out_folder, "snr_dapi_normalized.csv"))
-    write_csv(norm_marker_means, paste0(out_folder, "marker_mean_norm_snr.csv"))
-  }
-  
-  # Calculate min/max for consistent scales for original SNR
-  min_snr <- min(snr_long$SNR, na.rm = TRUE)
-  max_snr <- max(snr_long$SNR, na.rm = TRUE)
-  
-  # 1. Basic heatmap with Purple-Yellow color scheme
-  heatmap_purpleyellow <- ggplot(snr_long, aes(x = Staining_condition, y = Marker, fill = SNR)) +
-    geom_tile(color = "black", linewidth = 0.4) +
-    scale_fill_gradient2(
-      low = "purple", 
-      mid = "white", 
-      high = "yellow", 
-      midpoint = median(snr_long$SNR, na.rm = TRUE),
-      na.value = "grey80",
-      limits = c(min_snr, max_snr)
-    ) +
-    geom_text(aes(label = sprintf("%.2f", SNR)), size = 3) +
-    theme_minimal() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      plot.title = element_text(hjust = 0.5)
-    ) +
-    labs(
-      title = "Signal-to-Noise Ratio Heatmap (Purple-Yellow)",
-      x = "Staining Condition",
-      y = "Marker",
-      fill = "SNR"
-    )
-  
-  # Save the first heatmap
-  ggsave(
-    filename = paste0(out_folder, "SNR_heatmap_purpleyellow.svg"),
-    plot = heatmap_purpleyellow,
-    width = 10,
-    height = 8
-  )
-  
-  # 2. Threshold-based heatmap (clear visual for SNR > 1)
-  # Define thresholds for coloring
-  threshold_colors <- c(
-    "<0.8" = "#FF9999",  # Light red
-    "0.8-1.0" = "#FFCC99", # Light orange
-    "1.0-1.5" = "#FFFF99", # Light yellow
-    "1.5-2.0" = "#CCFF99", # Light green
-    "2.0-3.0" = "#99FF99", # Medium green
-    ">3.0" = "#009900"     # Dark green
-  )
-  
-  # Add threshold category
-  snr_long <- snr_long %>%
-    mutate(SNR_category = case_when(
-      SNR < 0.8 ~ "<0.8",
-      SNR >= 0.8 & SNR < 1.0 ~ "0.8-1.0",
-      SNR >= 1.0 & SNR < 1.5 ~ "1.0-1.5",
-      SNR >= 1.5 & SNR < 2.0 ~ "1.5-2.0",
-      SNR >= 2.0 & SNR < 3.0 ~ "2.0-3.0",
-      SNR >= 3.0 ~ ">3.0",
-      TRUE ~ NA_character_
-    ))
-  
-  # Convert to ordered factor for proper legend ordering
-  snr_long$SNR_category <- factor(
-    snr_long$SNR_category,
-    levels = names(threshold_colors)
-  )
-  
-  heatmap_threshold <- ggplot(snr_long, aes(x = Staining_condition, y = Marker, fill = SNR_category)) +
-    geom_tile(color = "black", linewidth = 0.4) +
-    scale_fill_manual(
-      values = threshold_colors,
-      na.value = "grey80",
-      drop = FALSE
-    ) +
-    geom_text(aes(label = sprintf("%.2f", SNR)), size = 3) +
-    theme_minimal() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      plot.title = element_text(hjust = 0.5)
-    ) +
-    labs(
-      title = "Signal-to-Noise Ratio Heatmap (Threshold-Based)",
-      x = "Staining Condition",
-      y = "Marker",
-      fill = "SNR Range"
-    )
-  
-  # Save the heatmap
-  ggsave(
-    filename = paste0(out_folder, "SNR_heatmap_threshold.svg"),
-    plot = heatmap_threshold,
-    width = 10,
-    height = 8
-  )
-  
-  # 3. Bar plot of mean SNR per marker
-  # Calculate mean SNR for each marker
-  marker_means <- snr_long %>%
-    group_by(Marker) %>%
-    summarize(mean_SNR = mean(SNR, na.rm = TRUE)) %>%
-    arrange(desc(mean_SNR))
-  barplot_means <- ggplot(marker_means, aes(x = reorder(Marker, mean_SNR), y = mean_SNR)) +
-    geom_bar(stat = "identity", fill = "steelblue") +
-    geom_text(aes(label = sprintf("%.2f", mean_SNR)), hjust = -0.1, size = 3) +
-    geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
-    coord_flip() +
-    theme_minimal() +
-    labs(
-      title = "Mean Signal-to-Noise Ratio per Marker",
-      x = "Marker",
-      y = "Mean SNR",
-      caption = "Red dashed line indicates SNR = 1.0"
-    )
-  
-  ggsave(
-    filename = paste0(out_folder, "SNR_barplot_means.svg"),
-    plot = barplot_means,
-    width = 8,
-    height = 8
-  )
-  
-  # Save the processed data for reference
-  write_csv(snr_data, paste0(out_folder, "processed_snr_data.csv"))
-  
-  # Save marker statistics
-  write_csv(marker_means, paste0(out_folder, "marker_mean_snr.csv"))
-  
-  # Return a list of plot objects for potential further use
-  result_list <- list(
-    heatmap_purpleyellow = heatmap_purpleyellow,
-    heatmap_threshold = heatmap_threshold,
-    barplot_means = barplot_means
-  )
-  
-  # Add DAPI-normalized visualizations to results if created
-  if (!is.null(nuclear_marker_col)) {
-    result_list$heatmap_dapi_norm <- heatmap_dapi_norm
-    result_list$heatmap_norm_threshold <- heatmap_norm_threshold
-    result_list$barplot_norm_means <- barplot_norm_means
-  }
-  
-  return(result_list)
-}
 # Function to implement the scoring system directly as described
 implement_scoring_system <- function(df_trans, out_folder, excluded_values = list(), remove_values = c(), penalty_score = 10, marker_sequence = NULL, current_config_name = NULL) {
   # Select column names (markers)
@@ -1119,7 +861,7 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     ))
   
   # MODIFIED: Conditional ordering for heatmap columns
-  if (!is.null(current_config_name) && grepl("UKentucky", current_config_name)) {
+  if (!is.null(current_config_name) && grepl("^UKentucky", current_config_name)) {
     # --- Logic for UKentucky ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(cv_df$Staining_condition)
@@ -1128,6 +870,17 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     # Reorder the full condition names by matching their endings to the suffix_order
     condition_order <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
+    }))
+    
+  } else if (!is.null(current_config_name) && grepl("B1_ASTAR_COMET|B2_Stanford_Rarecyte|B1_Roche|B1_UKentucky|B2_Stanford_MIBI_Colon|B2_Stanford_MIBI_Liver|B3_Novartis_LuCa|B3_Novartis_tonsil|B3_Stanford_OSCC|B2_Stanford_IMC_Tonsil", current_config_name)) {
+    # --- NEW: Logic for new B1/B2 ASTAR & RareCyte naming conventions ---
+    # Get the unique conditions present in the data for this run
+    all_conditions <- unique(cv_df$Staining_condition)
+    # Define the desired logical suffix order with underscores
+    suffix_order <- c('Tris_20min', 'Tris_40min', 'Tris_10min', 'Citra_20min')
+    # Reorder the full condition names by matching their endings to the suffix_order
+    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+      grep(paste0(sfx, "$"), all_conditions, value = TRUE, ignore.case = TRUE)
     }))
     
   } else if (!is.null(current_config_name) && grepl("ASTAR_COMET|RareCyte", current_config_name)) {
@@ -1546,362 +1299,9 @@ reorder_bidmc_subset_conditions <- function(data) {
   return(data)
 }
 
+
 # Function to create multiple heatmap visualizations for signal-to-noise ratio data
-create_snr_heatmaps1 <- function(snr_data, out_folder, remove_values = c()) {
-  # First, identify marker columns (all except Staining_condition)
-  marker_cols <- setdiff(names(snr_data), "Staining_condition")
-  
-  # Remove specified markers if requested
-  if(length(remove_values) > 0) {
-    marker_cols <- setdiff(marker_cols, remove_values)
-  }
-  
-  # Clean marker names (remove special characters)
-  snr_data <- snr_data %>%
-    rename_with(~ gsub("[.-]", "", .), all_of(marker_cols))
-  
-  snr_data <- snr_data %>%
-    select(-any_of(remove_values))
-  
-  # Update marker_cols with cleaned names
-  marker_cols <- setdiff(names(snr_data), "Staining_condition")
-  
-  # Get original marker names for display
-  old_marker_names <- marker_cols
-  
-  # Get numeric ordering of staining conditions
-  condition_order <- snr_data %>%
-    mutate(
-      condition_num = as.numeric(gsub("\\D", "", Staining_condition))
-    ) %>%
-    arrange(condition_num) %>%
-    pull(Staining_condition) %>%
-    unique()
-  
-  # Convert data to long format for ggplot
-  snr_long <- snr_data %>%
-    pivot_longer(
-      cols = all_of(marker_cols),
-      names_to = "Marker",
-      values_to = "SNR"
-    ) %>%
-    # Set factor levels to ensure correct ordering
-    mutate(Staining_condition = factor(Staining_condition, levels = condition_order))
-  
-  # Check if nuclear marker (DAPI/Hoechst/Nucleus) is available for normalization
-  has_nuclear_marker <- "DAPI" %in% marker_cols || "Hoechst" %in% marker_cols || "Nucleus" %in% marker_cols
-  
-  # Determine which nuclear marker column to use
-  nuclear_marker_col <- if ("Hoechst" %in% marker_cols) {
-    "Hoechst"
-  } else if ("DAPI" %in% marker_cols) {
-    "DAPI"
-  } else if ("Nucleus" %in% marker_cols) {
-    "Nucleus"
-  } else {
-    NULL
-  }
-  
-  # Create normalized versions of all visualizations if DAPI/Hoechst is available
-  if (!is.null(nuclear_marker_col)) {
-    # Create a wide format dataset by marker for normalization
-    snr_wide_by_marker <- snr_long %>%
-      pivot_wider(
-        names_from = Marker,
-        values_from = SNR
-      )
-    
-    # Normalize each marker by DAPI
-    snr_dapi_normalized <- snr_wide_by_marker %>%
-      mutate(across(all_of(setdiff(marker_cols, nuclear_marker_col)),
-                    ~ . / .data[[nuclear_marker_col]],
-                    .names = "{.col}_norm"))
-    
-    # Extract normalized columns
-    norm_cols <- names(snr_dapi_normalized)[grepl("_norm$", names(snr_dapi_normalized))]
-    
-    # Convert back to long format for visualization
-    snr_norm_long <- snr_dapi_normalized %>%
-      select(Staining_condition, all_of(norm_cols)) %>%
-      pivot_longer(
-        cols = -Staining_condition,
-        names_to = "Marker",
-        values_to = "Normalized_SNR"
-      ) %>%
-      # Clean up marker names
-      mutate(Marker = gsub("_norm$", "", Marker))
-    
-    # Calculate min/max for consistent scales
-    min_norm_snr <- min(snr_norm_long$Normalized_SNR, na.rm = TRUE)
-    max_norm_snr <- max(snr_norm_long$Normalized_SNR, na.rm = TRUE)
-    
-    # 1. Normalized heatmap with blue-white-red color scheme
-    heatmap_dapi_norm <- ggplot(snr_norm_long,
-                                aes(x = Staining_condition, y = Marker, fill = Normalized_SNR)) +
-      geom_tile(color = "black", linewidth = 0.4) +
-      scale_fill_gradient2(
-        low = "blue",
-        mid = "white",
-        high = "red",
-        midpoint = median(snr_norm_long$Normalized_SNR, na.rm = TRUE),
-        na.value = "grey80",
-        limits = c(min_norm_snr, max_norm_snr)
-      ) +
-      geom_text(aes(label = sprintf("%.2f", Normalized_SNR)), size = 3) +
-      theme_minimal() +
-      theme(
-        axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5)
-      ) +
-      labs(
-        title = paste0("Signal-to-Noise Ratio Normalized to ", nuclear_marker_col),
-        x = "Staining Condition",
-        y = "Marker",
-        fill = "Normalized SNR"
-      )
-    
-    # 2. Normalized threshold-based heatmap
-    # Define thresholds for normalized values
-    norm_threshold_colors <- c(
-      "<0.5" = "#FF9999", # Light red
-      "0.5-0.8" = "#FFCC99", # Light orange
-      "0.8-1.0" = "#FFFF99", # Light yellow
-      "1.0-1.5" = "#CCFF99", # Light green
-      "1.5-2.0" = "#99FF99", # Medium green
-      ">2.0" = "#009900"  # Dark green
-    )
-    
-    # Add normalized threshold category
-    snr_norm_long <- snr_norm_long %>%
-      mutate(SNR_category = case_when(
-        Normalized_SNR < 0.5 ~ "<0.5",
-        Normalized_SNR >= 0.5 & Normalized_SNR < 0.8 ~ "0.5-0.8",
-        Normalized_SNR >= 0.8 & Normalized_SNR < 1.0 ~ "0.8-1.0",
-        Normalized_SNR >= 1.0 & Normalized_SNR < 1.5 ~ "1.0-1.5",
-        Normalized_SNR >= 1.5 & Normalized_SNR < 2.0 ~ "1.5-2.0",
-        Normalized_SNR >= 2.0 ~ ">2.0",
-        TRUE ~ NA_character_
-      ))
-    
-    # Convert to ordered factor for proper legend ordering
-    snr_norm_long$SNR_category <- factor(
-      snr_norm_long$SNR_category,
-      levels = names(norm_threshold_colors)
-    )
-    
-    heatmap_norm_threshold <- ggplot(snr_norm_long,
-                                     aes(x = Staining_condition, y = Marker, fill = SNR_category)) +
-      geom_tile(color = "black", linewidth = 0.4) +
-      scale_fill_manual(
-        values = norm_threshold_colors,
-        na.value = "grey80",
-        drop = FALSE
-      ) +
-      geom_text(aes(label = sprintf("%.2f", Normalized_SNR)), size = 3) +
-      theme_minimal() +
-      theme(
-        axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5)
-      ) +
-      labs(
-        title = paste0(nuclear_marker_col, "-Normalized SNR Heatmap (Threshold-Based)"),
-        subtitle = "Values > 1.0 indicate better SNR than nuclear marker",
-        x = "Staining Condition",
-        y = "Marker",
-        fill = "Normalized SNR Range"
-      )
-    
-    # 3. Normalized bar plot of mean SNR per marker
-    norm_marker_means <- snr_norm_long %>%
-      group_by(Marker) %>%
-      summarize(mean_norm_SNR = mean(Normalized_SNR, na.rm = TRUE)) %>%
-      arrange(desc(mean_norm_SNR))
-    
-    barplot_norm_means <- ggplot(norm_marker_means,
-                                 aes(x = reorder(Marker, mean_norm_SNR), y = mean_norm_SNR)) +
-      geom_bar(stat = "identity", fill = "steelblue") +
-      geom_text(aes(label = sprintf("%.2f", mean_norm_SNR)), hjust = -0.1, size = 3) +
-      geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
-      coord_flip() +
-      theme_minimal() +
-      labs(
-        title = paste0("Mean Signal-to-Noise Ratio Normalized to ", nuclear_marker_col),
-        subtitle = "Values > 1.0 indicate better SNR than nuclear marker",
-        x = "Marker",
-        y = paste0("Mean ", nuclear_marker_col, "-Normalized SNR"),
-        caption = "Red line indicates equal performance to nuclear marker"
-      )
-    
-    # Save the normalized visualizations
-    ggsave(
-      filename = paste0(out_folder, "SNR_heatmap_DAPI_normalized.svg"),
-      plot = heatmap_dapi_norm,
-      width = 10,
-      height = 8
-    )
-    
-    ggsave(
-      filename = paste0(out_folder, "SNR_heatmap_DAPI_norm_threshold.svg"),
-      plot = heatmap_norm_threshold,
-      width = 10,
-      height = 8
-    )
-    
-    ggsave(
-      filename = paste0(out_folder, "SNR_barplot_DAPI_normalized.svg"),
-      plot = barplot_norm_means,
-      width = 8,
-      height = 8
-    )
-    
-    # Save the normalized data
-    write_csv(snr_dapi_normalized, paste0(out_folder, "snr_dapi_normalized.csv"))
-    write_csv(norm_marker_means, paste0(out_folder, "marker_mean_norm_snr.csv"))
-  }
-  
-  # Calculate min/max for consistent scales for original SNR
-  min_snr <- min(snr_long$SNR, na.rm = TRUE)
-  max_snr <- max(snr_long$SNR, na.rm = TRUE)
-  
-  # 1. Basic heatmap with Purple-Yellow color scheme
-  heatmap_purpleyellow <- ggplot(snr_long, aes(x = Staining_condition, y = Marker, fill = SNR)) +
-    geom_tile(color = "black", linewidth = 0.4) +
-    scale_fill_gradient2(
-      low = "purple",
-      mid = "white",
-      high = "yellow",
-      midpoint = median(snr_long$SNR, na.rm = TRUE),
-      na.value = "grey80",
-      limits = c(min_snr, max_snr)
-    ) +
-    geom_text(aes(label = sprintf("%.2f", SNR)), size = 3) +
-    theme_minimal() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      plot.title = element_text(hjust = 0.5)
-    ) +
-    labs(
-      title = "Signal-to-Noise Ratio Heatmap (Purple-Yellow)",
-      x = "Staining Condition",
-      y = "Marker",
-      fill = "SNR"
-    )
-  
-  # Save the first heatmap
-  ggsave(
-    filename = paste0(out_folder, "SNR_heatmap_purpleyellow.svg"),
-    plot = heatmap_purpleyellow,
-    width = 10,
-    height = 8
-  )
-  
-  # 2. Threshold-based heatmap (clear visual for SNR > 1)
-  # Define thresholds for coloring
-  threshold_colors <- c(
-    "<0.8" = "#FF9999", # Light red
-    "0.8-1.0" = "#FFCC99", # Light orange
-    "1.0-1.5" = "#FFFF99", # Light yellow
-    "1.5-2.0" = "#CCFF99", # Light green
-    "2.0-3.0" = "#99FF99", # Medium green
-    ">3.0" = "#009900"  # Dark green
-  )
-  
-  # Add threshold category
-  snr_long <- snr_long %>%
-    mutate(SNR_category = case_when(
-      SNR < 0.8 ~ "<0.8",
-      SNR >= 0.8 & SNR < 1.0 ~ "0.8-1.0",
-      SNR >= 1.0 & SNR < 1.5 ~ "1.0-1.5",
-      SNR >= 1.5 & SNR < 2.0 ~ "1.5-2.0",
-      SNR >= 2.0 & SNR < 3.0 ~ "2.0-3.0",
-      SNR >= 3.0 ~ ">3.0",
-      TRUE ~ NA_character_
-    ))
-  
-  # Convert to ordered factor for proper legend ordering
-  snr_long$SNR_category <- factor(
-    snr_long$SNR_category,
-    levels = names(threshold_colors)
-  )
-  
-  heatmap_threshold <- ggplot(snr_long, aes(x = Staining_condition, y = Marker, fill = SNR_category)) +
-    geom_tile(color = "black", linewidth = 0.4) +
-    scale_fill_manual(
-      values = threshold_colors,
-      na.value = "grey80",
-      drop = FALSE
-    ) +
-    geom_text(aes(label = sprintf("%.2f", SNR)), size = 3) +
-    theme_minimal() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      plot.title = element_text(hjust = 0.5)
-    ) +
-    labs(
-      title = "Signal-to-Noise Ratio Heatmap (Threshold-Based)",
-      x = "Staining Condition",
-      y = "Marker",
-      fill = "SNR Range"
-    )
-  
-  # Save the heatmap
-  ggsave(
-    filename = paste0(out_folder, "SNR_heatmap_threshold.svg"),
-    plot = heatmap_threshold,
-    width = 10,
-    height = 8
-  )
-  
-  # 3. Bar plot of mean SNR per marker
-  # Calculate mean SNR for each marker
-  marker_means <- snr_long %>%
-    group_by(Marker) %>%
-    summarize(mean_SNR = mean(SNR, na.rm = TRUE)) %>%
-    arrange(desc(mean_SNR))
-  barplot_means <- ggplot(marker_means, aes(x = reorder(Marker, mean_SNR), y = mean_SNR)) +
-    geom_bar(stat = "identity", fill = "steelblue") +
-    geom_text(aes(label = sprintf("%.2f", mean_SNR)), hjust = -0.1, size = 3) +
-    geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
-    coord_flip() +
-    theme_minimal() +
-    labs(
-      title = "Mean Signal-to-Noise Ratio per Marker",
-      x = "Marker",
-      y = "Mean SNR",
-      caption = "Red dashed line indicates SNR = 1.0"
-    )
-  
-  ggsave(
-    filename = paste0(out_folder, "SNR_barplot_means.svg"),
-    plot = barplot_means,
-    width = 8,
-    height = 8
-  )
-  
-  # Save the processed data for reference
-  write_csv(snr_data, paste0(out_folder, "processed_snr_data.csv"))
-  
-  # Save marker statistics
-  write_csv(marker_means, paste0(out_folder, "marker_mean_snr.csv"))
-  
-  # Return a list of plot objects for potential further use
-  result_list <- list(
-    heatmap_purpleyellow = heatmap_purpleyellow,
-    heatmap_threshold = heatmap_threshold,
-    barplot_means = barplot_means
-  )
-  
-  # Add DAPI-normalized visualizations to results if created
-  if (!is.null(nuclear_marker_col)) {
-    result_list$heatmap_dapi_norm <- heatmap_dapi_norm
-    result_list$heatmap_norm_threshold <- heatmap_norm_threshold
-    result_list$barplot_norm_means <- barplot_norm_means
-  }
-  
-  return(result_list)
-}
-# Function to create multiple heatmap visualizations for signal-to-noise ratio data
-create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c()) {
+create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) {
   # First, identify marker columns (all except Staining_condition)
   marker_cols <- setdiff(names(snr_data), "Staining_condition")
   
@@ -2248,6 +1648,269 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c()) {
   # Save the processed data for reference
   write_csv(snr_data, paste0(out_folder, "processed_snr_data.csv"))
   write_csv(marker_means, paste0(out_folder, "marker_mean_snr.csv"))
+  
+  return(result_list)
+}
+
+#' Create and Save SNR Heatmaps from Pre-Normalized Data
+#'
+#' Generates multiple heatmaps and a new combined visualization showing average
+#' normalized SNR above the Z-score heatmap.
+#'
+#' @param snr_data The combined, wide-format SNR data frame with pre-normalized values.
+#' @param out_folder The directory to save the output heatmap files.
+#' @param remove_values A vector of marker names to exclude from the heatmaps.
+#' @param excluded_values A list specifying marker/condition pairs to grey out.
+#' @return A list containing the generated ggplot objects.
+create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), excluded_values = list()) {
+  
+  # --- 1. DATA PREPARATION ---
+  snr_data_clean <- snr_data %>%
+    rename_with(~ gsub("[.-]", "", .), all_of(setdiff(names(snr_data), "Staining_condition")))
+  
+  marker_cols <- setdiff(names(snr_data_clean), "Staining_condition")
+  
+  final_marker_cols <- marker_cols
+  if (length(remove_values) > 0) {
+    cleaned_remove_values <- gsub("[.-]", "", remove_values)
+    final_marker_cols <- setdiff(marker_cols, cleaned_remove_values)
+  }
+  
+  condition_order <- snr_data_clean %>%
+    mutate(condition_num = as.numeric(gsub("\\D", "", Staining_condition))) %>%
+    arrange(condition_num) %>%
+    pull(Staining_condition) %>%
+    unique()
+  
+  snr_long <- snr_data_clean %>%
+    select(Staining_condition, all_of(final_marker_cols)) %>%
+    pivot_longer(
+      cols = all_of(final_marker_cols),
+      names_to = "Marker",
+      values_to = "SNR"
+    ) %>%
+    mutate(Staining_condition = factor(Staining_condition, levels = condition_order))
+  
+  if (length(excluded_values) > 0) {
+    cleaned_excluded_values <- lapply(excluded_values, function(markers) gsub("[.-]", "", markers))
+    for (condition in names(cleaned_excluded_values)) {
+      markers_to_exclude <- cleaned_excluded_values[[condition]]
+      snr_long <- snr_long %>%
+        mutate(SNR = ifelse(Staining_condition == condition & Marker %in% markers_to_exclude, NA, SNR))
+    }
+  }
+  
+  result_list <- list()
+  
+  # --- 2. CALCULATIONS ---
+  
+  # A. Normalize each marker's SNR to a 0-1 scale
+  snr_norm_01 <- snr_long %>%
+    group_by(Marker) %>%
+    mutate(
+      range = max(SNR, na.rm = TRUE) - min(SNR, na.rm = TRUE),
+      SNR_norm_01 = if_else(range == 0, 0.5, (SNR - min(SNR, na.rm = TRUE)) / range)
+    ) %>%
+    ungroup()
+  
+  # B. Calculate the average of these 0-1 normalized values for each slide
+  avg_snr_data <- snr_norm_01 %>%
+    group_by(Staining_condition) %>%
+    summarise(Avg_SNR = mean(SNR_norm_01, na.rm = TRUE), .groups = 'drop') %>%
+    mutate(Staining_condition = factor(Staining_condition, levels = condition_order))
+  
+  # C. Prepare Z-score data from ORIGINAL SNR
+  snr_long_zscore <- snr_long %>%
+    group_by(Marker) %>%
+    mutate(
+      s = sd(SNR, na.rm = TRUE),
+      SNR_zscore = if_else(is.na(s) | s == 0, 0, (SNR - mean(SNR, na.rm = TRUE)) / s)
+    ) %>%
+    ungroup()
+  
+  # D. Prepare Z-score data from 0-1 NORMALIZED SNR
+  snr_01_norm_zscore <- snr_norm_01 %>%
+    group_by(Marker) %>%
+    mutate(
+      s_norm = sd(SNR_norm_01, na.rm = TRUE),
+      SNR_01_norm_zscore = if_else(is.na(s_norm) | s_norm == 0, 0, (SNR_norm_01 - mean(SNR_norm_01, na.rm = TRUE)) / s_norm)
+    ) %>%
+    ungroup()
+  
+  # --- 3. CREATE PLOTS ---
+  
+  # PLOT 1: Combined Plot (Bar chart over original Z-score heatmap)
+  p_top_barplot <- ggplot(avg_snr_data, aes(x = Staining_condition, y = Avg_SNR)) +
+    geom_bar(stat = "identity", fill = "steelblue", width = 0.7) +
+    geom_text(aes(label = sprintf("%.2f", Avg_SNR)), vjust = -0.4, size = 4.5) +
+    theme_minimal() +
+    theme(
+      axis.title.x = element_blank(),
+      axis.text.x = element_blank(),
+      plot.margin = margin(b = 3),
+      panel.grid.major.x = element_blank(),
+      axis.text.y = element_text(size = 12),
+      axis.title.y = element_text(size = 14),
+      plot.title = element_text(hjust = 0.5, face = "bold", size = 16)
+    ) +
+    labs(y = "Avg Score", title = "Average Normalized SNR and Z-Score Heatmap") +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.2)))
+  
+  lim <- max(abs(range(snr_long_zscore$SNR_zscore, na.rm = TRUE)))
+  
+  p_bottom_heatmap <- ggplot(snr_long_zscore, aes(x = Staining_condition, y = Marker, fill = SNR_zscore)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_gradientn(
+      colors = c("#330066",      # Very dark purple
+                 "#44007C",      # Dark purple
+                 "#5B0092",      # Medium-dark purple
+                 "#7209B7",      # Purple
+                 "#9D4EDD",      # Medium purple
+                 "#C77DFF",      # Light purple
+                 "#E0AAFF",      # Very light purple
+                 "#F3E5F5",      # Almost white purple
+                 "#FFF4E6",      # Almost white yellow
+                 "#FFE082",      # Very light yellow
+                 "#FFD54F",      # Light yellow
+                 "#FFCA28",      # Medium-light yellow
+                 "#FFC107",      # Medium yellow
+                 "#FFB300",      # Bright yellow
+                 "#FFA000"),     # Deep bright yellow
+      values = scales::rescale(c(-3, -2.5, -2, -1.5, -1, -0.5, -0.25, 0, 0.25, 0.5, 1, 1.5, 2, 2.5, 3)),
+      limits = c(-3, 3),
+      oob = scales::squish,
+      na.value = "grey80"
+    )  +
+    geom_text(aes(label = ifelse(is.na(SNR_zscore), "", sprintf("%.2f", SNR_zscore))), size = 3) +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      axis.title.x = element_blank(),
+      plot.margin = margin(0.5, 5, 5, 5)
+    ) +
+    labs(y = "Marker", fill = "Z-Score")
+  
+  combined_plot <- plot_grid(
+    p_top_barplot, p_bottom_heatmap,
+    ncol = 1, align = "v",
+    rel_heights = c(0.3, 0.7), axis = "lr"
+  )
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_zscore_with_avg.svg"),
+    plot = combined_plot, width = 12, height = 11
+  )
+  result_list$combined_plot <- combined_plot
+  
+  # PLOT 2: Heatmap of Pre-Normalized SNR values
+  heatmap_prenorm <- ggplot(snr_long, aes(x = Staining_condition, y = Marker, fill = SNR)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_gradient2(low = "yellow", mid = "white", high = "#800080", midpoint = median(snr_long$SNR, na.rm = TRUE), na.value = "grey80") +
+    geom_text(aes(label = ifelse(is.na(SNR), "", sprintf("%.2f", SNR))), size = 3) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +
+    labs(title = "Pre-Normalized Signal-to-Noise Ratio Heatmap", x = "Staining Condition", y = "Marker", fill = "SNR")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_prenormalized.svg"),
+    plot = heatmap_prenorm, width = 10, height = 8
+  )
+  result_list$heatmap_prenormalized <- heatmap_prenorm
+  
+  # PLOT 3: NEW - Heatmap of 0-1 Normalized SNR values
+  heatmap_01norm <- ggplot(snr_norm_01, aes(x = Staining_condition, y = Marker, fill = SNR_norm_01)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_gradient2(low = "yellow", mid = "white", high = "#800080", midpoint = 0.5, na.value = "grey80") +
+    geom_text(aes(label = ifelse(is.na(SNR_norm_01), "", sprintf("%.2f", SNR_norm_01))), size = 3) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +
+    labs(title = "0-1 Normalized Signal-to-Noise Ratio Heatmap", x = "Staining Condition", y = "Marker", fill = "0-1 Norm. SNR")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_01normalized.svg"),
+    plot = heatmap_01norm, width = 10, height = 8
+  )
+  result_list$heatmap_01normalized <- heatmap_01norm
+  
+  # PLOT 4: Threshold-based Heatmap
+  threshold_colors <- c("<0.8" = "#FF9999", "0.8-1.0" = "#FFCC99", "1.0-1.5" = "#FFFF99", "1.5-2.0" = "#CCFF99", "2.0-3.0" = "#99FF99", ">3.0" = "#009900")
+  snr_long_threshold <- snr_long %>%
+    mutate(SNR_category = case_when(
+      SNR < 0.8 ~ "<0.8", SNR >= 0.8 & SNR < 1.0 ~ "0.8-1.0", SNR >= 1.0 & SNR < 1.5 ~ "1.0-1.5",
+      SNR >= 1.5 & SNR < 2.0 ~ "1.5-2.0", SNR >= 2.0 & SNR < 3.0 ~ "2.0-3.0", SNR >= 3.0 ~ ">3.0",
+      TRUE ~ NA_character_
+    )) %>%
+    mutate(SNR_category = factor(SNR_category, levels = names(threshold_colors)))
+  
+  heatmap_threshold <- ggplot(snr_long_threshold, aes(x = Staining_condition, y = Marker, fill = SNR_category)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_manual(values = threshold_colors, na.value = "grey80", drop = FALSE) +
+    geom_text(aes(label = ifelse(is.na(SNR), "", sprintf("%.2f", SNR))), size = 3) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +
+    labs(title = "Pre-Normalized SNR Heatmap (Threshold-Based)", x = "Staining Condition", y = "Marker", fill = "SNR Range")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_threshold.svg"),
+    plot = heatmap_threshold, width = 10, height = 8
+  )
+  result_list$heatmap_threshold <- heatmap_threshold
+  
+  # PLOT 5: Z-Score Heatmap of ORIGINAL Pre-Normalized SNR
+  heatmap_zscore <- ggplot(snr_long_zscore, aes(x = Staining_condition, y = Marker, fill = SNR_zscore)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_gradient2(low = "yellow", mid = "white", high = "#800080", midpoint = 0, na.value = "grey80") +
+    geom_text(aes(label = ifelse(is.na(SNR_zscore), "", sprintf("%.2f", SNR_zscore))), size = 3) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +
+    labs(title = "Z-Score of Pre-Normalized Signal-to-Noise Ratio", x = "Staining Condition", y = "Marker", fill = "Z-Score")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_zscore.svg"),
+    plot = heatmap_zscore, width = 10, height = 8
+  )
+  result_list$heatmap_zscore <- heatmap_zscore
+  
+  # PLOT 6: CORRECTED - Z-Score Heatmap of 0-1 NORMALIZED SNR
+  heatmap_zscore_01norm <- ggplot(snr_01_norm_zscore, aes(x = Staining_condition, y = Marker, fill = SNR_01_norm_zscore)) +
+    geom_tile(color = "black", linewidth = 0.4) +
+    scale_fill_gradient2(low = "yellow", mid = "white", high = "#800080", midpoint = 0, na.value = "grey80") +
+    geom_text(aes(label = ifelse(is.na(SNR_01_norm_zscore), "", sprintf("%.2f", SNR_01_norm_zscore))), size = 3) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) +
+    labs(title = "Z-Score of 0-1 Normalized SNR", x = "Staining Condition", y = "Marker", fill = "Z-Score")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_heatmap_zscore_of_01normed.svg"),
+    plot = heatmap_zscore_01norm, width = 10, height = 8
+  )
+  result_list$heatmap_zscore_01normed <- heatmap_zscore_01norm
+  
+  # Bar plot of mean pre-normalized SNR
+  marker_means <- snr_long %>%
+    group_by(Marker) %>%
+    summarize(mean_SNR = mean(SNR, na.rm = TRUE)) %>%
+    arrange(desc(mean_SNR))
+  
+  barplot_means <- ggplot(marker_means, aes(x = reorder(Marker, mean_SNR), y = mean_SNR)) +
+    geom_bar(stat = "identity", fill = "steelblue") +
+    geom_text(aes(label = sprintf("%.2f", mean_SNR)), hjust = -0.1, size = 3) +
+    geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+    coord_flip() +
+    theme_minimal() +
+    labs(title = "Mean Pre-Normalized SNR per Marker", x = "Marker", y = "Mean SNR", caption = "Red dashed line indicates SNR = 1.0")
+  
+  ggsave(
+    filename = file.path(out_folder, "SNR_barplot_means.svg"),
+    plot = barplot_means, width = 8, height = 8
+  )
+  result_list$barplot_means <- barplot_means
+  
+  # Save the processed data for reference
+  write_csv(snr_data_clean %>% select(Staining_condition, all_of(final_marker_cols)), file.path(out_folder, "processed_snr_data.csv"))
+  write_csv(marker_means, file.path(out_folder, "marker_mean_snr.csv"))
+  
+  message(paste("Successfully generated and saved all plots and data to:", out_folder))
   
   return(result_list)
 }
