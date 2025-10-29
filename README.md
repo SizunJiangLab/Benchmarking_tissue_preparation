@@ -8,7 +8,7 @@
 - [Quickstart](#quickstart)
 - [Selecting a Configuration](#selecting-a-configuration)
 - [Outputs](#outputs)
-- [Optional Workflows](#optional-workflows)
+- [Complementary Workflows](#complementary-workflows)
 - [Utilities](#utilities)
 - [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
@@ -263,14 +263,14 @@ Key files:
 
 ## Utilities
 
-- `check_norm_column.R`: Verifies expected normalization columns and nuclear marker priority (DNA1 > HH3 > DAPI > Nucleus).
+- `check_norm_column.R`: Verifies that required normalization columns exist in inputs.
 - `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `MESMER_SignalNoise_workflow.R`.
 
-## Manual Annotation (independent step)
+## Manual Annotation
 
-Manual clustering and annotation are maintained in `./manual_annotation/` and are independent from the R-based workflows above.
+Manual clustering and annotation are maintained in `./manual_annotation/` and are separate from the R-based workflows above.
 
-- See `manual_annotation/DOCUMENTATION.md` for the complete Python-based pipeline and SLURM submission scripts.
+- See [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) for the complete Python-based pipeline and SLURM submission scripts.
 
 ## Directory Structure
 
