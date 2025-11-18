@@ -254,12 +254,12 @@ normalize_data <- function (data) {
 
 # Function to plot density plots for each staining condition and marker
 plot_density_plots <- function(data,
-                                marker_names,
-                                original_marker_names,
-                                legend.position = "bottom",
-                                legend.direction = "horizontal",
-                                legend.justification = "center",
-                                legend.rows = 2) {
+                               marker_names,
+                               original_marker_names,
+                               legend.position = "bottom",
+                               legend.direction = "horizontal",
+                               legend.justification = "center",
+                               legend.rows = 2) {
   p <- data %>%
     select(Staining_condition, all_of(marker_names)) %>%
     pivot_longer(
@@ -308,12 +308,18 @@ perform_statistical_and_kruskal_wallis_tests <- function(data, marker_names) {
   return(kruskal_results)
 }
 
-calc_effect_size <- function(data, out_folder, pairs) {
+calc_effect_size <- function(data, out_folder, pairs, remove_values = c()) {
   data <- data %>% mutate(id = str_c("c", 1:nrow(.)))
   counts <- data %>%
     column_to_rownames("id") %>%
     select(5:(ncol(data)-3)) %>%
     t()
+  
+  # Apply remove_values filter to exclude unwanted markers
+  if (length(remove_values) > 0) {
+    counts <- counts[!rownames(counts) %in% remove_values, , drop = FALSE]
+  }
+  
   group.by <- data$Staining_condition
   comb_2 <- combn(unique(data$Staining_condition), 2)
   res <- vector("list", ncol(comb_2))
@@ -328,6 +334,11 @@ calc_effect_size <- function(data, out_folder, pairs) {
   #Prepare data for Cohen's d effect size test
   # Calculate mean of each marker for each staining condition
   cols <- names(data)[5:(ncol(data) - 3)]
+  
+  # Apply remove_values filter to exclude unwanted markers
+  if (length(remove_values) > 0) {
+    cols <- setdiff(cols, remove_values)
+  }
   
   mean_df <- data %>%
     group_by(Staining_condition) %>%

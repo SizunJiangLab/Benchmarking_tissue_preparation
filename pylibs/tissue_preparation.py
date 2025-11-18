@@ -17,7 +17,7 @@ from deepcell.applications import Mesmer # Mesmer
 from deepcell.utils.plot_utils import create_rgb_image, make_outline_overlay
 
 nuclear_markers = [0] # these are indices of the channels we want to use as the nuclear signal (only one here)
-membrane_markers = [1, 4, 5, 6, 8, 14, 21, 22, 23, 24, 25, 27] # these are the indices we want to use as the membrane signal (referenced above)
+membrane_markers = [2, 6, 12, 27] # CD45, HLA-DR, Cytokeratin, CD11b these are the indices we want to use as the membrane signal (referenced above)
 
 
 def read_qtiff_image(fn: str)->np.ndarray: 

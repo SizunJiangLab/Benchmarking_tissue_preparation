@@ -345,6 +345,26 @@ result = normalize_data(data)
 df_norm <- result$data
 marker_names <- result$marker_names
 
+# Remove markers that are in the remove_values list
+if (length(remove_values) > 0) {
+  # Filter marker_names (cleaned format)
+  marker_names <- setdiff(marker_names, remove_values)
+  
+  # Filter original_marker_names (display format with dashes)
+  # Create a mapping between cleaned names and original names
+  cleaned_to_original <- setNames(original_marker_names, 
+                                  gsub("[.-]", "", original_marker_names))
+  
+  # Convert remove_values to original format and filter
+  remove_values_original <- cleaned_to_original[remove_values]
+  remove_values_original <- remove_values_original[!is.na(remove_values_original)]
+  original_marker_names <- setdiff(original_marker_names, remove_values_original)
+  
+  cat("Removed markers:", paste(remove_values, collapse = ", "), "\n")
+  cat("Remaining markers (cleaned):", length(marker_names), "\n")
+  cat("Remaining markers (original):", length(original_marker_names), "\n")
+}
+
 ### Arcsinh (Inverse hyperbolic Sine) Transformation
 df_arcsinh <- df_norm %>%
   mutate(across(all_of(marker_names), ~ asinh(.x / 0.001)))
@@ -385,7 +405,8 @@ write_csv(kruskal_results, paste0(out_folder, "kruskal_pvals.csv"))
 effect_size <- calc_effect_size(
   data = df_trans,
   out_folder = out_folder,
-  pairs = pairs
+  pairs = pairs,
+  remove_values = remove_values
 )
 
 # Generate heatmaps

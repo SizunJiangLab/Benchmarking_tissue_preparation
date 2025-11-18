@@ -33,15 +33,16 @@ Tested on:
 
 Recommended versions:
 
-- Python: 3.9.12 (optional, for segmentation)
+- Python: 3.9.12+ (required for SNR preprocessing, optional for other segmentation tasks)
 - R: >= 4.3.2
 
 Install dependencies:
 
-- Python (optional, for segmentation notebook)
+- Python (required for SNR preprocessing workflow, optional for other segmentation tasks)
 
 ```bash
 pip install -r ./requirements.txt
+pip install deepcell  # Required for MESMER segmentation in SNR preprocessing
 ```
 
 - R packages
@@ -233,6 +234,44 @@ Key files:
 
 - SNR workflow (MESMER sources with SNR raw data: BIDMC, Roche, Stanford)
 
+  0. **Preprocess images and extract signal-to-noise ratios (Python)**
+
+     Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract signal ratios. This step performs image cropping, MESMER segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
+
+     ```bash
+     python crop_mesmer_featureextraction_signaltonoise.py
+     ```
+
+     **Prerequisites:**
+
+     - Python 3.9+ with dependencies: `pip install -r requirements.txt`
+     - DeepCell MESMER installed: `pip install deepcell`
+     - Raw qptiff image files in the specified data folder
+
+     **Configuration:**
+
+     - Edit the script to set:
+       - `data_folder`: Path to folder containing `.qptiff` files
+       - `output_folder`: Where to save processed outputs
+       - `crop_coords_dict`: Dictionary mapping slide numbers to crop coordinates `(x_min, x_max, y_min, y_max)`
+       - `markers`: List of marker names in channel order
+
+     **Outputs:**
+
+     - `extracted_features/`: Single-cell feature CSV files (`data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`)
+     - `Individualtiff_slide{key}_FOV1/`: Individual TIFF files per marker and `signal_ratios_slide{key}_FOV2.csv` with SNR metrics
+     - `MESMER_outputs/`: Segmentation masks and overlays
+
+     **Key outputs for R workflow:**
+
+     - Signal ratio CSV files: `signal_ratios_slide{key}_FOV2.csv` containing columns:
+       - `Marker`: Marker name
+       - `signal_invsout_DAPInorm`: DAPI-normalized signal ratio
+       - `signal_invsout_areanorm`: Area-normalized signal ratio
+       - `Normalized_signal_invsout`: DAPI + area normalized ratio (used by R workflow)
+
+     **Note:** Ensure these signal ratio files are referenced in `Slide_metadata.csv` with `Type == "signal_ratios"` for the R workflow to find them.
+
   1. Normalize raw SNR cell counts
 
      ```bash
@@ -247,7 +286,7 @@ Key files:
 
   - Features: Hoechst normalization, SNR heatmaps, mean SNR barplots
   - Outputs (examples): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
-  - Runtime estimate: a few seconds per run.
+  - Runtime estimate: Python preprocessing depends on image size and number of slides (typically minutes to hours per slide). R workflow: a few seconds per run.
 
 - CellXpress workflow
 
@@ -265,6 +304,8 @@ Key files:
 
 - `check_norm_column.R`: Verifies that required normalization columns exist in inputs.
 - `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `MESMER_SignalNoise_workflow.R`.
+- `crop_mesmer_featureextraction_signaltonoise.py`: Python script for preprocessing qptiff images, performing MESMER segmentation, extracting single-cell features, and calculating signal-to-noise ratios. Required before running the SNR visualization workflow in R.
+- `pylibs/tissue_preparation.py`: Python utility library providing functions for reading qtiff images, generating nuclear/membrane channels, running MESMER segmentation, and extracting single-cell features. Used by `crop_mesmer_featureextraction_signaltonoise.py`.
 
 ## Manual Annotation
 
@@ -308,6 +349,10 @@ Representative layout in this repository:
 ├── build_compare_pairs.R
 ├── balagan_analysis.R
 ├── helper.R
+├── crop_mesmer_featureextraction_signaltonoise.py
+├── pylibs/
+│   ├── __init__.py
+│   └── tissue_preparation.py
 └── README.md (this file)
 ```
 
