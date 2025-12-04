@@ -1,0 +1,402 @@
+# =========================================================================================
+# === COMPREHENSIVE CORRELATION ANALYSIS (Balagan Metrics vs. CV Scores) ===
+# =========================================================================================
+# This script performs multiple correlation analyses:
+# 1. Mean Intensity vs. CV Rank/Score
+# 2. CV Score vs. Balagan Metrics (Alpha, Tau Rank)
+# 3. Unknown/Mixed Cell Fraction vs. Alpha
+# 4. All Markers vs. 10 Markers Comparison
+# 5. Quadrant Classification (Efficiency vs. Heterogeneity)
+#
+# --- Load Libraries ---
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(svglite)
+library(ggpubr)    # For stat_cor
+library(ggrepel)   # For geom_text_repel
+library(purrr)     # For map_dfr
+library(tidyr)
+library(balagan)   # For recalculating tau
+
+# =========================================================================================
+# --- 1. CONFIGURATION ---
+# =========================================================================================
+
+# --- INPUT DIRECTORIES ---
+# Directory with your 100-run analysis
+consistency_dir <- "./balagan_consistency_analysis_from_raw"
+
+# Directory with your CV analysis
+cv_dir <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/out_BIDMC_all"
+
+# Directory with stable tau rank table
+tau_rank_dir <- "./stable_rank_analysis_plots"
+
+# Directory with raw MESMER data (for sparsity analysis)
+raw_data_dir <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/data_mesmer"
+bidmc_data_dir <- file.path(raw_data_dir, "BIDMC")
+
+# Directory with "All Markers" run (100-1000 FOV)
+all_markers_dir <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/balagan_results1/out_balagan_analysis_BIDMC_optimization_10082025/BIDMC"
+
+# --- OPTIONAL: Path to mixed/unknown cell fraction file ---
+mixed_unknown_file <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/mixed_unknown_counts_and_fractions_by_slide.csv"
+
+# --- OUTPUT DIRECTORY ---
+output_dir <- "./advanced_correlation_analysis"
+dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+
+cat(paste("Saving all plots to:", output_dir, "\n"))
+
+# =========================================================================================
+# --- 2. LOAD CORE DATASETS ---
+# =========================================================================================
+cat("Loading core datasets...\n")
+
+# --- Balagan Metrics: Alpha Slopes ---
+alpha_slope_file <- file.path(consistency_dir, "AGGREGATE_stable_alpha_slopes.csv")
+stable_alpha_slopes <- read_csv(alpha_slope_file, show_col_types = FALSE) %>%
+  mutate(Slide_Name = paste0("slide", gsub(".*slide(\\d+).*", "\\1", Slide))) %>%
+  mutate(Alpha = median_alpha_slope * -1) %>%  # Convert to positive exponent
+  select(Slide_Name, Alpha, sd_alpha_slope)
+
+# --- Balagan Metrics: Tau Ranks ---
+tau_rank_file <- file.path(tau_rank_dir, "TABLE_stable_MEAN_rank_stability.csv")
+stable_tau_ranks <- read_csv(tau_rank_file, show_col_types = FALSE) %>%
+  dplyr::rename(Average_Tau_Rank = mean_rank) %>%
+  select(Slide_Name, Average_Tau_Rank, stability_sd, stability_iqr)
+
+# --- CV Metrics: Ranks and Scores ---
+cv_summary_file <- file.path(cv_dir, "condition_summary.csv")
+cv_summary_data <- read_csv(cv_summary_file, show_col_types = FALSE) %>%
+  mutate(CV_Rank = 1:n()) %>%
+  mutate(Slide_Name = paste0("slide", gsub("\\D", "", Staining_condition))) %>%
+  dplyr::rename(CV_Score = Average_Score) %>%
+  select(Slide_Name, CV_Rank, CV_Score)
+
+# --- Mean Intensity Data ---
+mean_intensity_file <- file.path(cv_dir, "mean_values.csv")
+phenotypic_markers <- c("CD3", "CD15", "CD8", "CD20", "CD11c", "CD68", "FoxP3", "Pax5", "CD31", "Cytokeratin")
+
+intensity_data <- read_csv(mean_intensity_file, show_col_types = FALSE) %>%
+  select(Staining_condition, any_of(phenotypic_markers)) %>%
+  rowwise() %>%
+  mutate(Mean_Intensity = mean(c_across(all_of(phenotypic_markers)), na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(Slide_Name = paste0("slide", gsub("\\D", "", Staining_condition))) %>%
+  select(Slide_Name, Mean_Intensity)
+
+# --- Combine Core Metrics ---
+core_metrics <- stable_alpha_slopes %>%
+  left_join(stable_tau_ranks, by = "Slide_Name") %>%
+  left_join(cv_summary_data, by = "Slide_Name") %>%
+  left_join(intensity_data, by = "Slide_Name") %>%
+  mutate(Slide_Name_short = sub("slide", "", Slide_Name))
+
+write_csv(core_metrics, file.path(output_dir, "TABLE_combined_core_metrics.csv"))
+cat("Core metrics loaded and combined successfully.\n")
+
+# =========================================================================================
+# === ANALYSIS 1: MEAN INTENSITY CORRELATIONS ===
+# =========================================================================================
+cat("\n--- Analysis 1: Mean Intensity Correlations ---\n")
+
+# --- 1A: Mean Intensity vs. CV Rank ---
+p_int_cv_rank <- ggplot(core_metrics, aes(x = Mean_Intensity, y = CV_Rank)) +
+  geom_point(size = 3, color = "purple") +
+  geom_text_repel(aes(label = Slide_Name_short), size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "spearman") +
+  scale_y_reverse() +
+  labs(
+    title = "Mean Intensity vs. CV Rank",
+    x = "Mean Intensity",
+    y = "CV Rank (Best at Top)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_01a_intensity_vs_cv_rank.svg"), plot = p_int_cv_rank, width = 8, height = 7)
+
+# --- 1B: Mean Intensity vs. CV Score ---
+p_int_cv_score <- ggplot(core_metrics, aes(x = Mean_Intensity, y = CV_Score)) +
+  geom_point(size = 3, color = "purple") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "pearson") +
+  labs(
+    title = "Mean Intensity vs. Average CV Score",
+    x = "Mean Intensity",
+    y = "Average CV Score"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_01b_intensity_vs_cv_score.svg"), plot = p_int_cv_score, width = 8, height = 7)
+
+# --- 1C: Mean Intensity vs. Alpha ---
+p_int_alpha <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Alpha)) +
+  geom_point(size = 3, color = "red") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "spearman") +
+  labs(
+    title = "Mean Intensity vs. Spatial Heterogeneity",
+    x = "Overall Mean Intensity",
+    y = "Alpha (Heterogeneity)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_01c_intensity_vs_alpha.svg"), plot = p_int_alpha, width = 8, height = 7)
+
+# --- 1D: Mean Intensity vs. Tau Rank ---
+p_int_tau <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Average_Tau_Rank)) +
+  geom_point(size = 3, color = "red") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "spearman") +
+  labs(
+    title = "Mean Intensity vs. Sampling Efficiency",
+    x = "Overall Mean Intensity",
+    y = "Stable Avg Tau Rank (Efficiency)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_01d_intensity_vs_tau.svg"), plot = p_int_tau, width = 8, height = 7)
+
+cat("Intensity correlation plots saved.\n")
+
+# =========================================================================================
+# === ANALYSIS 2: CV SCORE vs. BALAGAN METRICS ===
+# =========================================================================================
+cat("\n--- Analysis 2: CV Score vs. Balagan Metrics ---\n")
+
+# --- 2A: CV Score vs. Alpha ---
+p_cv_alpha <- ggplot(core_metrics, aes(x = CV_Score, y = Alpha)) +
+  geom_point(size = 3, color = "blue") +
+  geom_text_repel(aes(label = Slide_Name_short), size = 3.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "pearson", label.x.npc = "left", label.y.npc = "top") +
+  labs(
+    title = "Correlation: CV Score vs. Alpha",
+    subtitle = "Pearson's correlation (R) shown.",
+    x = "CV Score (Lower is Better)",
+    y = "Alpha (Higher = More Heterogeneity)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_02a_cv_score_vs_alpha.svg"), plot = p_cv_alpha, width = 8, height = 7)
+
+# --- 2B: CV Score vs. Tau Rank ---
+p_cv_tau <- ggplot(core_metrics, aes(x = CV_Score, y = Average_Tau_Rank)) +
+  geom_point(size = 3, color = "red") +
+  geom_text_repel(aes(label = Slide_Name_short), size = 3.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "pearson", label.x.npc = "left", label.y.npc = "top") +
+  labs(
+    title = "Correlation: CV Score vs. Average Tau Rank",
+    subtitle = "Pearson's correlation (R) shown.",
+    x = "CV Score (Lower is Better)",
+    y = "Average Tau Rank (Efficiency)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_02b_cv_score_vs_tau_rank.svg"), plot = p_cv_tau, width = 8, height = 7)
+
+# --- 2C: Alpha vs. Tau Rank ---
+p_alpha_tau <- ggplot(core_metrics, aes(x = Alpha, y = Average_Tau_Rank)) +
+  geom_point(size = 3, color = "darkblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+  stat_cor(method = "pearson", label.x.npc = "left", label.y.npc = "top") +
+  labs(
+    title = "Correlation: Alpha vs. Stable Tau Rank",
+    subtitle = "Testing correlation between heterogeneity and sampling efficiency.",
+    x = "Alpha (Higher = More Heterogeneity)",
+    y = "Average Tau Rank (Efficiency)"
+  ) +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_02c_alpha_vs_tau_rank.svg"), plot = p_alpha_tau, width = 8, height = 7)
+
+cat("CV vs. Balagan metric plots saved.\n")
+
+# =========================================================================================
+# === ANALYSIS 3: UNKNOWN/MIXED CELL FRACTION ===
+# =========================================================================================
+if (file.exists(mixed_unknown_file)) {
+  cat("\n--- Analysis 3: Unknown/Mixed Cell Fraction vs. Alpha ---\n")
+  
+  mixed_data <- read_csv(mixed_unknown_file, show_col_types = FALSE) %>%
+    mutate(Slide_Name = gsub("_", "", slide_id)) %>%
+    select(Slide_Name, Mixed_UnknownFraction)
+  
+  combined_mixed <- core_metrics %>%
+    left_join(mixed_data, by = "Slide_Name") %>%
+    filter(!is.na(Mixed_UnknownFraction))
+  
+  write_csv(combined_mixed, file.path(output_dir, "TABLE_alpha_vs_unknown_fraction.csv"))
+  
+  p_unknown_alpha <- ggplot(combined_mixed, aes(x = Mixed_UnknownFraction, y = Alpha)) +
+    geom_point(size = 3, color = "darkorange") +
+    geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+    stat_cor(method = "pearson", label.x.npc = "left", label.y.npc = "top") +
+    labs(
+      title = "Correlation: Unknown/Mixed Cell Fraction vs. Alpha",
+      subtitle = "Pearson's correlation (R) shown.",
+      x = "Fraction of Unknown/Mixed Cells",
+      y = "Alpha (Heterogeneity)"
+    ) +
+    theme_minimal()
+  
+  ggsave(file.path(output_dir, "PLOT_03_unknown_fraction_vs_alpha.svg"), plot = p_unknown_alpha, width = 8, height = 7)
+  cat("Unknown cell fraction plot saved.\n")
+} else {
+  cat("\n--- Analysis 3: Skipped (mixed/unknown data file not found) ---\n")
+}
+
+# =========================================================================================
+# === ANALYSIS 4: ALL MARKERS vs. 10 MARKERS COMPARISON ===
+# =========================================================================================
+if (dir.exists(all_markers_dir)) {
+  cat("\n--- Analysis 4: All Markers vs. 10 Markers Comparison ---\n")
+  
+  # Helper functions
+  safe_fit_nls <- function(data) {
+    x <- data$N_sampling
+    y <- data$Mean_number_cluster
+    if (length(unique(y)) < 2) return(data.frame(N = NA_real_, tau = NA_real_, R_squared = NA_real_))
+    tryCatch({
+      expo_model <- nls(y ~ N * (1 - exp(-x/tau)), start = list(N = max(y), tau = 5))
+      coeffs <- coef(expo_model)
+      R_squared <- cor(predict(expo_model, newdata = x), y)^2
+      return(data.frame(N = coeffs["N"], tau = coeffs["tau"], R_squared = R_squared))
+    }, error = function(e) data.frame(N = NA_real_, tau = NA_real_, R_squared = NA_real_))
+  }
+  
+  recalculate_tau_from_file_robust <- function(file_path, param_table) {
+    slide_name <- basename(file_path)
+    slide_name <- sub("_Complex_sampling.csv", "", slide_name)
+    slide_name <- paste0("slide", gsub(".*slide(\\d+).*", "\\1", slide_name))
+    
+    sampling_data <- tryCatch(read.csv(file_path), error = function(e) NULL)
+    if (is.null(sampling_data) || nrow(sampling_data) != nrow(param_table)) return(NULL)
+    
+    full_data <- sampling_data %>% 
+      mutate(Height = param_table$Height, Width = param_table$Width)
+    
+    results_by_fov <- full_data %>%
+      group_by(Width) %>%
+      nest() %>%
+      mutate(fit_results = map(data, safe_fit_nls)) %>%
+      unnest(fit_results) %>%
+      select(Width, N, tau, R_squared)
+    
+    final_results <- results_by_fov %>%
+      dplyr::rename(FoV_width = Width) %>%
+      mutate(Slide_Name = slide_name)
+    
+    return(final_results)
+  }
+  
+  safe_lm <- function(data) {
+    if(nrow(data) < 2) return(NA_real_)
+    tryCatch({
+      model <- lm(log10(tau) ~ log10(FoV_width), data = data)
+      coef(model)[2]
+    }, error = function(e) NA_real_)
+  }
+  
+  # Process "All Markers" data
+  fov_sizes_all <- seq(100, 1000, 100)
+  n_sampling_regions_all <- 1:20
+  param_table_all <- data.frame(
+    Height = rep(fov_sizes_all, each = length(n_sampling_regions_all)),
+    Width = rep(fov_sizes_all, each = length(n_sampling_regions_all))
+  )
+  
+  all_markers_files <- list.files(
+    path = all_markers_dir,
+    pattern = "_Complex_sampling\\.csv$",
+    recursive = TRUE,
+    full.names = TRUE
+  )
+  
+  if (length(all_markers_files) > 0) {
+    all_markers_tau <- map_dfr(all_markers_files, ~ recalculate_tau_from_file_robust(.x, param_table_all))
+    
+    all_markers_alpha <- all_markers_tau %>%
+      filter(!is.na(tau), tau > 0, !is.na(FoV_width), FoV_width > 0) %>%
+      group_by(Slide_Name) %>%
+      nest() %>%
+      mutate(Alpha_All_Markers = map_dbl(data, safe_lm) * -1) %>%
+      select(Slide_Name, Alpha_All_Markers)
+    
+    # Load "10 Markers" data
+    alpha_10_markers <- stable_alpha_slopes %>%
+      select(Slide_Name, Alpha) %>%
+      dplyr::rename(Alpha_10_Markers = Alpha)
+    
+    # Combine and plot
+    combined_panels <- alpha_10_markers %>%
+      left_join(all_markers_alpha, by = "Slide_Name") %>%
+      filter(!is.na(Alpha_All_Markers), !is.na(Alpha_10_Markers)) %>%
+      mutate(Slide_Name_short = sub("slide", "", Slide_Name))
+    
+    p_panel_compare <- ggplot(combined_panels, aes(x = Alpha_All_Markers, y = Alpha_10_Markers)) +
+      geom_point(size = 3, color = "darkcyan") +
+      geom_text_repel(aes(label = Slide_Name_short), size = 3.5) +
+      geom_smooth(method = "lm", se = FALSE, color = "darkgrey", linetype = "dashed") +
+      geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dotted") +
+      stat_cor(method = "spearman") +
+      labs(
+        title = "Panel Reduction vs. Spatial Heterogeneity",
+        x = "Alpha (All Markers)",
+        y = "Alpha (10 Markers)",
+        caption = "Red dotted line = 1:1 relationship"
+      ) +
+      theme_minimal()
+    
+    ggsave(file.path(output_dir, "PLOT_04_all_markers_vs_10_markers.svg"), plot = p_panel_compare, width = 8, height = 7)
+    cat("All markers vs. 10 markers plot saved.\n")
+  } else {
+    cat("No 'All Markers' files found, skipping Analysis 4.\n")
+  }
+} else {
+  cat("\n--- Analysis 4: Skipped (all_markers_dir not found) ---\n")
+}
+
+# =========================================================================================
+# === ANALYSIS 5: QUADRANT CLASSIFICATION ===
+# =========================================================================================
+cat("\n--- Analysis 5: Quadrant Classification ---\n")
+
+median_tau_rank <- median(core_metrics$Average_Tau_Rank, na.rm = TRUE)
+median_alpha <- median(core_metrics$Alpha, na.rm = TRUE)
+
+p_quadrant <- ggplot(core_metrics, aes(x = Average_Tau_Rank, y = Alpha)) +
+  geom_point(size = 4, aes(color = stability_sd)) +
+  geom_text_repel(aes(label = Slide_Name_short), size = 3.5, max.overlaps = Inf) +
+  geom_hline(yintercept = median_alpha, linetype = "dashed", color = "black") +
+  geom_vline(xintercept = median_tau_rank, linetype = "dashed", color = "black") +
+  scale_color_gradient(low = "darkgreen", high = "orange", name = "Rank Stability (SD)") +
+  labs(
+    title = "Slide Classification: Efficiency vs. Heterogeneity",
+    x = "Sampling Efficiency (Stable Avg Tau Rank) →",
+    y = "Spatial Heterogeneity (Alpha) →"
+  ) +
+  annotate("text", x = min(core_metrics$Average_Tau_Rank), y = max(core_metrics$Alpha),
+           label = "Inefficient &\nHeterogeneous", hjust = 0, vjust = 1, alpha = 0.5) +
+  annotate("text", x = max(core_metrics$Average_Tau_Rank), y = max(core_metrics$Alpha),
+           label = "Efficient &\nHeterogeneous", hjust = 1, vjust = 1, alpha = 0.5) +
+  annotate("text", x = min(core_metrics$Average_Tau_Rank), y = min(core_metrics$Alpha),
+           label = "Inefficient &\nHomogeneous", hjust = 0, vjust = 0, alpha = 0.5) +
+  annotate("text", x = max(core_metrics$Average_Tau_Rank), y = min(core_metrics$Alpha),
+           label = "Efficient &\nHomogeneous", hjust = 1, vjust = 0, alpha = 0.5) +
+  scale_x_reverse() +
+  scale_y_reverse() +
+  theme_minimal()
+
+ggsave(file.path(output_dir, "PLOT_05_quadrant_efficiency_vs_heterogeneity.svg"), plot = p_quadrant, width = 11, height = 9)
+cat("Quadrant classification plot saved.\n")
+
+cat("\n====================================================\n")
+cat("All correlation analyses complete.\n")
+cat(paste("Plots saved to:", output_dir, "\n"))
+cat("====================================================\n")
+
