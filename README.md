@@ -22,7 +22,7 @@ Primary workflows:
 - MESMER data-slide analysis: `MESMER_dataSlide_workflow.R`
 - CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
 - Signal-to-Noise Ratio (SNR) analysis: `MESMER_SignalNoise_workflow.R`
-- Optional spatial analysis: `balagan_analysis.R`
+- Optional spatial analysis: See `balagan_analysis/` folder for complete workflow
 
 ## Environment
 
@@ -55,7 +55,7 @@ install.packages(c(
 
 devtools::install_github("immunogenomics/presto")
 
-# Optional: to run balagan_analysis.R
+# Optional: for Balagan spatial analysis workflow
 devtools::install_github("PierreBSC/Balagan")
 ```
 
@@ -359,15 +359,6 @@ Representative layout in this repository:
 │   ├── Slide_exclude_markers.csv
 │   ├── Slide_remove_markers.csv
 │   └── Registered_Report_marker_sequence.csv
-├── qsave_input/
-│   └── <CONFIG>_input.qsave
-├── manual_annotation/
-│   ├── 01_clustering.py
-│   ├── 02_annotation.py
-│   ├── 03_phenotype_map.py
-│   ├── 04_stacked_bar_plots.py
-│   ├── 05_enrichment_plots.py
-│   └── DOCUMENTATION.md
 ├── balagan_analysis/
 │   ├── 00_run_100_balagan_analyses.R
 │   ├── 01_check_consistency_and_calc_alpha.R
@@ -377,20 +368,43 @@ Representative layout in this repository:
 │   ├── 05_calculate_tau_rank_stability.R
 │   ├── 06_correlation_analysis.R
 │   ├── 07_regenerate_scatter_heatmap_plots.R
+│   ├── balagan_analysis.R              # Batch analysis script
 │   └── README.md
-├── out_<CONFIG>_.../
-│   └── [output CSVs/SVGs]
-├── MESMER_dataSlide_workflow.R
-├── MESMER_SignalNoise_workflow.R
-├── cellXpress_dataSlide_workflow.R
-├── build_compare_pairs.R
-├── balagan_analysis.R
-├── helper.R
-├── crop_mesmer_featureextraction_signaltonoise.py
+├── manual_annotation/
+│   ├── 01_clustering.py
+│   ├── 01_submit_clustering.slurm
+│   ├── 02_annotation.py
+│   ├── 02_submit_annotation.slurm
+│   ├── 03_phenotype_map.py
+│   ├── 03_submit_phenotype_map.slurm
+│   ├── 04_stacked_bar_plots.py
+│   ├── 04_submit_stacked_bar_plot.slurm
+│   ├── 05_enrichment_plots.py
+│   ├── 05_submit_enrichment.slurm
+│   └── DOCUMENTATION.md
 ├── pylibs/
 │   ├── __init__.py
 │   └── tissue_preparation.py
-└── README.md (this file)
+├── out/                                   # Output directory for SNR preprocessing
+│   ├── extracted_features/
+│   └── MESMER_outputs/
+├── out_<CONFIG>_.../                      # Per-configuration output folders
+│   └── [output CSVs/SVGs]
+├── qsave_input/                          # Cached input data (auto-generated)
+│   └── <CONFIG>_input.qsave
+├── MESMER_dataSlide_workflow.R           # Main MESMER workflow
+├── MESMER_SignalNoise_workflow.R          # MESMER SNR analysis
+├── cellXpress_dataSlide_workflow.R       # Main CellXpress workflow
+├── CellXpress_SNR_Analysis.R             # CellXpress SNR analysis
+├── build_compare_pairs.R                 # Generate comparison pairs
+├── process_cell_counts.R                  # Normalize cell counts for SNR
+├── check_norm_column.R                    # Verify normalization columns
+├── helper.R                              # Shared utility functions
+├── crop_mesmer_featureextraction_signaltonoise.py  # SNR preprocessing
+├── segmentation_scFeature_extraction_4slides.ipynb # Jupyter notebook
+├── requirements.txt                      # Python dependencies
+├── LICENSE
+└── README.md                             # This file
 ```
 
 ## Contributors
