@@ -61,9 +61,21 @@ devtools::install_github("PierreBSC/Balagan")
 
 ## Data and Metadata
 
-Place inputs under `./data_mesmer/` (MESMER workflow) or `./data_cellXpress/` (CellXpress workflow). Raw data should not be committed to the repository.
+**Important**: The raw data files are not included in this GitHub repository. Data will be made available on Zenodo, and download links will be provided here once available.
 
-MESMER example structure:
+To use the workflows, download the data from Zenodo and place it under:
+
+- `./data_mesmer/` (MESMER workflow)
+- `./data_cellXpress/` (CellXpress workflow)
+
+For detailed information about data organization, file formats, and structure, see:
+
+- [data_mesmer/README.md](data_mesmer/README.md) - MESMER segmentation data documentation
+- [data_cellXpress/README.md](data_cellXpress/README.md) - CellXpress segmentation data documentation
+
+### Data Structure Overview
+
+MESMER data structure:
 
 ```
 ./data_mesmer/
@@ -79,7 +91,7 @@ MESMER example structure:
   Slide_exclude_cells.csv   # optional
 ```
 
-cellXpress example structure:
+CellXpress data structure:
 
 ```
 ./data_cellXpress/
@@ -88,12 +100,13 @@ cellXpress example structure:
   Stanford/
   ...
   Slide_metadata.csv
+  Slide_compare_pairs.csv
   Slide_exclude_markers.csv
   Slide_remove_markers.csv
   Registered_Report_marker_sequence.csv
 ```
 
-Key metadata CSVs:
+### Key Metadata Files
 
 - Slide_metadata.csv
 
@@ -140,11 +153,16 @@ Key metadata CSVs:
 
 Standard end-to-end for MESMER and CellXpress:
 
-1. Update metadata and marker lists
+1. **Download data from Zenodo** (links will be provided)
+
+   - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
+   - See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed data organization
+
+2. **Update metadata and marker lists** (if needed)
 
 - Ensure these files are current: `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, `Registered_Report_marker_sequence.csv`.
 
-2. Build comparison pairs for statistical testing
+3. Build comparison pairs for statistical testing
 
 ```bash
 Rscript build_compare_pairs.R
@@ -152,7 +170,7 @@ Rscript build_compare_pairs.R
 
 - Writes `./data_mesmer/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
 
-3. Select a configuration to run
+4. Select a configuration to run
 
 - Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to your target dataset.
 
@@ -161,7 +179,7 @@ current_config_name <- "BIDMC_all"  # choose your config
 current_config <- configurations[[current_config_name]]
 ```
 
-4. Run the workflow
+5. Run the workflow
 
 ```bash
 Rscript MESMER_dataSlide_workflow.R
@@ -294,11 +312,17 @@ Key files:
   - Input location: `./data_cellXpress/` (mirrors MESMER structure)
   - Produces analogous density plots and summaries
 
-- Balagan spatial analysis (optional)
+- Balagan spatial analysis (advanced, optional)
 
-  - Script: `balagan_analysis.R`
-  - Install: `devtools::install_github("PierreBSC/Balagan")`
-  - Outputs: spatial clustering heatmaps and related figures
+  - **Location**: `./balagan_analysis/` folder with complete workflow
+  - **Purpose**: Quantifies spatial heterogeneity and subsampling efficiency using 100 independent Balagan runs
+  - **Key Metrics**:
+    - Tau (τ): Sampling efficiency - how quickly subsampling recovers all cell clusters
+    - Alpha (α): Spatial heterogeneity - power-law relationship between FOV size and cluster discovery
+  - **Install**: `devtools::install_github("PierreBSC/Balagan")`
+  - **Documentation**: See [balagan_analysis/README.md](balagan_analysis/README.md) for complete workflow
+  - **Runtime**: ~24-30 hours for full 100-run analysis
+  - **Outputs**: Stability metrics, rank heatmaps, correlation plots, quadrant classifications
 
 ## Utilities
 
@@ -320,15 +344,18 @@ Representative layout in this repository:
 ```
 .
 ├── data_mesmer/
-│   ├── <Source folders with CSV files>
+│   ├── README.md                          # Detailed data documentation
+│   ├── <Source folders with CSV files>    # Download from Zenodo
 │   ├── Slide_metadata.csv
 │   ├── Slide_compare_pairs.csv
 │   ├── Slide_exclude_markers.csv
 │   ├── Slide_remove_markers.csv
 │   └── Registered_Report_marker_sequence.csv
 ├── data_cellXpress/
-│   ├── <Source folders with CSV files>
+│   ├── README.md                          # Detailed data documentation
+│   ├── <Source folders with CSV/QS files> # Download from Zenodo
 │   ├── Slide_metadata.csv
+│   ├── Slide_compare_pairs.csv
 │   ├── Slide_exclude_markers.csv
 │   ├── Slide_remove_markers.csv
 │   └── Registered_Report_marker_sequence.csv
@@ -341,6 +368,16 @@ Representative layout in this repository:
 │   ├── 04_stacked_bar_plots.py
 │   ├── 05_enrichment_plots.py
 │   └── DOCUMENTATION.md
+├── balagan_analysis/
+│   ├── 00_run_100_balagan_analyses.R
+│   ├── 01_check_consistency_and_calc_alpha.R
+│   ├── 02_plot_stable_rank_heatmaps.R
+│   ├── 03_plot_subsampling_curves.R
+│   ├── 04_plot_rank_correlations.R
+│   ├── 05_calculate_tau_rank_stability.R
+│   ├── 06_correlation_analysis.R
+│   ├── 07_regenerate_scatter_heatmap_plots.R
+│   └── README.md
 ├── out_<CONFIG>_.../
 │   └── [output CSVs/SVGs]
 ├── MESMER_dataSlide_workflow.R
