@@ -261,7 +261,7 @@ write_csv(
   paste0(out_folder, "processed_files.csv")
 )
 
-### Load MESMER data. Try to load from qsave if available, otherwise load raw data
+### Load Mesmer data. Try to load from qsave if available, otherwise load raw data
 qsave_file <- paste0("./qsave_input/", current_config_name, "_input.qsave")
 if (file.exists(qsave_file)) {
   cat("Loading data from saved qsave file:", qsave_file, "\n")

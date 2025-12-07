@@ -337,7 +337,7 @@ BiocManager::install("SingleCellExperiment")
 
 - **Lower score = Better technical quality**
 - Based on coefficient of variation across markers
-- Independent metric from main MESMER workflow
+- Independent metric from main Mesmer workflow
 
 ### Quadrant Classification
 

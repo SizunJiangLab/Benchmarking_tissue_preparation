@@ -125,7 +125,7 @@ for (source in sources) {
     next
   
   
-  # Process mesmer_data from qsave file
+  # Process Mesmer data from qsave file
   cat("Calculating cell counts from loaded data...\n")
   
   # Group by Staining_condition and FOV

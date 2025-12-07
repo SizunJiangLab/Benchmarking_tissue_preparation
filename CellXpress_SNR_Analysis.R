@@ -297,7 +297,7 @@ create_snr_heatmaps_safe <- function(snr_data, out_folder, remove_values = c(), 
 # ==============================================================================
 # CellXpress SNR Analysis Pipeline
 # This script processes CellXpress segmentation SNR data with the same workflow
-# as MESMER, including FOV cell count weighting and Z-score heatmap generation.
+# as Mesmer, including FOV cell count weighting and Z-score heatmap generation.
 # ==============================================================================
 
 # ==============================================================================
@@ -316,7 +316,7 @@ config <- list(
   # Format: Slide, FOV, Cell count
   cell_counts_file = "./data_cellXpress/SNR_BIDMC/cell_counts_BIDMC.csv",
   
-  # Paths to marker removal and exclusion files (same as MESMER)
+  # Paths to marker removal and exclusion files (same as Mesmer)
   removal_file = "./data_mesmer/Slide_remove_markers.csv",
   exclusion_file = "./data_mesmer/Slide_exclude_markers.csv",
   
@@ -330,7 +330,7 @@ config <- list(
   # Additional markers from Slide_remove_markers.csv will be added automatically
   remove_markers = c("DAPI"),
   
-  # Marker name mapping: CellXpress names -> MESMER names
+  # Marker name mapping: CellXpress names -> Mesmer names
   # This ensures consistent naming between pipelines
   marker_name_mapping = c(
     "Tox_Tox2" = "ToxTox2",
@@ -346,10 +346,10 @@ config <- list(
     # CD45RA, CD45, CD4, CD31, CD3, CD20, CD15, CD138, CD11c, CD11b, CD56
   ),
   
-  # Marker order to match MESMER BIDMC SNR result (reversed to match heatmap y-axis)
+  # Marker order to match Mesmer BIDMC SNR result (reversed to match heatmap y-axis)
   # Note: CD56 and DCSIGN will be removed per Slide_remove_markers.csv for BIDMC
   marker_sequence = c(
-    # MESMER markers in reverse order (so they appear correctly on y-axis from bottom to top)
+    # Mesmer markers in reverse order (so they appear correctly on y-axis from bottom to top)
     "CD11b", "CD11c", "CD138", "CD15", "CD20", "CD3", "CD31", "CD4", "CD45", "CD45RA",
     "CD68", "CD8", "Cytokeratin", "FoxP3", "GranzymeB", "H3K27ac", "H3K27me3", "HLADRA",
     "IDO1", "Ki67", "NAKATPase", "Pax5", "PD1", "pS6", "ToxTox2"
@@ -360,12 +360,12 @@ config <- list(
 # 2. Helper Functions
 # ==============================================================================
 
-#' Rename Markers to Match MESMER Naming Convention
+#' Rename Markers to Match Mesmer Naming Convention
 #' 
-#' Applies marker name mapping to convert CellXpress names to MESMER names.
+#' Applies marker name mapping to convert CellXpress names to Mesmer names.
 #' 
 #' @param marker_names Vector of marker column names
-#' @param mapping Named vector of mappings (CellXpress name -> MESMER name)
+#' @param mapping Named vector of mappings (CellXpress name -> Mesmer name)
 #' @return Vector of renamed marker names
 rename_markers <- function(marker_names, mapping) {
   renamed <- marker_names
@@ -451,10 +451,10 @@ load_exclusion_markers <- function(exclusion_file, source_name) {
 #' Load and Clean CellXpress SNR Data
 #' 
 #' Reads the SNR CSV and extracts signal columns based on normalization type.
-#' Cleans marker names by removing the suffix and applies MESMER naming convention.
+#' Cleans marker names by removing the suffix and applies Mesmer naming convention.
 #' 
 #' @param snr_file Path to the ratio_renamed.csv file
-#' @param marker_mapping Named vector for renaming markers to MESMER convention
+#' @param marker_mapping Named vector for renaming markers to Mesmer convention
 #' @param norm_type Normalization type: "Normalized" (default), "DAPInorm", or "areanorm"
 #' @return A data frame with Slide_Region, Label, and marker SNR values
 load_cellxpress_snr <- function(snr_file, marker_mapping = NULL, norm_type = "Normalized") {
@@ -481,7 +481,7 @@ load_cellxpress_snr <- function(snr_file, marker_mapping = NULL, norm_type = "No
   # Apply marker name mapping if provided
   if (!is.null(marker_mapping)) {
     colnames(snr_clean) <- rename_markers(colnames(snr_clean), marker_mapping)
-    message("Applied marker name mapping to match MESMER convention")
+    message("Applied marker name mapping to match Mesmer convention")
   }
   
   # Rename Slide/Region for easier handling
@@ -764,8 +764,8 @@ process_cellxpress_snr <- function(config, norm_type = "Normalized", out_suffix 
   # --- Step 3: Combine with weights ---
   weighted_snr <- combine_snr_with_weights(snr_data, metadata, cell_counts)
   
-  # --- Step 4: Apply marker ordering to match MESMER ---
-  message("\nApplying marker order to match MESMER BIDMC SNR result...")
+  # --- Step 4: Apply marker ordering to match Mesmer ---
+  message("\nApplying marker order to match Mesmer BIDMC SNR result...")
   weighted_snr <- reorder_markers(weighted_snr, config$marker_sequence)
   
   # Save weighted SNR data

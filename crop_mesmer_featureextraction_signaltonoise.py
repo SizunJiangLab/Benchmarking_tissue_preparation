@@ -16,7 +16,7 @@ from pylibs.tissue_preparation import (
     extract_sc_features,
 )
 
-# MESMER PARAMETERS
+# Mesmer PARAMETERS
 image_mpp = 0.50
 maxima_threshold = 0.075
 interior_threshold = 0.2
@@ -92,14 +92,14 @@ def process_and_segment(data_folder, output_folder, crop_coords_dict, markers):
         rgb_image = create_rgb_image(cropped_stack, channel_colors=["green", "blue"])
         overlay = make_outline_overlay(rgb_data=rgb_image, predictions=predictions)
 
-        # Save MESMER outputs
+        # Save Mesmer outputs
         output_dir = os.path.join(output_folder, f'MESMER_outputs/{maxima_threshold}maxima_{key}_{interior_threshold}interior_{key}_FOV2/')
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
         skimage.io.imsave(os.path.join(output_dir, "seg_outline.tiff"), img_as_ubyte(overlay[0, ..., 0]), check_contrast=False)  # segmentation outline
         skimage.io.imsave(os.path.join(output_dir, "seg_overlay.tiff"), img_as_ubyte(overlay[0, ...]), check_contrast=False)  # segmentation overlay (nuc + membrane + outline)
-        skimage.io.imsave(os.path.join(output_dir, "MESMER_mask.tiff"), predictions[0, ..., 0], check_contrast=False)  # MESMER mask
+        skimage.io.imsave(os.path.join(output_dir, "MESMER_mask.tiff"), predictions[0, ..., 0], check_contrast=False)  # Mesmer mask
 
         print(f"✅ Processed, cropped, segmented, and saved results for {key}.")
 
