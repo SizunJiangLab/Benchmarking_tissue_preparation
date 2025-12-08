@@ -1,8 +1,6 @@
-# MESMER Segmentation Data
+# Mesmer Segmentation Data
 
-This folder contains cell segmentation data processed using the MESMER (Mesmerizing Segmentation) pipeline. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
-
-**Note**: The actual data files are not included in this GitHub repository. Data files will be made available on Zenodo, and download links will be provided in the main [README.md](../README.md) once available. Please download the data from Zenodo and place it in this directory to use the analysis workflows.
+This folder contains single-cell marker signal intensity data following Mesmer cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
 
 ## Folder Structure
 
@@ -16,33 +14,29 @@ data_mesmer/
 ├── Registered_Report_marker_sequence.csv  # Marker ordering for visualization
 ├── condition_summary.csv              # Summary of staining conditions
 │
-├── ASTAR_COMET_CRC/                   # ASTAR COMET CRC data
-├── ASTAR_COMET_Tonsil/                # ASTAR COMET Tonsil data
-├── BIDMC/                             # BIDMC main dataset (24 slides)
-├── BIDMC_DLBCL/                       # BIDMC DLBCL dataset
-├── BIDMC_Tonsil/                      # BIDMC Tonsil dataset
-├── BIDMC_Tonsil_compare/              # BIDMC Tonsil comparison dataset
-├── Double/                            # Double staining condition data
-├── Novartis_Lung_Cancer/              # Novartis lung cancer data
-├── Novartis_Tonsil/                   # Novartis tonsil data
-├── RareCyte_LN1_FOV1_FOV2_0.325/     # RareCyte lymph node data
-├── RareCyte_TMA_FOV1_FOV2_0.325/     # RareCyte TMA data
-├── Roche/                             # Roche main dataset
-├── Roche_Tonsil/                      # Roche tonsil data
-├── Roche_intestine/                   # Roche intestine data
-├── Stanford/                          # Stanford main dataset
-├── Stanford-scan1/                    # Stanford scan 1 data
-├── Stanford_MIBI_Colon/               # Stanford MIBI colon data
-├── Stanford_MIBI_Liver/               # Stanford MIBI liver data
-├── Stanford_MIBI_LymphNode/           # Stanford MIBI lymph node (pooled)
-├── Stanford_MIBI_LymphNode_Tile1-4/   # Stanford MIBI lymph node tiles
-├── Stanford_OSCC/                     # Stanford OSCC data
-├── Stanford_RareCyte_LN/              # Stanford RareCyte lymph node
-├── Stanford_RareCyte_TMA/             # Stanford RareCyte TMA
-├── Stanford_Tonsil/                   # Stanford tonsil data
-├── StorageConditionsExpt/             # Storage conditions experiment
-├── UKentucky_SCC/                     # University of Kentucky SCC data
-└── UKentucky_Tonsil/                  # University of Kentucky tonsil data
+├── Initial_Optimization/BIDMC/                   # BIDMC Initial Optimization data (24 slides)
+├── Initial_Optimization/Roche/                   # Roche Initial Optimization data (6 slides)
+├── Initial_Optimization/Stanford/                # Stanford Initial Optimization data (12 slides)
+├── LyophilizationTest_FigS2/                     # Comparison of Fresh vs Lyophilized manual vs Automated 
+├── Reimagedslide_FigS5/                          # BIDMC Tonsil Run 1 vs Run 2 data
+├── StorageConditionsExpt/                        # Storage conditions experiment
+├── Validation/ASTAR_COMET_CRC/                   # ASTAR COMET CRC data (Validation)
+├── Validation/ASTAR_COMET_Tonsil/                # ASTAR COMET Tonsil data
+├── Validation/BIDMC_DLBCL/                       # BIDMC DLBCL data
+├── Validation/BIDMC_Tonsil/                      # BIDMC Tonsil data
+├── Validation/Novartis_Lung_Cancer/              # Novartis lung cancer data
+├── Validation/Novartis_Tonsil/                   # Novartis tonsil data
+├── Validation/Roche_Tonsil/                      # Roche tonsil data
+├── Validation/Roche_Intestine/                   # Roche intestine data
+├── Validation/Stanford_IMC_OSCC/                 # Stanford IMC OSCC data
+├── Validation/Stanford_IMC_Tonsil/               # Stanford IMC tonsil data
+├── Validation/Stanford_MIBI_Colon/               # Stanford MIBI colon data
+├── Validation/Stanford_MIBI_Liver/               # Stanford MIBI liver data
+├── Validation/Stanford_MIBI_LymphNode/           # Stanford MIBI lymph node data
+├── Validation/Stanford_Orion_LN/                 # Stanford Orion lymph node data
+├── Validation/Stanford_Orion_EndometrialCancer/  # Stanford Orion endometrial cancer data
+├── Validation/UKentucky_SCC/                     # University of Kentucky SCC data
+├── Validation/UKentucky_Tonsil/                  # University of Kentucky tonsil data
 ```
 
 ## Data Format
@@ -50,8 +44,9 @@ data_mesmer/
 Each source folder contains CSV files with the following naming convention:
 
 - `dataScaleSize_slide[#]_FOV[1|2].csv` - Main segmentation data
-- `signal_ratios_slide[#]_FOV[1|2].csv` - Signal-to-noise ratio data (for some sources)
+- `signal_ratios_slide[#]_FOV[1|2].csv` - Signal-to-noise ratio data (for Initial Optimization dataset)
 
+The conditions corresponding to each slide number can be found in Supplementary Table 18. 
 ### CSV File Structure
 
 Each CSV file contains:
@@ -92,17 +87,16 @@ The workflows will automatically:
 
 This dataset includes contributions from:
 
-- **ASTAR**: ASTAR COMET platform data
+- **ASTAR**: Agency for Science, Technology and Research
 - **BIDMC**: Beth Israel Deaconess Medical Center
-- **Novartis**: Novartis research data
-- **Roche**: Roche research data
-- **Stanford**: Stanford University data (MIBI, IMC, RareCyte platforms)
-- **UKentucky**: University of Kentucky data
-- **RareCyte**: RareCyte platform data
+- **Novartis**: Novartis 
+- **Roche**: Roche 
+- **Stanford**: Stanford University (MIBI, IMC, Orion platforms)
+- **UKentucky**: University of Kentucky
 
 ## Notes
-
-- Data has been pre-processed and normalized
+- Each row in `dataScaleSize` is a cell and each column a marker. 
+- Signal intensities have been normalized by cell size.
 - Each slide typically has 2 FOVs (Fields of View)
 - Marker names may vary slightly between sources (see marker mapping in workflows)
 - Some sources include both `dataScaleSize` and `signal_ratios` data types

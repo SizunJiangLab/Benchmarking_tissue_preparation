@@ -19,7 +19,7 @@ This repository hosts analysis workflows to benchmark tissue preparation and sta
 
 Primary workflows:
 
-- MESMER data-slide analysis: `MESMER_dataSlide_workflow.R`
+- Mesmer data-slide analysis: `MESMER_dataSlide_workflow.R`
 - CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
 - Signal-to-Noise Ratio (SNR) analysis: `MESMER_SignalNoise_workflow.R`
 - Optional spatial analysis: See `balagan_analysis/` folder for complete workflow
@@ -42,7 +42,7 @@ Install dependencies:
 
 ```bash
 pip install -r ./requirements.txt
-pip install deepcell  # Required for MESMER segmentation in SNR preprocessing
+pip install deepcell  # Required for Mesmer segmentation in SNR preprocessing
 ```
 
 - R packages
@@ -65,17 +65,17 @@ devtools::install_github("PierreBSC/Balagan")
 
 To use the workflows, download the data from Zenodo and place it under:
 
-- `./data_mesmer/` (MESMER workflow)
+- `./data_mesmer/` (Mesmer workflow)
 - `./data_cellXpress/` (CellXpress workflow)
 
 For detailed information about data organization, file formats, and structure, see:
 
-- [data_mesmer/README.md](data_mesmer/README.md) - MESMER segmentation data documentation
+- [data_mesmer/README.md](data_mesmer/README.md) - Mesmer segmentation data documentation
 - [data_cellXpress/README.md](data_cellXpress/README.md) - CellXpress segmentation data documentation
 
 ### Data Structure Overview
 
-MESMER data structure:
+Mesmer data structure:
 
 ```
 ./data_mesmer/
@@ -151,42 +151,42 @@ CellXpress data structure:
 
 ## Quickstart
 
-Standard end-to-end for MESMER and CellXpress:
+Standard end-to-end for Mesmer and CellXpress:
 
-1. **Download data from Zenodo** (links will be provided)
+1.  **Download data from Zenodo** (links will be provided)
 
-   - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
-   - See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed data organization
+    - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
+    - See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed data organization
 
-2. **Update metadata and marker lists** (if needed)
+2.  **Update metadata and marker lists** (if needed)
 
-- Ensure these files are current: `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, `Registered_Report_marker_sequence.csv`.
+    - Ensure these files are current: `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, `Registered_Report_marker_sequence.csv`.
 
-3. Build comparison pairs for statistical testing
+3.  Build comparison pairs for statistical testing
 
 ```bash
 Rscript build_compare_pairs.R
 ```
 
-- Writes `./data_mesmer/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
+- Writes `./data_mesmer/Slide_compare_pairs.csv` and `./data_cellXpress/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
 
-4. Select a configuration to run
+4.  Select a configuration to run
 
-- Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to your target dataset.
+    - Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to your target dataset.
 
 ```r
 current_config_name <- "BIDMC_all"  # choose your config
 current_config <- configurations[[current_config_name]]
 ```
 
-5. Run the workflow
+5.  Run the workflow
 
 ```bash
 Rscript MESMER_dataSlide_workflow.R
 ```
 
 - The script caches inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
-- Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes. CellXpress is similar in scale to MESMER.
+- Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes. CellXpress is similar in scale to Mesmer.
 
 ## Selecting a Configuration
 
@@ -250,57 +250,57 @@ Key files:
 
 ## Complementary Workflows
 
-- SNR workflow (MESMER sources with SNR raw data: BIDMC, Roche, Stanford)
+- SNR workflow (Mesmer sources with SNR raw data: BIDMC, Roche, Stanford)
 
-  0. **Preprocess images and extract signal-to-noise ratios (Python)**
+  0.  **Preprocess images and extract signal-to-noise ratios (Python)**
 
-     Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract signal ratios. This step performs image cropping, MESMER segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
+      Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract signal ratios. This step performs image cropping, Mesmer segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
 
-     ```bash
-     python crop_mesmer_featureextraction_signaltonoise.py
-     ```
+      ```bash
+      python crop_mesmer_featureextraction_signaltonoise.py
+      ```
 
-     **Prerequisites:**
+      **Prerequisites:**
 
-     - Python 3.9+ with dependencies: `pip install -r requirements.txt`
-     - DeepCell MESMER installed: `pip install deepcell`
-     - Raw qptiff image files in the specified data folder
+      - Python 3.9+ with dependencies: `pip install -r requirements.txt`
+      - DeepCell Mesmer installed: `pip install deepcell`
+      - Raw qptiff image files in the specified data folder
 
-     **Configuration:**
+      **Configuration:**
 
-     - Edit the script to set:
-       - `data_folder`: Path to folder containing `.qptiff` files
-       - `output_folder`: Where to save processed outputs
-       - `crop_coords_dict`: Dictionary mapping slide numbers to crop coordinates `(x_min, x_max, y_min, y_max)`
-       - `markers`: List of marker names in channel order
+      - Edit the script to set:
+        - `data_folder`: Path to folder containing `.qptiff` files
+        - `output_folder`: Where to save processed outputs
+        - `crop_coords_dict`: Dictionary mapping slide numbers to crop coordinates `(x_min, x_max, y_min, y_max)`
+        - `markers`: List of marker names in channel order
 
-     **Outputs:**
+      **Outputs:**
 
-     - `extracted_features/`: Single-cell feature CSV files (`data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`)
-     - `Individualtiff_slide{key}_FOV1/`: Individual TIFF files per marker and `signal_ratios_slide{key}_FOV2.csv` with SNR metrics
-     - `MESMER_outputs/`: Segmentation masks and overlays
+      - `extracted_features/`: Single-cell feature CSV files (`data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`)
+      - `Individualtiff_slide{key}_FOV1/`: Individual TIFF files per marker and `signal_ratios_slide{key}_FOV2.csv` with SNR metrics
+      - `MESMER_outputs/`: Segmentation masks and overlays
 
-     **Key outputs for R workflow:**
+      **Key outputs for R workflow:**
 
-     - Signal ratio CSV files: `signal_ratios_slide{key}_FOV2.csv` containing columns:
-       - `Marker`: Marker name
-       - `signal_invsout_DAPInorm`: DAPI-normalized signal ratio
-       - `signal_invsout_areanorm`: Area-normalized signal ratio
-       - `Normalized_signal_invsout`: DAPI + area normalized ratio (used by R workflow)
+      - Signal ratio CSV files: `signal_ratios_slide{key}_FOV2.csv` containing columns:
+        - `Marker`: Marker name
+        - `signal_invsout_DAPInorm`: DAPI-normalized signal ratio
+        - `signal_invsout_areanorm`: Area-normalized signal ratio
+        - `Normalized_signal_invsout`: DAPI + area normalized ratio (used by R workflow)
 
-     **Note:** Ensure these signal ratio files are referenced in `Slide_metadata.csv` with `Type == "signal_ratios"` for the R workflow to find them.
+      **Note:** Ensure these signal ratio files are referenced in `Slide_metadata.csv` with `Type == "signal_ratios"` for the R workflow to find them.
 
-  1. Normalize raw SNR cell counts
+  1.  Normalize raw SNR cell counts
 
-     ```bash
-     Rscript process_cell_counts.R
-     ```
+      ```bash
+      Rscript process_cell_counts.R
+      ```
 
-  2. Generate SNR figures and summaries
+  2.  Generate SNR figures and summaries
 
-     ```bash
-     Rscript MESMER_SignalNoise_workflow.R
-     ```
+      ```bash
+      Rscript MESMER_SignalNoise_workflow.R
+      ```
 
   - Features: Hoechst normalization, SNR heatmaps, mean SNR barplots
   - Outputs (examples): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
@@ -309,7 +309,7 @@ Key files:
 - CellXpress workflow
 
   - Script: `cellXpress_dataSlide_workflow.R`
-  - Input location: `./data_cellXpress/` (mirrors MESMER structure)
+  - Input location: `./data_cellXpress/` (mirrors Mesmer structure)
   - Produces analogous density plots and summaries
 
 - Balagan spatial analysis (advanced, optional)
@@ -328,8 +328,8 @@ Key files:
 
 - `check_norm_column.R`: Verifies that required normalization columns exist in inputs.
 - `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `MESMER_SignalNoise_workflow.R`.
-- `crop_mesmer_featureextraction_signaltonoise.py`: Python script for preprocessing qptiff images, performing MESMER segmentation, extracting single-cell features, and calculating signal-to-noise ratios. Required before running the SNR visualization workflow in R.
-- `pylibs/tissue_preparation.py`: Python utility library providing functions for reading qtiff images, generating nuclear/membrane channels, running MESMER segmentation, and extracting single-cell features. Used by `crop_mesmer_featureextraction_signaltonoise.py`.
+- `crop_mesmer_featureextraction_signaltonoise.py`: Python script for preprocessing qptiff images, performing Mesmer segmentation, extracting single-cell features, and calculating signal-to-noise ratios. Required before running the SNR visualization workflow in R.
+- `pylibs/tissue_preparation.py`: Python utility library providing functions for reading qtiff images, generating nuclear/membrane channels, running Mesmer segmentation, and extracting single-cell features. Used by `crop_mesmer_featureextraction_signaltonoise.py`.
 
 ## Manual Annotation
 
@@ -392,8 +392,8 @@ Representative layout in this repository:
 │   └── [output CSVs/SVGs]
 ├── qsave_input/                          # Cached input data (auto-generated)
 │   └── <CONFIG>_input.qsave
-├── MESMER_dataSlide_workflow.R           # Main MESMER workflow
-├── MESMER_SignalNoise_workflow.R          # MESMER SNR analysis
+├── MESMER_dataSlide_workflow.R           # Main Mesmer workflow
+├── MESMER_SignalNoise_workflow.R          # Mesmer SNR analysis
 ├── cellXpress_dataSlide_workflow.R       # Main CellXpress workflow
 ├── CellXpress_SNR_Analysis.R             # CellXpress SNR analysis
 ├── build_compare_pairs.R                 # Generate comparison pairs

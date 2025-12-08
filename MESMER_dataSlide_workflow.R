@@ -161,8 +161,21 @@ for (source in all_sources) {
     source_penalty <- 10  # default
   }
   
-  # Build data folder path
-  data_folder <- paste0("./data_mesmer/", source, "/")
+  # Build data folder path - checks for nested structure
+  base_data_path <- "./data_mesmer/"
+  possible_paths <- c(
+    paste0(base_data_path, source, "/"),
+    paste0(base_data_path, "Initial_Optimization/", source, "/"),
+    paste0(base_data_path, "Validation/", source, "/")
+  )
+  
+  data_folder <- possible_paths[1] # Default to first
+  for (path in possible_paths) {
+    if (dir.exists(path)) {
+      data_folder <- path
+      break
+    }
+  }
   
   # Build output folder path
   out_folder <- paste0("./out_", gsub("_all$", "", config_name), "_all/")

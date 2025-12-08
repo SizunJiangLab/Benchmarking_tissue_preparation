@@ -1,6 +1,8 @@
-# CellXpress2 Segmentation Data
+# CellXpress Segmentation Data
 
-This folder contains single-cell marker signal intensity data following cellXpress2 cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
+This folder contains cell segmentation data processed using the CellXpress pipeline. The data includes single-cell measurements from multiplexed imaging experiments, organized by batch and source institution.
+
+**Note**: The actual data files are not included in this GitHub repository. Data files will be made available on Zenodo, and download links will be provided in the main [README.md](../README.md) once available. Please download the data from Zenodo and place it in this directory to use the analysis workflows.
 
 ## Folder Structure
 
@@ -13,26 +15,27 @@ data_cellXpress/
 ├── Slide_exclude_markers.csv          # Marker/slide-specific exclusions
 ├── Registered_Report_marker_sequence.csv  # Marker ordering for visualization
 │
-├── Initial_Optimization/BIDMC/                   # BIDMC Initial Optimization dataset (24 slides)
-├── Initial_Optimization/Roche/                   # Roche Initial Optimization dataset (6 slides)
-├── Initial_Optimization/Stanford/                # Stanford Initial Optimization dataset (12 slides)
+├── B1_ASTAR/                          # Batch 1: ASTAR data
+├── B1_BIDMC/                          # Batch 1: BIDMC data
+├── B1_Roche/                          # Batch 1: Roche data
+├── B1_UK/                             # Batch 1: University of Kentucky data
 │
-├── Validation/ASTAR/                             # ASTAR COMET data
-├── Validation/BIDMC/                             # BIDMC Fusion data
-├── Validation/Novartis_LungCancer/               # Novartis lung cancer
-├── Validation/Novartis_Tonsil/                   # Novartis tonsil
-├── Validation/Roche/                             # Roche Fusion data
-├── Validation/Stanford_IMC_OSCC/                 # Stanford OSCC
-├── Validation/Stanford_IMC_Tonsil/           # Batch 2: Stanford IMC tonsil
-├── Validation/Stanford_MIBI/                  # Batch 2: Stanford MIBI data
-├── Validation/Stanford_Orion/              # Batch 2: Stanford RareCyte data
-├── Validation/UK/                                # University of Kentucky COMET data
+├── B2_Stanford_IMC_Tonsil/           # Batch 2: Stanford IMC tonsil
+├── B2_Stanford_MIBI/                  # Batch 2: Stanford MIBI data
+├── B2_Stanford_Rarecyte/              # Batch 2: Stanford RareCyte data
 │
-
-
-
+├── B3_Novartis_LuCa/                  # Batch 3: Novartis lung cancer
+├── B3_Novartis_tonsil/                # Batch 3: Novartis tonsil
+├── B3_Stanford_OSCC/                   # Batch 3: Stanford OSCC
 │
-
+├── BIDMC/                             # BIDMC main dataset
+├── Roche/                              # Roche main dataset
+├── Stanford/                          # Stanford main dataset
+│
+└── SNR_BIDMC/                         # Signal-to-noise ratio data for BIDMC
+    ├── SNR_ratios_BIDMC.csv           # SNR ratio data
+    ├── metadata_BIDMC.csv             # Metadata mapping
+    └── cell_counts_BIDMC.csv          # Cell counts per FOV
 ```
 
 ## Data Format
@@ -98,17 +101,17 @@ The workflows will automatically:
 ## Data Sources
 
 This dataset includes contributions from:
-- **ASTAR**: Agency for Science, Technology and Research
+- **ASTAR**: ASTAR COMET platform data
 - **BIDMC**: Beth Israel Deaconess Medical Center
-- **Novartis**: Novartis 
-- **Roche**: Roche 
-- **Stanford**: Stanford University (MIBI, IMC, Orion platforms)
-- **UKentucky**: University of Kentucky
+- **Novartis**: Novartis research data
+- **Roche**: Roche research data
+- **Stanford**: Stanford University data (MIBI, IMC, RareCyte platforms)
+- **UKentucky**: University of Kentucky data
 
 ## Notes
 
 - Data files use `.qs` format for efficient serialization (faster than CSV for large datasets)
 - Each slide typically has multiple regions/ROIs
 - Marker names follow CellXpress conventions (see marker mapping in workflows)
-
+- The `SNR_BIDMC` folder contains processed SNR data, not raw segmentation data
 

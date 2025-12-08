@@ -125,9 +125,31 @@ configurations <- list(
     penalty_score = penalty_scores$BIDMC
   ),
   
+  # Build data folder path for Roche - checks for nested structure
+  {
+    source <- "Roche"
+    config_name <- "Roche_cellXpress_all"
+    base_data_path <- "./data_cellXpress/" # Changed from data_cellXpress2 to data_cellXpress
+    possible_paths <- c(
+      paste0(base_data_path, source, "/"),
+      paste0(base_data_path, "Initial_Optimization/", source, "/"),
+      paste0(base_data_path, "Validation/", source, "/")
+    )
+    
+    roche_data_folder <- possible_paths[1] # Default to first
+    for (path in possible_paths) {
+      if (dir.exists(path)) {
+        roche_data_folder <- path
+        break
+      }
+    }
+    
+    # Build output folder path
+    roche_out_folder <- paste0("./out_cellXpress_", gsub("_all$", "", config_name), "_all/")
+  },
   Roche_cellXpress_all = list(
-    data_folder = "./data_cellXpress/Roche/",
-    out_folder = "./out_cellXpress_Roche_all/",
+    data_folder = roche_data_folder,
+    out_folder = roche_out_folder,
     input_filenames = roche_data$Filename,
     input_note = roche_data$Name,
     pairs = roche_pairs,
