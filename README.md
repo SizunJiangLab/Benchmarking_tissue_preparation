@@ -75,70 +75,7 @@ For detailed information about data organization, file formats, and structure, s
 
 ### Data Structure Overview
 
-Data is organized into **Initial Optimization** (main study) and **Validation** datasets:
-
-Mesmer data structure:
-
-```
-./data_mesmer/
-├── Initial_Optimization/
-│   ├── BIDMC/                    # 24 slides, 2 FOVs each
-│   ├── Roche/                    # 6 slides, 2 FOVs each
-│   ├── Stanford/                 # 12 slides, 2 FOVs each
-│   └── cell_counts/              # Pre-calculated cell counts
-├── Validation/
-│   ├── ASTAR_COMET_CRC/
-│   ├── ASTAR_COMET_Tonsil/
-│   ├── BIDMC_DLBCL/
-│   ├── BIDMC_Tonsil/
-│   ├── Novartis_Lung_Cancer/
-│   ├── Novartis_Tonsil/
-│   ├── Roche_Tonsil/
-│   ├── Roche_intestine/
-│   ├── Stanford_IMC_OSCC/
-│   ├── Stanford_IMC_Tonsil/
-│   ├── Stanford_MIBI_Colon/
-│   ├── Stanford_MIBI_Liver/
-│   ├── Stanford_MIBI_LymphNode/
-│   ├── Stanford_Orion_EndometrialCancer/
-│   ├── Stanford_Orion_LN/
-│   ├── UKentucky_SCC/
-│   └── UKentucky_Tonsil/
-├── LyophilizationTest_FigS2/     # Supplementary experiment
-├── Reimagedslide_FigS5/          # Supplementary experiment
-├── StorageConditionsExpt/        # Supplementary experiment
-├── Slide_metadata.csv
-├── Slide_compare_pairs.csv
-├── Slide_exclude_markers.csv
-├── Slide_remove_markers.csv
-└── Registered_Report_marker_sequence.csv
-```
-
-CellXpress data structure:
-
-```
-./data_cellXpress/
-├── Initial_Optimization/
-│   ├── BIDMC/                    # 24 slides
-│   ├── Roche/                    # 6 slides
-│   └── Stanford/                 # 12 slides
-├── Validation/
-│   ├── ASTAR/
-│   ├── BIDMC/
-│   ├── Roche/
-│   ├── UK/
-│   ├── Stanford_MIBI/
-│   ├── Stanford_Orion/
-│   ├── Stanford_IMC_OSCC/
-│   ├── Stanford_IMC_Tonsil/
-│   ├── Novartis_LungCancer/
-│   └── Novartis_Tonsil/
-├── Slide_metadata.csv
-├── Slide_compare_pairs.csv
-├── Slide_exclude_markers.csv
-├── Slide_remove_markers.csv
-└── Registered_Report_marker_sequence.csv
-```
+Data is organized into **Initial Optimization** (main study) and **Validation** datasets. See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed folder structures and file formats.
 
 ### Key Metadata Files
 
@@ -185,8 +122,6 @@ CellXpress data structure:
 
 ## Quickstart
 
-Standard end-to-end for Mesmer and CellXpress:
-
 1.  **Download data from Zenodo** (links will be provided)
 
     - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
@@ -204,69 +139,50 @@ Rscript build_compare_pairs.R
 
 - Writes `./data_mesmer/Slide_compare_pairs.csv` and `./data_cellXpress/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
 
-4.  Select a configuration to run
+4.  **Run workflows** (one configuration at a time)
 
-    - Edit `MESMER_dataSlide_workflow.R` and set `current_config_name` to your target dataset.
+    **Important**: Workflows cannot be run directly with `Rscript`. You must:
 
-```r
-current_config_name <- "BIDMC_all"  # choose your config
-current_config <- configurations[[current_config_name]]
-```
+    - Open the workflow script (`MESMER_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R`) in R/RStudio
+    - Edit the `current_config_name` variable to your target dataset (see [Selecting a Configuration](#selecting-a-configuration) for available options)
+    - Run the script manually (source it or run line-by-line)
 
-5.  Run the workflow
+    Example for MESMER workflow:
 
-```bash
-Rscript MESMER_dataSlide_workflow.R
-```
+    ```r
+    # Edit this line in MESMER_dataSlide_workflow.R:
+    current_config_name <- "BIDMC_all"  # choose your config
+    current_config <- configurations[[current_config_name]]
+    # Then run the script
+    ```
 
-- The script caches inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
-- Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes. CellXpress is similar in scale to Mesmer.
+    Example for CellXpress workflow:
+
+    ```r
+    # Edit this line in cellXpress_dataSlide_workflow.R:
+    current_config_name <- "BIDMC_cellXpress"  # choose your config
+    current_config <- configurations[[current_config_name]]
+    # Then run the script
+    ```
+
+    - The script caches inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
+    - Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes.
 
 ## Selecting a Configuration
 
-Set `current_config_name` to one of the following:
+Available configurations are defined in the workflow scripts. Open `MESMER_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R` to see the full list of available configurations. Common examples:
 
-### Mesmer Configurations (MESMER_dataSlide_workflow.R)
+**MESMER workflows:**
 
-**Initial Optimization:**
+- Initial Optimization: `BIDMC_all`, `Roche_all`, `Stanford_all`
+- Validation: `ASTAR_COMET_CRC_all`, `BIDMC_DLBCL_all`, `Novartis_Lung_Cancer_all`, `Stanford_MIBI_Colon_all`, etc.
 
-- `BIDMC_all`, `Roche_all`, `Stanford_all`
+**CellXpress workflows:**
 
-**Validation:**
+- Initial Optimization: `BIDMC_cellXpress`, `Roche_cellXpress`, `Stanford_cellXpress`
+- Validation: `ASTAR_COMET_CRC_cellXpress`, `BIDMC_DLBCL_cellXpress`, `Novartis_LungCancer_cellXpress`, etc.
 
-- `ASTAR_COMET_CRC_all`, `ASTAR_COMET_Tonsil_all`
-- `BIDMC_DLBCL_all`, `BIDMC_Tonsil_all`
-- `Novartis_Lung_Cancer_all`, `Novartis_Tonsil_all`
-- `Roche_intestine_all`, `Roche_Tonsil_all`
-- `Stanford_IMC_OSCC_all`, `Stanford_IMC_Tonsil_all`
-- `Stanford_MIBI_Colon_all`, `Stanford_MIBI_Liver_all`, `Stanford_MIBI_LymphNode_pooled_all`
-- `Stanford_Orion_EndometrialCancer_all`, `Stanford_Orion_LN_all`
-- `UKentucky_SCC_all`, `UKentucky_Tonsil_all`
-
-**Supplementary:**
-
-- `LyophilizationTest_FigS2_all`, `Reimagedslide_FigS5_all`, `StorageConditionsExpt_all`
-
-### CellXpress Configurations (cellXpress_dataSlide_workflow.R)
-
-**Initial Optimization:**
-
-- `BIDMC_cellXpress`, `Roche_cellXpress`, `Stanford_cellXpress`
-
-**Validation:**
-
-- `ASTAR_COMET_CRC_cellXpress`, `ASTAR_COMET_Tonsil_cellXpress`
-- `BIDMC_DLBCL_cellXpress`, `BIDMC_Tonsil_cellXpress`
-- `Novartis_LungCancer_cellXpress`, `Novartis_Tonsil_cellXpress`
-- `Roche_Intestine_cellXpress`, `Roche_Tonsil_cellXpress`
-- `Stanford_IMC_OSCC_cellXpress`, `Stanford_IMC_Tonsil_cellXpress`
-- `Stanford_MIBI_Colon_cellXpress`, `Stanford_MIBI_Liver_cellXpress`, `Stanford_MIBI_LymphNode_pooled_cellXpress`
-- `Stanford_Orion_Lymph_node_cellXpress`, `Stanford_Orion_Endometrium_cellXpress`
-- `UKentucky_Skin_cellXpress`, `UKentucky_Tonsil_cellXpress`
-
-Notes:
-
-- Standard loading uses `load_mesmer_data()` (FOV-based). `Stanford_MIBI_LymphNode_pooled_all` uses `load_mesmer_data_pooled()` to pool tiles.
+**Note:** `Stanford_MIBI_LymphNode_pooled_all` uses pooled tile loading instead of FOV-based loading.
 
 ## Outputs
 
@@ -367,8 +283,9 @@ Key files:
 - CellXpress workflow
 
   - Script: `cellXpress_dataSlide_workflow.R`
-  - Input location: `./data_cellXpress/` (mirrors Mesmer structure)
-  - Produces analogous density plots and summaries
+  - Follow the same workflow steps as MESMER: edit `current_config_name` in the script and run manually
+  - Input location: `./data_cellXpress/`
+  - Produces analogous density plots and summaries as MESMER workflow
 
 - Balagan spatial analysis (advanced, optional)
 
@@ -397,75 +314,26 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 
 ## Directory Structure
 
-Representative layout in this repository:
-
 ```
 .
-├── data_mesmer/
-│   ├── README.md                          # Detailed data documentation
-│   ├── Initial_Optimization/              # Main study data
-│   │   ├── BIDMC/
-│   │   ├── Roche/
-│   │   ├── Stanford/
-│   │   └── cell_counts/
-│   ├── Validation/                        # Validation datasets
-│   │   └── <multiple source folders>
-│   ├── Slide_metadata.csv
-│   ├── Slide_compare_pairs.csv
-│   ├── Slide_exclude_markers.csv
-│   ├── Slide_remove_markers.csv
-│   └── Registered_Report_marker_sequence.csv
-├── data_cellXpress/
-│   ├── README.md                          # Detailed data documentation
-│   ├── Initial_Optimization/              # Main study data
-│   ├── Validation/                        # Validation datasets
-│   ├── Slide_metadata.csv
-│   ├── Slide_compare_pairs.csv
-│   ├── Slide_exclude_markers.csv
-│   ├── Slide_remove_markers.csv
-│   └── Registered_Report_marker_sequence.csv
-├── balagan_analysis/
-│   ├── 00_run_100_balagan_analyses.R
-│   ├── 01_check_consistency_and_calc_alpha.R
-│   ├── 02_plot_stable_rank_heatmaps.R
-│   ├── 03_plot_subsampling_curves.R
-│   ├── 04_plot_rank_correlations.R
-│   ├── 05_calculate_tau_rank_stability.R
-│   ├── 06_correlation_analysis.R
-│   ├── 07_regenerate_scatter_heatmap_plots.R
-│   ├── balagan_analysis.R                 # Batch analysis script
-│   └── README.md
-├── manual_annotation/
-│   ├── 01_clustering.py
-│   ├── 01_submit_clustering.slurm
-│   ├── 02_annotation.py
-│   ├── 02_submit_annotation.slurm
-│   ├── 03_phenotype_map.py
-│   ├── 03_submit_phenotype_map.slurm
-│   ├── 04_stacked_bar_plots.py
-│   ├── 04_submit_stacked_bar_plot.slurm
-│   ├── 05_enrichment_plots.py
-│   ├── 05_submit_enrichment.slurm
-│   └── DOCUMENTATION.md
-├── pylibs/
-│   ├── __init__.py
-│   └── tissue_preparation.py
-├── results/                               # Output directory (auto-created)
-│   └── out_<CONFIG>/                      # Per-configuration outputs
-├── qsave_input/                           # Cached input data (auto-generated)
-│   └── <CONFIG>_input.qsave
-├── MESMER_dataSlide_workflow.R            # Main Mesmer workflow
-├── MESMER_SignalNoise_workflow.R          # Mesmer SNR analysis
-├── cellXpress_dataSlide_workflow.R        # Main CellXpress workflow
-├── build_compare_pairs.R                  # Generate comparison pairs
-├── process_cell_counts.R                  # Normalize cell counts for SNR
-├── check_norm_column.R                    # Verify normalization columns
-├── helper.R                               # Shared utility functions
+├── data_mesmer/                    # MESMER data (see data_mesmer/README.md)
+├── data_cellXpress/                # CellXpress data (see data_cellXpress/README.md)
+├── balagan_analysis/               # Balagan spatial analysis workflow
+├── manual_annotation/              # Manual clustering/annotation pipeline
+├── pylibs/                         # Python utility library
+├── results/                        # Output directory (auto-created)
+│   └── out_<CONFIG>/               # Per-configuration outputs
+├── qsave_input/                    # Cached input data (auto-generated)
+├── MESMER_dataSlide_workflow.R     # Main MESMER workflow
+├── MESMER_SignalNoise_workflow.R   # MESMER SNR analysis
+├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
+├── CellXpress_SNR_Analysis.R       # CellXpress SNR analysis
+├── build_compare_pairs.R           # Generate comparison pairs
+├── process_cell_counts.R          # Normalize cell counts for SNR
+├── check_norm_column.R            # Verify normalization columns
+├── helper.R                       # Shared utility functions
 ├── crop_mesmer_featureextraction_signaltonoise.py  # SNR preprocessing
-├── segmentation_scFeature_extraction_4slides.ipynb # Jupyter notebook
-├── requirements.txt                       # Python dependencies
-├── LICENSE
-└── README.md                              # This file
+└── requirements.txt               # Python dependencies
 ```
 
 ## Contributors
