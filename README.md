@@ -229,9 +229,11 @@ Set `current_config_name` to one of the following:
 ### Mesmer Configurations (MESMER_dataSlide_workflow.R)
 
 **Initial Optimization:**
+
 - `BIDMC_all`, `Roche_all`, `Stanford_all`
 
 **Validation:**
+
 - `ASTAR_COMET_CRC_all`, `ASTAR_COMET_Tonsil_all`
 - `BIDMC_DLBCL_all`, `BIDMC_Tonsil_all`
 - `Novartis_Lung_Cancer_all`, `Novartis_Tonsil_all`
@@ -242,14 +244,17 @@ Set `current_config_name` to one of the following:
 - `UKentucky_SCC_all`, `UKentucky_Tonsil_all`
 
 **Supplementary:**
+
 - `LyophilizationTest_FigS2_all`, `Reimagedslide_FigS5_all`, `StorageConditionsExpt_all`
 
 ### CellXpress Configurations (cellXpress_dataSlide_workflow.R)
 
 **Initial Optimization:**
+
 - `BIDMC_cellXpress`, `Roche_cellXpress`, `Stanford_cellXpress`
 
 **Validation:**
+
 - `ASTAR_COMET_CRC_cellXpress`, `ASTAR_COMET_Tonsil_cellXpress`
 - `BIDMC_DLBCL_cellXpress`, `BIDMC_Tonsil_cellXpress`
 - `Novartis_LungCancer_cellXpress`, `Novartis_Tonsil_cellXpress`
