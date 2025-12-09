@@ -78,7 +78,7 @@ def run_segmentation(
     interior_threshold: Optional[float] = 0.2,
 ):
     """
-    Identify cell segmentation with Mesmer
+    Identify cell segmentation with MESMER
     Args:
         image (ndarray): image content
         image_mpp (Optional, float): microns per pixel resolution
@@ -111,7 +111,7 @@ def extract_sc_features(
     Extract sc features from image
     Args:
         img (ndarray): image content
-        mask (ndarray): Mesmer mask
+        mask (ndarray): MESMER mask
         markers (List[str]): markers
     
     Returns:
