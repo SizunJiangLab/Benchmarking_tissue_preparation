@@ -27,13 +27,13 @@ library(balagan)   # For recalculating tau
 # Directory with your 100-run analysis (output from 01_check_consistency_and_calc_alpha.R)
 consistency_dir <- "./balagan_consistency_analysis_from_raw"
 
-# Directory with your CV analysis (output from MESMER workflow)
-cv_dir <- "./out_MESMER_BIDMC_all"
+# Directory with your CV analysis (output from Mesmer workflow)
+cv_dir <- "./out_Mesmer_BIDMC_all"
 
 # Directory with stable tau rank table (output from 05_calculate_tau_rank_stability.R)
 tau_rank_dir <- "./stable_rank_analysis_plots"
 
-# Directory with raw MESMER data (for sparsity analysis)
+# Directory with raw Mesmer data (for sparsity analysis)
 raw_data_dir <- "./data_mesmer"
 bidmc_data_dir <- file.path(raw_data_dir, "BIDMC")
 

@@ -195,7 +195,7 @@ sources_to_process <- c(
 )
 
 # --- Load Metadata ---
-# Note: Balagan analysis uses MESMER segmentation data
+# Note: Balagan analysis uses Mesmer segmentation data
 metadata_file <- "./data_mesmer/Slide_metadata.csv"
 removal_file <- "./data_mesmer/Slide_remove_markers.csv"
 
@@ -230,7 +230,7 @@ for(current_source in sources_to_process) {
   cat("TEST MODE: Running on first file only:", current_filename, "\n")
   
   # Dynamically determine data and output paths
-  # Input: MESMER segmentation data from data_mesmer/
+  # Input: Mesmer segmentation data from data_mesmer/
   data_folder <- file.path("./data_mesmer", current_source)
   out_folder <- file.path("./out_balagan_analysis", current_source)
   dir.create(out_folder, showWarnings = FALSE, recursive = TRUE)

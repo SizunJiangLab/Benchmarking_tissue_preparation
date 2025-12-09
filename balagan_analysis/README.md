@@ -93,7 +93,7 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 **Input**:
 
 - `./out_balagan_analysis/out_balagan_analysis_BIDMC_run_{1-100}/`
-- `./out_MESMER_BIDMC_all/condition_summary.csv` (optional, for CV ordering)
+- `./out_Mesmer_BIDMC_all/condition_summary.csv` (optional, for CV ordering)
 
 **Output**:
 
@@ -223,7 +223,7 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 **Input**:
 
 - `./balagan_consistency_analysis_from_raw/`
-- `./out_MESMER_BIDMC_all/` (Mesmer workflow output)
+- `./out_Mesmer_BIDMC_all/` (Mesmer workflow output)
 - `./stable_rank_analysis_plots/`
 - `./data_mesmer/`
 
@@ -298,7 +298,7 @@ BiocManager::install("SingleCellExperiment")
 
 3. **Optional files**:
    - `./data_mesmer/condition_summary.csv` (from Mesmer workflow, for CV comparison)
-   - `./out_MESMER_{Source}_all/` (MESMER workflow outputs)
+   - `./out_Mesmer_{Source}_all/` (Mesmer workflow outputs)
 
 ---
 

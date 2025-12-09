@@ -19,9 +19,9 @@ This repository hosts analysis workflows to benchmark tissue preparation and sta
 
 Primary workflows:
 
-- Mesmer data-slide analysis: `MESMER_dataSlide_workflow.R`
+- Mesmer data-slide analysis: `Mesmer_dataSlide_workflow.R`
 - CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
-- Signal-to-Noise Ratio (SNR) analysis: `MESMER_SignalNoise_workflow.R`
+- Signal-to-Noise Ratio (SNR) analysis: `Mesmer_SignalNoise_workflow.R`
 - Optional spatial analysis: See `balagan_analysis/` folder for complete workflow
 
 ## Environment
@@ -143,14 +143,14 @@ Rscript build_compare_pairs.R
 
     **Important**: Workflows cannot be run directly with `Rscript`. You must:
 
-    - Open the workflow script (`MESMER_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R`) in R/RStudio
+    - Open the workflow script (`Mesmer_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R`) in R/RStudio
     - Edit the `current_config_name` variable to your target dataset (see [Selecting a Configuration](#selecting-a-configuration) for available options)
     - Run the script manually (source it or run line-by-line)
 
-    Example for MESMER workflow:
+    Example for Mesmer workflow:
 
     ```r
-    # Edit this line in MESMER_dataSlide_workflow.R:
+    # Edit this line in Mesmer_dataSlide_workflow.R:
     current_config_name <- "BIDMC_all"  # choose your config
     current_config <- configurations[[current_config_name]]
     # Then run the script
@@ -170,7 +170,7 @@ Rscript build_compare_pairs.R
 
 ## Selecting a Configuration
 
-Available configurations are defined in the workflow scripts. Open `MESMER_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R` to see the full list of available configurations. Common examples:
+Available configurations are defined in the workflow scripts. Open `Mesmer_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R` to see the full list of available configurations. Common examples:
 
 **Mesmer workflows:**
 
@@ -252,7 +252,7 @@ Key files:
 
       - `extracted_features/`: Single-cell feature CSV files (`data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`)
       - `Individualtiff_slide{key}_FOV1/`: Individual TIFF files per marker and `signal_ratios_slide{key}_FOV2.csv` with SNR metrics
-      - `MESMER_outputs/`: Segmentation masks and overlays
+      - `Mesmer_outputs/`: Segmentation masks and overlays
 
       **Key outputs for R workflow:**
 
@@ -273,7 +273,7 @@ Key files:
   2.  Generate SNR figures and summaries
 
       ```bash
-      Rscript MESMER_SignalNoise_workflow.R
+      Rscript Mesmer_SignalNoise_workflow.R
       ```
 
   - Features: Hoechst normalization, SNR heatmaps, mean SNR barplots
@@ -302,7 +302,7 @@ Key files:
 ## Utilities
 
 - `check_norm_column.R`: Verifies that required normalization columns exist in inputs.
-- `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `MESMER_SignalNoise_workflow.R`.
+- `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `Mesmer_SignalNoise_workflow.R`.
 - `crop_mesmer_featureextraction_signaltonoise.py`: Python script for preprocessing qptiff images, performing Mesmer segmentation, extracting single-cell features, and calculating signal-to-noise ratios. Required before running the SNR visualization workflow in R.
 - `pylibs/tissue_preparation.py`: Python utility library providing functions for reading qtiff images, generating nuclear/membrane channels, running Mesmer segmentation, and extracting single-cell features. Used by `crop_mesmer_featureextraction_signaltonoise.py`.
 
@@ -324,8 +324,8 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 ├── results/                        # Output directory (auto-created)
 │   └── out_<CONFIG>/               # Per-configuration outputs
 ├── qsave_input/                    # Cached input data (auto-generated)
-├── MESMER_dataSlide_workflow.R     # Main Mesmer workflow
-├── MESMER_SignalNoise_workflow.R   # Mesmer SNR analysis
+├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
+├── Mesmer_SignalNoise_workflow.R   # Mesmer SNR analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
 ├── CellXpress_SNR_Analysis.R       # CellXpress SNR analysis
 ├── build_compare_pairs.R           # Generate comparison pairs

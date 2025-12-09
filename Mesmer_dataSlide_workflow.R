@@ -16,7 +16,7 @@ dir.create("./results", showWarnings = FALSE, recursive = TRUE)
 
 ########################################## Configuration Begin #############################################################################
 ### What data to load?
-data_type <- "MESMER"
+data_type <- "Mesmer"
 
 # Define paths for metadata and exclusion files
 metadata_file <- "./data_mesmer/Slide_metadata.csv"

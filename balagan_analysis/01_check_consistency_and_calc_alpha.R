@@ -27,8 +27,8 @@ library(balagan) # For Visualize_complex_sampling
 BASE_RESULTS_DIR <- "./out_balagan_analysis"
 
 # --- ADDED: Path to CV scores for ordering ---
-# This points to the MESMER workflow output directory with condition_summary.csv
-CV_DIR <- "./out_MESMER_BIDMC_all"
+# This points to the Mesmer workflow output directory with condition_summary.csv
+CV_DIR <- "./out_Mesmer_BIDMC_all"
 
 # A new directory to save this consistency analysis
 OUTPUT_DIR <- "./balagan_consistency_analysis_from_raw"

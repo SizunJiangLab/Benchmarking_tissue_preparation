@@ -59,12 +59,12 @@ def output_dir(slide_str: str) -> str:
 
 def fov_paths(slide_str: str, fov: int):
     """
-    MESMER filenames use *un-padded* slide numbers.
+    Mesmer filenames use *un-padded* slide numbers.
     Convert slide_str ('07') -> '7' for overlay/mask file names.
     """
     slide_unpadded = str(int(slide_str))
-    outline = os.path.join(BASE, f"MESMER_overlay/overlay_{slide_unpadded}_FOV{fov}.tiff")
-    seg     = os.path.join(BASE, f"MESMER_mask/segmentation_mask_{slide_unpadded}_FOV{fov}.tiff")
+    outline = os.path.join(BASE, f"Mesmer_overlay/overlay_{slide_unpadded}_FOV{fov}.tiff")
+    seg     = os.path.join(BASE, f"Mesmer_mask/segmentation_mask_{slide_unpadded}_FOV{fov}.tiff")
     return outline, seg
 
 def verify_all_files_present(slide_str: str) -> bool:
