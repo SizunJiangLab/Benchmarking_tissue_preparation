@@ -21,7 +21,7 @@ Primary workflows:
 
 - Mesmer data-slide analysis: `Mesmer_dataSlide_workflow.R`
 - CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
-- Signal-to-Noise Ratio (SNR) analysis: `Mesmer_SignalNoise_workflow.R`
+- Analysis of ratio of marker signal intensities within vs outside cell mask (SNR): `Mesmer_SignalNoise_workflow.R`
 - Optional spatial analysis: See `balagan_analysis/` folder for complete workflow
 
 ## Environment
@@ -42,7 +42,7 @@ Install dependencies:
 
 ```bash
 pip install -r ./requirements.txt
-pip install deepcell  # Required for Mesmer segmentation in SNR preprocessing
+pip install deepcell  # Required for Mesmer segmentation
 ```
 
 - R packages
@@ -61,7 +61,7 @@ devtools::install_github("PierreBSC/Balagan")
 
 ## Data and Metadata
 
-**Important**: The raw data files are not included in this GitHub repository. Data will be made available on Zenodo, and download links will be provided here once available.
+**Important**: The raw data files are not included in this GitHub repository. Images will be made available on BioImage Archive and the relevant .csv data will be made available on Zenodo, and download links will be provided here once available.
 
 To use the workflows, download the data from Zenodo and place it under:
 
@@ -75,7 +75,7 @@ For detailed information about data organization, file formats, and structure, s
 
 ### Data Structure Overview
 
-Data is organized into **Initial Optimization** (main study) and **Validation** datasets. See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed folder structures and file formats.
+Data is organized into **Initial Optimization** and **Validation** datasets. See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed folder structures and file formats.
 
 ### Key Metadata Files
 
@@ -224,11 +224,11 @@ Key files:
 
 ## Complementary Workflows
 
-- SNR workflow (Mesmer sources with SNR raw data: BIDMC, Roche, Stanford)
+- SNR workflow to compare ratios of marker signal intensities within vs outside cell mask (Mesmer sources with SNR raw data: BIDMC, Roche, Stanford)
 
   0.  **Preprocess images and extract signal-to-noise ratios (Python)**
 
-      Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract signal ratios. This step performs image cropping, Mesmer segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
+      Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract single-cell features and signal ratios. This step performs image cropping, Mesmer segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
 
       ```bash
       python crop_mesmer_featureextraction_signaltonoise.py
@@ -258,8 +258,6 @@ Key files:
 
       - Signal ratio CSV files: `signal_ratios_slide{key}_FOV2.csv` containing columns:
         - `Marker`: Marker name
-        - `signal_invsout_DAPInorm`: DAPI-normalized signal ratio
-        - `signal_invsout_areanorm`: Area-normalized signal ratio
         - `Normalized_signal_invsout`: DAPI + area normalized ratio (used by R workflow)
 
       **Note:** Ensure these signal ratio files are referenced in `Slide_metadata.csv` with `Type == "signal_ratios"` for the R workflow to find them.
@@ -341,5 +339,6 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 - Johanna Schaffenrath
 - Cankun Wang
 - Shaohong Feng
+- Lollija Gladiseva
 
 For questions or feedback, contact Sizun Jiang: sjiang3@bidmc.harvard.edu.

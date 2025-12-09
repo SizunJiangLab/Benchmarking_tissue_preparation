@@ -1,8 +1,6 @@
-# CellXpress Segmentation Data
+# CellXpress2 Segmentation Data
 
-This folder contains single-cell marker signal intensity data following CellXpress cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
-
-**Note**: The actual data files are not included in this GitHub repository. Data files will be made available on Zenodo, and download links will be provided in the main [README.md](../README.md) once available. Please download the data from Zenodo and place it in this directory to use the analysis workflows.
+This folder contains single-cell marker signal intensity data following cellXpress2 cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
 
 ## Dataset Organization
 
@@ -109,9 +107,7 @@ roi_info <- qread("path/to/file_ROI_info.qs")
 To use this data with the analysis workflows:
 
 1. Ensure all data files are in their respective source folders
-2. Open `cellXpress_dataSlide_workflow.R` in R/RStudio
-3. Edit the `current_config_name` variable to your target dataset
-4. Run the script manually (source it or run line-by-line)
+2. Run `cellXpress_dataSlide_workflow.R` for main analysis
 
 The workflows will automatically:
 
@@ -119,8 +115,6 @@ The workflows will automatically:
 - Apply marker exclusions and removals
 - Perform normalization and transformation
 - Generate statistical comparisons and visualizations
-
-**Note**: The workflow cannot be run directly with `Rscript`. You must edit the configuration name in the script and run it manually.
 
 ## Data Sources
 
