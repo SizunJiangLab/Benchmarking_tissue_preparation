@@ -23,10 +23,12 @@ library(balagan) # For Visualize_complex_sampling
 # =========================================================================================
 
 # Set the base directory where all 100 run folders are located
-BASE_RESULTS_DIR <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/balagan_results"
+# This should contain folders named: out_balagan_analysis_BIDMC_run_1, out_balagan_analysis_BIDMC_run_2, ...
+BASE_RESULTS_DIR <- "./out_balagan_analysis"
 
 # --- ADDED: Path to CV scores for ordering ---
-CV_DIR <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/out_BIDMC_all"
+# This points to the MESMER workflow output directory with condition_summary.csv
+CV_DIR <- "./out_MESMER_BIDMC_all"
 
 # A new directory to save this consistency analysis
 OUTPUT_DIR <- "./balagan_consistency_analysis_from_raw"

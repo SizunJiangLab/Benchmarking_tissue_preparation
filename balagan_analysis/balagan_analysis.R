@@ -170,19 +170,34 @@ perform_balagan_analysis <- function(data_df, output_prefix, markers_to_remove =
 
 ### CHOOSE WHICH DATASETS TO RUN ###
 # Define the specific list of "Source" names you want to analyze.
+# These must match the Source column in data_mesmer/Slide_metadata.csv
 sources_to_process <- c(
-  "Roche", "BIDMC", "Stanford", "BIDMC_DLBCL", "Stanford_Tonsil", 
-  "Stanford_OSCC", "Roche_Tonsil", "Roche_intestine", "UKentucky_Tonsil",
-  "UKentucky_SCC", "ASTAR_COMET_CRC", "ASTAR_COMET_Tonsil", 
+  # Initial Optimization datasets
+  "Roche", "BIDMC", "Stanford",
+  # Validation datasets - BIDMC
+  "BIDMC_Tonsil", "BIDMC_DLBCL",
+  # Validation datasets - Roche
+  "Roche_Tonsil", "Roche_intestine",
+  # Validation datasets - UKentucky
+  "UKentucky_Tonsil", "UKentucky_SCC",
+  # Validation datasets - ASTAR
+  "ASTAR_COMET_CRC", "ASTAR_COMET_Tonsil",
+  # Validation datasets - Stanford IMC
+  "Stanford_IMC_Tonsil", "Stanford_IMC_OSCC",
+  # Validation datasets - Stanford MIBI
   "Stanford_MIBI_Colon", "Stanford_MIBI_Liver", "Stanford_MIBI_LymphNode",
-  "Stanford_RareCyte_LN", "Stanford_RareCyte_TMA", "RareCyte_LN1_FOV1_FOV2_0.325",
-  "RareCyte_TMA_FOV1_FOV2_0.325", "BIDMC_Tonsil_compare", 
-  "Novartis_Tonsil", "Novartis_Lung_Cancer"
+  # Validation datasets - Stanford Orion
+  "Stanford_Orion_LN", "Stanford_Orion_EndometrialCancer",
+  # Validation datasets - Novartis
+  "Novartis_Tonsil", "Novartis_Lung_Cancer",
+  # Special datasets
+  "LyophilizationTest_FigS2", "Reimagedslide_FigS5", "StorageConditionsExpt"
 )
 
 # --- Load Metadata ---
-metadata_file <- "./data_03272025/Slide_metadata.csv"
-removal_file <- "./data_03272025/Slide_remove_markers.csv"
+# Note: Balagan analysis uses MESMER segmentation data
+metadata_file <- "./data_mesmer/Slide_metadata.csv"
+removal_file <- "./data_mesmer/Slide_remove_markers.csv"
 
 if (!file.exists(metadata_file) || !file.exists(removal_file)) {
   stop("Metadata or marker removal file not found. Please check file paths.")
@@ -215,7 +230,8 @@ for(current_source in sources_to_process) {
   cat("TEST MODE: Running on first file only:", current_filename, "\n")
   
   # Dynamically determine data and output paths
-  data_folder <- file.path("./data_03272025", current_source)
+  # Input: MESMER segmentation data from data_mesmer/
+  data_folder <- file.path("./data_mesmer", current_source)
   out_folder <- file.path("./out_balagan_analysis", current_source)
   dir.create(out_folder, showWarnings = FALSE, recursive = TRUE)
   

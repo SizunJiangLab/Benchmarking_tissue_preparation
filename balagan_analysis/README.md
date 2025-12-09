@@ -2,6 +2,8 @@
 
 This directory contains R scripts for comprehensive spatial analysis of tissue samples using the [Balagan](https://github.com/PierreBSC/Balagan) framework. The workflow runs 100 independent Balagan analyses to generate stable, reproducible metrics for comparing tissue preparation conditions.
 
+> **Note**: This workflow analyzes **MESMER segmentation data** (from `./data_mesmer/`). It does NOT use cellXpress data.
+
 ## Overview
 
 The Balagan framework assesses spatial heterogeneity and subsampling efficiency in multiplexed imaging data through:
@@ -10,6 +12,41 @@ The Balagan framework assesses spatial heterogeneity and subsampling efficiency 
 - **Alpha (α)**: Spatial heterogeneity metric - quantifies the relationship between field-of-view size and cluster discovery
 
 Lower τ and higher α indicate more heterogeneous tissue organization.
+
+## Directory Structure
+
+### Input Directories
+
+```
+../data_mesmer/                      # MESMER segmentation data (INPUT)
+  ├── Slide_metadata.csv             # Maps files to sources and conditions
+  ├── Slide_remove_markers.csv       # Markers to exclude from analysis
+  └── {Source}/                      # Source-specific data folders (e.g., BIDMC/)
+      └── *.csv                      # Single-cell feature data
+```
+
+### Output Directories
+
+```
+../out_balagan_analysis/             # Base output from Step 0
+  └── out_balagan_analysis_BIDMC_run_{1-100}/  # Results per run
+      └── BIDMC/
+          ├── *_Complex_sampling.csv # Raw subsampling data
+          └── *_Fitting_tau.csv      # Fitted tau values
+
+./balagan_consistency_analysis_from_raw/  # Output from Step 1
+  ├── AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv
+  ├── AGGREGATE_stable_alpha_slopes.csv
+  └── plot_*.svg
+
+./stable_rank_analysis_plots/        # Output from Steps 2-5
+  ├── TABLE_*.csv                    # Combined rank tables
+  └── PLOT_*.svg                     # Rank comparison plots
+
+./advanced_correlation_analysis/     # Output from Step 6
+  ├── TABLE_combined_core_metrics.csv
+  └── PLOT_*.svg
+```
 
 ## Workflow
 
@@ -22,9 +59,15 @@ Lower τ and higher α indicate more heterogeneous tissue organization.
 - Outputs tau values for each slide and FOV combination
 - **Runtime**: ~20-30 hours for 24 slides × 100 runs
 
-**Outputs**:
+**Input**:
 
-- `./out_balagan_analysis_BIDMC_run_<N>/BIDMC/`
+- `./data_mesmer/Slide_metadata.csv`
+- `./data_mesmer/Slide_remove_markers.csv`
+- `./data_mesmer/{Source}/*.csv` (single-cell data)
+
+**Output**:
+
+- `./out_balagan_analysis_BIDMC_run_{N}/BIDMC/`
   - `*_Complex_sampling.csv` - Raw subsampling data
   - `*_Fitting_tau.csv` - Fitted tau values per FOV
   - `AGGREGATE_all_slides_tau_per_fov.csv` - Combined results per run
@@ -47,7 +90,12 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 - Calculates alpha slope (exponent of power-law relationship)
 - Generates consistency plots to assess result stability
 
-**Outputs**:
+**Input**:
+
+- `./out_balagan_analysis/out_balagan_analysis_BIDMC_run_{1-100}/`
+- `./out_MESMER_BIDMC_all/condition_summary.csv` (optional, for CV ordering)
+
+**Output**:
 
 - `./balagan_consistency_analysis_from_raw/`
   - `AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv` - All tau values
@@ -73,20 +121,18 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 - Generates standalone and CV-combined heatmaps
 - Orders slides by stable performance rank
 
-**Outputs**:
+**Input**:
+
+- `./balagan_consistency_analysis_from_raw/AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv`
+- `./data_mesmer/condition_summary.csv` (optional, for CV comparison)
+
+**Output**:
 
 - `./stable_rank_analysis_plots/`
   - `AGGREGATE_stable_MEAN_tau_rank_heatmap.svg` - Mean-based ranks
   - `AGGREGATE_stable_MEDIAN_tau_rank_heatmap.svg` - Median-based ranks
   - `AGGREGATE_stable_MEAN_cv_tau_rank_heatmap.svg` - Mean ranks with CV comparison
   - `AGGREGATE_stable_MEDIAN_cv_tau_rank_heatmap.svg` - Median ranks with CV comparison
-
-**Configuration**:
-
-```r
-INCLUDE_CV_PLOTS <- TRUE  # Set to FALSE to skip CV comparison plots
-cv_rank_file <- "./data_mesmer/condition_summary.csv"
-```
 
 ---
 
@@ -98,10 +144,13 @@ cv_rank_file <- "./data_mesmer/condition_summary.csv"
 - Faceted by FOV size to compare subsampling efficiency
 - Shows how many regions are needed to recover all clusters
 
-**Outputs**:
+**Input**:
 
-- `./stable_rank_analysis_plots/`
-  - `PLOT_average_subsampling_curves.svg` - Multi-panel discovery curves
+- `./out_balagan_analysis/out_balagan_analysis_BIDMC_run_{1-100}/`
+
+**Output**:
+
+- `./stable_rank_analysis_plots/PLOT_average_subsampling_curves.svg`
 
 **Interpretation**:
 
@@ -120,18 +169,19 @@ cv_rank_file <- "./data_mesmer/condition_summary.csv"
   - CV Rank vs. Tau Rank
   - Alpha Rank vs. Tau Rank
 
-**Outputs**:
+**Input**:
+
+- `./balagan_consistency_analysis_from_raw/AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv`
+- `./balagan_consistency_analysis_from_raw/AGGREGATE_stable_alpha_slopes.csv`
+- `./data_mesmer/condition_summary.csv`
+
+**Output**:
 
 - `./stable_rank_analysis_plots/`
   - `TABLE_all_combined_ranks.csv` - All ranking metrics
-  - `PLOT_correlation_cv_vs_alpha.svg` - CV vs. spatial heterogeneity
-  - `PLOT_correlation_cv_vs_tau.svg` - CV vs. sampling efficiency
-  - `PLOT_correlation_alpha_vs_tau.svg` - Heterogeneity vs. efficiency
-
-**Key Questions**:
-
-- Does technical quality (CV) correlate with spatial metrics?
-- Are heterogeneity and efficiency independent or related?
+  - `PLOT_correlation_cv_vs_alpha.svg`
+  - `PLOT_correlation_cv_vs_tau.svg`
+  - `PLOT_correlation_alpha_vs_tau.svg`
 
 ---
 
@@ -143,17 +193,15 @@ cv_rank_file <- "./data_mesmer/condition_summary.csv"
 - Calculates standard deviation (SD) and interquartile range (IQR) of ranks
 - Identifies slides with consistent vs. variable performance
 
-**Outputs**:
+**Input**:
+
+- `./balagan_consistency_analysis_from_raw/AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv`
+
+**Output**:
 
 - `./stable_rank_analysis_plots/`
-  - `TABLE_stable_MEAN_rank_stability.csv` - Mean-based stability metrics
-  - `TABLE_stable_MEDIAN_rank_stability.csv` - Median-based stability metrics
-
-**Metrics**:
-
-- **stability_sd**: Lower = more consistent rank across FOV sizes
-- **stability_iqr**: Robust measure of rank variability
-- **mean_rank**: Average tau rank (lower = better efficiency)
+  - `TABLE_stable_MEAN_rank_stability.csv`
+  - `TABLE_stable_MEDIAN_rank_stability.csv`
 
 ---
 
@@ -163,50 +211,27 @@ cv_rank_file <- "./data_mesmer/condition_summary.csv"
 
 - Performs multiple advanced correlation analyses
 - Tests relationships between technical quality, spatial metrics, and biological features
-- Generates quadrant classification plot
 
-**Analyses Performed**:
+**Analyses**:
 
-1. **Mean Intensity Correlations**
+1. Mean Intensity vs. CV Rank/Score
+2. CV Score vs. Alpha/Tau Rank
+3. Unknown/Mixed Cell Fraction vs. Alpha (optional)
+4. All Markers vs. 10 Markers (optional)
+5. Quadrant Classification (Efficiency vs. Heterogeneity)
 
-   - Intensity vs. CV Rank
-   - Intensity vs. CV Score
-   - Intensity vs. Alpha
-   - Intensity vs. Tau Rank
+**Input**:
 
-2. **CV Score vs. Balagan Metrics**
+- `./balagan_consistency_analysis_from_raw/`
+- `./out_MESMER_BIDMC_all/` (MESMER workflow output)
+- `./stable_rank_analysis_plots/`
+- `./data_mesmer/`
 
-   - CV Score vs. Alpha
-   - CV Score vs. Tau Rank
-   - Alpha vs. Tau Rank
-
-3. **Unknown/Mixed Cell Fraction** (optional)
-
-   - Unknown cell fraction vs. Alpha
-
-4. **All Markers vs. 10 Markers** (optional)
-
-   - Compares alpha values from full panel vs. reduced panel
-
-5. **Quadrant Classification**
-   - 2D plot: Efficiency (tau rank) vs. Heterogeneity (alpha)
-   - Classifies slides into 4 performance categories
-
-**Outputs**:
+**Output**:
 
 - `./advanced_correlation_analysis/`
-  - `TABLE_combined_core_metrics.csv` - All metrics combined
+  - `TABLE_combined_core_metrics.csv`
   - `PLOT_01a_intensity_vs_cv_rank.svg` through `PLOT_05_quadrant_*`
-  - 10+ correlation plots
-
-**Configuration**:
-
-```r
-# Adjust these paths to your data locations
-cv_dir <- "/path/to/out_BIDMC_all"
-all_markers_dir <- "/path/to/all_markers_run"  # Optional
-mixed_unknown_file <- "/path/to/mixed_unknown_fractions.csv"  # Optional
-```
 
 ---
 
@@ -216,18 +241,25 @@ mixed_unknown_file <- "/path/to/mixed_unknown_fractions.csv"  # Optional
 
 - Utility script to regenerate plots from saved CSV data
 - Allows tweaking plot parameters without re-running analysis
-- Generates cell cluster scatter plots and marker expression heatmaps
 
-**Outputs**:
+**Input**:
+
+- `./out_balagan_analysis/{Source}/` (with `*_heatmap_data.csv` and `*_scatter_data.csv`)
+
+**Output**:
 
 - `*_scatter.svg` - Cell cluster spatial distribution
-  - `*_heatmap.svg` - Marker expression per cluster
+- `*_heatmap.svg` - Marker expression per cluster
 
-**Configuration**:
+---
 
-```r
-results_dir <- "/path/to/balagan/output"  # Directory with saved CSV files
-```
+### Standalone Analysis Script
+
+**Script**: `balagan_analysis.R`
+
+- Single-run Balagan analysis for testing/exploration
+- Processes one file from each source at a time
+- Uses MESMER data from `./data_mesmer/`
 
 ---
 
@@ -254,19 +286,19 @@ BiocManager::install("SingleCellExperiment")
 
 ### Input Data Requirements
 
-1. **Single-cell feature data**: CSV files with columns:
+1. **Single-cell feature data** (from MESMER segmentation): CSV files with columns:
 
    - `cellLabel`, `Y_cent`, `X_cent`, `cellSize`
    - Marker expression columns (e.g., `CD3`, `CD20`, etc.)
 
-2. **Metadata files** (from main workflow):
+2. **Metadata files**:
 
    - `./data_mesmer/Slide_metadata.csv`
    - `./data_mesmer/Slide_remove_markers.csv`
-   - `./data_mesmer/condition_summary.csv` (optional, for CV comparison)
 
-3. **100-run output** (generated by Step 0):
-   - `./out_balagan_analysis_BIDMC_run_<1-100>/`
+3. **Optional files**:
+   - `./data_mesmer/condition_summary.csv` (from MESMER workflow, for CV comparison)
+   - `./out_MESMER_{Source}_all/` (MESMER workflow outputs)
 
 ---
 
@@ -277,44 +309,6 @@ BiocManager::install("SingleCellExperiment")
 - **Steps 2-7**: < 5 minutes each
 
 **Total**: ~24-30 hours for complete workflow
-
----
-
-## Output Summary
-
-### Key Output Directories
-
-```
-./balagan_consistency_analysis_from_raw/
-  ├── AGGREGATE_all_100_runs_RECALCULATED_tau_data.csv
-  ├── AGGREGATE_stable_alpha_slopes.csv
-  └── plot_*.svg
-
-./stable_rank_analysis_plots/
-  ├── TABLE_stable_MEAN_rank_stability.csv
-  ├── AGGREGATE_stable_*_heatmap.svg
-  └── PLOT_*.svg
-
-./advanced_correlation_analysis/
-  ├── TABLE_combined_core_metrics.csv
-  └── PLOT_*.svg
-```
-
-### Key Tables
-
-1. **`AGGREGATE_stable_alpha_slopes.csv`**
-
-   - Columns: `Slide`, `median_alpha_slope`, `sd_alpha_slope`, `successful_runs`
-   - One row per slide, alpha = median across 100 runs
-
-2. **`TABLE_stable_MEAN_rank_stability.csv`**
-
-   - Columns: `Slide_Name`, `mean_rank`, `stability_sd`, `stability_iqr`
-   - Rank stability metrics per slide
-
-3. **`TABLE_combined_core_metrics.csv`**
-   - All metrics in one table: Alpha, Tau Rank, CV Score, Intensity, etc.
-   - Use for downstream statistical analysis
 
 ---
 
@@ -337,7 +331,7 @@ BiocManager::install("SingleCellExperiment")
 
 - **Lower score = Better technical quality**
 - Based on coefficient of variation across markers
-- Independent metric from main Mesmer workflow
+- Independent metric from main MESMER workflow
 
 ### Quadrant Classification
 

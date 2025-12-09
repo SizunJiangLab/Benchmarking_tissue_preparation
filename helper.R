@@ -498,6 +498,9 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     ))
   
   # MODIFIED: Conditional ordering for heatmap columns
+  # MODIFIED: Conditional ordering for heatmap columns
+  condition_order <- NULL
+  
   if (!is.null(current_config_name) && grepl("^UKentucky", current_config_name)) {
     # --- Logic for UKentucky ---
     # Get the unique conditions present in the data for this run
@@ -505,34 +508,40 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     # Define the desired suffix order
     suffix_order <- c("Dako20mins", "Dako40mins", "Dako10mins", "CA20mins")
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
     }))
-    
-  } else if (!is.null(current_config_name) && grepl("B1_ASTAR_COMET|B2_Stanford_Rarecyte|B1_Roche|B1_UKentucky|B2_Stanford_MIBI_Colon|B2_Stanford_MIBI_Liver|B3_Novartis_LuCa|B3_Novartis_tonsil|B3_Stanford_OSCC|B2_Stanford_IMC_Tonsil", current_config_name)) {
-    # --- NEW: Logic for new B1/B2 ASTAR & RareCyte naming conventions ---
+    if (length(matches) > 0) condition_order <- matches
+  }
+  
+  if (is.null(condition_order) && !is.null(current_config_name) && grepl("ASTAR_COMET|Stanford_Orion|Roche|UKentucky|Stanford_MIBI_Colon|Stanford_MIBI_Liver|Novartis_LungCancer|Novartis_Tonsil|Stanford_IMC_OSCC|Stanford_IMC_Tonsil", current_config_name)) {
+    # --- NEW: Logic for new B1/B2 ASTAR & Orion naming conventions ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(mean_df$Staining_condition)
     # Define the desired logical suffix order with underscores
     suffix_order <- c('Tris_20min', 'Tris_40min', 'Tris_10min', 'Citra_20min')
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE, ignore.case = TRUE)
     }))
+    if (length(matches) > 0) condition_order <- matches
+  } 
     
-  } else if (!is.null(current_config_name) && grepl("ASTAR_COMET|RareCyte", current_config_name)) {
-    # --- Logic for ASTAR_COMET and Stanford_RareCyte ---
+  if (is.null(condition_order) && !is.null(current_config_name) && grepl("ASTAR_COMET|Orion", current_config_name)) {
+    # --- Logic for ASTAR_COMET and Stanford_Orion ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(mean_df$Staining_condition)
     # Define the desired suffix order
     suffix_order <- c('Tris20min', 'Tris40min', 'Tris10min', 'CA20min')
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
     }))
-    
-  } else {
-    # Original numeric ordering for all other configurations
+    if (length(matches) > 0) condition_order <- matches
+  }
+  
+  if (is.null(condition_order) || length(condition_order) == 0) {
+    # Original numeric ordering for all other configurations or fallback
     condition_order <- mean_df %>%
       mutate(
         condition_num = as.numeric(gsub("\\D", "", Staining_condition))
@@ -792,30 +801,25 @@ load_signal_ratio_data <- function(data_folder, input_filenames, input_note) {
     # Read the signal ratio CSV file
     data_file <- read_csv(file_path, show_col_types = FALSE)
     
-    # Check if we have the expected columns
-    if("Marker" %in% colnames(data_file) && 
-       "Normalized_signal_invsout" %in% colnames(data_file)) {
-      
-      # Clean up filenames to remove extensions
-      data_file <- data_file %>%
-        mutate(Marker = gsub("\\.tiff$|\\.tif$|\\.jpg$|\\.png$", "", Marker))
-      
-      # Pivot to wide format
-      data_wide <- data_file %>%
-        pivot_wider(
-          names_from = Marker,
-          values_from = Normalized_signal_invsout
-        )
-      
-      # Add staining condition
-      data_wide$Staining_condition <- input_note[i]
-      
-      data_list[[i]] <- data_wide
-    } else {
-      warning(paste("Unexpected column format in file:", input_filenames[i]))
-      # Create an empty dataframe with the staining condition
-      data_list[[i]] <- tibble(Staining_condition = input_note[i])
-    }
+    # Select only the first two columns
+    data_file <- data_file %>% select(1:2)
+    colnames(data_file) <- c("Marker", "Normalized_signal_invsout")
+    
+    # Clean up filenames to remove extensions
+    data_file <- data_file %>%
+      mutate(Marker = gsub("\\.tiff$|\\.tif$|\\.jpg$|\\.png$", "", Marker))
+    
+    # Pivot to wide format
+    data_wide <- data_file %>%
+      pivot_wider(
+        names_from = Marker,
+        values_from = Normalized_signal_invsout
+      )
+    
+    # Add staining condition
+    data_wide$Staining_condition <- input_note[i]
+    
+    data_list[[i]] <- data_wide
   }
   
   # Combine all dataframes
@@ -872,6 +876,9 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     ))
   
   # MODIFIED: Conditional ordering for heatmap columns
+  # MODIFIED: Conditional ordering for heatmap columns
+  condition_order <- NULL
+  
   if (!is.null(current_config_name) && grepl("^UKentucky", current_config_name)) {
     # --- Logic for UKentucky ---
     # Get the unique conditions present in the data for this run
@@ -879,34 +886,40 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     # Define the desired suffix order
     suffix_order <- c("Dako20mins", "Dako40mins", "Dako10mins", "CA20mins")
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
     }))
-    
-  } else if (!is.null(current_config_name) && grepl("B1_ASTAR_COMET|B2_Stanford_Rarecyte|B1_Roche|B1_UKentucky|B2_Stanford_MIBI_Colon|B2_Stanford_MIBI_Liver|B3_Novartis_LuCa|B3_Novartis_tonsil|B3_Stanford_OSCC|B2_Stanford_IMC_Tonsil", current_config_name)) {
-    # --- NEW: Logic for new B1/B2 ASTAR & RareCyte naming conventions ---
+    if (length(matches) > 0) condition_order <- matches
+  }
+
+  if (is.null(condition_order) && !is.null(current_config_name) && grepl("ASTAR_COMET|Stanford_Orion|Roche|UKentucky|Stanford_MIBI_Colon|Stanford_MIBI_Liver|Novartis_LungCancer|Novartis_Tonsil|Stanford_IMC_OSCC|Stanford_IMC_Tonsil", current_config_name)) {
+    # --- NEW: Logic for new B1/B2 ASTAR & Orion naming conventions ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(cv_df$Staining_condition)
     # Define the desired logical suffix order with underscores
     suffix_order <- c('Tris_20min', 'Tris_40min', 'Tris_10min', 'Citra_20min')
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE, ignore.case = TRUE)
     }))
+    if (length(matches) > 0) condition_order <- matches
+  } 
     
-  } else if (!is.null(current_config_name) && grepl("ASTAR_COMET|RareCyte", current_config_name)) {
-    # --- Logic for ASTAR_COMET and Stanford_RareCyte ---
+  if (is.null(condition_order) && !is.null(current_config_name) && grepl("ASTAR_COMET|Orion", current_config_name)) {
+    # --- Logic for ASTAR_COMET and Stanford_Orion ---
     # Get the unique conditions present in the data for this run
     all_conditions <- unique(cv_df$Staining_condition)
     # Define the desired suffix order
     suffix_order <- c('Tris20min', 'Tris40min', 'Tris10min', 'CA20min')
     # Reorder the full condition names by matching their endings to the suffix_order
-    condition_order <- unlist(sapply(suffix_order, function(sfx) {
+    matches <- unlist(sapply(suffix_order, function(sfx) {
       grep(paste0(sfx, "$"), all_conditions, value = TRUE)
     }))
-    
-  } else {
-    # Original numeric ordering for all other configurations
+    if (length(matches) > 0) condition_order <- matches
+  }
+  
+  if (is.null(condition_order) || length(condition_order) == 0) {
+    # Original numeric ordering for all other configurations or fallback
     condition_order <- cv_df %>%
       mutate(
         condition_num = as.numeric(gsub("\\D", "", Staining_condition))

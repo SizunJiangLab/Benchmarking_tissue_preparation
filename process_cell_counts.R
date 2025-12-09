@@ -17,7 +17,7 @@ slide_metadata <- read_csv(metadata_file)
 sources <- c("BIDMC", "Roche", "Stanford", "Stanford-scan1")
 
 # Output directories
-out_dir <- "./cell_counts/"
+out_dir <- "./data_mesmer/Initial_Optimization/cell_counts"
 
 ########################################## Configuration End  #############################################################################
 
@@ -46,8 +46,21 @@ for (source in sources) {
   
     cat("Loading dataScaleSize files for", source, "...\n")
     
-    # Get data folder path
-    data_folder <- paste0("./data_03272025/", source, "/")
+    # Get data folder path - check for nested structure
+    base_data_path <- "./data_mesmer/"
+    possible_paths <- c(
+      paste0(base_data_path, source, "/"),
+      paste0(base_data_path, "Initial_Optimization/", source, "/"),
+      paste0(base_data_path, "Validation/", source, "/")
+    )
+    
+    data_folder <- possible_paths[1] # Default to first
+    for (path in possible_paths) {
+      if (dir.exists(path)) {
+        data_folder <- path
+        break
+      }
+    }
     
     # Initialize list to store cell counts
     cell_data_list <- list()

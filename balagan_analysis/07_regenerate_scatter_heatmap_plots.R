@@ -24,7 +24,8 @@ library(Polychrome) # For the palette36.colors
 
 # IMPORTANT: This must point to the directory where your results are.
 # This is both the INPUT and OUTPUT directory.
-results_dir <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/balagan_results1/out_balagan_analysis_BIDMC_phenotypic_markers_run2/BIDMC"
+# Update this path to your specific balagan output folder
+results_dir <- "./out_balagan_analysis/BIDMC"
 
 cat(paste("Looking for data and saving plots in:", results_dir, "\n"))
 
@@ -88,7 +89,6 @@ if (length(scatter_data_files) > 0) {
   cat(paste("Found", length(scatter_data_files), "scatter data files to process.\n"))
   
   for (csv_path in scatter_data_files) {
-    csv_path <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/balagan_results1/out_balagan_analysis_BIDMC_phenotypic_markers_run2/BIDMC/dataScaleSize_slide13_FOV1_scatter_data.csv"
     message(paste("Processing scatter plot for:", basename(csv_path)))
     
     # Load the data

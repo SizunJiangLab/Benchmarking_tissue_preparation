@@ -2,48 +2,84 @@
 
 This folder contains single-cell marker signal intensity data following cellXpress2 cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
 
+## Dataset Organization
+
+The data is organized into two main categories:
+
+### 1. Initial Optimization (Main Study)
+
+Primary dataset for benchmarking tissue preparation protocols.
+
+| Source   | Slides | Tissue | Description                           |
+| -------- | ------ | ------ | ------------------------------------- |
+| BIDMC    | 24     | Tonsil | Beth Israel - Full optimization panel |
+| Roche    | 6      | Tonsil | Roche - Selected conditions           |
+| Stanford | 12     | Tonsil | Stanford - Selected conditions        |
+
+### 2. Validation Datasets
+
+Independent validation across different institutions, platforms, and tissue types.
+
+| Source                         | Institution | Platform | Tissue Type                 |
+| ------------------------------ | ----------- | -------- | --------------------------- |
+| ASTAR_COMET_Tonsil             | ASTAR       | COMET    | Tonsil                      |
+| ASTAR_COMET_CRC                | ASTAR       | COMET    | Colorectal Cancer           |
+| BIDMC_Tonsil                   | BIDMC       | Fusion   | Tonsil                      |
+| BIDMC_DLBCL                    | BIDMC       | Fusion   | DLBCL (Lymph Node)          |
+| Roche_Tonsil                   | Roche       | Fusion   | Tonsil                      |
+| Roche_Intestine                | Roche       | Fusion   | Intestine                   |
+| UKentucky_Tonsil               | U. Kentucky | COMET    | Tonsil                      |
+| UKentucky_Skin                 | U. Kentucky | COMET    | Skin (SCC)                  |
+| Novartis_Tonsil                | Novartis    | Fusion   | Tonsil                      |
+| Novartis_LungCancer            | Novartis    | Fusion   | Lung Cancer                 |
+| Stanford_IMC_Tonsil            | Stanford    | IMC      | Tonsil                      |
+| Stanford_IMC_OSCC              | Stanford    | IMC      | Oral SCC                    |
+| Stanford_MIBI_LymphNode_pooled | Stanford    | MIBI     | Lymph Node (4 tiles pooled) |
+| Stanford_MIBI_Colon            | Stanford    | MIBI     | Colon                       |
+| Stanford_MIBI_Liver            | Stanford    | MIBI     | Liver                       |
+| Stanford_Orion_Lymph_node      | Stanford    | Orion    | Lymph Node                  |
+| Stanford_Orion_Endometrium     | Stanford    | Orion    | Endometrial Cancer          |
+
 ## Folder Structure
 
 ```
 data_cellXpress/
-├── README.md                          # This file
-├── Slide_metadata.csv                 # Metadata mapping files to sources and conditions
-├── Slide_compare_pairs.csv            # Comparison pairs for statistical analysis
-├── Slide_remove_markers.csv           # Markers to exclude from analysis
-├── Slide_exclude_markers.csv          # Marker/slide-specific exclusions
-├── Registered_Report_marker_sequence.csv  # Marker ordering for visualization
+├── README.md
+├── Slide_metadata.csv
+├── Slide_compare_pairs.csv
+├── Slide_remove_markers.csv
+├── Slide_exclude_markers.csv
+├── Registered_Report_marker_sequence.csv
 │
-├── Initial_Optimization/BIDMC/                   # BIDMC Initial Optimization dataset (24 slides)
-├── Initial_Optimization/Roche/                   # Roche Initial Optimization dataset (6 slides)
-├── Initial_Optimization/Stanford/                # Stanford Initial Optimization dataset (12 slides)
+├── Initial_Optimization/
+│   ├── BIDMC/                    # 24 slides
+│   ├── Roche/                    # 6 slides
+│   └── Stanford/                 # 12 slides
 │
-├── Validation/ASTAR/                             # ASTAR COMET data
-├── Validation/BIDMC/                             # BIDMC Fusion data
-├── Validation/Novartis_LungCancer/               # Novartis lung cancer
-├── Validation/Novartis_Tonsil/                   # Novartis tonsil
-├── Validation/Roche/                             # Roche Fusion data
-├── Validation/Stanford_IMC_OSCC/                 # Stanford OSCC
-├── Validation/Stanford_IMC_Tonsil/           # Batch 2: Stanford IMC tonsil
-├── Validation/Stanford_MIBI/                  # Batch 2: Stanford MIBI data
-├── Validation/Stanford_Orion/              # Batch 2: Stanford RareCyte data
-├── Validation/UK/                                # University of Kentucky COMET data
-│
-
-
-
-│
-
+└── Validation/
+    ├── ASTAR/                    # ASTAR COMET (Tonsil + CRC)
+    ├── BIDMC/                    # BIDMC Fusion (Tonsil + DLBCL)
+    ├── Roche/                    # Roche Fusion (Tonsil + Intestine)
+    ├── UK/                       # U. Kentucky COMET (Tonsil + Skin)
+    ├── Stanford_MIBI/            # Stanford MIBI (LymphNode + Colon + Liver)
+    ├── Stanford_Orion/           # Stanford Orion (LymphNode + Endometrium)
+    ├── Stanford_IMC_OSCC/        # Stanford IMC OSCC
+    ├── Stanford_IMC_Tonsil/      # Stanford IMC Tonsil
+    ├── Novartis_LungCancer/      # Novartis Lung Cancer
+    └── Novartis_Tonsil/          # Novartis Tonsil
 ```
 
 ## Data Format
 
 Each source folder contains `.qs` (quick serialization) files with the following naming convention:
+
 - `*_raw_data.qs` - Main segmentation data (cell-level measurements)
 - `*_ROI_info.qs` - Region of Interest (ROI) metadata
 
 ### Data File Structure
 
 The `.qs` files contain R data structures:
+
 - **raw_data.qs**: Data frame with columns:
   - Cell identifiers and spatial coordinates
   - Marker expression values (normalized fluorescence intensity)
@@ -51,27 +87,12 @@ The `.qs` files contain R data structures:
 - **ROI_info.qs**: Metadata about regions of interest
 
 To load these files in R:
+
 ```r
 library(qs)
 data <- qread("path/to/file_raw_data.qs")
 roi_info <- qread("path/to/file_ROI_info.qs")
 ```
-
-## Batch Organization
-
-Data is organized into batches (B1, B2, B3) representing different experimental runs or time periods:
-- **Batch 1 (B1)**: Early experimental batches
-- **Batch 2 (B2)**: Stanford platform-specific data (MIBI, IMC, RareCyte)
-- **Batch 3 (B3)**: Later experimental batches
-
-## SNR Data
-
-The `SNR_BIDMC/` folder contains pre-calculated signal-to-noise ratio data for BIDMC samples:
-- **SNR_ratios_BIDMC.csv**: Signal-to-noise ratios per marker and slide
-- **metadata_BIDMC.csv**: Maps SNR slide names to slide identifiers
-- **cell_counts_BIDMC.csv**: Cell counts per slide and FOV for weighted averaging
-
-See `SNR_BIDMC/README.md` for more details on SNR analysis.
 
 ## Metadata Files
 
@@ -87,9 +108,9 @@ To use this data with the analysis workflows:
 
 1. Ensure all data files are in their respective source folders
 2. Run `cellXpress_dataSlide_workflow.R` for main analysis
-3. Run `CellXpress_SNR_Analysis.R` for SNR analysis (BIDMC only)
 
 The workflows will automatically:
+
 - Load data based on `Slide_metadata.csv`
 - Apply marker exclusions and removals
 - Perform normalization and transformation
@@ -98,17 +119,17 @@ The workflows will automatically:
 ## Data Sources
 
 This dataset includes contributions from:
-- **ASTAR**: Agency for Science, Technology and Research
+
+- **ASTAR**: Agency for Science, Technology and Research (Singapore)
 - **BIDMC**: Beth Israel Deaconess Medical Center
-- **Novartis**: Novartis 
-- **Roche**: Roche 
+- **Novartis**: Novartis Institutes for BioMedical Research
+- **Roche**: Roche Tissue Diagnostics
 - **Stanford**: Stanford University (MIBI, IMC, Orion platforms)
 - **UKentucky**: University of Kentucky
 
 ## Notes
 
 - Data files use `.qs` format for efficient serialization (faster than CSV for large datasets)
-- Each slide typically has multiple regions/ROIs
+- Each slide typically has one or more ROIs
 - Marker names follow CellXpress conventions (see marker mapping in workflows)
-
-
+- Stanford_MIBI_LymphNode_pooled has 4 tiles per slide that are pooled together for analysis

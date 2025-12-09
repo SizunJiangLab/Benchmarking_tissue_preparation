@@ -69,7 +69,7 @@ Stanford_MIBI_Colon,Marker,Lag3
 Stanford_MIBI_Colon,Marker,Ki67
 Stanford_MIBI_Colon,Marker,ICOS
 Stanford_MIBI_Colon,Marker,HLADR
-Stanford_MIBI_Colon,Marker,HLA.1.ABC
+Stanford_MIBI_Colon,Marker,HLA1ABC
 Stanford_MIBI_Colon,Marker,Granzyme B
 Stanford_MIBI_Colon,Marker,FOXP3
 Stanford_MIBI_Colon,Marker,CD45RO
@@ -95,18 +95,18 @@ Stanford_MIBI_Liver,Marker,CD20
 Stanford_MIBI_Liver,Marker,CD11c
 Stanford_MIBI_Liver,Marker,PDL1
 Stanford_Orion_EndometrialCancer,Marker,FOXP3
-Stanford_Orion_TMA,Marker,X16_ArgoFluor760
-Stanford_Orion_TMA,Marker,X06_AF2
-Stanford_Orion_TMA,Marker,X05_ArgoFluor548
-Stanford_Orion_TMA,Marker,X03_ArgoFluor520
-Stanford_Orion_TMA,Marker,X02_AF1
+Stanford_Orion_EndometrialCancer,Marker,X16_ArgoFluor760
+Stanford_Orion_EndometrialCancer,Marker,X06_AF2
+Stanford_Orion_EndometrialCancer,Marker,X05_ArgoFluor548
+Stanford_Orion_EndometrialCancer,Marker,X03_ArgoFluor520
+Stanford_Orion_EndometrialCancer,Marker,X02_AF1
 Stanford_Orion_LN,Marker,X16_ArgoFluor760
 Stanford_Orion_LN,Marker,X06_AF2
 Stanford_Orion_LN,Marker,X05_ArgoFluor548
 Stanford_Orion_LN,Marker,X03_ArgoFluor520
 Stanford_Orion_LN,Marker,X02_AF1
 Stanford_Orion_LN,Marker,FOXP3
-Stanford_Orion_LN,Marker,Pan.CK
+Stanford_Orion_LN,Marker,PanCK
 Stanford_MIBI_LymphNode,Marker,PanKeratin
 Stanford_MIBI_LymphNode,Marker,Lag3
 Stanford_MIBI_LymphNode,Marker,CD163
@@ -127,3 +127,4 @@ Novartis_Lung_Cancer,Marker,CD68
 Novartis_Lung_Cancer,Marker,HLADR
 Novartis_Lung_Cancer,Marker,CD138
 Novartis_Lung_Cancer,Marker,CD8
+LyophilizationTest_FigS2,Marker,IDO1

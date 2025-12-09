@@ -9,8 +9,9 @@ library(ggplot2)
 library(svglite)
 
 # --- 1. CONFIGURATION ---
-# INPUT: The base directory where all 100 run folders are
-BASE_RESULTS_DIR <- "/Users/wang.13246/Documents/Project/Sizun_NM_revision/MESMER_workflow_03272025/balagan_results"
+# INPUT: The base directory where all 100 run folders are located
+# This should contain folders named: out_balagan_analysis_BIDMC_run_1, out_balagan_analysis_BIDMC_run_2, ...
+BASE_RESULTS_DIR <- "./out_balagan_analysis"
 
 # OUTPUT: The folder to save your new plot
 output_dir <- "./stable_rank_analysis_plots"

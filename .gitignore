@@ -19,6 +19,7 @@ qsave_input/
 # Outputs (large, regenerated)
 out/
 out_*/
+results/
 
 # Raw data (not tracked)
 # MESMER inputs

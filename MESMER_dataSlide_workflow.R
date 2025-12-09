@@ -11,6 +11,9 @@ library(svglite)
 library(qs)
 source("helper.R")
 
+# Create results folder if it doesn't exist
+dir.create("./results", showWarnings = FALSE, recursive = TRUE)
+
 ########################################## Configuration Begin #############################################################################
 ### What data to load?
 data_type <- "MESMER"
@@ -42,16 +45,13 @@ if (file.exists(cell_exclusion_file)) {
 }
 
 ### Define penalty scores for each source ###
+### Define penalty scores for each source ###
 penalty_scores <- list(
-  "RareCyte_LN1_FOV1_FOV2_0.325" = 10,
-  "RareCyte_TMA_FOV1_FOV2_0.325" = 10,
   "ASTAR_COMET_CRC" = 10,
   "ASTAR_COMET_Tonsil" = 10,
   "BIDMC" = 30,
   "BIDMC_DLBCL" = 10,
   "BIDMC_Tonsil" = 10,
-  "BIDMC_Tonsil_compare" = 10,
-  "Double" = 1,
   "Novartis_Lung_Cancer" = 10,
   "Novartis_Tonsil" = 10,
   "Roche" = 10,
@@ -60,19 +60,18 @@ penalty_scores <- list(
   "Stanford" = 18,
   "Stanford_MIBI_Colon" = 10,
   "Stanford_MIBI_Liver" = 10,
-  "Stanford_MIBI_LymphNode_Tile1" = 10,
-  "Stanford_MIBI_LymphNode_Tile2" = 10,
-  "Stanford_MIBI_LymphNode_Tile3" = 10,
-  "Stanford_MIBI_LymphNode_Tile4" = 10,
+  "Stanford_MIBI_LymphNode" = 10,
   "Stanford_OSCC" = 10,
-  "Stanford_RareCyte_LN" = 10,
-  "Stanford_RareCyte_TMA" = 10,
-  "Stanford-scan1" = 18,
+  "Stanford_Orion_LN" = 10,
+  "Stanford_Orion_EndometrialCancer" = 10,
   "Stanford_Tonsil" = 10,
   "UKentucky_SCC" = 10,
   "UKentucky_Tonsil" = 10,
-  "Stanford_MIBI_LymphNode" = 10,
-  "StorageConditionsExpt" = 10
+  "StorageConditionsExpt" = 10,
+  "Stanford_IMC_Tonsil" = 10,
+  "Stanford_IMC_OSCC" = 10,
+  "LyophilizationTest_FigS2" = 10,
+  "Reimagedslide_FigS5" = 10
 )
 
 ### Helper functions ###
@@ -95,16 +94,13 @@ all_sources <- slide_metadata %>%
   unique()
 
 # Define source-to-config-name mapping
+# Define source-to-config-name mapping
 source_to_config_name <- c(
-  "RareCyte_LN1_FOV1_FOV2_0.325" = "Adjusted_RareCyte_LN_all",
-  "RareCyte_TMA_FOV1_FOV2_0.325" = "Adjusted_RareCyte_TMA_all",
   "ASTAR_COMET_CRC" = "ASTAR_COMET_CRC_all",
   "ASTAR_COMET_Tonsil" = "ASTAR_COMET_Tonsil_all",
   "BIDMC" = "BIDMC_all",
   "BIDMC_DLBCL" = "BIDMC_DLBCL_all",
   "BIDMC_Tonsil" = "BIDMC_Tonsil_all",
-  "BIDMC_Tonsil_compare" = "BIDMC_Tonsil_compare_all",
-  "Double" = "Double_all",
   "Novartis_Lung_Cancer" = "Novartis_Lung_Cancer_all",
   "Novartis_Tonsil" = "Novartis_Tonsil_all",
   "Roche" = "Roche_all",
@@ -113,19 +109,18 @@ source_to_config_name <- c(
   "Stanford" = "Stanford_all",
   "Stanford_MIBI_Colon" = "Stanford_MIBI_Colon_all",
   "Stanford_MIBI_Liver" = "Stanford_MIBI_Liver_all",
-  "Stanford_MIBI_LymphNode_Tile1" = "Stanford_MIBI_LymphNode_Tile1_all",
-  "Stanford_MIBI_LymphNode_Tile2" = "Stanford_MIBI_LymphNode_Tile2_all",
-  "Stanford_MIBI_LymphNode_Tile3" = "Stanford_MIBI_LymphNode_Tile3_all",
-  "Stanford_MIBI_LymphNode_Tile4" = "Stanford_MIBI_LymphNode_Tile4_all",
+  "Stanford_MIBI_LymphNode" = "Stanford_MIBI_LymphNode_pooled_all",
   "Stanford_OSCC" = "Stanford_OSCC_all",
-  "Stanford_RareCyte_LN" = "Stanford_RareCyte_LN_all",
-  "Stanford_RareCyte_TMA" = "Stanford_RareCyte_TMA_all",
-  "Stanford-scan1" = "Stanford_scan1_all",
+  "Stanford_Orion_LN" = "Stanford_Orion_LN_all",
+  "Stanford_Orion_EndometrialCancer" = "Stanford_Orion_EndometrialCancer_all",
   "Stanford_Tonsil" = "Stanford_Tonsil_all",
   "UKentucky_SCC" = "UKentucky_SCC_all",
   "UKentucky_Tonsil" = "UKentucky_Tonsil_all",
-  "Stanford_MIBI_LymphNode" = "Stanford_MIBI_LymphNode_pooled_all",
-  "StorageConditionsExpt" = "StorageConditionsExpt_all"
+  "StorageConditionsExpt" = "StorageConditionsExpt_all",
+  "Stanford_IMC_Tonsil" = "Stanford_IMC_Tonsil_all",
+  "Stanford_IMC_OSCC" = "Stanford_IMC_OSCC_all",
+  "LyophilizationTest_FigS2" = "LyophilizationTest_FigS2_all",
+  "Reimagedslide_FigS5" = "Reimagedslide_FigS5_all"
 )
 
 # Generate configurations dynamically
@@ -178,7 +173,7 @@ for (source in all_sources) {
   }
   
   # Build output folder path
-  out_folder <- paste0("./out_", gsub("_all$", "", config_name), "_all/")
+  out_folder <- paste0("./results/out_", gsub("_all$", "", config_name), "_all/")
   
   # Create configuration
   configurations[[config_name]] <- list(
@@ -193,47 +188,20 @@ for (source in all_sources) {
   )
 }
 
-### Special configurations ###
-
-# BIDMC subset configuration
-bidmc_subset_data <- slide_metadata %>%
-  filter(Source == "BIDMC" & Type == "dataScaleSize") %>%
-  filter(grepl("slide5_|slide13_|slide16_|slide21_", Filename)) %>%
-  arrange(Name, FOV)
-
-bidmc_subset_pairs <- comparison_pairs %>%
-  filter(Source == "BIDMC") %>%
-  filter(
-    (Compare1 %in% c("BIDMC_5", "BIDMC_13", "BIDMC_16", "BIDMC_21") &
-       Compare2 %in% c("BIDMC_5", "BIDMC_13", "BIDMC_16", "BIDMC_21"))
-  ) %>% 
-  to_pairs()
-
-configurations[["BIDMC_subset"]] <- list(
-  data_folder = "./data_mesmer/BIDMC/",
-  out_folder = "./out_BIDMC_subset/",
-  input_filenames = bidmc_subset_data$Filename,
-  input_note = bidmc_subset_data$Name,
-  pairs = bidmc_subset_pairs,
-  remove_values = get_remove_markers("BIDMC"),
-  excluded_values = process_excluded_markers("BIDMC"),
-  penalty_score = 10
-)
-
 ########################################## Configuration Selection #########################################################
 
 # Choose which configuration to use - can be changed to process different datasets
-# Options: "Adjusted_RareCyte_LN_all", "Adjusted_RareCyte_TMA_all", "ASTAR_COMET_CRC_all", "ASTAR_COMET_Tonsil_all",
-#          "BIDMC_all", "BIDMC_DLBCL_all", "BIDMC_Tonsil_all", "BIDMC_Tonsil_compare_all", "Double_all",
-#          "Novartis_Lung_Cancer_all", "Novartis_Tonsil_all", "Roche_all", "Roche_intestine_all", "Roche_Tonsil_all",
+# Options: "ASTAR_COMET_CRC_all", "ASTAR_COMET_Tonsil_all",
+#          "BIDMC_all", "BIDMC_DLBCL_all", "BIDMC_Tonsil_all",
+#          "Novartis_Lung_Cancer_all", "Novartis_Tonsil_all", "Roche_all", 
+#          "Roche_intestine_all", "Roche_Tonsil_all",
 #          "Stanford_all", "Stanford_MIBI_Colon_all", "Stanford_MIBI_Liver_all",
-#          "Stanford_MIBI_LymphNode_Tile1_all", "Stanford_MIBI_LymphNode_Tile2_all",
-#          "Stanford_MIBI_LymphNode_Tile3_all", "Stanford_MIBI_LymphNode_Tile4_all",
-#          "Stanford_OSCC_all", "Stanford_RareCyte_LN_all", "Stanford_RareCyte_TMA_all",
-#          "Stanford_scan1_all", "Stanford_Tonsil_all", "UKentucky_SCC_all",
-#          "UKentucky_Tonsil_all", "BIDMC_subset", "Stanford_MIBI_LymphNode_pooled_all",
-#          "StorageConditionsExpt_all"
-current_config_name <- "BIDMC_all"
+#          "Stanford_OSCC_all", "Stanford_Orion_LN_all", "Stanford_Orion_EndometrialCancer_all",
+#          "Stanford_Tonsil_all", "UKentucky_SCC_all", "UKentucky_Tonsil_all", 
+#          "Stanford_MIBI_LymphNode_pooled_all", "StorageConditionsExpt_all",
+#          "Stanford_IMC_Tonsil_all", "Stanford_IMC_OSCC_all",
+#          "LyophilizationTest_FigS2_all", "Reimagedslide_FigS5_all"
+current_config_name <- "LyophilizationTest_FigS2_all"
 
 ########################################## Configuration End ###############################################################
 
@@ -275,6 +243,9 @@ write_csv(
 )
 
 ### Load Mesmer data. Try to load from qsave if available, otherwise load raw data
+# Create qsave directory if it doesn't exist
+dir.create("./qsave_input", showWarnings = FALSE)
+
 qsave_file <- paste0("./qsave_input/", current_config_name, "_input.qsave")
 if (file.exists(qsave_file)) {
   cat("Loading data from saved qsave file:", qsave_file, "\n")
@@ -358,22 +329,42 @@ result = normalize_data(data)
 df_norm <- result$data
 marker_names <- result$marker_names
 
+# --- Sync original_marker_names with marker_names (handling Hoechst rename, DNA2 removal, and reordering) ---
+temp_clean_names <- gsub("[.-]", "", original_marker_names)
+clean_to_original_map <- setNames(original_marker_names, temp_clean_names)
+
+new_original <- c()
+for (m in marker_names) {
+  if (m == "Hoechst") {
+    # Prioritize finding the original nuclear marker
+    src <- NA
+    # Check candidates in priority order (same as renaming logic)
+    if ("DNA1" %in% original_marker_names) src <- "DNA1"
+    else if ("HH3" %in% original_marker_names) src <- "HH3"
+    else if ("DAPI" %in% original_marker_names) src <- "DAPI"
+    else if ("Nucleus" %in% original_marker_names) src <- "Nucleus"
+    
+    if (is.na(src)) src <- "Hoechst" 
+    new_original <- c(new_original, src)
+  } else {
+    orig <- clean_to_original_map[m]
+    if (is.na(orig)) orig <- m 
+    new_original <- c(new_original, orig)
+  }
+}
+original_marker_names <- new_original
+
 # Remove markers that are in the remove_values list
 if (length(remove_values) > 0) {
-  # Filter marker_names (cleaned format)
-  marker_names <- setdiff(marker_names, remove_values)
+  # Since order is now synced, we can just filter by matching against marker_names
+  keep_mask <- ! (marker_names %in% remove_values)
   
-  # Filter original_marker_names (display format with dashes)
-  # Create a mapping between cleaned names and original names
-  cleaned_to_original <- setNames(original_marker_names, 
-                                  gsub("[.-]", "", original_marker_names))
+  # Log removed
+  cat("Removed markers:", paste(marker_names[!keep_mask], collapse = ", "), "\n")
   
-  # Convert remove_values to original format and filter
-  remove_values_original <- cleaned_to_original[remove_values]
-  remove_values_original <- remove_values_original[!is.na(remove_values_original)]
-  original_marker_names <- setdiff(original_marker_names, remove_values_original)
+  marker_names <- marker_names[keep_mask]
+  original_marker_names <- original_marker_names[keep_mask]
   
-  cat("Removed markers:", paste(remove_values, collapse = ", "), "\n")
   cat("Remaining markers (cleaned):", length(marker_names), "\n")
   cat("Remaining markers (original):", length(original_marker_names), "\n")
 }

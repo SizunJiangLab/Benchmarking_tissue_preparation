@@ -2,41 +2,93 @@
 
 This folder contains single-cell marker signal intensity data following Mesmer cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
 
+## Dataset Organization
+
+The data is organized into three main categories:
+
+### 1. Initial Optimization (Main Study)
+
+Primary dataset for benchmarking tissue preparation protocols with signal-to-noise ratio analysis.
+
+| Source   | Slides | Tissue | Description                           |
+| -------- | ------ | ------ | ------------------------------------- |
+| BIDMC    | 24     | Tonsil | Beth Israel - Full optimization panel |
+| Roche    | 6      | Tonsil | Roche - Selected conditions           |
+| Stanford | 12     | Tonsil | Stanford - Selected conditions        |
+
+### 2. Validation Datasets
+
+Independent validation across different institutions, platforms, and tissue types.
+
+| Source                           | Institution | Platform | Tissue Type             |
+| -------------------------------- | ----------- | -------- | ----------------------- |
+| ASTAR_COMET_Tonsil               | ASTAR       | COMET    | Tonsil                  |
+| ASTAR_COMET_CRC                  | ASTAR       | COMET    | Colorectal Cancer       |
+| BIDMC_Tonsil                     | BIDMC       | Fusion   | Tonsil                  |
+| BIDMC_DLBCL                      | BIDMC       | Fusion   | DLBCL (Lymph Node)      |
+| Roche_Tonsil                     | Roche       | Fusion   | Tonsil                  |
+| Roche_intestine                  | Roche       | Fusion   | Intestine               |
+| UKentucky_Tonsil                 | U. Kentucky | COMET    | Tonsil                  |
+| UKentucky_SCC                    | U. Kentucky | COMET    | Squamous Cell Carcinoma |
+| Novartis_Tonsil                  | Novartis    | Fusion   | Tonsil                  |
+| Novartis_Lung_Cancer             | Novartis    | Fusion   | Lung Cancer             |
+| Stanford_IMC_Tonsil              | Stanford    | IMC      | Tonsil                  |
+| Stanford_IMC_OSCC                | Stanford    | IMC      | Oral SCC                |
+| Stanford_MIBI_LymphNode          | Stanford    | MIBI     | Lymph Node (4 tiles)    |
+| Stanford_MIBI_Colon              | Stanford    | MIBI     | Colon                   |
+| Stanford_MIBI_Liver              | Stanford    | MIBI     | Liver                   |
+| Stanford_Orion_LN                | Stanford    | Orion    | Lymph Node              |
+| Stanford_Orion_EndometrialCancer | Stanford    | Orion    | Endometrial Cancer      |
+
+### 3. Supplementary Experiments
+
+Special experiments for specific manuscript figures.
+
+| Source                   | Description                                 | Figure |
+| ------------------------ | ------------------------------------------- | ------ |
+| LyophilizationTest_FigS2 | Fresh vs Lyophilized (manual vs automated)  | Fig S2 |
+| Reimagedslide_FigS5      | BIDMC Tonsil Run 1 vs Run 2 reproducibility | Fig S5 |
+| StorageConditionsExpt    | Storage temperature and vacuum conditions   | -      |
+
 ## Folder Structure
 
 ```
 data_mesmer/
-├── README.md                          # This file
-├── Slide_metadata.csv                 # Metadata mapping files to sources and conditions
-├── Slide_compare_pairs.csv            # Comparison pairs for statistical analysis
-├── Slide_remove_markers.csv           # Markers to exclude from analysis
-├── Slide_exclude_markers.csv          # Marker/slide-specific exclusions
-├── Registered_Report_marker_sequence.csv  # Marker ordering for visualization
-├── condition_summary.csv              # Summary of staining conditions
+├── README.md
+├── Slide_metadata.csv
+├── Slide_compare_pairs.csv
+├── Slide_remove_markers.csv
+├── Slide_exclude_markers.csv
+├── Registered_Report_marker_sequence.csv
 │
-├── Initial_Optimization/BIDMC/                   # BIDMC Initial Optimization data (24 slides)
-├── Initial_Optimization/Roche/                   # Roche Initial Optimization data (6 slides)
-├── Initial_Optimization/Stanford/                # Stanford Initial Optimization data (12 slides)
-├── LyophilizationTest_FigS2/                     # Comparison of Fresh vs Lyophilized manual vs Automated 
-├── Reimagedslide_FigS5/                          # BIDMC Tonsil Run 1 vs Run 2 data
-├── StorageConditionsExpt/                        # Storage conditions experiment
-├── Validation/ASTAR_COMET_CRC/                   # ASTAR COMET CRC data (Validation)
-├── Validation/ASTAR_COMET_Tonsil/                # ASTAR COMET Tonsil data
-├── Validation/BIDMC_DLBCL/                       # BIDMC DLBCL data
-├── Validation/BIDMC_Tonsil/                      # BIDMC Tonsil data
-├── Validation/Novartis_Lung_Cancer/              # Novartis lung cancer data
-├── Validation/Novartis_Tonsil/                   # Novartis tonsil data
-├── Validation/Roche_Tonsil/                      # Roche tonsil data
-├── Validation/Roche_Intestine/                   # Roche intestine data
-├── Validation/Stanford_IMC_OSCC/                 # Stanford IMC OSCC data
-├── Validation/Stanford_IMC_Tonsil/               # Stanford IMC tonsil data
-├── Validation/Stanford_MIBI_Colon/               # Stanford MIBI colon data
-├── Validation/Stanford_MIBI_Liver/               # Stanford MIBI liver data
-├── Validation/Stanford_MIBI_LymphNode/           # Stanford MIBI lymph node data
-├── Validation/Stanford_Orion_LN/                 # Stanford Orion lymph node data
-├── Validation/Stanford_Orion_EndometrialCancer/  # Stanford Orion endometrial cancer data
-├── Validation/UKentucky_SCC/                     # University of Kentucky SCC data
-├── Validation/UKentucky_Tonsil/                  # University of Kentucky tonsil data
+├── Initial_Optimization/
+│   ├── BIDMC/                    # 24 slides, 2 FOVs each
+│   ├── Roche/                    # 6 slides, 2 FOVs each
+│   ├── Stanford/                 # 12 slides, 2 FOVs each
+│   └── cell_counts/              # Pre-calculated cell counts (from process_cell_counts.R)
+│
+├── Validation/
+│   ├── ASTAR_COMET_CRC/
+│   ├── ASTAR_COMET_Tonsil/
+│   ├── BIDMC_DLBCL/
+│   ├── BIDMC_Tonsil/
+│   ├── Novartis_Lung_Cancer/
+│   ├── Novartis_Tonsil/
+│   ├── Roche_Tonsil/
+│   ├── Roche_intestine/
+│   ├── Stanford_IMC_OSCC/
+│   ├── Stanford_IMC_Tonsil/
+│   ├── Stanford_MIBI_Colon/
+│   ├── Stanford_MIBI_Liver/
+│   ├── Stanford_MIBI_LymphNode/
+│   ├── Stanford_Orion_EndometrialCancer/
+│   ├── Stanford_Orion_LN/
+│   ├── UKentucky_SCC/
+│   └── UKentucky_Tonsil/
+│
+├── LyophilizationTest_FigS2/
+├── Reimagedslide_FigS5/
+└── StorageConditionsExpt/
 ```
 
 ## Data Format
@@ -44,9 +96,10 @@ data_mesmer/
 Each source folder contains CSV files with the following naming convention:
 
 - `dataScaleSize_slide[#]_FOV[1|2].csv` - Main segmentation data
-- `signal_ratios_slide[#]_FOV[1|2].csv` - Signal-to-noise ratio data (for Initial Optimization dataset)
+- `signal_ratios_slide[#]_FOV[1|2].csv` - Signal-to-noise ratio data (Initial Optimization only)
 
-The conditions corresponding to each slide number can be found in Supplementary Table 18. 
+The conditions corresponding to each slide number can be found in Supplementary Table 18.
+
 ### CSV File Structure
 
 Each CSV file contains:
@@ -68,6 +121,15 @@ Each CSV file contains:
 - **Slide_exclude_markers.csv**: Lists marker/slide combinations to exclude (set to NA)
 - **Registered_Report_marker_sequence.csv**: Defines marker order for heatmap visualization
 
+## Cell Counts
+
+The `Initial_Optimization/cell_counts/` folder contains pre-calculated cell counts per FOV, generated by `process_cell_counts.R`. This data is used by `MESMER_SignalNoise_workflow.R` to calculate weighted average signal-to-noise ratios across FOVs.
+
+Each source subfolder (BIDMC/, Roche/, Stanford/) contains:
+
+- **fov_cell_counts.csv**: Cell counts per FOV with columns: `Filename`, `Staining_condition`, `FOV`, `Cell_count`, `Total_cells`, `Cell_proportion`
+- **cell_count_summary.csv**: Summary statistics per condition including total cells, FOV count, min/max/mean/median cells
+
 ## Usage
 
 To use this data with the analysis workflows:
@@ -87,16 +149,17 @@ The workflows will automatically:
 
 This dataset includes contributions from:
 
-- **ASTAR**: Agency for Science, Technology and Research
+- **ASTAR**: Agency for Science, Technology and Research (Singapore)
 - **BIDMC**: Beth Israel Deaconess Medical Center
-- **Novartis**: Novartis 
-- **Roche**: Roche 
+- **Novartis**: Novartis Institutes for BioMedical Research
+- **Roche**: Roche Tissue Diagnostics
 - **Stanford**: Stanford University (MIBI, IMC, Orion platforms)
 - **UKentucky**: University of Kentucky
 
 ## Notes
-- Each row in `dataScaleSize` is a cell and each column a marker. 
+
+- Each row in `dataScaleSize` is a cell and each column a marker.
 - Signal intensities have been normalized by cell size.
-- Each slide typically has 2 FOVs (Fields of View)
+- Each slide typically has 2 FOVs (Fields of View), except Stanford_MIBI_LymphNode which has 4 tiles.
 - Marker names may vary slightly between sources (see marker mapping in workflows)
-- Some sources include both `dataScaleSize` and `signal_ratios` data types
+- Initial Optimization sources include both `dataScaleSize` and `signal_ratios` data types

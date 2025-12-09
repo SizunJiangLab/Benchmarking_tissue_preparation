@@ -8,20 +8,26 @@ library(rstatix)
 library(readr)
 library(presto)
 library(svglite)
+library(cowplot)
 
 source("helper.R")
+
+# Create results folder if it doesn't exist
+dir.create("./results", showWarnings = FALSE, recursive = TRUE)
+
 ########################################## Configuration Begin  #############################################################################
 
 # Define paths for metadata and exclusion files
-metadata_file <- "./data_03272025/Slide_metadata.csv"
-removal_file <- "./data_03272025/Slide_remove_markers.csv"
-exclusion_file <- "./data_03272025/Slide_exclude_markers.csv"
-marker_sequence_file <- "./data_03272025/Registered_Report_marker_sequence.csv"
+# Define paths for metadata and exclusion files
+metadata_file <- "./data_mesmer/Slide_metadata.csv"
+removal_file <- "./data_mesmer/Slide_remove_markers.csv"
+exclusion_file <- "./data_mesmer/Slide_exclude_markers.csv"
+marker_sequence_file <- "./data_mesmer/Registered_Report_marker_sequence.csv"
 
 # Cell count files (pre-calculated by Process_Cell_Counts.R)
-bidmc_cell_counts_file <- "./cell_counts/BIDMC/fov_cell_counts.csv"
-roche_cell_counts_file <- "./cell_counts/Roche/fov_cell_counts.csv"
-stanford_cell_counts_file <- "./cell_counts/Stanford/fov_cell_counts.csv"
+bidmc_cell_counts_file <- "./data_mesmer/Initial_Optimization/cell_counts/BIDMC/fov_cell_counts.csv"
+roche_cell_counts_file <- "./data_mesmer/Initial_Optimization/cell_counts/Roche/fov_cell_counts.csv"
+stanford_cell_counts_file <- "./data_mesmer/Initial_Optimization/cell_counts/Stanford/fov_cell_counts.csv"
 
 # Load metadata and exclusions
 slide_metadata <- read_csv(metadata_file)
@@ -62,27 +68,30 @@ stanford_remove_markers <- removed_markers %>%
 # Create configurations for each dataset
 configurations <- list(
   BIDMC_Combined = list(
-    data_folder = "./data_03272025/BIDMC/",
-    out_folder = "./out_BIDMC_Combined_SNR/",
+    data_folder = if(dir.exists("./data_mesmer/Initial_Optimization/BIDMC/")) "./data_mesmer/Initial_Optimization/BIDMC/" else "./data_mesmer/BIDMC/",
+    out_folder = "./results/out_BIDMC_Combined_SNR/",
     snr_data = bidmc_snr_data,
     cell_counts = bidmc_cell_counts,
-    remove_values = bidmc_remove_markers
+    remove_values = bidmc_remove_markers,
+    excluded_values = process_excluded_markers("BIDMC")
   ),
   
   Roche_Combined = list(
-    data_folder = "./data_03272025/Roche/",
-    out_folder = "./out_Roche_Combined_SNR/",
+    data_folder = if(dir.exists("./data_mesmer/Initial_Optimization/Roche/")) "./data_mesmer/Initial_Optimization/Roche/" else "./data_mesmer/Roche/",
+    out_folder = "./results/out_Roche_Combined_SNR/",
     snr_data = roche_snr_data,
     cell_counts = roche_cell_counts,
-    remove_values = roche_remove_markers
+    remove_values = roche_remove_markers,
+    excluded_values = process_excluded_markers("Roche")
   ),
   
   Stanford_Combined = list(
-    data_folder = "./data_03272025/Stanford/",
-    out_folder = "./out_Stanford_Combined_SNR/",
+    data_folder = if(dir.exists("./data_mesmer/Initial_Optimization/Stanford/")) "./data_mesmer/Initial_Optimization/Stanford/" else "./data_mesmer/Stanford/",
+    out_folder = "./results/out_Stanford_Combined_SNR/",
     snr_data = stanford_snr_data,
     cell_counts = stanford_cell_counts,
-    remove_values = stanford_remove_markers
+    remove_values = stanford_remove_markers,
+    excluded_values = process_excluded_markers("Stanford")
   )
 )
 
@@ -101,6 +110,7 @@ remove_values <- current_config$remove_values
 
 # Clean up marker names to match data processing
 remove_values <- gsub("[.-]", "", remove_values)
+remove_values <- c(remove_values, "DAPI", "Nucleus") # Keep this logic if DAPI is never desired in plots
 
 # Create output directory if it doesn't exist
 dir.create(out_folder, showWarnings = FALSE)
@@ -153,12 +163,19 @@ combine_snr_with_cell_weights <- function(data_folder, snr_meta, cell_counts) {
     condition <- all_conditions[i]
     
     # Get corresponding cell counts and calculate weights
-    condition_counts <- cell_counts %>%
-      filter(Staining_condition == condition)
-    
-    # Skip if we don't have cell count data for this condition
-    if (nrow(condition_counts) == 0) {
-      cat("Warning: No cell count data for condition:", condition, "\n")
+    if (!is.null(cell_counts)) {
+      condition_counts <- cell_counts %>%
+        filter(Staining_condition == condition)
+      
+      # Skip if we don't have cell count data for this condition
+      if (nrow(condition_counts) == 0) {
+        cat("Warning: No cell count data for condition:", condition, "- skipping\n")
+        next
+      }
+    } else {
+      # If cell_counts whole object is NULL, we cannot proceed with weighted logic.
+      # Old script assumed cell counts existed. If they don't, we should probably skip to match 'old' behavior of not producing output for this condition.
+      cat("Warning: Cell counts object is NULL for condition:", condition, "- skipping\n")
       next
     }
     
@@ -174,20 +191,22 @@ combine_snr_with_cell_weights <- function(data_folder, snr_meta, cell_counts) {
       
       # Get FOV1 value if available
       if (length(fov1_row) > 0 && marker %in% colnames(fov1_snr)) {
-        fov1_val <- fov1_snr[fov1_row, marker]
+        vals <- fov1_snr[fov1_row, marker]
+        fov1_val <- mean(vals[[1]], na.rm = TRUE)
       }
       
       # Get FOV2 value if available
       if (length(fov2_row) > 0 && marker %in% colnames(fov2_snr)) {
-        fov2_val <- fov2_snr[fov2_row, marker]
+        vals <- fov2_snr[fov2_row, marker]
+        fov2_val <- mean(vals[[1]], na.rm = TRUE)
       }
       
       # Only proceed if we have at least one value
-      if (is.na(fov1_val) && is.na(fov2_val)) {
+      if ((is.na(fov1_val) || is.nan(fov1_val)) && (is.na(fov2_val) || is.nan(fov2_val))) {
         next
       }
       
-      # Get cell counts and proportions
+      # Determine weights
       fov1_count <- condition_counts %>% 
         filter(FOV == "FOV1") %>% 
         pull(Cell_count)
@@ -242,13 +261,15 @@ cat("Creating signal-to-noise ratio heatmaps...\n")
 heatmap_results <- create_snr_heatmaps(
   snr_data = combined_snr,
   out_folder = out_folder,
-  remove_values = remove_values
+  remove_values = remove_values,
+  excluded_values = current_config$excluded_values
 )
 
 # Print completion message
 cat("\nAnalysis completed for", current_config_name, "\n")
 cat("Results saved to:", out_folder, "\n")
 
+config_name="Stanford_Combined"
 # Function to process all configurations sequentially
 process_all_configs <- function() {
   for (config_name in names(configurations)) {
@@ -268,6 +289,7 @@ process_all_configs <- function() {
     
     # Clean up marker names
     remove_values <- gsub("[.-]", "", remove_values)
+    remove_values <- c(remove_values, "DAPI", "Nucleus") # Keep this logic if DAPI is never desired in plots
     
     # Create output directory
     dir.create(out_folder, showWarnings = FALSE)
@@ -297,7 +319,8 @@ process_all_configs <- function() {
     heatmap_results <- create_snr_heatmaps(
       snr_data = combined_snr,
       out_folder = out_folder,
-      remove_values = remove_values
+      remove_values = remove_values,
+      excluded_values = current_config$excluded_values
     )
     
     cat("Analysis completed for", config_name, "\n")

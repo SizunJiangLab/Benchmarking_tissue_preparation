@@ -11,8 +11,8 @@ library(purrr)
 cat("--- Setting up configurations based on your script ---\n")
 
 # Define paths for metadata and other configuration files
-metadata_file <- "./data_03272025/Slide_metadata.csv"
-pairs_file <- "./data_03272025/Slide_compare_pairs.csv"
+metadata_file <- "./data_mesmer/Slide_metadata.csv"
+pairs_file <- "./data_mesmer/Slide_compare_pairs.csv"
 
 # Check if essential files exist before proceeding
 if (!file.exists(metadata_file) || !file.exists(pairs_file)) {
@@ -52,30 +52,45 @@ ukentucky_tonsil_data <- slide_metadata %>% filter(Source == "UKentucky_Tonsil" 
 # --- Section 2: Assemble Final Configurations List ---
 # This list is taken directly from your script to ensure the check is accurate.
 # Only the parameters needed for the check (data_folder, input_filenames) are used.
+# Helper function to find data folder
+get_data_folder <- function(source) {
+  base_data_path <- "./data_mesmer/"
+  possible_paths <- c(
+    paste0(base_data_path, source, "/"),
+    paste0(base_data_path, "Initial_Optimization/", source, "/"),
+    paste0(base_data_path, "Validation/", source, "/")
+  )
+  
+  for (path in possible_paths) {
+    if (dir.exists(path)) return(path)
+  }
+  return(paste0(base_data_path, source, "/")) # Default fallback
+}
+
 configurations <- list(
-  ASTAR_COMET_CRC_all = list(data_folder = "./data_03272025/ASTAR_COMET_CRC/", input_filenames = astar_comet_crc_data$Filename),
-  ASTAR_COMET_Tonsil_all = list(data_folder = "./data_03272025/ASTAR_COMET_Tonsil/", input_filenames = astar_comet_tonsil_data$Filename),
-  BIDMC_all = list(data_folder = "./data_03272025/BIDMC/", input_filenames = bidmc_data$Filename),
-  BIDMC_DLBCL_all = list(data_folder = "./data_03272025/BIDMC_DLBCL/", input_filenames = bidmc_dlbcl_data$Filename),
-  BIDMC_Tonsil_all = list(data_folder = "./data_03272025/BIDMC_Tonsil/", input_filenames = bidmc_tonsil_data$Filename),
-  Double_all = list(data_folder = "./data_03272025/Double/", input_filenames = double_data$Filename),
-  Roche_all = list(data_folder = "./data_03272025/Roche/", input_filenames = roche_data$Filename),
-  Roche_intestine_all = list(data_folder = "./data_03272025/Roche_intestine/", input_filenames = roche_intestine_data$Filename),
-  Roche_Tonsil_all = list(data_folder = "./data_03272025/Roche_Tonsil/", input_filenames = roche_tonsil_data$Filename),
-  Stanford_all = list(data_folder = "./data_03272025/Stanford/", input_filenames = stanford_data$Filename),
-  Stanford_MIBI_Colon_all = list(data_folder = "./data_03272025/Stanford_MIBI_Colon/", input_filenames = stanford_mibi_colon_data$Filename),
-  Stanford_MIBI_Liver_all = list(data_folder = "./data_03272025/Stanford_MIBI_Liver/", input_filenames = stanford_mibi_liver_data$Filename),
-  Stanford_MIBI_LymphNode_Tile1_all = list(data_folder = "./data_03272025/Stanford_MIBI_LymphNode_Tile1/", input_filenames = stanford_mibi_lymphnode_tile1_data$Filename),
-  Stanford_MIBI_LymphNode_Tile2_all = list(data_folder = "./data_03272025/Stanford_MIBI_LymphNode_Tile2/", input_filenames = stanford_mibi_lymphnode_tile2_data$Filename),
-  Stanford_MIBI_LymphNode_Tile3_all = list(data_folder = "./data_03272025/Stanford_MIBI_LymphNode_Tile3/", input_filenames = stanford_mibi_lymphnode_tile3_data$Filename),
-  Stanford_MIBI_LymphNode_Tile4_all = list(data_folder = "./data_03272025/Stanford_MIBI_LymphNode_Tile4/", input_filenames = stanford_mibi_lymphnode_tile4_data$Filename),
-  Stanford_OSCC_all = list(data_folder = "./data_03272025/Stanford_OSCC/", input_filenames = stanford_oscc_data$Filename),
-  Stanford_RareCyte_LN_all = list(data_folder = "./data_03272025/Stanford_RareCyte_LN/", input_filenames = stanford_rarecyte_ln_data$Filename),
-  Stanford_RareCyte_TMA_all = list(data_folder = "./data_03272025/Stanford_RareCyte_TMA/", input_filenames = stanford_rarecyte_tma_data$Filename),
-  Stanford_scan1_all = list(data_folder = "./data_03272025/Stanford-scan1/", input_filenames = stanford_scan1_data$Filename),
-  Stanford_Tonsil_all = list(data_folder = "./data_03272025/Stanford_Tonsil/", input_filenames = stanford_tonsil_data$Filename),
-  UKentucky_SCC_all = list(data_folder = "./data_03272025/UKentucky_SCC/", input_filenames = ukentucky_scc_data$Filename),
-  UKentucky_Tonsil_all = list(data_folder = "./data_03272025/UKentucky_Tonsil/", input_filenames = ukentucky_tonsil_data$Filename)
+  ASTAR_COMET_CRC_all = list(data_folder = get_data_folder("ASTAR_COMET_CRC"), input_filenames = astar_comet_crc_data$Filename),
+  ASTAR_COMET_Tonsil_all = list(data_folder = get_data_folder("ASTAR_COMET_Tonsil"), input_filenames = astar_comet_tonsil_data$Filename),
+  BIDMC_all = list(data_folder = get_data_folder("BIDMC"), input_filenames = bidmc_data$Filename),
+  BIDMC_DLBCL_all = list(data_folder = get_data_folder("BIDMC_DLBCL"), input_filenames = bidmc_dlbcl_data$Filename),
+  BIDMC_Tonsil_all = list(data_folder = get_data_folder("BIDMC_Tonsil"), input_filenames = bidmc_tonsil_data$Filename),
+  Double_all = list(data_folder = get_data_folder("Double"), input_filenames = double_data$Filename),
+  Roche_all = list(data_folder = get_data_folder("Roche"), input_filenames = roche_data$Filename),
+  Roche_intestine_all = list(data_folder = get_data_folder("Roche_intestine"), input_filenames = roche_intestine_data$Filename),
+  Roche_Tonsil_all = list(data_folder = get_data_folder("Roche_Tonsil"), input_filenames = roche_tonsil_data$Filename),
+  Stanford_all = list(data_folder = get_data_folder("Stanford"), input_filenames = stanford_data$Filename),
+  Stanford_MIBI_Colon_all = list(data_folder = get_data_folder("Stanford_MIBI_Colon"), input_filenames = stanford_mibi_colon_data$Filename),
+  Stanford_MIBI_Liver_all = list(data_folder = get_data_folder("Stanford_MIBI_Liver"), input_filenames = stanford_mibi_liver_data$Filename),
+  Stanford_MIBI_LymphNode_Tile1_all = list(data_folder = get_data_folder("Stanford_MIBI_LymphNode_Tile1"), input_filenames = stanford_mibi_lymphnode_tile1_data$Filename),
+  Stanford_MIBI_LymphNode_Tile2_all = list(data_folder = get_data_folder("Stanford_MIBI_LymphNode_Tile2"), input_filenames = stanford_mibi_lymphnode_tile2_data$Filename),
+  Stanford_MIBI_LymphNode_Tile3_all = list(data_folder = get_data_folder("Stanford_MIBI_LymphNode_Tile3"), input_filenames = stanford_mibi_lymphnode_tile3_data$Filename),
+  Stanford_MIBI_LymphNode_Tile4_all = list(data_folder = get_data_folder("Stanford_MIBI_LymphNode_Tile4"), input_filenames = stanford_mibi_lymphnode_tile4_data$Filename),
+  Stanford_OSCC_all = list(data_folder = get_data_folder("Stanford_OSCC"), input_filenames = stanford_oscc_data$Filename),
+  Stanford_RareCyte_LN_all = list(data_folder = get_data_folder("Stanford_RareCyte_LN"), input_filenames = stanford_rarecyte_ln_data$Filename),
+  Stanford_RareCyte_TMA_all = list(data_folder = get_data_folder("Stanford_RareCyte_TMA"), input_filenames = stanford_rarecyte_tma_data$Filename),
+  Stanford_scan1_all = list(data_folder = get_data_folder("Stanford-scan1"), input_filenames = stanford_scan1_data$Filename),
+  Stanford_Tonsil_all = list(data_folder = get_data_folder("Stanford_Tonsil"), input_filenames = stanford_tonsil_data$Filename),
+  UKentucky_SCC_all = list(data_folder = get_data_folder("UKentucky_SCC"), input_filenames = ukentucky_scc_data$Filename),
+  UKentucky_Tonsil_all = list(data_folder = get_data_folder("UKentucky_Tonsil"), input_filenames = ukentucky_tonsil_data$Filename)
 )
 
 cat("--- Verifying Original Normalization Marker for All Configurations ---\n\n")
