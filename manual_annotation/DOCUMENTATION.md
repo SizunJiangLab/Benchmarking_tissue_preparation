@@ -63,7 +63,7 @@ Renders per-FOV phenotype maps using segmentation masks and annotations.
 
 **Inputs:**  
 - `output/slide_{XX}_adata_k=200/clustering_results/*.csv`  
-- `Mesmer_overlay/*.tiff` and `Mesmer_mask/*.tiff`  
+- `MESMER_overlay/*.tiff` and `MESMER_mask/*.tiff`  
 
 **Outputs:**  
 - `output/slide_{XX}_adata_k=200/*.png, *.svg` — per-FOV colored phenotype maps  
