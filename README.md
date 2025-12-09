@@ -172,7 +172,7 @@ Rscript build_compare_pairs.R
 
 Available configurations are defined in the workflow scripts. Open `MESMER_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R` to see the full list of available configurations. Common examples:
 
-**MESMER workflows:**
+**Mesmer workflows:**
 
 - Initial Optimization: `BIDMC_all`, `Roche_all`, `Stanford_all`
 - Validation: `ASTAR_COMET_CRC_all`, `BIDMC_DLBCL_all`, `Novartis_Lung_Cancer_all`, `Stanford_MIBI_Colon_all`, etc.
@@ -283,9 +283,9 @@ Key files:
 - CellXpress workflow
 
   - Script: `cellXpress_dataSlide_workflow.R`
-  - Follow the same workflow steps as MESMER: edit `current_config_name` in the script and run manually
+  - Follow the same workflow steps as Mesmer: edit `current_config_name` in the script and run manually
   - Input location: `./data_cellXpress/`
-  - Produces analogous density plots and summaries as MESMER workflow
+  - Produces analogous density plots and summaries as Mesmer workflow
 
 - Balagan spatial analysis (advanced, optional)
 
@@ -316,7 +316,7 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 
 ```
 .
-├── data_mesmer/                    # MESMER data (see data_mesmer/README.md)
+├── data_mesmer/                    # Mesmer data (see data_mesmer/README.md)
 ├── data_cellXpress/                # CellXpress data (see data_cellXpress/README.md)
 ├── balagan_analysis/               # Balagan spatial analysis workflow
 ├── manual_annotation/              # Manual clustering/annotation pipeline
@@ -324,8 +324,8 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 ├── results/                        # Output directory (auto-created)
 │   └── out_<CONFIG>/               # Per-configuration outputs
 ├── qsave_input/                    # Cached input data (auto-generated)
-├── MESMER_dataSlide_workflow.R     # Main MESMER workflow
-├── MESMER_SignalNoise_workflow.R   # MESMER SNR analysis
+├── MESMER_dataSlide_workflow.R     # Main Mesmer workflow
+├── MESMER_SignalNoise_workflow.R   # Mesmer SNR analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
 ├── CellXpress_SNR_Analysis.R       # CellXpress SNR analysis
 ├── build_compare_pairs.R           # Generate comparison pairs
