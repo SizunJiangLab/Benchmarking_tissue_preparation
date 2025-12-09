@@ -2,7 +2,7 @@
 
 This directory contains R scripts for comprehensive spatial analysis of tissue samples using the [Balagan](https://github.com/PierreBSC/Balagan) framework. The workflow runs 100 independent Balagan analyses to generate stable, reproducible metrics for comparing tissue preparation conditions.
 
-> **Note**: This workflow analyzes **MESMER segmentation data** (from `./data_mesmer/`). It does NOT use cellXpress data.
+> **Note**: This workflow analyzes **Mesmer segmentation data** (from `./data_mesmer/`). It does NOT use cellXpress data.
 
 ## Overview
 
@@ -18,7 +18,7 @@ Lower τ and higher α indicate more heterogeneous tissue organization.
 ### Input Directories
 
 ```
-../data_mesmer/                      # MESMER segmentation data (INPUT)
+../data_mesmer/                      # Mesmer segmentation data (INPUT)
   ├── Slide_metadata.csv             # Maps files to sources and conditions
   ├── Slide_remove_markers.csv       # Markers to exclude from analysis
   └── {Source}/                      # Source-specific data folders (e.g., BIDMC/)
@@ -223,7 +223,7 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 **Input**:
 
 - `./balagan_consistency_analysis_from_raw/`
-- `./out_MESMER_BIDMC_all/` (MESMER workflow output)
+- `./out_MESMER_BIDMC_all/` (Mesmer workflow output)
 - `./stable_rank_analysis_plots/`
 - `./data_mesmer/`
 
@@ -259,7 +259,7 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 
 - Single-run Balagan analysis for testing/exploration
 - Processes one file from each source at a time
-- Uses MESMER data from `./data_mesmer/`
+- Uses Mesmer data from `./data_mesmer/`
 
 ---
 
@@ -286,7 +286,7 @@ BiocManager::install("SingleCellExperiment")
 
 ### Input Data Requirements
 
-1. **Single-cell feature data** (from MESMER segmentation): CSV files with columns:
+1. **Single-cell feature data** (from Mesmer segmentation): CSV files with columns:
 
    - `cellLabel`, `Y_cent`, `X_cent`, `cellSize`
    - Marker expression columns (e.g., `CD3`, `CD20`, etc.)
@@ -297,7 +297,7 @@ BiocManager::install("SingleCellExperiment")
    - `./data_mesmer/Slide_remove_markers.csv`
 
 3. **Optional files**:
-   - `./data_mesmer/condition_summary.csv` (from MESMER workflow, for CV comparison)
+   - `./data_mesmer/condition_summary.csv` (from Mesmer workflow, for CV comparison)
    - `./out_MESMER_{Source}_all/` (MESMER workflow outputs)
 
 ---
@@ -331,7 +331,7 @@ BiocManager::install("SingleCellExperiment")
 
 - **Lower score = Better technical quality**
 - Based on coefficient of variation across markers
-- Independent metric from main MESMER workflow
+- Independent metric from main Mesmer workflow
 
 ### Quadrant Classification
 
