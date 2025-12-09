@@ -1,22 +1,24 @@
-# CellXpress2 Segmentation Data
+# CellXpress Segmentation Data
 
-This folder contains single-cell marker signal intensity data following cellXpress2 cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
+This folder contains single-cell marker signal intensity data following CellXpress cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
+
+**Note**: The actual data files are not included in this GitHub repository. Data files will be made available on Zenodo, and download links will be provided in the main [README.md](../README.md) once available. Please download the data from Zenodo and place it in this directory to use the analysis workflows.
 
 ## Dataset Organization
 
 The data is organized into two main categories:
 
-### 1. Initial Optimization (Main Study)
+### 1. Initial Optimization
 
 Primary dataset for benchmarking tissue preparation protocols.
 
-| Source   | Slides | Tissue | Description                           |
-| -------- | ------ | ------ | ------------------------------------- |
-| BIDMC    | 24     | Tonsil | Beth Israel - Full optimization panel |
-| Roche    | 6      | Tonsil | Roche - Selected conditions           |
-| Stanford | 12     | Tonsil | Stanford - Selected conditions        |
+| Source   | Slides | Tissue     | Description                                      |
+| -------- | ------ | ---------- | ------------------------------------------------ |
+| BIDMC    | 24     | Tonsil     | Beth Israel - 24 HIER and Ab staining conditions |
+| Roche    | 6      | Tonsil     | Roche - Selected conditions                      |
+| Stanford | 12     | Lymph Node | Stanford - Selected conditions                   |
 
-### 2. Validation Datasets
+### 2. Cross-site Validation of Top Three and Bottom One Conditions
 
 Independent validation across different institutions, platforms, and tissue types.
 
@@ -107,7 +109,9 @@ roi_info <- qread("path/to/file_ROI_info.qs")
 To use this data with the analysis workflows:
 
 1. Ensure all data files are in their respective source folders
-2. Run `cellXpress_dataSlide_workflow.R` for main analysis
+2. Open `cellXpress_dataSlide_workflow.R` in R/RStudio
+3. Edit the `current_config_name` variable to your target dataset
+4. Run the script manually (source it or run line-by-line)
 
 The workflows will automatically:
 
@@ -115,6 +119,8 @@ The workflows will automatically:
 - Apply marker exclusions and removals
 - Perform normalization and transformation
 - Generate statistical comparisons and visualizations
+
+**Note**: The workflow cannot be run directly with `Rscript`. You must edit the configuration name in the script and run it manually.
 
 ## Data Sources
 
