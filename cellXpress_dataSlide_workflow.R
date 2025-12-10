@@ -23,7 +23,7 @@ removal_file <- "./data_cellXpress/Slide_remove_markers.csv"
 exclusion_file <- "./data_cellXpress/Slide_exclude_markers.csv"
 pairs_file <- "./data_cellXpress/Slide_compare_pairs.csv"
 marker_sequence_file <- "./data_cellXpress/Registered_Report_marker_sequence.csv"
-cell_exclusion_file <- "./data_cellXpress/Slide_exclude_cells.csv"
+
 
 # Load metadata and exclusions
 slide_metadata <- read_csv(metadata_file)
@@ -35,15 +35,6 @@ marker_sequence <- marker_sequence[[1]]  # Get the first column as a vector
 
 # Load cell-specific exclusions if the file exists
 cell_exclusions <- NULL
-if (file.exists(cell_exclusion_file)) {
-  cell_exclusions <- read_csv(cell_exclusion_file) %>%
-    mutate(
-      # Clean marker names
-      Marker = gsub("[.-]", "", Marker),
-      # Create a key for matching
-      Key = paste0(Source, "_", Slide)
-    )
-}
 
 # --- Define all source names from metadata ---
 all_sources <- unique(slide_metadata$Source)

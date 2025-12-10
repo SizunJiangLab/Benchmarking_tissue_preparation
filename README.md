@@ -116,16 +116,12 @@ Data is organized into **Initial Optimization** and **Validation** datasets. See
 
   - One-column CSV specifying desired marker order
 
-- Slide_exclude_cells.csv (optional)
-  - Per-slide cell exclusions used by helper logic
-  - Columns: `Source, Slide, Marker` (Marker name normalization removes `.` and `-`)
 
 ## Quickstart
 
 1.  **Download data from Zenodo** (links will be provided)
 
     - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
-    - See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed data organization
 
 2.  **Update metadata and marker lists** (if needed)
 
@@ -319,7 +315,7 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 ├── balagan_analysis/               # Balagan spatial analysis workflow
 ├── manual_annotation/              # Manual clustering/annotation pipeline
 ├── pylibs/                         # Python utility library
-├── results/                        # Output directory (auto-created)
+├── results/                        # Outputs
 │   └── out_<CONFIG>/               # Per-configuration outputs
 ├── qsave_input/                    # Cached input data (auto-generated)
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow

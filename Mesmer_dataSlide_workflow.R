@@ -24,7 +24,7 @@ removal_file <- "./data_mesmer/Slide_remove_markers.csv"
 exclusion_file <- "./data_mesmer/Slide_exclude_markers.csv"
 pairs_file <- "./data_mesmer/Slide_compare_pairs.csv"
 marker_sequence_file <- "./data_mesmer/Registered_Report_marker_sequence.csv"
-cell_exclusion_file <- "./data_mesmer/Slide_exclude_cells.csv"
+
 
 # Load all metadata and configuration files
 slide_metadata <- read_csv(metadata_file)
@@ -36,13 +36,6 @@ marker_sequence <- marker_sequence[[1]]
 
 # Load cell-specific exclusions if the file exists
 cell_exclusions <- NULL
-if (file.exists(cell_exclusion_file)) {
-  cell_exclusions <- read_csv(cell_exclusion_file) %>%
-    mutate(
-      Marker = gsub("[.-]", "", Marker),
-      Key = paste0(Source, "_", Slide)
-    )
-}
 
 ### Define penalty scores for each source ###
 ### Define penalty scores for each source ###
