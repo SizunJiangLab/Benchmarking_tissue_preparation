@@ -113,13 +113,13 @@ output_base_dir <- "./out_balagan_analysis_BIDMC_run_"
 
 ---
 
-### Step 2: Plot Stable Rank Heatmaps
+### Step 2: Plot Rank Heatmaps
 
 **Script**: `02_plot_stable_rank_heatmaps.R`
 
-- Calculates stable mean and median tau ranks across all 100 runs
+- Calculates mean and median tau ranks across all 100 runs
 - Generates standalone and CV-combined heatmaps
-- Orders slides by stable performance rank
+- Orders slides by performance rank
 
 **Input**:
 

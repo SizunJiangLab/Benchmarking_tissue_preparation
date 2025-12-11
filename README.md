@@ -1,333 +1,291 @@
 ### Benchmarking Tissue Preparation
 
+Large-scale Quantitative Assessment of Tissue Preparation and Staining Conditions for Robust Multiplexed Imaging.
+
 #### Table of Contents
 
 - [Project Overview](#project-overview)
-- [Environment](#environment)
-- [Data and Metadata](#data-and-metadata)
-- [Quickstart](#quickstart)
-- [Selecting a Configuration](#selecting-a-configuration)
-- [Outputs](#outputs)
-- [Complementary Workflows](#complementary-workflows)
-- [Utilities](#utilities)
+- [Workflow Overview](#workflow-overview)
+- [Data Sources](#data-sources)
+- [Quick Start](#quick-start)
+- [Detailed Workflows](#detailed-workflows)
+- [Configuration Reference](#configuration-reference)
+- [Output Files](#output-files)
 - [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
 
 ## Project Overview
 
-This repository hosts analysis workflows to benchmark tissue preparation and staining conditions across multiple platforms. It provides publication-ready figures and statistics across many datasets and sources.
+This repository provides analysis workflows to benchmark tissue preparation and staining conditions across multiple multiplexed imaging platforms. It generates publication-ready figures, heatmaps, and statistics comparing different antigen retrieval conditions.
 
-Primary workflows:
+**Key capabilities:**
 
-- Mesmer data-slide analysis: `Mesmer_dataSlide_workflow.R`
-- CellXpress data-slide analysis: `cellXpress_dataSlide_workflow.R`
-- Analysis of ratio of marker signal intensities within vs outside cell mask (SNR): `Mesmer_SignalNoise_workflow.R`
-- Optional spatial analysis: See `balagan_analysis/` folder for complete workflow
+- Compare marker signal intensities across conditions (Mesmer/CellXpress workflows)
+- Analyze signal-to-noise ratios (SNR workflow)
+- Perform manual cell type annotation (Python pipeline)
+- Quantify spatial heterogeneity (Balagan analysis)
 
-## Environment
+## Workflow Overview
 
-Tested on:
+The analysis has two main stages:
 
-- MacOS 14.6.1
-- Red Hat Enterprise Linux 8.10 (Ootpa)
+### Stage 1: Image Preprocessing (Python)
 
-Recommended versions:
+**Script:** [`crop_mesmer_featureextraction_signaltonoise.py`](crop_mesmer_featureextraction_signaltonoise.py)
 
-- Python: 3.9.12+ (required for SNR preprocessing, optional for other segmentation tasks)
-- R: >= 4.3.2
+**Inputs:**
 
-Install dependencies:
+- Raw QPTIFF images from [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (accession TBD)
+- FOV crop coordinates from [`Master_metadata.csv`](Master_metadata.csv) or Supplementary Table 18
 
-- Python (required for SNR preprocessing workflow, optional for other segmentation tasks)
+**Process:**
 
-```bash
-pip install -r ./requirements.txt
-pip install deepcell  # Required for Mesmer segmentation
+1. Crop images to FOV regions
+2. Run Mesmer cell segmentation
+3. Extract single-cell marker intensities
+4. Calculate signal-to-noise ratios
+
+**Outputs:** CSV files with single-cell data (available on [Zenodo](https://zenodo.org/) for download)
+
+### Stage 2: Statistical Analysis and Visualization (R)
+
+**Scripts:** `Mesmer_dataSlide_workflow.R`, `cellXpress_dataSlide_workflow.R`
+
+**Inputs:** CSV files from Stage 1 (or downloaded from Zenodo)
+
+**Outputs:** Heatmaps, density plots, statistical comparisons
+
+```mermaid
+flowchart TD
+    subgraph stage1["Stage 1: Python Preprocessing"]
+        A[("Raw QPTIFF Images<br/>(BioImage Archive)")] --> B["crop_mesmer_featureextraction_signaltonoise.py"]
+        B --> C["Crop FOVs<br/>(coords from Master_metadata.csv)"]
+        C --> D["Mesmer Segmentation"]
+        D --> E["Extract Features & SNR"]
+        E --> F[("CSV Data Files<br/>(Zenodo)")]
+    end
+
+    subgraph stage2["Stage 2: R Analysis"]
+        F --> G["Mesmer_dataSlide_workflow.R"]
+        F --> H["cellXpress_dataSlide_workflow.R"]
+        F --> I["Mesmer_SignalNoise_workflow.R"]
+        G --> J[("Heatmaps & Statistics")]
+        H --> J
+        I --> J
+    end
+
+    subgraph stage2b["Stage 2: Python Annotation"]
+        F --> K["manual_annotation/ pipeline"]
+        K --> L[("Cell Type Maps & Enrichment")]
+    end
 ```
 
-- R packages
+> **Note:** Most users can skip Stage 1 by downloading pre-processed CSV files from Zenodo. Stage 1 is only needed to reproduce the analysis from raw images.
+
+## Data Sources
+
+### Where to Get Data
+
+| Data Type       | Location                                                          | Description                             |
+| --------------- | ----------------------------------------------------------------- | --------------------------------------- |
+| Raw Images      | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Original QPTIFF files                   |
+| Processed CSVs  | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities          |
+| FOV Coordinates | [`Master_metadata.csv`](Master_metadata.csv)                      | Crop coordinates, conditions, platforms |
+
+### Master Metadata
+
+[`Master_metadata.csv`](Master_metadata.csv) contains comprehensive file mappings for all datasets:
+
+- **Dataset**: Initial_Optimization, Validation, or Supplementary
+- **Site**: BIDMC, Stanford, Roche, Novartis, ASTAR, UKentucky
+- **Tissue**: Tonsil, DLBCL, Lung_Cancer, CRC, etc.
+- **Condition**: Antigen retrieval parameters
+- **Platform**: PhenoCycler-Fusion, RareCyte_Orion, IMC, Lunaphore_COMET
+- **Pixel_Size**: Micrometers per pixel
+- **FOV Coordinates**: (x_min, x_max, y_min, y_max) for cropping
+- **Annotation files**: Paths to segmentation masks, GeoJSONs, h5ad files (BIDMC only)
+
+### Metadata Files in data_mesmer/ and data_cellXpress/
+
+| File                                    | Purpose                                              |
+| --------------------------------------- | ---------------------------------------------------- |
+| `Slide_metadata.csv`                    | Maps CSV filenames to source, type, FOV, sample name |
+| `Slide_compare_pairs.csv`               | Defines pairs for statistical comparisons            |
+| `Slide_exclude_markers.csv`             | Markers to gray out (non-working)                    |
+| `Slide_remove_markers.csv`              | Markers to exclude entirely                          |
+| `Registered_Report_marker_sequence.csv` | Marker display order for heatmaps                    |
+
+See [data_mesmer/README.md](data_mesmer/README.md) for detailed data organization.
+
+## Quick Start
+
+### 1. Setup Environment
+
+```bash
+# Python (for preprocessing and manual annotation)
+pip install -r requirements.txt
+pip install deepcell  # For Mesmer segmentation
+
+# R packages
+Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools", "qs"))'
+Rscript -e 'devtools::install_github("immunogenomics/presto")'
+```
+
+### 2. Get Data
+
+Download processed CSV files from Zenodo and place in:
+
+- `./data_mesmer/` for Mesmer workflow
+- `./data_cellXpress/` for CellXpress workflow
+
+### 3. Run Analysis
 
 ```r
-install.packages(c(
-  "dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr",
-  "rstatix", "readr", "svglite", "devtools", "qs"
-))
-
-devtools::install_github("immunogenomics/presto")
-
-# Optional: for Balagan spatial analysis workflow
-devtools::install_github("PierreBSC/Balagan")
+# In R/RStudio, open and edit the workflow script:
+current_config_name <- "BIDMC_all"  # Choose your configuration
+source("Mesmer_dataSlide_workflow.R")
 ```
 
-## Data and Metadata
+Outputs appear in `./results/out_<CONFIG>/`
 
-**Important**: The raw data files are not included in this GitHub repository. Images will be made available on BioImage Archive and the relevant .csv data will be made available on Zenodo, and download links will be provided here once available.
+## Detailed Workflows
 
-To use the workflows, download the data from Zenodo and place it under:
+### Main Analysis (Mesmer / CellXpress)
 
-- `./data_mesmer/` (Mesmer workflow)
-- `./data_cellXpress/` (CellXpress workflow)
+Compares marker signal intensities across tissue preparation conditions.
 
-For detailed information about data organization, file formats, and structure, see:
+**Scripts:**
 
-- [data_mesmer/README.md](data_mesmer/README.md) - Mesmer segmentation data documentation
-- [data_cellXpress/README.md](data_cellXpress/README.md) - CellXpress segmentation data documentation
+- `Mesmer_dataSlide_workflow.R` - Mesmer segmentation data
+- `cellXpress_dataSlide_workflow.R` - CellXpress segmentation data
 
-### Data Structure Overview
+**Usage:**
 
-Data is organized into **Initial Optimization** and **Validation** datasets. See [data_mesmer/README.md](data_mesmer/README.md) and [data_cellXpress/README.md](data_cellXpress/README.md) for detailed folder structures and file formats.
+1. Open script in R/RStudio
+2. Set `current_config_name` to your target dataset
+3. Run the script
 
-### Key Metadata Files
+**Key outputs:** Density plots, heatmaps (mean, CV, z-scores), statistical tests (Kruskal-Wallis, Wilcoxon, Cohen's d)
 
-- Slide_metadata.csv
+---
 
-  - Maps filenames to source, type, FOV, and sample name
-  - Columns: `Filename, Source, Type, FOV, Name`
-  - Example:
-    ```
-    Filename,Source,Type,FOV,Name
-    dataScaleSize_slide10_FOV1.csv,Roche,dataScaleSize,FOV1,Roche_10
-    dataScaleSize_slide10_FOV2.csv,Roche,dataScaleSize,FOV2,Roche_10
-    ```
+### SNR Analysis
 
-- Slide_compare_pairs.csv
+Analyzes signal-to-noise ratios (marker signal inside vs outside cell masks).
 
-  - Defines pairs used for Cohen's d and Wilcoxon tests
-  - Auto-generated by `build_compare_pairs.R` from unique `Name` per `Source` where `Type == dataScaleSize`
-  - Columns: `Source, Compare1, Compare2`
-
-- Slide_exclude_markers.csv
-
-  - Markers to gray out (non-working) for specific sources
-  - Columns: `Source, Exclude_type, Exclude_value`
-  - Example:
-    ```
-    Source,Exclude_type,Exclude_value
-    Roche,Marker,CD68
-    Roche,Marker,Pan-Cytokeratin
-    ```
-
-- Slide_remove_markers.csv
-
-  - Markers to remove entirely before analysis
-  - Columns: `Source, Exclude_type, Exclude_value`
-
-- Registered_Report_marker_sequence.csv
-
-  - One-column CSV specifying desired marker order
-
-
-## Quickstart
-
-1.  **Download data from Zenodo** (links will be provided)
-
-    - Download and extract the data to `./data_mesmer/` and/or `./data_cellXpress/` directories
-
-2.  **Update metadata and marker lists** (if needed)
-
-    - Ensure these files are current: `Slide_metadata.csv`, `Slide_exclude_markers.csv`, `Slide_remove_markers.csv`, `Registered_Report_marker_sequence.csv`.
-
-3.  Build comparison pairs for statistical testing
+**Step 1: Preprocess images (Python)**
 
 ```bash
-Rscript build_compare_pairs.R
+python crop_mesmer_featureextraction_signaltonoise.py
 ```
 
-- Writes `./data_mesmer/Slide_compare_pairs.csv` and `./data_cellXpress/Slide_compare_pairs.csv` by enumerating all pairs of `Name` per `Source` for `Type == dataScaleSize`.
+Configure in script:
 
-4.  **Run workflows** (one configuration at a time)
+- `data_folder`: Path to QPTIFF files
+- `output_folder`: Output directory
+- `crop_coords_dict`: FOV coordinates (from `Master_metadata.csv`)
+- `markers`: Marker names in channel order
 
-    **Important**: Workflows cannot be run directly with `Rscript`. You must:
+**Step 2: Run R visualization**
 
-    - Open the workflow script (`Mesmer_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R`) in R/RStudio
-    - Edit the `current_config_name` variable to your target dataset (see [Selecting a Configuration](#selecting-a-configuration) for available options)
-    - Run the script manually (source it or run line-by-line)
+```bash
+Rscript process_cell_counts.R
+Rscript Mesmer_SignalNoise_workflow.R
+```
 
-    Example for Mesmer workflow:
+**Key outputs:** SNR heatmaps, mean SNR barplots
 
-    ```r
-    # Edit this line in Mesmer_dataSlide_workflow.R:
-    current_config_name <- "BIDMC_all"  # choose your config
-    current_config <- configurations[[current_config_name]]
-    # Then run the script
-    ```
+---
 
-    Example for CellXpress workflow:
+### Manual Annotation
 
-    ```r
-    # Edit this line in cellXpress_dataSlide_workflow.R:
-    current_config_name <- "BIDMC_cellXpress"  # choose your config
-    current_config <- configurations[[current_config_name]]
-    # Then run the script
-    ```
+Python pipeline for cell type annotation of the 24 BIDMC-Harvard slides.
 
-    - The script caches inputs in `./qsave_input/<CONFIG>_input.qsave` for faster re-runs.
-    - Runtime estimate: depends on number of slides per configuration. Largest (BIDMC) typically ~20 minutes on a laptop; others usually ~5 minutes.
+**Location:** [`./manual_annotation/`](https://github.com/SizunJiangLab/Benchmarking_tissue_preparation/tree/main/manual_annotation)
 
-## Selecting a Configuration
+**Pipeline:**
 
-Available configurations are defined in the workflow scripts. Open `Mesmer_dataSlide_workflow.R` or `cellXpress_dataSlide_workflow.R` to see the full list of available configurations. Common examples:
+1. `01_clustering.py` - PhenoGraph clustering (k=200)
+2. `02_annotation.py` - Cell type annotation
+3. `03_phenotype_map.py` - Phenotype map visualization
+4. `04_stacked_bar_plots.py` - Cell type composition
+5. `05_enrichment_plots.py` - Enrichment analysis
 
-**Mesmer workflows:**
+**Inputs:** OME-TIFFs, segmentation masks, h5ad files, GeoJSONs (file paths in `Master_metadata.csv`)
 
-- Initial Optimization: `BIDMC_all`, `Roche_all`, `Stanford_all`
-- Validation: `ASTAR_COMET_CRC_all`, `BIDMC_DLBCL_all`, `Novartis_Lung_Cancer_all`, `Stanford_MIBI_Colon_all`, etc.
+See [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) for complete instructions.
 
-**CellXpress workflows:**
+---
 
-- Initial Optimization: `BIDMC_cellXpress`, `Roche_cellXpress`, `Stanford_cellXpress`
-- Validation: `ASTAR_COMET_CRC_cellXpress`, `BIDMC_DLBCL_cellXpress`, `Novartis_LungCancer_cellXpress`, etc.
+### Balagan Spatial Analysis
 
-**Note:** `Stanford_MIBI_LymphNode_pooled_all` uses pooled tile loading instead of FOV-based loading.
+Quantifies spatial heterogeneity and subsampling efficiency.
 
-## Outputs
+**Location:** `./balagan_analysis/`
 
-Outputs are written to `./results/out_<CONFIG>/` folder (created automatically).
+**Key metrics:**
 
-Key files:
+- Tau (τ): Sampling efficiency
+- Alpha (α): Spatial heterogeneity
 
-- Visualizations
+**Install:** `devtools::install_github("PierreBSC/Balagan")`
 
-  - `Arcsinh_transformed_Hoechst_normalised_density_plots.svg`
-  - `Heatmap_mean_white_to_red.svg`
-  - `Heatmap_mean_zscore_blue_white_red.svg`
-  - `Heatmap_CV_zscore_purple_green.svg`
-  - `Heatmap_CV_raw_values.svg` (raw CVs annotated)
-  - Score heatmap and average score barplot for conditions
+See [balagan_analysis/README.md](balagan_analysis/README.md) for workflow.
 
-- Statistics
+## Configuration Reference
 
-  - `kruskal_pvals.csv` (Kruskal–Wallis)
-  - `wilcox_results.csv` (Wilcoxon between pairs)
-  - `cohens_d_results.csv` and `large_effect_results.csv`
+### Available Configurations
 
-- Processed data
+Set `current_config_name` in the workflow scripts to one of:
 
-  - `mean_values.csv`, `mean_z_scores.csv`
-  - `cv_values.csv`, `cv_z_scores.csv`
+**Initial Optimization:**
 
-- Scoring system exports
+- `BIDMC_all`, `Roche_all`, `Stanford_all`
 
-  - `condition_summary.csv` (average scores, working markers count, ranks)
-  - `marker_summary.csv`
-  - `total_z_ranks.csv`
-  - `cv_values_long.csv`, `cv_z_scores_long.csv`
-  - `cv_ranks_and_scores.csv`, `cv_ranks_wide.csv`, `cv_scores_wide.csv`
+**Validation:**
 
-- Configuration and provenance
-  - `config_summary.csv`, `processed_files.csv`, `comparison_pairs.csv`
-  - `session_info.txt`
+- `ASTAR_COMET_CRC_all`, `ASTAR_COMET_Tonsil_all`
+- `BIDMC_DLBCL_all`, `BIDMC_Tonsil_all`
+- `Novartis_Lung_Cancer_all`, `Novartis_Tonsil_all`
+- `Roche_Tonsil_all`, `Roche_intestine_all`
+- `Stanford_IMC_OSCC_all`, `Stanford_IMC_Tonsil_all`
+- `Stanford_MIBI_Colon_all`, `Stanford_MIBI_Liver_all`, `Stanford_MIBI_LymphNode_pooled_all`
+- `Stanford_Orion_EndometrialCancer_all`, `Stanford_Orion_LN_all`
+- `UKentucky_SCC_all`, `UKentucky_Tonsil_all`
 
-## Complementary Workflows
+**CellXpress:** Same names with `_cellXpress` suffix instead of `_all`
 
-- SNR workflow to compare ratios of marker signal intensities within vs outside cell mask (Mesmer sources with SNR raw data: BIDMC, Roche, Stanford)
+## Output Files
 
-  0.  **Preprocess images and extract signal-to-noise ratios (Python)**
+All outputs are written to `./results/out_<CONFIG>/`
 
-      Before running the R SNR visualization workflow, you must first process the raw qptiff images to extract single-cell features and signal ratios. This step performs image cropping, Mesmer segmentation, single-cell feature extraction, and calculates signal-to-noise ratios for each marker.
-
-      ```bash
-      python crop_mesmer_featureextraction_signaltonoise.py
-      ```
-
-      **Prerequisites:**
-
-      - Python 3.9+ with dependencies: `pip install -r requirements.txt`
-      - DeepCell Mesmer installed: `pip install deepcell`
-      - Raw qptiff image files in the specified data folder
-
-      **Configuration:**
-
-      - Edit the script to set:
-        - `data_folder`: Path to folder containing `.qptiff` files
-        - `output_folder`: Where to save processed outputs
-        - `crop_coords_dict`: Dictionary mapping slide numbers to crop coordinates `(x_min, x_max, y_min, y_max)`
-        - `markers`: List of marker names in channel order
-
-      **Outputs:**
-
-      - `extracted_features/`: Single-cell feature CSV files (`data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`)
-      - `Individualtiff_slide{key}_FOV1/`: Individual TIFF files per marker and `signal_ratios_slide{key}_FOV2.csv` with SNR metrics
-      - `Mesmer_outputs/`: Segmentation masks and overlays
-
-      **Key outputs for R workflow:**
-
-      - Signal ratio CSV files: `signal_ratios_slide{key}_FOV2.csv` containing columns:
-        - `Marker`: Marker name
-        - `Normalized_signal_invsout`: DAPI + area normalized ratio (used by R workflow)
-
-      **Note:** Ensure these signal ratio files are referenced in `Slide_metadata.csv` with `Type == "signal_ratios"` for the R workflow to find them.
-
-  1.  Normalize raw SNR cell counts
-
-      ```bash
-      Rscript process_cell_counts.R
-      ```
-
-  2.  Generate SNR figures and summaries
-
-      ```bash
-      Rscript Mesmer_SignalNoise_workflow.R
-      ```
-
-  - Features: Hoechst normalization, SNR heatmaps, mean SNR barplots
-  - Outputs (examples): `SNR_heatmap_threshold.svg`, `SNR_heatmap_purpleyellow.svg`, `SNR_barplot_means.svg`, `processed_snr_data.csv`, `marker_mean_snr.csv`
-  - Runtime estimate: Python preprocessing depends on image size and number of slides (typically minutes to hours per slide). R workflow: a few seconds per run.
-
-- CellXpress workflow
-
-  - Script: `cellXpress_dataSlide_workflow.R`
-  - Follow the same workflow steps as Mesmer: edit `current_config_name` in the script and run manually
-  - Input location: `./data_cellXpress/`
-  - Produces analogous density plots and summaries as Mesmer workflow
-
-- Balagan spatial analysis (advanced, optional)
-
-  - **Location**: `./balagan_analysis/` folder with complete workflow
-  - **Purpose**: Quantifies spatial heterogeneity and subsampling efficiency using 100 independent Balagan runs
-  - **Key Metrics**:
-    - Tau (τ): Sampling efficiency - how quickly subsampling recovers all cell clusters
-    - Alpha (α): Spatial heterogeneity - power-law relationship between FOV size and cluster discovery
-  - **Install**: `devtools::install_github("PierreBSC/Balagan")`
-  - **Documentation**: See [balagan_analysis/README.md](balagan_analysis/README.md) for complete workflow
-  - **Runtime**: ~24-30 hours for full 100-run analysis
-  - **Outputs**: Stability metrics, rank heatmaps, correlation plots, quadrant classifications
-
-## Utilities
-
-- `check_norm_column.R`: Verifies that required normalization columns exist in inputs.
-- `process_cell_counts.R`: Normalizes and aggregates cell counts for SNR analysis prior to `Mesmer_SignalNoise_workflow.R`.
-- `crop_mesmer_featureextraction_signaltonoise.py`: Python script for preprocessing qptiff images, performing Mesmer segmentation, extracting single-cell features, and calculating signal-to-noise ratios. Required before running the SNR visualization workflow in R.
-- `pylibs/tissue_preparation.py`: Python utility library providing functions for reading qtiff images, generating nuclear/membrane channels, running Mesmer segmentation, and extracting single-cell features. Used by `crop_mesmer_featureextraction_signaltonoise.py`.
-
-## Manual Annotation
-
-Manual clustering and annotation are maintained in `./manual_annotation/` and are separate from the R-based workflows above.
-
-- See [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) for the complete Python-based pipeline and SLURM submission scripts.
+| Category       | Files                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| Visualizations | `Heatmap_mean_*.svg`, `Heatmap_CV_*.svg`, density plots            |
+| Statistics     | `kruskal_pvals.csv`, `wilcox_results.csv`, `cohens_d_results.csv`  |
+| Processed data | `mean_values.csv`, `cv_values.csv`, `*_z_scores.csv`               |
+| Scoring        | `condition_summary.csv`, `marker_summary.csv`, `total_z_ranks.csv` |
+| Provenance     | `config_summary.csv`, `processed_files.csv`, `session_info.txt`    |
 
 ## Directory Structure
 
 ```
 .
 ├── data_mesmer/                    # Mesmer data (see data_mesmer/README.md)
-├── data_cellXpress/                # CellXpress data (see data_cellXpress/README.md)
-├── balagan_analysis/               # Balagan spatial analysis workflow
-├── manual_annotation/              # Manual clustering/annotation pipeline
-├── pylibs/                         # Python utility library
-├── results/                        # Outputs
-│   └── out_<CONFIG>/               # Per-configuration outputs
-├── qsave_input/                    # Cached input data (auto-generated)
+├── data_cellXpress/                # CellXpress data
+├── balagan_analysis/               # Spatial analysis workflow
+├── manual_annotation/              # Cell type annotation pipeline
+├── pylibs/                         # Python utilities
+├── results/                        # Analysis outputs
+│   └── out_<CONFIG>/
+├── qsave_input/                    # Cached inputs (auto-generated)
+├── Master_metadata.csv             # FOV coordinates & file mappings
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
-├── Mesmer_SignalNoise_workflow.R   # Mesmer SNR analysis
+├── Mesmer_SignalNoise_workflow.R   # SNR analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
-├── CellXpress_SNR_Analysis.R       # CellXpress SNR analysis
-├── build_compare_pairs.R           # Generate comparison pairs
-├── process_cell_counts.R          # Normalize cell counts for SNR
-├── check_norm_column.R            # Verify normalization columns
-├── helper.R                       # Shared utility functions
-├── crop_mesmer_featureextraction_signaltonoise.py  # SNR preprocessing
-└── requirements.txt               # Python dependencies
+├── crop_mesmer_featureextraction_signaltonoise.py  # Preprocessing
+├── helper.R                        # Shared R functions
+└── requirements.txt                # Python dependencies
 ```
 
 ## Contributors
@@ -337,4 +295,4 @@ Manual clustering and annotation are maintained in `./manual_annotation/` and ar
 - Shaohong Feng
 - Lollija Gladiseva
 
-For questions or feedback, contact Sizun Jiang: sjiang3@bidmc.harvard.edu.
+For questions or feedback, contact Sizun Jiang: sjiang3@bidmc.harvard.edu
