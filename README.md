@@ -45,7 +45,14 @@ The analysis has two main stages:
 3. Extract single-cell marker intensities
 4. Calculate signal-to-noise ratios
 
-**Outputs:** CSV files with single-cell data (available on [Zenodo](https://zenodo.org/) for download)
+**Outputs (per slide/FOV):**
+
+- Mesmer mask and overlays: `MESMER_mask.tiff`, `seg_overlay.tiff`, `seg_outline.tiff`
+- Single-cell feature CSVs: `data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`
+- Per-marker cropped TIFFs: `Individualtiff_slide{key}_FOV1/{marker}.tiff`
+- SNR ratios per marker: `signal_ratios_slide{key}_FOV2.csv`
+  - columns: `Marker`, `signal_invsout_DAPInorm`, `signal_invsout_areanorm`, `Normalized_signal_invsout`
+    (Pre-generated CSVs are available on Zenodo for convenience.)
 
 ### Stage 2: Statistical Analysis and Visualization (R)
 
@@ -80,7 +87,7 @@ flowchart TD
     end
 ```
 
-> **Note:** Most users can skip Stage 1 by downloading pre-processed CSV files from Zenodo. Stage 1 is only needed to reproduce the analysis from raw images.
+> **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs. Stage 1 is only needed if you start from raw images.
 
 ## Data Sources
 
