@@ -21,7 +21,7 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 **Key capabilities:**
 
 - Compare marker signal intensities across conditions (Mesmer/CellXpress workflows)
-- Analyze signal-to-noise ratios (SNR workflow)
+- Calculate signal intensity ratios inside vs outside cell masks
 - Perform manual cell type annotation (Python pipeline)
 - Quantify spatial heterogeneity (Balagan analysis)
 
@@ -43,16 +43,16 @@ The analysis has two main stages:
 1. Crop images to FOV regions
 2. Run Mesmer cell segmentation
 3. Extract single-cell marker intensities
-4. Calculate signal-to-noise ratios
+4. Calculate signal intensity ratios inside vs outside cell masks
 
 **Outputs (per slide/FOV):**
 
 - Mesmer mask and overlays: `MESMER_mask.tiff`, `seg_overlay.tiff`, `seg_outline.tiff`
-- Single-cell feature CSVs: `data_slide{key}_FOV1.csv`, `dataScaleSize_slide{key}_FOV2.csv`
-- Per-marker cropped TIFFs: `Individualtiff_slide{key}_FOV1/{marker}.tiff`
-- SNR ratios per marker: `signal_ratios_slide{key}_FOV2.csv`
-  - columns: `Marker`, `signal_invsout_DAPInorm`, `signal_invsout_areanorm`, `Normalized_signal_invsout`
-    (Pre-generated CSVs are available on Zenodo for convenience.)
+- Single-cell feature CSVs: `data_slide{key}_{FOV}.csv`, `dataScaleSize_slide{key}_{FOV}.csv`
+- Per-marker cropped TIFFs: `Individualtiff_slide{key}_{FOV}/{marker}.tiff`
+- Signal intensity ratios per marker: `signal_ratios_slide{key}_{FOV}.csv` (column: `Normalized_signal_invsout`)
+
+Pre-generated CSVs are available on Zenodo for convenience.
 
 ### Stage 2: Statistical Analysis and Visualization (R)
 
@@ -68,7 +68,7 @@ flowchart TD
         A[("Raw QPTIFF Images<br/>(BioImage Archive)")] --> B["crop_mesmer_featureextraction_signaltonoise.py"]
         B --> C["Crop FOVs<br/>(coords from Master_metadata.csv)"]
         C --> D["Mesmer Segmentation"]
-        D --> E["Extract Features & SNR"]
+        D --> E["Extract Features & Signal Ratios"]
         E --> F[("CSV Data Files<br/>(Zenodo)")]
     end
 
@@ -176,9 +176,9 @@ Compares marker signal intensities across tissue preparation conditions.
 
 ---
 
-### SNR Analysis
+### Signal Intensity Ratio Analysis
 
-Analyzes signal-to-noise ratios (marker signal inside vs outside cell masks).
+Analyzes signal intensity ratios inside vs outside cell masks.
 
 **Step 1: Preprocess images (Python)**
 
@@ -200,7 +200,7 @@ Rscript process_cell_counts.R
 Rscript Mesmer_SignalNoise_workflow.R
 ```
 
-**Key outputs:** SNR heatmaps, mean SNR barplots
+**Key outputs:** Signal intensity ratio heatmaps, mean ratio barplots
 
 ---
 
@@ -288,7 +288,7 @@ All outputs are written to `./results/out_<CONFIG>/`
 ├── qsave_input/                    # Cached inputs (auto-generated)
 ├── Master_metadata.csv             # FOV coordinates & file mappings
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
-├── Mesmer_SignalNoise_workflow.R   # SNR analysis
+├── Mesmer_SignalNoise_workflow.R   # Signal intensity ratio analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
 ├── crop_mesmer_featureextraction_signaltonoise.py  # Preprocessing
 ├── helper.R                        # Shared R functions
