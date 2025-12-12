@@ -8,8 +8,7 @@ Large-scale Quantitative Assessment of Tissue Preparation and Staining Condition
 - [Data & Resources](#data--resources)
 - [Workflow Overview](#workflow-overview)
 - [Quick Start](#quick-start)
-- [Configuration Reference](#configuration-reference)
-- [Output Files](#output-files)
+- [Analysis Outputs](#analysis-outputs)
 - [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
 
@@ -32,11 +31,11 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 
 ### Data Locations
 
-| Data Type                | Location                                                          | Description                                    |
-| ------------------------ | ----------------------------------------------------------------- | ---------------------------------------------- |
+| Data Type                | Location                                                          | Description                                           |
+| ------------------------ | ----------------------------------------------------------------- | ----------------------------------------------------- |
 | Raw Images & Annotations | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | QPTIFF files, segmentation masks, OME-TIFFs, GeoJSONs |
-| Processed CSVs           | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities                 |
-| Code & Metadata          | This GitHub repo                                                  | Analysis scripts, `Master_metadata.csv`        |
+| Processed CSVs           | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities                        |
+| Code & Metadata          | This GitHub repo                                                  | Analysis scripts, `Master_metadata.csv`               |
 
 ### Metadata Files
 
@@ -50,13 +49,15 @@ Located in `data_mesmer/` and `data_cellXpress/`:
 | `Slide_remove_markers.csv`              | Markers to exclude entirely                          |
 | `Registered_Report_marker_sequence.csv` | Marker display order for heatmaps                    |
 
-### Documentation
+### Workflow Documentation
 
-| Workflow             | Documentation                                              |
-| -------------------- | ---------------------------------------------------------- |
-| Data organization    | [data_mesmer/README.md](data_mesmer/README.md)             |
-| Manual annotation    | [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) |
-| Balagan spatial analysis | [balagan_analysis/README.md](balagan_analysis/README.md) |
+| Workflow                          | Script / Folder                    | Documentation                                                            |
+| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------ |
+| Mesmer segmentation analysis      | `Mesmer_dataSlide_workflow.R`      | [data_mesmer/README.md](data_mesmer/README.md)                           |
+| CellXpress segmentation analysis  | `cellXpress_dataSlide_workflow.R`  | [data_cellXpress/README.md](data_cellXpress/README.md)                   |
+| Signal intensity ratio analysis   | `Mesmer_SignalNoise_workflow.R`    | [data_mesmer/README.md](data_mesmer/README.md)                           |
+| Manual cell type annotation       | `manual_annotation/`               | [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) |
+| Balagan spatial heterogeneity     | `balagan_analysis/`                | [balagan_analysis/README.md](balagan_analysis/README.md)                 |
 
 ## Workflow Overview
 
@@ -110,53 +111,33 @@ Download processed CSV files from Zenodo and place in:
 
 ### 3. Run Analysis
 
-```r
-# In R/RStudio, set your configuration and run:
-current_config_name <- "BIDMC_all"  # See Configuration Reference below
-source("Mesmer_dataSlide_workflow.R")
-```
+Choose a workflow and follow its documentation:
 
-Outputs appear in `./results/out_<CONFIG>/`
+| Workflow | Command | Documentation |
+| -------- | ------- | ------------- |
+| Mesmer analysis | `source("Mesmer_dataSlide_workflow.R")` | [data_mesmer/README.md](data_mesmer/README.md) |
+| CellXpress analysis | `source("cellXpress_dataSlide_workflow.R")` | [data_cellXpress/README.md](data_cellXpress/README.md) |
+| Signal ratios | `source("Mesmer_SignalNoise_workflow.R")` | [data_mesmer/README.md](data_mesmer/README.md) |
+| Manual annotation | `python manual_annotation/01_clustering.py` | [DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) |
+| Balagan spatial | `source("balagan_analysis/balagan_analysis.R")` | [README.md](balagan_analysis/README.md) |
 
-## Configuration Reference
+Outputs appear in `./results/`
 
-Set `current_config_name` in the workflow scripts to one of:
+## Analysis Outputs
 
-**Initial Optimization:**
+Each workflow generates outputs in `./results/out_<CONFIG>/`:
 
-- `BIDMC_all`, `Roche_all`, `Stanford_all`
-
-**Validation:**
-
-- `ASTAR_COMET_CRC_all`, `ASTAR_COMET_Tonsil_all`
-- `BIDMC_DLBCL_all`, `BIDMC_Tonsil_all`
-- `Novartis_Lung_Cancer_all`, `Novartis_Tonsil_all`
-- `Roche_Tonsil_all`, `Roche_intestine_all`
-- `Stanford_IMC_OSCC_all`, `Stanford_IMC_Tonsil_all`
-- `Stanford_MIBI_Colon_all`, `Stanford_MIBI_Liver_all`, `Stanford_MIBI_LymphNode_pooled_all`
-- `Stanford_Orion_EndometrialCancer_all`, `Stanford_Orion_LN_all`
-- `UKentucky_SCC_all`, `UKentucky_Tonsil_all`
-
-**CellXpress:** Same names with `_cellXpress` suffix instead of `_all`
-
-## Output Files
-
-All outputs are written to `./results/out_<CONFIG>/`
-
-| Category       | Files                                                              |
-| -------------- | ------------------------------------------------------------------ |
-| Visualizations | `Heatmap_mean_*.svg`, `Heatmap_CV_*.svg`, density plots            |
-| Statistics     | `kruskal_pvals.csv`, `wilcox_results.csv`, `cohens_d_results.csv`  |
-| Processed data | `mean_values.csv`, `cv_values.csv`, `*_z_scores.csv`               |
-| Scoring        | `condition_summary.csv`, `marker_summary.csv`, `total_z_ranks.csv` |
-| Provenance     | `config_summary.csv`, `processed_files.csv`, `session_info.txt`    |
+- **Mesmer/CellXpress workflows**: Heatmaps, density plots, statistical comparisons (see [data_mesmer/README.md](data_mesmer/README.md))
+- **Signal intensity ratio analysis**: Ratio heatmaps, barplots
+- **Manual annotation**: Cell type maps, enrichment plots (see [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md))
+- **Balagan analysis**: Tau/alpha metrics, subsampling curves (see [balagan_analysis/README.md](balagan_analysis/README.md))
 
 ## Directory Structure
 
 ```
 .
 ├── data_mesmer/                    # Mesmer data (see data_mesmer/README.md)
-├── data_cellXpress/                # CellXpress data
+├── data_cellXpress/                # CellXpress data (see data_cellXpress/README.md)
 ├── balagan_analysis/               # Spatial analysis (see balagan_analysis/README.md)
 ├── manual_annotation/              # Cell type annotation (see DOCUMENTATION.md)
 ├── pylibs/                         # Python utilities
