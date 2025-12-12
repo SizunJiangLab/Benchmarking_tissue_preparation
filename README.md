@@ -36,10 +36,10 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 
 Large data files are hosted externally due to size. Download and place in the appropriate folders before running workflows.
 
-| Data Type                | Location                                                          | Description                                                                                   |
-| ------------------------ | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Raw Images & Annotations | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Multiplexed images (QPTIFF), segmentation masks, cropped FOVs (OME-TIFF), cell outlines       |
-| Single-cell Features     | [Zenodo](https://zenodo.org/) (TBD)                               | Per-cell marker intensities and signal ratios → place in `data_mesmer/` or `data_cellXpress/` |
+| Data Type                | Location                                                          | Description                                                                                             |
+| ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Raw Images & Annotations | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Input for Stage 1 preprocessing: QPTIFF images, segmentation masks, cropped FOVs, cell outlines         |
+| Single-cell Features     | [Zenodo](https://zenodo.org/) (TBD)                               | Input for Stage 2 analysis: per-cell marker intensities → place in `data_mesmer/` or `data_cellXpress/` |
 
 ### Workflow Documentation
 
@@ -94,7 +94,7 @@ flowchart TD
 
 **Typical entry point:** Download CSVs from Zenodo → place in `data_mesmer/` → run `Mesmer_dataSlide_workflow.R` (see [data_mesmer/README.md](data_mesmer/README.md)).
 
-## Quick Start
+## Dependency Installation
 
 ```bash
 # Python (for preprocessing and manual annotation)
@@ -112,11 +112,11 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 
 ```
 .
-├── preprocessing/                  # Stage 1: Image preprocessing (see README.md)
-├── data_mesmer/                    # Mesmer data (see README.md)
-├── data_cellXpress/                # CellXpress data (see README.md)
-├── balagan_analysis/               # Spatial analysis (see README.md)
-├── manual_annotation/              # Cell type annotation (see README.md)
+├── preprocessing/                  # Image preprocessing
+├── data_mesmer/                    # Mesmer data
+├── data_cellXpress/                # CellXpress data
+├── balagan_analysis/               # Spatial analysis
+├── manual_annotation/              # Cell type annotation
 ├── Master_metadata.csv             # Central file linking all data
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
 ├── Mesmer_SignalNoise_workflow.R   # Signal intensity ratio analysis
