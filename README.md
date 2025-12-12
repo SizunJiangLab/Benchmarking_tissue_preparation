@@ -5,11 +5,9 @@ Large-scale Quantitative Assessment of Tissue Preparation and Staining Condition
 #### Table of Contents
 
 - [Project Overview](#project-overview)
-- [Get Started](#get-started)
+- [Data & Resources](#data--resources)
 - [Workflow Overview](#workflow-overview)
-- [Data Sources](#data-sources)
 - [Quick Start](#quick-start)
-- [Detailed Workflows](#detailed-workflows)
 - [Configuration Reference](#configuration-reference)
 - [Output Files](#output-files)
 - [Directory Structure](#directory-structure)
@@ -26,55 +24,41 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 - Perform manual cell type annotation (Python pipeline)
 - Quantify spatial heterogeneity (Balagan analysis)
 
-## Get Started
+## Data & Resources
 
-**[`Master_metadata.csv`](Master_metadata.csv)** is the central reference linking all data files across repositories. Use this file to find the segmentation masks, OME-TIFFs, GeoJSONs, and processed CSVs associated with any slide.
+### Master Metadata
 
-**Data is distributed across three locations:**
+**[`Master_metadata.csv`](Master_metadata.csv)** is the central reference linking all data files across repositories. Each row represents one slide and includes: dataset, site, tissue type, experimental condition, platform, pixel size, FOV crop coordinates, and paths to all associated files (segmentation masks, OME-TIFFs, GeoJSONs, h5ad files).
 
-- **BioImage Archive**: Raw QPTIFF images, segmentation masks, OME-TIFFs, GeoJSONs
-- **Zenodo**: Processed single-cell CSV files
-- **This GitHub repo**: Analysis code, metadata files, `Master_metadata.csv`
+### Data Locations
 
-Each row in `Master_metadata.csv` represents one slide and includes: dataset, site, tissue type, experimental condition, platform, pixel size, FOV crop coordinates, and paths to all associated files.
+| Data Type                | Location                                                          | Description                                    |
+| ------------------------ | ----------------------------------------------------------------- | ---------------------------------------------- |
+| Raw Images & Annotations | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | QPTIFF files, segmentation masks, OME-TIFFs, GeoJSONs |
+| Processed CSVs           | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities                 |
+| Code & Metadata          | This GitHub repo                                                  | Analysis scripts, `Master_metadata.csv`        |
+
+### Metadata Files
+
+Located in `data_mesmer/` and `data_cellXpress/`:
+
+| File                                    | Purpose                                              |
+| --------------------------------------- | ---------------------------------------------------- |
+| `Slide_metadata.csv`                    | Maps CSV filenames to source, type, FOV, sample name |
+| `Slide_compare_pairs.csv`               | Defines pairs for statistical comparisons            |
+| `Slide_exclude_markers.csv`             | Markers to gray out (non-working)                    |
+| `Slide_remove_markers.csv`              | Markers to exclude entirely                          |
+| `Registered_Report_marker_sequence.csv` | Marker display order for heatmaps                    |
+
+### Documentation
+
+| Workflow             | Documentation                                              |
+| -------------------- | ---------------------------------------------------------- |
+| Data organization    | [data_mesmer/README.md](data_mesmer/README.md)             |
+| Manual annotation    | [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) |
+| Balagan spatial analysis | [balagan_analysis/README.md](balagan_analysis/README.md) |
 
 ## Workflow Overview
-
-The analysis has two main stages:
-
-### Stage 1: Image Preprocessing (Python)
-
-**Script:** [`crop_mesmer_featureextraction_signaltonoise.py`](crop_mesmer_featureextraction_signaltonoise.py)
-
-**Inputs:**
-
-- Raw QPTIFF images from [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (accession TBD)
-
-> FOV crop coordinates used in the script are documented in [`Master_metadata.csv`](Master_metadata.csv) and Supplementary Table 18.
-
-**Process:**
-
-1. Crop images to FOV regions
-2. Run Mesmer cell segmentation
-3. Extract single-cell marker intensities
-4. Calculate signal intensity ratios inside vs outside cell masks
-
-**Outputs (per slide/FOV):**
-
-- Mesmer mask and overlays: `MESMER_mask.tiff`, `seg_overlay.tiff`, `seg_outline.tiff`
-- Single-cell feature CSVs: `data_slide{key}_{FOV}.csv`, `dataScaleSize_slide{key}_{FOV}.csv`
-- Per-marker cropped TIFFs: `Individualtiff_slide{key}_{FOV}/{marker}.tiff`
-- Signal intensity ratios per marker: `signal_ratios_slide{key}_{FOV}.csv` (column: `Normalized_signal_invsout`)
-
-Pre-generated CSVs are available on Zenodo for convenience.
-
-### Stage 2: Statistical Analysis and Visualization (R)
-
-**Scripts:** `Mesmer_dataSlide_workflow.R`, `cellXpress_dataSlide_workflow.R`
-
-**Inputs:** CSV files from Stage 1 (or downloaded from Zenodo)
-
-**Outputs:** Heatmaps, density plots, statistical comparisons
 
 ```mermaid
 flowchart TD
@@ -101,29 +85,7 @@ flowchart TD
     end
 ```
 
-> **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs. Stage 1 is only needed if you start from raw images.
-
-## Data Sources
-
-### Where to Get Data
-
-| Data Type       | Location                                                          | Description                             |
-| --------------- | ----------------------------------------------------------------- | --------------------------------------- |
-| Raw Images      | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Original QPTIFF files                   |
-| Processed CSVs  | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities          |
-| FOV Coordinates | [`Master_metadata.csv`](Master_metadata.csv)                      | Crop coordinates, conditions, platforms |
-
-### Metadata Files in data_mesmer/ and data_cellXpress/
-
-| File                                    | Purpose                                              |
-| --------------------------------------- | ---------------------------------------------------- |
-| `Slide_metadata.csv`                    | Maps CSV filenames to source, type, FOV, sample name |
-| `Slide_compare_pairs.csv`               | Defines pairs for statistical comparisons            |
-| `Slide_exclude_markers.csv`             | Markers to gray out (non-working)                    |
-| `Slide_remove_markers.csv`              | Markers to exclude entirely                          |
-| `Registered_Report_marker_sequence.csv` | Marker display order for heatmaps                    |
-
-See [data_mesmer/README.md](data_mesmer/README.md) for detailed data organization.
+> **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs from Zenodo. Stage 1 is only needed if you want to process raw images from BioImage Archive.
 
 ## Quick Start
 
@@ -149,100 +111,14 @@ Download processed CSV files from Zenodo and place in:
 ### 3. Run Analysis
 
 ```r
-# In R/RStudio, open and edit the workflow script:
-current_config_name <- "BIDMC_all"  # Choose your configuration
+# In R/RStudio, set your configuration and run:
+current_config_name <- "BIDMC_all"  # See Configuration Reference below
 source("Mesmer_dataSlide_workflow.R")
 ```
 
 Outputs appear in `./results/out_<CONFIG>/`
 
-## Detailed Workflows
-
-### Main Analysis (Mesmer / CellXpress)
-
-Compares marker signal intensities across tissue preparation conditions.
-
-**Scripts:**
-
-- `Mesmer_dataSlide_workflow.R` - Mesmer segmentation data
-- `cellXpress_dataSlide_workflow.R` - CellXpress segmentation data
-
-**Usage:**
-
-1. Open script in R/RStudio
-2. Set `current_config_name` to your target dataset
-3. Run the script
-
-**Key outputs:** Density plots, heatmaps (mean, CV, z-scores), statistical tests (Kruskal-Wallis, Wilcoxon, Cohen's d)
-
----
-
-### Signal Intensity Ratio Analysis
-
-Analyzes signal intensity ratios inside vs outside cell masks.
-
-**Step 1: Preprocess images (Python)**
-
-```bash
-python crop_mesmer_featureextraction_signaltonoise.py
-```
-
-Configure in script:
-
-- `data_folder`: Path to QPTIFF files
-- `output_folder`: Output directory
-- `crop_coords_dict`: FOV coordinates (from `Master_metadata.csv`)
-- `markers`: Marker names in channel order
-
-**Step 2: Run R visualization**
-
-```bash
-Rscript process_cell_counts.R
-Rscript Mesmer_SignalNoise_workflow.R
-```
-
-**Key outputs:** Signal intensity ratio heatmaps, mean ratio barplots
-
----
-
-### Manual Annotation
-
-Python pipeline for cell type annotation of the 24 BIDMC-Harvard slides.
-
-**Location:** [`./manual_annotation/`](https://github.com/SizunJiangLab/Benchmarking_tissue_preparation/tree/main/manual_annotation)
-
-**Pipeline:**
-
-1. `01_clustering.py` - PhenoGraph clustering (k=200)
-2. `02_annotation.py` - Cell type annotation
-3. `03_phenotype_map.py` - Phenotype map visualization
-4. `04_stacked_bar_plots.py` - Cell type composition
-5. `05_enrichment_plots.py` - Enrichment analysis
-
-**Inputs:** OME-TIFFs, segmentation masks, h5ad files, GeoJSONs (file paths in `Master_metadata.csv`)
-
-See [manual_annotation/DOCUMENTATION.md](manual_annotation/DOCUMENTATION.md) for complete instructions.
-
----
-
-### Balagan Spatial Analysis
-
-Quantifies spatial heterogeneity and subsampling efficiency.
-
-**Location:** `./balagan_analysis/`
-
-**Key metrics:**
-
-- Tau (τ): Sampling efficiency
-- Alpha (α): Spatial heterogeneity
-
-**Install:** `devtools::install_github("PierreBSC/Balagan")`
-
-See [balagan_analysis/README.md](balagan_analysis/README.md) for workflow.
-
 ## Configuration Reference
-
-### Available Configurations
 
 Set `current_config_name` in the workflow scripts to one of:
 
@@ -281,17 +157,16 @@ All outputs are written to `./results/out_<CONFIG>/`
 .
 ├── data_mesmer/                    # Mesmer data (see data_mesmer/README.md)
 ├── data_cellXpress/                # CellXpress data
-├── balagan_analysis/               # Spatial analysis workflow
-├── manual_annotation/              # Cell type annotation pipeline
+├── balagan_analysis/               # Spatial analysis (see balagan_analysis/README.md)
+├── manual_annotation/              # Cell type annotation (see DOCUMENTATION.md)
 ├── pylibs/                         # Python utilities
 ├── results/                        # Analysis outputs
 │   └── out_<CONFIG>/
-├── qsave_input/                    # Cached inputs (auto-generated)
-├── Master_metadata.csv             # FOV coordinates & file mappings
+├── Master_metadata.csv             # Central file linking all data
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
 ├── Mesmer_SignalNoise_workflow.R   # Signal intensity ratio analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
-├── crop_mesmer_featureextraction_signaltonoise.py  # Preprocessing
+├── crop_mesmer_featureextraction_signaltonoise.py  # Image preprocessing
 ├── helper.R                        # Shared R functions
 └── requirements.txt                # Python dependencies
 ```
