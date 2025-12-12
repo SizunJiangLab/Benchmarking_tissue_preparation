@@ -5,7 +5,7 @@ Large-scale Quantitative Assessment of Tissue Preparation and Staining Condition
 #### Table of Contents
 
 - [Project Overview](#project-overview)
-- [Master Metadata - Start Here](#-master-metadata---start-here)
+- [Get Started](#get-started)
 - [Workflow Overview](#workflow-overview)
 - [Data Sources](#data-sources)
 - [Quick Start](#quick-start)
@@ -26,7 +26,7 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 - Perform manual cell type annotation (Python pipeline)
 - Quantify spatial heterogeneity (Balagan analysis)
 
-## 📋 Master Metadata - Start Here
+## Get Started
 
 **[`Master_metadata.csv`](Master_metadata.csv)** is the central reference linking all data files across repositories. Use this file to find the segmentation masks, OME-TIFFs, GeoJSONs, and processed CSVs associated with any slide.
 
@@ -49,7 +49,8 @@ The analysis has two main stages:
 **Inputs:**
 
 - Raw QPTIFF images from [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (accession TBD)
-- FOV crop coordinates from [`Master_metadata.csv`](Master_metadata.csv) or Supplementary Table 18
+
+> FOV crop coordinates used in the script are documented in [`Master_metadata.csv`](Master_metadata.csv) and Supplementary Table 18.
 
 **Process:**
 
