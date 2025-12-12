@@ -5,6 +5,7 @@ Large-scale Quantitative Assessment of Tissue Preparation and Staining Condition
 #### Table of Contents
 
 - [Project Overview](#project-overview)
+- [Master Metadata - Start Here](#-master-metadata---start-here)
 - [Workflow Overview](#workflow-overview)
 - [Data Sources](#data-sources)
 - [Quick Start](#quick-start)
@@ -24,6 +25,18 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 - Calculate signal intensity ratios inside vs outside cell masks
 - Perform manual cell type annotation (Python pipeline)
 - Quantify spatial heterogeneity (Balagan analysis)
+
+## 📋 Master Metadata - Start Here
+
+**[`Master_metadata.csv`](Master_metadata.csv)** is the central reference linking all data files across repositories. Use this file to find the segmentation masks, OME-TIFFs, GeoJSONs, and processed CSVs associated with any slide.
+
+**Data is distributed across three locations:**
+
+- **BioImage Archive**: Raw QPTIFF images, segmentation masks, OME-TIFFs, GeoJSONs
+- **Zenodo**: Processed single-cell CSV files
+- **This GitHub repo**: Analysis code, metadata files, `Master_metadata.csv`
+
+Each row in `Master_metadata.csv` represents one slide and includes: dataset, site, tissue type, experimental condition, platform, pixel size, FOV crop coordinates, and paths to all associated files.
 
 ## Workflow Overview
 
@@ -98,19 +111,6 @@ flowchart TD
 | Raw Images      | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Original QPTIFF files                   |
 | Processed CSVs  | [Zenodo](https://zenodo.org/) (TBD)                               | Single-cell marker intensities          |
 | FOV Coordinates | [`Master_metadata.csv`](Master_metadata.csv)                      | Crop coordinates, conditions, platforms |
-
-### Master Metadata
-
-[`Master_metadata.csv`](Master_metadata.csv) contains comprehensive file mappings for all datasets:
-
-- **Dataset**: Initial_Optimization, Validation, or Supplementary
-- **Site**: BIDMC, Stanford, Roche, Novartis, ASTAR, UKentucky
-- **Tissue**: Tonsil, DLBCL, Lung_Cancer, CRC, etc.
-- **Condition**: Antigen retrieval parameters
-- **Platform**: PhenoCycler-Fusion, RareCyte_Orion, IMC, Lunaphore_COMET
-- **Pixel_Size**: Micrometers per pixel
-- **FOV Coordinates**: (x_min, x_max, y_min, y_max) for cropping
-- **Annotation files**: Paths to segmentation masks, GeoJSONs, h5ad files (BIDMC only)
 
 ### Metadata Files in data_mesmer/ and data_cellXpress/
 
