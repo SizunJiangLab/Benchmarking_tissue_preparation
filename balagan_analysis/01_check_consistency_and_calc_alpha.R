@@ -232,7 +232,8 @@ p1 <- ggplot(fov_success_rate, aes(x = factor(FoV_width), y = Slide, fill = succ
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         axis.text.y = element_text(size = 8))
 
-ggsave(file.path(OUTPUT_DIR, "plot_1_success_rate_heatmap.svg"), plot = p1, width = 10, height = 12)
+ggsave(file.path(OUTPUT_DIR, "plot_1_success_rate_heatmap.svg"), plot = p1, width = 10, height = 12,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- Plot 2: Alpha Slope Consistency (Your main consistency check) ---
 # --- MODIFIED: Joined with CV scores ---
@@ -265,7 +266,8 @@ p2 <- ggplot(alpha_slopes_to_plot,
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), 
         legend.position = "none")
 
-ggsave(file.path(OUTPUT_DIR, "plot_2_alpha_slope_consistency_boxplot_CV_ORDERED.svg"), plot = p2, width = 14, height = 7)
+ggsave(file.path(OUTPUT_DIR, "plot_2_alpha_slope_consistency_boxplot_CV_ORDERED.svg"), plot = p2, width = 14, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- Plot 3: Stable Result (Your final answer) ---
 # This plot will still be ordered by Alpha, which is fine.
@@ -304,7 +306,8 @@ p3_alpha_order <- ggplot(stable_alpha_slopes,
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), 
         legend.position = "none")
 
-ggsave(file.path(OUTPUT_DIR, "plot_3_alpha_slope_barchart_ALPHA_ORDERED.svg"), plot = p3_alpha_order, width = 14, height = 8)
+ggsave(file.path(OUTPUT_DIR, "plot_3_alpha_slope_barchart_ALPHA_ORDERED.svg"), plot = p3_alpha_order, width = 14, height = 8,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # Plot 3b: Ordered by CV Score (New)
 p3_cv_order <- ggplot(stable_alpha_slopes, 
@@ -329,7 +332,8 @@ p3_cv_order <- ggplot(stable_alpha_slopes,
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), 
         legend.position = "none")
 
-ggsave(file.path(OUTPUT_DIR, "plot_3_alpha_slope_barchart_CV_ORDERED.svg"), plot = p3_cv_order, width = 14, height = 8)
+ggsave(file.path(OUTPUT_DIR, "plot_3_alpha_slope_barchart_CV_ORDERED.svg"), plot = p3_cv_order, width = 14, height = 8,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 
 cat("\n====================================================\n")

@@ -104,7 +104,8 @@ p_corr_alpha <- ggplot(combined_ranks, aes(x = cv_rank, y = alpha_slope_rank)) +
   theme_minimal()
 
 ggsave(file.path(output_dir, "PLOT_correlation_cv_vs_alpha.svg"), 
-       plot = p_corr_alpha, width = 8, height = 7)
+       plot = p_corr_alpha, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- Plot 2: CV Rank vs. Stable Tau Rank ---
 cat("Generating Plot 2: CV Rank vs. Stable Tau Rank\n")
@@ -121,7 +122,8 @@ p_corr_tau <- ggplot(combined_ranks, aes(x = cv_rank, y = avg_tau_rank)) +
   theme_minimal()
 
 ggsave(file.path(output_dir, "PLOT_correlation_cv_vs_tau.svg"), 
-       plot = p_corr_tau, width = 8, height = 7)
+       plot = p_corr_tau, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- NEW: Plot 3: Alpha Rank vs. Stable Tau Rank ---
 cat("Generating Plot 3: Alpha Rank vs. Stable Tau Rank\n")
@@ -138,7 +140,8 @@ p_corr_alpha_vs_tau <- ggplot(combined_ranks, aes(x = avg_tau_rank, y = alpha_sl
   theme_minimal()
 
 ggsave(file.path(output_dir, "PLOT_correlation_alpha_vs_tau.svg"), 
-       plot = p_corr_alpha_vs_tau, width = 8, height = 7)
+       plot = p_corr_alpha_vs_tau, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 # --- END NEW PLOT ---
 
 cat("\n====================================================\n")

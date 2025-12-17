@@ -58,7 +58,7 @@ if (length(heatmap_data_files) > 0) {
     plot_title <- paste("Heatmap for", slide_basename)
     
     # Generate and save the heatmap (using parameters from your original script)
-    svglite(svg_output_path, width = 10, height = 8)
+    svglite::svglite(svg_output_path, width = 10, height = 8, fix_text_size = FALSE)
     pheatmap(
       heatmap_data,
       scale = "row",
@@ -136,7 +136,9 @@ if (length(scatter_data_files) > 0) {
       filename = scatter_file,
       plot = pp1,
       width = 12,
-      height = 10
+      height = 10,
+      device = svglite::svglite,
+      fix_text_size = FALSE
     )
   }
   cat("--- Scatter plot regeneration complete. ---\n")

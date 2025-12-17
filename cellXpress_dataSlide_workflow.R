@@ -343,7 +343,9 @@ ggsave(
   p,
   filename = paste0(out_folder, "Arcsinh_transformed_Hoechst_normalised_density_plots.svg"),
   width = 8,
-  height = 11
+  height = 11,
+  device = svglite::svglite,
+  fix_text_size = FALSE
 )
 
 ### Perform statistical and Kruskal-Wallis tests

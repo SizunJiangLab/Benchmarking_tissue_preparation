@@ -91,7 +91,7 @@ perform_balagan_analysis <- function(data_df, output_prefix, markers_to_remove =
   
   # Save heatmap
   pheatmap_file <- paste0(output_prefix, "_heatmap.svg")
-  svglite(pheatmap_file, width = 10, height = 8)
+  svglite::svglite(pheatmap_file, width = 10, height = 8, fix_text_size = FALSE)
   pheatmap(
     summary_data_t[selected_features, ],
     scale = "row",
@@ -135,7 +135,9 @@ perform_balagan_analysis <- function(data_df, output_prefix, markers_to_remove =
     filename = scatter_file,
     plot = pp1,
     width = 12,
-    height = 10
+    height = 10,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   message(paste("Saved scatter plot to:", scatter_file))
   
@@ -153,9 +155,10 @@ perform_balagan_analysis <- function(data_df, output_prefix, markers_to_remove =
   
 
   subsampling_file <- paste0(output_prefix, "_subsampling.svg")
-  svg(paste0(output_prefix, "_subsampling.svg"),
+  svglite::svglite(paste0(output_prefix, "_subsampling.svg"),
       width = 10,
-      height = 8)
+      height = 8,
+      fix_text_size = FALSE)
   Visualize_simple_sampling(Simple_sampling_analysis)
   dev.off()
   message(paste("Saved subsampling plot to:", subsampling_file))

@@ -118,7 +118,8 @@ p_int_cv_rank <- ggplot(core_metrics, aes(x = Mean_Intensity, y = CV_Rank)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_01a_intensity_vs_cv_rank.svg"), plot = p_int_cv_rank, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_01a_intensity_vs_cv_rank.svg"), plot = p_int_cv_rank, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- 1B: Mean Intensity vs. CV Score ---
 p_int_cv_score <- ggplot(core_metrics, aes(x = Mean_Intensity, y = CV_Score)) +
@@ -132,7 +133,8 @@ p_int_cv_score <- ggplot(core_metrics, aes(x = Mean_Intensity, y = CV_Score)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_01b_intensity_vs_cv_score.svg"), plot = p_int_cv_score, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_01b_intensity_vs_cv_score.svg"), plot = p_int_cv_score, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- 1C: Mean Intensity vs. Alpha ---
 p_int_alpha <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Alpha)) +
@@ -146,7 +148,8 @@ p_int_alpha <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Alpha)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_01c_intensity_vs_alpha.svg"), plot = p_int_alpha, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_01c_intensity_vs_alpha.svg"), plot = p_int_alpha, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- 1D: Mean Intensity vs. Tau Rank ---
 p_int_tau <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Average_Tau_Rank)) +
@@ -160,7 +163,8 @@ p_int_tau <- ggplot(core_metrics, aes(x = Mean_Intensity, y = Average_Tau_Rank))
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_01d_intensity_vs_tau.svg"), plot = p_int_tau, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_01d_intensity_vs_tau.svg"), plot = p_int_tau, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 cat("Intensity correlation plots saved.\n")
 
@@ -183,7 +187,8 @@ p_cv_alpha <- ggplot(core_metrics, aes(x = CV_Score, y = Alpha)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_02a_cv_score_vs_alpha.svg"), plot = p_cv_alpha, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_02a_cv_score_vs_alpha.svg"), plot = p_cv_alpha, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- 2B: CV Score vs. Tau Rank ---
 p_cv_tau <- ggplot(core_metrics, aes(x = CV_Score, y = Average_Tau_Rank)) +
@@ -199,7 +204,8 @@ p_cv_tau <- ggplot(core_metrics, aes(x = CV_Score, y = Average_Tau_Rank)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_02b_cv_score_vs_tau_rank.svg"), plot = p_cv_tau, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_02b_cv_score_vs_tau_rank.svg"), plot = p_cv_tau, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 # --- 2C: Alpha vs. Tau Rank ---
 p_alpha_tau <- ggplot(core_metrics, aes(x = Alpha, y = Average_Tau_Rank)) +
@@ -214,7 +220,8 @@ p_alpha_tau <- ggplot(core_metrics, aes(x = Alpha, y = Average_Tau_Rank)) +
   ) +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_02c_alpha_vs_tau_rank.svg"), plot = p_alpha_tau, width = 8, height = 7)
+ggsave(file.path(output_dir, "PLOT_02c_alpha_vs_tau_rank.svg"), plot = p_alpha_tau, width = 8, height = 7,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 cat("CV vs. Balagan metric plots saved.\n")
 
@@ -246,7 +253,8 @@ if (file.exists(mixed_unknown_file)) {
     ) +
     theme_minimal()
   
-  ggsave(file.path(output_dir, "PLOT_03_unknown_fraction_vs_alpha.svg"), plot = p_unknown_alpha, width = 8, height = 7)
+  ggsave(file.path(output_dir, "PLOT_03_unknown_fraction_vs_alpha.svg"), plot = p_unknown_alpha, width = 8, height = 7,
+         device = svglite::svglite, fix_text_size = FALSE)
   cat("Unknown cell fraction plot saved.\n")
 } else {
   cat("\n--- Analysis 3: Skipped (mixed/unknown data file not found) ---\n")
@@ -354,7 +362,8 @@ if (dir.exists(all_markers_dir)) {
       ) +
       theme_minimal()
     
-    ggsave(file.path(output_dir, "PLOT_04_all_markers_vs_10_markers.svg"), plot = p_panel_compare, width = 8, height = 7)
+    ggsave(file.path(output_dir, "PLOT_04_all_markers_vs_10_markers.svg"), plot = p_panel_compare, width = 8, height = 7,
+           device = svglite::svglite, fix_text_size = FALSE)
     cat("All markers vs. 10 markers plot saved.\n")
   } else {
     cat("No 'All Markers' files found, skipping Analysis 4.\n")
@@ -394,7 +403,8 @@ p_quadrant <- ggplot(core_metrics, aes(x = Average_Tau_Rank, y = Alpha)) +
   scale_y_reverse() +
   theme_minimal()
 
-ggsave(file.path(output_dir, "PLOT_05_quadrant_efficiency_vs_heterogeneity.svg"), plot = p_quadrant, width = 11, height = 9)
+ggsave(file.path(output_dir, "PLOT_05_quadrant_efficiency_vs_heterogeneity.svg"), plot = p_quadrant, width = 11, height = 9,
+       device = svglite::svglite, fix_text_size = FALSE)
 cat("Quadrant classification plot saved.\n")
 
 cat("\n====================================================\n")

@@ -126,7 +126,8 @@ plot_mean_final <- p_tau_rank_mean +
   )
 
 output_path_mean <- file.path(output_dir, "AGGREGATE_stable_MEAN_tau_rank_heatmap.svg")
-ggsave(output_path_mean, plot = plot_mean_final, width = 12, height = 10)
+ggsave(output_path_mean, plot = plot_mean_final, width = 12, height = 10,
+       device = svglite::svglite, fix_text_size = FALSE)
 cat(paste("MEAN standalone plot saved to:", output_path_mean, "\n"))
 
 # --- 1B. COMBINED MEAN TAU + CV RANK HEATMAP ---
@@ -179,7 +180,8 @@ if (INCLUDE_CV_PLOTS) {
     )
   
   output_path_mean_cv <- file.path(output_dir, "AGGREGATE_stable_MEAN_cv_tau_rank_heatmap.svg")
-  ggsave(output_path_mean_cv, plot = combined_plot_mean, width = 14, height = 10)
+  ggsave(output_path_mean_cv, plot = combined_plot_mean, width = 14, height = 10,
+         device = svglite::svglite, fix_text_size = FALSE)
   cat(paste("MEAN combined plot (with CV) saved to:", output_path_mean_cv, "\n"))
 }
 
@@ -239,7 +241,8 @@ plot_median_final <- p_tau_rank_median +
   )
 
 output_path_median <- file.path(output_dir, "AGGREGATE_stable_MEDIAN_tau_rank_heatmap.svg")
-ggsave(output_path_median, plot = plot_median_final, width = 12, height = 10)
+ggsave(output_path_median, plot = plot_median_final, width = 12, height = 10,
+       device = svglite::svglite, fix_text_size = FALSE)
 cat(paste("MEDIAN standalone plot saved to:", output_path_median, "\n"))
 
 # --- 2B. COMBINED MEDIAN TAU + CV RANK HEATMAP ---
@@ -292,7 +295,8 @@ if (INCLUDE_CV_PLOTS) {
     )
   
   output_path_median_cv <- file.path(output_dir, "AGGREGATE_stable_MEDIAN_cv_tau_rank_heatmap.svg")
-  ggsave(output_path_median_cv, plot = combined_plot_median, width = 14, height = 10)
+  ggsave(output_path_median_cv, plot = combined_plot_median, width = 14, height = 10,
+         device = svglite::svglite, fix_text_size = FALSE)
   cat(paste("MEDIAN combined plot (with CV) saved to:", output_path_median_cv, "\n"))
 }
 

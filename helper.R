@@ -655,7 +655,9 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     filename = paste0(out_folder, "Heatmap_mean_white_to_red.svg"),
     plot = mean_heatmap,
     width = 10,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # 2. Heatmap of mean with Z-score transformation (blue, white, red)
@@ -698,7 +700,9 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     filename = paste0(out_folder, "Heatmap_mean_zscore_blue_white_red.svg"),
     plot = mean_z_heatmap,
     width = 10,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # 3. Heatmap of CV with Z-score transformation (purple and green)
@@ -734,7 +738,9 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     filename = paste0(out_folder, "Heatmap_CV_zscore_purple_green.svg"),
     plot = cv_z_heatmap,
     width = 12,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # 4. Heatmap of raw CV values (without Z-score transformation)
@@ -765,7 +771,9 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
     filename = paste0(out_folder, "Heatmap_CV_raw_values.svg"),
     plot = cv_heatmap,
     width = 12,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # Save the data frames for further analysis if needed
@@ -1117,7 +1125,9 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     filename = paste0(out_folder, "marker_score_heatmap.svg"),
     plot = score_heatmap,
     width = 12,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # 2. Average score bar chart ordered by score value
@@ -1139,7 +1149,9 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     filename = paste0(out_folder, "average_score_by_condition.svg"),
     plot = avg_score_plot,
     width = 10,
-    height = 6
+    height = 6,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # 3. CV values heatmap with rankings
@@ -1174,7 +1186,9 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     filename = paste0(out_folder, "cv_heatmap_with_ranks.svg"),
     plot = cv_heatmap,
     width = 12,
-    height = 8
+    height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   #4. # Create the combined CV visualization
@@ -1189,7 +1203,9 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     filename = paste0(out_folder, "combined_cv_ranks_heatmap.svg"),
     plot = combined_cv_vis$combined_plot,
     width = 12,
-    height = 10
+    height = 10,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   
   # Return the results
@@ -1457,7 +1473,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
       filename = paste0(out_folder, "SNR_heatmap_zscore_normalized.svg"),
       plot = heatmap_zscore_normalized,
       width = 10,
-      height = 8
+      height = 8,
+      device = svglite::svglite,
+      fix_text_size = FALSE
     )
     result_list$heatmap_zscore_normalized <- heatmap_zscore_normalized
     # <<<--- PLOT 1: Z-SCORE HEATMAP ON NORMALIZED SNR (NEW) --- END --->>>
@@ -1488,7 +1506,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
     
     ggsave(
       filename = paste0(out_folder, "SNR_heatmap_DAPI_normalized.svg"),
-      plot = heatmap_dapi_norm, width = 10, height = 8
+      plot = heatmap_dapi_norm, width = 10, height = 8,
+      device = svglite::svglite,
+      fix_text_size = FALSE
     )
     result_list$heatmap_dapi_norm <- heatmap_dapi_norm
     # <<<--- PLOT 2: NORMALIZED HEATMAP (ORIGINAL) --- END --->>>
@@ -1528,7 +1548,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
     
     ggsave(
       filename = paste0(out_folder, "SNR_heatmap_DAPI_norm_threshold.svg"),
-      plot = heatmap_norm_threshold, width = 10, height = 8
+      plot = heatmap_norm_threshold, width = 10, height = 8,
+      device = svglite::svglite,
+      fix_text_size = FALSE
     )
     result_list$heatmap_norm_threshold <- heatmap_norm_threshold
     # <<<--- PLOT 3: NORMALIZED THRESHOLD HEATMAP (ORIGINAL) --- END --->>>
@@ -1560,7 +1582,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
   
   ggsave(
     filename = paste0(out_folder, "SNR_heatmap_raw.svg"),
-    plot = heatmap_purpleyellow, width = 10, height = 8
+    plot = heatmap_purpleyellow, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_raw <- heatmap_purpleyellow
   # <<<--- PLOT 4: BASIC RAW SNR HEATMAP (ORIGINAL) --- END --->>>
@@ -1599,7 +1623,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
   
   ggsave(
     filename = paste0(out_folder, "SNR_heatmap_threshold.svg"),
-    plot = heatmap_threshold, width = 10, height = 8
+    plot = heatmap_threshold, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_threshold <- heatmap_threshold
   # <<<--- PLOT 5: RAW SNR THRESHOLD HEATMAP (ORIGINAL) --- END --->>>
@@ -1639,7 +1665,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
   
   ggsave(
     filename = paste0(out_folder, "SNR_heatmap_zscore_raw.svg"),
-    plot = heatmap_zscore_raw, width = 10, height = 8
+    plot = heatmap_zscore_raw, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_zscore_raw <- heatmap_zscore_raw
   # <<<--- PLOT 6: Z-SCORE HEATMAP ON RAW SNR --- END --->>>
@@ -1665,7 +1693,9 @@ create_snr_heatmaps_norm <- function(snr_data, out_folder, remove_values = c()) 
   
   ggsave(
     filename = paste0(out_folder, "SNR_barplot_means.svg"),
-    plot = barplot_means, width = 8, height = 8
+    plot = barplot_means, width = 8, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$barplot_means <- barplot_means
   
@@ -1822,7 +1852,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_zscore_with_avg.svg"),
-    plot = combined_plot, width = 12, height = 11
+    plot = combined_plot, width = 12, height = 11,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$combined_plot <- combined_plot
   
@@ -1837,7 +1869,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_prenormalized.svg"),
-    plot = heatmap_prenorm, width = 10, height = 8
+    plot = heatmap_prenorm, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_prenormalized <- heatmap_prenorm
   
@@ -1852,7 +1886,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_01normalized.svg"),
-    plot = heatmap_01norm, width = 10, height = 8
+    plot = heatmap_01norm, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_01normalized <- heatmap_01norm
   
@@ -1876,7 +1912,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_threshold.svg"),
-    plot = heatmap_threshold, width = 10, height = 8
+    plot = heatmap_threshold, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_threshold <- heatmap_threshold
   
@@ -1891,7 +1929,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_zscore.svg"),
-    plot = heatmap_zscore, width = 10, height = 8
+    plot = heatmap_zscore, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_zscore <- heatmap_zscore
   
@@ -1906,7 +1946,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_heatmap_zscore_of_01normed.svg"),
-    plot = heatmap_zscore_01norm, width = 10, height = 8
+    plot = heatmap_zscore_01norm, width = 10, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$heatmap_zscore_01normed <- heatmap_zscore_01norm
   
@@ -1926,7 +1968,9 @@ create_snr_heatmaps <- function(snr_data, out_folder, remove_values = c(), exclu
   
   ggsave(
     filename = file.path(out_folder, "SNR_barplot_means.svg"),
-    plot = barplot_means, width = 8, height = 8
+    plot = barplot_means, width = 8, height = 8,
+    device = svglite::svglite,
+    fix_text_size = FALSE
   )
   result_list$barplot_means <- barplot_means
   

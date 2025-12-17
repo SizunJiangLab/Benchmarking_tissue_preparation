@@ -113,6 +113,7 @@ p_subsampling <- ggplot(avg_curves,
 
 # --- 6. SAVE THE PLOT ---
 output_path <- file.path(output_dir, "PLOT_average_subsampling_curves.svg")
-ggsave(output_path, plot = p_subsampling, width = 16, height = 12)
+ggsave(output_path, plot = p_subsampling, width = 16, height = 12,
+       device = svglite::svglite, fix_text_size = FALSE)
 
 cat(paste("\nSuccessfully saved subsampling plot to:", output_path, "\n"))
