@@ -1,5 +1,7 @@
 # CellXpress2 Segmentation Data
 
+**CellXpress2 Software:** Download from [cellxpress.org/download](https://cellxpress.org/download)
+
 This folder contains single-cell marker signal intensity data following cellXpress2 cell segmentation. The data includes single-cell measurements from multiplexed imaging experiments across multiple institutions and tissue types.
 
 ## Dataset Organization

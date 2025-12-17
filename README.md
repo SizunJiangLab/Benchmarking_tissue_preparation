@@ -26,11 +26,13 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 
 ### Master Metadata
 
-**[`Master_metadata.csv`](Master_metadata.csv)** is the central reference linking all data files across repositories. Each row represents one slide with:
+**[`Master_metadata_Mesmer.csv`](Master_metadata_Mesmer.csv)** is the central reference for Mesmer workflows, linking all data files across repositories. Each row represents one slide with:
 
 - **Slide_Key**: Matches naming in preprocessing scripts and CSV filenames (e.g., `slide1`, `slide2`)
 - **FOV coordinates**: Used by Stage 1 preprocessing; documented here for reference
 - **File paths**: Relative paths to BioImage Archive assets (masks, OME-TIFFs, GeoJSONs)
+
+**[`Master_metadata_cellXpress.csv`](Master_metadata_cellXpress.csv)** contains region-level metadata for CellXpress workflows, with one row per tile/region including coordinates and dimensions.
 
 ### External Data Repositories
 
@@ -56,7 +58,7 @@ _Mesmer and CellXpress are independent segmentation platforms—choose based on 
 | Workflow                         | Script / Folder                   | Documentation                                              |
 | -------------------------------- | --------------------------------- | ---------------------------------------------------------- |
 | Mesmer segmentation analysis     | `Mesmer_dataSlide_workflow.R`     | [data_mesmer/README.md](data_mesmer/README.md)             |
-| CellXpress segmentation analysis | `cellXpress_dataSlide_workflow.R` | [data_cellXpress/README.md](data_cellXpress/README.md)     |
+| CellXpress segmentation analysis | `cellXpress_dataSlide_workflow.R` | [data_cellXpress/README.md](data_cellXpress/README.md) ([CellXpress2 download](https://cellxpress.org/download)) |
 | Signal intensity ratio analysis  | `Mesmer_SignalNoise_workflow.R`   | [data_mesmer/README.md](data_mesmer/README.md)             |
 | Manual cell type annotation      | `manual_annotation/`              | [manual_annotation/README.md](manual_annotation/README.md) |
 | Balagan spatial heterogeneity    | `balagan_analysis/`               | [balagan_analysis/README.md](balagan_analysis/README.md)   |
@@ -69,7 +71,7 @@ _Manual annotation requires Stage 1 outputs (OME-TIFFs + segmentation masks from
 flowchart TD
     subgraph stage1["Stage 1: Python Preprocessing"]
         A[("Raw QPTIFF Images<br/>(BioImage Archive)")] --> B["preprocessing/"]
-        B --> C["Crop FOVs<br/>(coords from Master_metadata.csv)"]
+        B --> C["Crop FOVs<br/>(coords from Master_metadata_Mesmer.csv)"]
         C --> D["Mesmer Segmentation"]
         D --> E["Extract Features & Intensity Ratios"]
         E --> F[("CSV Data Files<br/>(Zenodo)")]
@@ -117,7 +119,8 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 ├── data_cellXpress/                # CellXpress data
 ├── balagan_analysis/               # Spatial analysis
 ├── manual_annotation/              # Cell type annotation
-├── Master_metadata.csv             # Central file linking all data
+├── Master_metadata_Mesmer.csv      # Mesmer workflow metadata
+├── Master_metadata_cellXpress.csv  # CellXpress workflow metadata
 ├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
 ├── Mesmer_SignalNoise_workflow.R   # Signal intensity ratio analysis
 ├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow

@@ -1,0 +1,785 @@
+Dataset,Site,Tissue,cX project name,Slide,Condition,Platform,Pixel_Size,Nuclear_marker used for cell segmentation,Membrane_markers used for segmentation,FOV,Region,Region_sizeX,Region_sizeY,Region_coordX,Region_coordY
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,10000,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,10000,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13584,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13584,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,14000,11000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,14000,13560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,17584,11000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-1,1,"10 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,17584,13560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-10,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,4000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,6560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,4000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,6560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,13000,10200
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,13000,12760
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16584,10200
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-11,11,"20 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16584,12760
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,12000,6250
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,12000,8810
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,15584,6250
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,15584,8810
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,15500,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,15500,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,19084,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-12,12,"20 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,19084,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-13,13,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,8000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,10560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,10560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,8000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12600,15000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12600,17560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16184,17560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-14,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16184,15000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-15,15,"20 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,10000,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,10000,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13584,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13584,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-16,16,"20 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11800
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14360
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14360
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-17,17,"40 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11800
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,12500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,15060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,15060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-18,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,12500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,10000,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,10000,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13584,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13584,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,13600,12200
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,13600,14760
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,17184,14760
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-19,19,"40 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,17184,12200
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,12500,6250
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,12500,8810
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,16084,8810
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,16084,6250
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,15600,12350
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,15600,14910
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,19184,14910
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-2,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,19184,12350
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-20,20,"40 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-21,21,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-22,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-23,23,"40 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,12000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9500,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9500,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13084,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13084,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12000,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12000,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,15584,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-24,24,"40 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,15584,13000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,19000,29500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,19000,32060
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,21048,32060
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,21048,29500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,20000,42500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,20000,44036
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,22560,44036
+Initial_Optimization,Roche,Tonsil,CCPA-250407-25,2,"10 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,22560,42500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,12300,31000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,12300,33560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,14348,33560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,14348,31000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,13000,44000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,13000,45536
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,15560,45536
+Initial_Optimization,Roche,Tonsil,CCPA-250407-26,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,15560,44000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,14600,36000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,14600,38560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,16648,38560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,16648,36000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,15000,49250
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,15000,50786
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,17560,49250
+Initial_Optimization,Roche,Tonsil,CCPA-250407-27,10,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,17560,50786
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,15500,30500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,15500,33060
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,17548,33060
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,17548,30500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,14500,43500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,14500,45036
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,17060,45036
+Initial_Optimization,Roche,Tonsil,CCPA-250407-28,14,"20 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,17060,43500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,14400,28000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,14400,30560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,16448,28000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,16448,30560
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,16000,40500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,16000,42036
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,18560,40500
+Initial_Optimization,Roche,Tonsil,CCPA-250407-29,18,"40 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,18560,42036
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12300,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12300,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,15884,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-3,3,"10 min Citraconic Anhydride (pH 7.4), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,15884,13000
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A01,2048,2560,16500,35900
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A02,2048,2560,16500,38460
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A03,2048,2560,18548,38460
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV1, A04,2048,2560,18548,35900
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A05,2560,1536,15500,49250
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A06,2560,1536,15500,50786
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A07,2560,1536,18060,50786
+Initial_Optimization,Roche,Tonsil,CCPA-250407-30,22,"40 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1, 2, 5, 8, 13] #CD8, CD3E, CD45, IBA1, Vimentin",FOV2, A08,2560,1536,18060,49250
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-4,4,"10 min Citraconic Anhydride (pH 7.4), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9500,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9500,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13084,8060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13084,5500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12000,12400
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12000,14960
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,15584,14960
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-5,5,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,15584,12400
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,4500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,13560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,13560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-6,6,"10 min Tris/EDTA (pH 9.0), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9500,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9500,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,13084,8560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,13084,6000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12000,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12000,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,15584,15560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-7,7,"10 min Tris/EDTA (pH 9.0), 25C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,15584,13000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-8,8,"10 min Tris/EDTA (pH 9.0), 37C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,9000,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,9000,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,12584,7560
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,12584,5000
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12500,11500
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12500,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16084,14060
+Initial_Optimization,BIDMC,Tonsil,CCPA-250407-9,9,"20 min Citraconic Anhydride (pH 7.4), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16084,11500
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-1,5_10R4N-B,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,21000,5000
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-1,5_10R4N-B,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,21000,7048
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-1,5_10R4N-B,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,23048,7048
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-1,5_10R4N-B,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,23048,5000
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-13,15_20RRTN-B,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16742,3998
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-13,15_20RRTN-B,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16742,6046
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-13,15_20RRTN-B,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18790,6046
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-13,15_20RRTN-B,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18790,3998
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-14,16_20R3760-A,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,13506,6005
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-14,16_20R3760-A,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,15042,6005
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-14,16_20R3760-A,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,13506,7541
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-14,16_20R3760-A,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,15042,7541
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-15,16_20R3760-B,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16277,3971
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-15,16_20R3760-B,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16277,6019
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-15,16_20R3760-B,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18325,6019
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-15,16_20R3760-B,"20 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18325,3971
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-16,17_40R4N-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,13384,6508
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-16,17_40R4N-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,14920,6508
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-16,17_40R4N-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,13384,8044
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-16,17_40R4N-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,14920,8044
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-17,17_40R4N-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,15482,3984
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-17,17_40R4N-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,15482,6032
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-17,17_40R4N-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,17530,6032
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-17,17_40R4N-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,17530,3984
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-18,18_40RRT60-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,10827,5976
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-18,18_40RRT60-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,12363,5976
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-18,18_40RRT60-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,10827,7512
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-18,18_40RRT60-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,12363,7512
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-19,18_40RRT60-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16795,3990
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-19,18_40RRT60-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16795,6038
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-19,18_40RRT60-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18843,6038
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-19,18_40RRT60-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18843,3990
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-2,6_10RRT60-A,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,10849,9513
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-2,6_10RRT60-A,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,12385,9513
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-2,6_10RRT60-A,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,10849,11049
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-2,6_10RRT60-A,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,12385,11049
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-20,19_40RRTN-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,11342,6024
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-20,19_40RRTN-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,12878,6024
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-20,19_40RRTN-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,11342,7560
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-20,19_40RRTN-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,12878,7560
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-21,19_40RRTN-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16004,3507
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-21,19_40RRTN-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16004,5555
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-21,19_40RRTN-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18052,5555
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-21,19_40RRTN-B,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18052,3507
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-22,20_40R3760-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,14426,6245
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-22,20_40R3760-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,15962,6245
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-22,20_40R3760-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,14426,7781
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-22,20_40R3760-A,,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,15962,7781
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-23,"20_40R3760-B	J",,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16502,4006
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-23,"20_40R3760-B	J",,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16502,6054
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-23,"20_40R3760-B	J",,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18550,6054
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-23,"20_40R3760-B	J",,RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18550,4006
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-3,6_10RRT60-B,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,13994,3497
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-3,6_10RRT60-B,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,13994,5545
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-3,6_10RRT60-B,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,16042,5545
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-3,6_10RRT60-B,"10 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,16042,3497
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-4,7_10RRTN-A,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,11143,7002
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-4,7_10RRTN-A,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,12679,7002
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-4,7_10RRTN-A,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,11143,8538
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-4,7_10RRTN-A,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,12679,8538
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-5,7_10RRTN-B,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,17481,3992
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-5,7_10RRTN-B,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,17481,6040
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-5,7_10RRTN-B,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,19529,6040
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-5,7_10RRTN-B,"10 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,19529,3992
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-6,8_10R3760-A,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,12501,6135
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-6,8_10R3760-A,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,14037,6135
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-6,8_10R3760-A,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,12501,7671
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-6,8_10R3760-A,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,14037,7671
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-7,8_10R3760-B,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,12490,4001
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-7,8_10R3760-B,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,12490,6049
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-7,8_10R3760-B,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,14538,6049
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250411-7,8_10R3760-B,"10 min Tris/EDTA (pH 9.0), 37C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,14538,4001
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-1,5_10R4N-A,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,14500,7000
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-1,5_10R4N-A,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,16036,7000
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-1,5_10R4N-A,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,14500,8536
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-1,5_10R4N-A,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,16036,8536
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-2,13_20R4N-A,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,11839,6199
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-2,13_20R4N-A,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,13375,6199
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-2,13_20R4N-A,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,11839,7735
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-2,13_20R4N-A,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,13375,7735
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-4,14_20RRT60-A,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,12993,6001
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-4,14_20RRT60-A,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,14529,6001
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-4,14_20RRT60-A,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,12993,7537
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-4,14_20RRT60-A,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,14529,7537
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-5,14_20RRT60-B,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16499,1987
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-5,14_20RRT60-B,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16499,4035
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-5,14_20RRT60-B,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18547,4035
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-5,14_20RRT60-B,"20 min Tris/EDTA (pH 9.0), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18547,1987
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-6,15_20RRTN-A,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,1536,1536,11668,5505
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-6,15_20RRTN-A,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,1536,1536,13204,5505
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-6,15_20RRTN-A,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,1536,2048,11668,7041
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250414-6,15_20RRTN-A,"20 min Tris/EDTA (pH 9.0), 25C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,1536,2048,13204,7041
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250416-1,13_20R4N-B,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A01,2048,2048,16488,3019
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250416-1,13_20R4N-B,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A02,2048,2048,16488,5067
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250416-1,13_20R4N-B,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A03,2048,2048,18536,5067
+Initial_Optimization,Stanford,Lymph_Node,CCPA-250416-1,13_20R4N-B,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 10] #CD31, SMA, HLA-ABC, CD4",FOV1, A04,2048,2048,18536,3019
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A01,3584,2560,5049,35587
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A02,3584,2560,5049,38147
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A03,3584,2560,8633,35587
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A04,3584,2560,8633,38147
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A05,3584,2560,24838,24680
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A06,3584,2560,24838,27240
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A07,3584,2560,28422,24680
+Validation,ASTAR,Tonsil,CCPA-250915-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A08,3584,2560,28422,27240
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,3868,6438
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,3868,8998
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,7452,8998
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,7452,6438
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12942,11390
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12942,13950
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16526,13950
+Validation,BIDMC,Tonsil,CCPA-250915-10,30,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16526,11390
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,4013,6419
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,4013,8979
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,7597,8979
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,7597,6419
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12871,11661
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12871,14221
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16455,14221
+Validation,BIDMC,Tonsil,CCPA-250915-11,31,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16455,11661
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,4112,6862
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,4112,9422
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,7696,9422
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,7696,6862
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12651,12658
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12651,15218
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16235,15218
+Validation,BIDMC,Tonsil,CCPA-250915-12,33,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16235,12658
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,1536,1536,16168,11157
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,1536,1536,16168,12693
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,1536,1536,17704,12693
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,1536,1536,17704,11157
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,1536,1536,6686,16149
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,1536,1536,6686,17685
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,1536,1536,8222,17685
+Validation,BIDMC,DLBCL,CCPA-250915-13,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,1536,1536,8222,16149
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,1536,1536,16067,11360
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,1536,1536,16067,12896
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,1536,1536,17603,12896
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,1536,1536,17603,11360
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,1536,1536,6303,16118
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,1536,1536,6303,17654
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,1536,1536,7839,17654
+Validation,BIDMC,DLBCL,CCPA-250915-14,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,1536,1536,7839,16118
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,1.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,1536,1536,19613,18400
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,2.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,1536,1536,19613,19936
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,3.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,1536,1536,21149,19936
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,4.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,1536,1536,21149,18400
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,5.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,1536,1536,9821,23003
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,6.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,1536,1536,9821,24539
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,7.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,1536,1536,11357,24539
+Validation,BIDMC,DLBCL,CCPA-250915-15,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,8.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,1536,1536,11357,23003
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,9.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,1536,1536,16796,11164
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,10.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,1536,1536,16796,12700
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,11.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,1536,1536,18332,12700
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,12.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,1536,1536,18332,11164
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,13.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,1536,1536,7041,16032
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,14.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,1536,1536,7041,17568
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,15.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,1536,1536,8577,17568
+Validation,BIDMC,DLBCL,CCPA-250915-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,16.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,1536,1536,8577,16032
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,3584,2048,14495,6499
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,3584,2048,14495,8547
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,3584,2048,18079,8547
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,3584,2048,18079,6499
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,3584,2048,6491,5000
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,3584,2048,6491,7048
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,3584,2048,10075,7048
+Validation,Roche,Tonsil,CCPA-250915-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,3584,2048,10075,5000
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,3584,2048,14502,9502
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,3584,2048,14502,11550
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,3584,2048,18086,11550
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,3584,2048,18086,9502
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,3584,2048,6006,7479
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,3584,2048,6006,9527
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,3584,2048,9590,9527
+Validation,Roche,Tonsil,CCPA-250915-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,3584,2048,9590,7479
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,3584,2048,14494,11037
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,3584,2048,14494,8989
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,3584,2048,18078,8989
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,3584,2048,18078,11037
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,3584,2048,6017,7495
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,3584,2048,6017,9543
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,3584,2048,9601,9543
+Validation,Roche,Tonsil,CCPA-250915-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,3584,2048,9601,7495
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A01,3584,2560,6689,34426
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A02,3584,2560,6689,36986
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A03,3584,2560,10273,36986
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A04,3584,2560,10273,34426
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A05,3584,2560,23689,21402
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A06,3584,2560,23689,23962
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A07,3584,2560,27273,23962
+Validation,ASTAR,Tonsil,CCPA-250915-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A08,3584,2560,27273,21402
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,3584,2048,14489,7502
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,3584,2048,14489,9550
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,3584,2048,18073,9550
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,3584,2048,18073,7502
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,3584,2048,5501,7561
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,3584,2048,5501,9609
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,3584,2048,9085,9609
+Validation,Roche,Tonsil,CCPA-250915-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,3584,2048,9085,7561
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,2560,1536,17518,29482
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,2560,1536,17518,31018
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,2560,1536,20078,31018
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,2560,1536,20078,29482
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,2560,1536,23980,32503
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,2560,1536,23980,34039
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,2560,1536,26540,34039
+Validation,Roche,Intestine,CCPA-250915-21,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,2560,1536,26540,32503
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,2560,1536,16973,31156
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,2560,1536,16973,32692
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,2560,1536,19533,32692
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,2560,1536,19533,31156
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,2560,1536,23032,35493
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,2560,1536,23032,37029
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,2560,1536,25592,37029
+Validation,Roche,Intestine,CCPA-250915-22,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,2560,1536,25592,35493
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,2560,1536,10518,30714
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,2560,1536,10518,32250
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,2560,1536,13078,32250
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,2560,1536,13078,30714
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,2560,1536,3498,33499
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,2560,1536,3498,35035
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,2560,1536,6058,35035
+Validation,Roche,Intestine,CCPA-250915-23,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,2560,1536,6058,33499
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A01,2560,1536,16018,31688
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A02,2560,1536,16018,33224
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A03,2560,1536,18578,33224
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV1, A04,2560,1536,18578,31688
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A05,2560,1536,22531,35519
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A06,2560,1536,22531,37055
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A07,2560,1536,25091,37055
+Validation,Roche,Intestine,CCPA-250915-24,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,2,3,4,5,6,11,13] # CD45, CD8, CD3, CD4, CD20, CD34, Vimentin, Pan-Cytokeratin",FOV2, A08,2560,1536,25091,35519
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,25030,2265
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,25030,5337
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,28102,5337
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,28102,2265
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,34552,1917
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,34552,4989
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,37624,4989
+Validation,UKentucky,Tonsil,CCPA-250915-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,37624,1917
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,22811,4396
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,22811,7468
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,25883,7468
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,25883,4396
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,32657,4650
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,32657,7722
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,35729,7722
+Validation,UKentucky,Tonsil,CCPA-250915-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,35729,4650
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,23455,2562
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,23455,5634
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,26527,5634
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,26527,2562
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,32760,1943
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,32760,5015
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,35832,5015
+Validation,UKentucky,Tonsil,CCPA-250915-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,35832,1943
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,24093,14397
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,24093,17469
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,27165,17469
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,27165,14397
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,33710,14616
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,33710,17688
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,36782,17688
+Validation,UKentucky,Tonsil,CCPA-250915-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,36782,14616
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,25234,14155
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,25234,17227
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,28306,17227
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,28306,14155
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,35769,13984
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,35769,17056
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,38841,17056
+Validation,UKentucky,SCC,CCPA-250915-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,38841,13984
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A01,3584,2560,4828,36199
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A02,3584,2560,4828,38759
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A03,3584,2560,8412,38759
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A04,3584,2560,8412,36199
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A05,3584,2560,23370,24415
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A06,3584,2560,23370,26975
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A07,3584,2560,26954,26975
+Validation,ASTAR,Tonsil,CCPA-250915-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A08,3584,2560,26954,24415
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,22642,16443
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,22642,19515
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,25714,19515
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,25714,16443
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,32988,16656
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,32988,19728
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,36060,19728
+Validation,UKentucky,SCC,CCPA-250915-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,36060,16656
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,23781,14453
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,23781,17525
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,26853,17525
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,26853,14453
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,34122,13784
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,34122,16856
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,37194,16856
+Validation,UKentucky,SCC,CCPA-250915-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,37194,13784
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A01,3072,3072,23720,26601
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A02,3072,3072,23720,29673
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A03,3072,3072,26792,29673
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV1, A04,3072,3072,26792,26601
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A05,3072,3072,34270,26730
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A06,3072,3072,34270,29802
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A07,3072,3072,37342,29802
+Validation,UKentucky,SCC,CCPA-250915-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[9, 15, 21] # CD45, SMA, CK",FOV2, A08,3072,3072,37342,26730
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A01,3584,2560,10748,37067
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A02,3584,2560,10748,39627
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A03,3584,2560,14332,39627
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV1, A04,3584,2560,14332,37067
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A05,3584,2560,29611,26537
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A06,3584,2560,29611,29097
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A07,3584,2560,33195,29097
+Validation,ASTAR,Tonsil,CCPA-250915-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15] # CD31, HLA-DR, CK ",FOV2, A08,3584,2560,33195,26537
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A01,3584,2560,12570,12125
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A02,3584,2560,12570,14685
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A03,3584,2560,16154,14685
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A04,3584,2560,16154,12125
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A05,3584,2560,32502,13449
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A06,3584,2560,32502,16009
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A07,3584,2560,36086,16009
+Validation,ASTAR,CRC,CCPA-250915-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A08,3584,2560,36086,13449
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A01,3584,2560,9757,9637
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A02,3584,2560,9757,12197
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A03,3584,2560,13341,12197
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A04,3584,2560,13341,9637
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A05,3584,2560,29005,10355
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A06,3584,2560,29005,12915
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A07,3584,2560,32589,10355
+Validation,ASTAR,CRC,CCPA-250915-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A08,3584,2560,32589,12915
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A01,3584,2560,12202,11521
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A02,3584,2560,12202,14081
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A03,3584,2560,15786,14081
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A04,3584,2560,15786,11521
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A05,3584,2560,30362,13820
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A06,3584,2560,30362,16380
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A07,3584,2560,33946,13820
+Validation,ASTAR,CRC,CCPA-250915-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A08,3584,2560,33946,16380
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A01,3584,2560,29861,16106
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A02,3584,2560,29861,18666
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A03,3584,2560,33445,18666
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV1, A04,3584,2560,33445,16106
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A05,3584,2560,11532,13405
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A06,3584,2560,11532,15965
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A07,3584,2560,15116,15965
+Validation,ASTAR,CRC,CCPA-250915-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",Lunaphore_COMET,0.23,[0] #DAPI,"[2, 13, 15, 17] # CD31, HLA-DR, CK, CD11b",FOV2, A08,3584,2560,15116,13405
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A01,3584,2560,4020,6714
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A02,3584,2560,4020,9274
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A03,3584,2560,7604,9274
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV1, A04,3584,2560,7604,6714
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A05,3584,2560,12752,11998
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A06,3584,2560,12752,14558
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A07,3584,2560,16336,14558
+Validation,BIDMC,Tonsil,CCPA-250915-9,32,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[2, 6, 12, 27] #CD45, CD11b, HLA-DR, Cytokeratin",FOV2, A08,3584,2560,16336,11998
+Validation,Stanford,Lymph_Node,CCPA-250916-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A01,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A02,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A03,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A04,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-10,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A01,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-10,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A02,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-10,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A03,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-10,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A04,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T3, A01,2048,2048,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-12,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T4, A01,2048,2048,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-13,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A01,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-13,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A02,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-13,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A03,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-13,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A04,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-14,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A01,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-14,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A02,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-14,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A03,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-14,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A04,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-15,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T3, A01,2048,2048,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-16,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T4, A01,2048,2048,0,0
+Validation,Stanford,Colon,CCPA-250916-17,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Colon,CCPA-250916-18,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Colon,CCPA-250916-19,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-2,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A01,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-2,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A02,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-2,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A03,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-2,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A04,3072,3072,0,0
+Validation,Stanford,Colon,CCPA-250916-20,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,3072,2048,9009,26003
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,3072,2048,9009,28051
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,3072,2048,12081,28051
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,3072,2048,12081,26003
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,3072,2048,7997,5978
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,3072,2048,7997,8026
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,3072,2048,11069,8026
+Validation,Stanford,Lymph_Node,CCPA-250916-25,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,3072,2048,11069,5978
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,3072,2048,8037,24980
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,3072,2048,8037,27028
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,3072,2048,11109,27028
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,3072,2048,11109,24980
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,3072,2048,7993,4990
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,3072,2048,7993,7038
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,3072,2048,11065,7038
+Validation,Stanford,Lymph_Node,CCPA-250916-26,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,3072,2048,11065,4990
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,3072,2048,6998,24990
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,3072,2048,6998,27038
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,3072,2048,10070,27038
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,3072,2048,10070,24990
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,3072,2048,6004,4006
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,3072,2048,6004,6054
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,3072,2048,9076,6054
+Validation,Stanford,Lymph_Node,CCPA-250916-27,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,3072,2048,9076,4006
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,3072,2048,7994,24990
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,3072,2048,7994,27038
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,3072,2048,11066,27038
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,3072,2048,11066,24990
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,3072,2048,9004,4989
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,3072,2048,9004,7037
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,3072,2048,12076,7037
+Validation,Stanford,Lymph_Node,CCPA-250916-28,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,3072,2048,12076,4989
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,1024,1024,27673,22172
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,1024,1536,27673,23196
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,1536,1536,28697,23196
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,1536,1024,28697,22172
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,1024,1024,18850,17004
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,1024,1536,18850,18028
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,1536,1536,19874,18028
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-29,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,1536,1024,19874,17004
+Validation,Stanford,Lymph_Node,CCPA-250916-3,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T3, A01,2048,2048,0,0
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,1024,1024,28288,21496
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,1024,1536,28288,22520
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,1536,1536,29312,22520
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,1536,1024,29312,21496
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,1024,1024,19498,16493
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,1024,1536,19498,17517
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,1536,1536,20522,17517
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-30,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,1536,1024,20522,16493
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,1024,1024,23157,20508
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,1024,1536,23157,21532
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,1536,1536,24181,21532
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,1536,1024,24181,20508
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,1024,1024,14488,15500
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,1024,1536,14488,16524
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,1536,1536,15512,16524
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-31,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,1536,1024,15512,15500
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A01,1024,1024,28492,22009
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A02,1024,1536,28492,23033
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A03,1536,1536,29516,23033
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV1, A04,1536,1024,29516,22009
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A05,1024,1024,19496,17002
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A06,1024,1536,19496,18026
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A07,1536,1536,20520,18026
+Validation,Stanford,Endometrial_Cancer,CCPA-250916-32,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",RareCyte_Orion,0.325,[0] #DAPI,"[16, 17, 18, 9, 12 ] # CD31, SMA, HLA-ABC, CD8, CD3",FOV2, A08,1536,1024,20520,17002
+Validation,Stanford,Tonsil,CCPA-250916-33,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,1024,512,0,1488
+Validation,Stanford,Tonsil,CCPA-250916-33,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,1024,1024,976,0
+Validation,Stanford,Tonsil,CCPA-250916-34,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,1024,1024,976,0
+Validation,Stanford,Tonsil,CCPA-250916-34,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,1024,512,0,1488
+Validation,Stanford,Tonsil,CCPA-250916-35,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,1024,512,0,1488
+Validation,Stanford,Tonsil,CCPA-250916-35,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,1024,1024,976,0
+Validation,Stanford,Tonsil,CCPA-250916-36,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,1024,1024,976,0
+Validation,Stanford,Tonsil,CCPA-250916-36,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,1024,512,0,1488
+Validation,Stanford,Lymph_Node,CCPA-250916-4,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T4, A01,2048,2048,0,0
+Validation,Stanford,Liver,CCPA-250916-41,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Liver,CCPA-250916-42,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Liver,CCPA-250916-43,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Liver,CCPA-250916-44,24,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",, A01,1024,1024,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-5,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A01,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-5,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A02,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-5,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A03,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-5,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A04,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A01,2048,2048,3072,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A02,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A03,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T2, A04,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-7,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T3, A01,2048,2048,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-8,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T4, A01,2048,2048,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-9,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A01,3072,3072,0,0
+Validation,Stanford,Lymph_Node,CCPA-250916-9,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A02,2048,3072,3072,0
+Validation,Stanford,Lymph_Node,CCPA-250916-9,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A03,3072,2048,0,3072
+Validation,Stanford,Lymph_Node,CCPA-250916-9,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",MIBI,0.390625,[12] #HH3,"[1, 20, 21] # SMA, CD45, CD31",T1, A04,2048,2048,3072,3072
+Validation,Stanford,OSCC,CCPA-251008-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,2048,2048,0,1952
+Validation,Stanford,OSCC,CCPA-251008-1,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,2048,2048,1952,0
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A01,1536,2560,6448,11052
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A02,1536,2560,6448,13612
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A03,1536,2560,7984,13612
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A04,1536,2560,7984,11052
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A05,1536,2560,15675,7156
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A06,1536,2560,15675,9716
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A07,1536,2560,17211,9716
+Validation,Novartis,Lung_Cancer,CCPA-251008-10,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A08,1536,2560,17211,7156
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A01,1536,2560,7490,6020
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A02,1536,2560,7490,8580
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A03,1536,2560,9026,8580
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A04,1536,2560,9026,6020
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A05,1536,2560,17026,8024
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A06,1536,2560,17026,10584
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A07,1536,2560,18562,10584
+Validation,Novartis,Lung_Cancer,CCPA-251008-11,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A08,1536,2560,18562,8024
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A01,1536,2560,7994,6532
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A02,1536,2560,7994,3972
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A03,1536,2560,9530,3972
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A04,1536,2560,9530,6532
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A05,1536,2560,16765,6069
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A06,1536,2560,16765,8629
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A07,1536,2560,18301,8629
+Validation,Novartis,Lung_Cancer,CCPA-251008-12,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A08,1536,2560,18301,6069
+Validation,Stanford,OSCC,CCPA-251008-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,2048,2048,0,1952
+Validation,Stanford,OSCC,CCPA-251008-2,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,2048,2048,1952,0
+Validation,Stanford,OSCC,CCPA-251008-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,2048,2048,0,1952
+Validation,Stanford,OSCC,CCPA-251008-3,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,2048,2048,1952,0
+Validation,Stanford,OSCC,CCPA-251008-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV1, A01,2048,2048,0,1952
+Validation,Stanford,OSCC,CCPA-251008-4,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",IMC,1,[37] #DNA1,"[0,2,3,4,17,21,22,23,25] #  ASMA, CD3, CD4, CD8, CD20, CD45RA, CD45RO, CD31, panCK",FOV2, A02,2048,2048,1952,0
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A01,1536,2560,9864,1835
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A02,1536,2560,9864,4395
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A03,1536,2560,11400,4395
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A04,1536,2560,11400,1835
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A05,1536,2560,10951,9527
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A06,1536,2560,10951,12087
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A07,1536,2560,12487,9527
+Validation,Novartis,Tonsil,CCPA-251008-5,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A08,1536,2560,12487,12087
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A01,1536,2560,9483,2013
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A02,1536,2560,9483,4573
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A03,1536,2560,11019,4573
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A04,1536,2560,11019,2013
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A05,1536,2560,9609,9571
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A06,1536,2560,9609,12131
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A07,1536,2560,11145,12131
+Validation,Novartis,Tonsil,CCPA-251008-6,1,"20 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A08,1536,2560,11145,9571
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A01,1536,2560,8809,1847
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A02,1536,2560,8809,4407
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A03,1536,2560,10345,4407
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A04,1536,2560,10345,1847
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A05,1536,2560,10633,9673
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A06,1536,2560,10633,12233
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A07,1536,2560,12169,12233
+Validation,Novartis,Tonsil,CCPA-251008-7,2,"40 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A08,1536,2560,12169,9673
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A01,1536,2560,9483,2013
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A02,1536,2560,9483,4573
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A03,1536,2560,11019,4573
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV1, A04,1536,2560,11019,2013
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A05,1536,2560,9609,9571
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A06,1536,2560,9609,12131
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A07,1536,2560,11145,12131
+Validation,Novartis,Tonsil,CCPA-251008-8,4,"20 min Citraconic Anhydride (pH 7.4), 25C 1h",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,7,11] # CD3, CD11c, Ecadherin",FOV2, A08,1536,2560,11145,9571
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A01,1536,2560,7392,12558
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A02,1536,2560,7392,15118
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A03,1536,2560,8928,15118
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV1, A04,1536,2560,8928,12558
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A05,1536,2560,15891,7645
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A06,1536,2560,15891,10205
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A07,1536,2560,17427,10205
+Validation,Novartis,Lung_Cancer,CCPA-251008-9,3,"10 min Tris/EDTA (pH 9.0), 4C O/N",PhenoCycler-Fusion,0.5,[0] #DAPI,"[1,6,8,11] # CD3, CD68, HLA-DR, ECadherin ",FOV2, A08,1536,2560,17427,7645

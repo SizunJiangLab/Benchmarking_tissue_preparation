@@ -28,7 +28,7 @@ pip install deepcell  # For Mesmer segmentation
 ## Inputs
 
 - **Raw QPTIFF images**: Download from [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (accession TBD)
-- **FOV coordinates**: Defined in the script's `crop_coords_dict` or reference [`Master_metadata.csv`](../Master_metadata.csv)
+- **FOV coordinates**: Defined in the script's `crop_coords_dict` or reference [`Master_metadata_Mesmer.csv`](../Master_metadata_Mesmer.csv)
 
 ## Configuration
 
