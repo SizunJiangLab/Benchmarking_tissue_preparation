@@ -10,22 +10,21 @@ from tqdm import tqdm
 import pandas as pd
 import matplotlib.colors as mcolors
 
-# --- Palette (exactly the same as your preferred one) ---
 CELLTYPE_COLOR = {
     # T-cell family
-    "T cells": "#E41A1C",          # Set1 red
+    #"T cells": "#E41A1C",          # Set1 red
     "CD8+ T cells": "#FB6A4A",     # custom salmon
-    "CD8- T cells": "#FCBBA1",     # lighter salmon
+    "CD4+ T cells": "#FCBBA1",     # lighter salmon
     "Tregs": "#FEB24C",            # orange
 
     # Other lineages (Set1)
     "B cells": "#377EB8",          # Set1 blue
     "Epithelial": "#984EA3",       # Set1 purple
-    "Epithelial and B cells": "#4DAF4A",  # Set1 green
+    #"Epithelial and B cells": "#4DAF4A",  # Set1 green
     "Macrophages": "#A65628",      # Set1 brown
-    "Neutrophils and Unknown": "#F781BF", # Set1 pink
+    #"Neutrophils and Other": "#F781BF", # Set1 pink
 
-    "Unknown": "#525252",          # dark gray
+    "Other": "#525252",          # dark gray
 }
 
 MIXED_COLOR = "#bdbdbd"  # default/fallback color

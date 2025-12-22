@@ -176,7 +176,6 @@ for prefix in matches:
 
     gdf["class_key"] = gdf["classification_dict"].apply(to_key)
 
-    # --- group & write ---
     summary = []
     for (name, color), sub in gdf.groupby("class_key"):
         # build a safe filename: e.g., name-11_color-242-72-72.geojson

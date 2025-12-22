@@ -35,8 +35,8 @@ markers_all = [
 ]
 
 def reduce_annotation_for_category(label: str) -> str:
-    if label == "Unknown":
-        return "Unknown"
+    if label == "Other":
+        return "Other"
     if "and" in label:
     #if "and" in label or label == "T cells":
         return "Mixed"
@@ -44,7 +44,7 @@ def reduce_annotation_for_category(label: str) -> str:
 
 
 # Paths
-annotation_json_path = Path("/registered_report/cluster_annotations.json")
+annotation_json_path = Path("registered_report/cluster_annotations.json")
 output_root = Path("/registered_report/output")
 input_dir = Path("/registered_report/input/h5ad")
 
