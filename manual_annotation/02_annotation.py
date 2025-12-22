@@ -44,7 +44,7 @@ def reduce_annotation_for_category(label: str) -> str:
 
 
 # Paths
-annotation_json_path = Path("registered_report/cluster_annotations.json")
+annotation_json_path = Path("/registered_report/cluster_annotations.json")
 output_root = Path("/registered_report/output")
 input_dir = Path("/registered_report/input/h5ad")
 
