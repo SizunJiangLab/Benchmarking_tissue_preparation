@@ -35,8 +35,8 @@ markers_all = [
 ]
 
 def reduce_annotation_for_category(label: str) -> str:
-    if label == "Unknown":
-        return "Unknown"
+    if label == "Other":
+        return "Other"
     if "and" in label:
     #if "and" in label or label == "T cells":
         return "Mixed"

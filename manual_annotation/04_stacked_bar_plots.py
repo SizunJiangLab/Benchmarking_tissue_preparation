@@ -9,28 +9,28 @@ from clustering import subcluster
 importlib.reload(subcluster)
 from clustering.subcluster import ClusteringResult, ClusteringResultManager
 
+
 CELLTYPE_COLOR = {
     # T-cell family
-    "T cells": "#E41A1C",          # Set1 red
-    "CD8+ T cells": "#FB6A4A",     # custom salmon
-    "CD8- T cells": "#FCBBA1",     # lighter salmon
+    #"T cells": "#E41A1C",          # Set1 red
+    "Macrophages": "#A65628",      # Set1 brown
+    "Epithelial": "#984EA3",       # Set1 purple
+    "B cells": "#377EB8",          # Set1 blue
     "Tregs": "#FEB24C",            # orange
+    "CD4+ T cells": "#FCBBA1",     # lighter salmon
+    "CD8+ T cells": "#FB6A4A",     # custom salmon
 
     # Other lineages (Set1)
-    "B cells": "#377EB8",          # Set1 blue
-    "Epithelial": "#984EA3",       # Set1 purple
-    "Epithelial and B cells": "#4DAF4A",  # Set1 green
-    "Macrophages": "#A65628",      # Set1 brown
-    "Neutrophils and Unknown": "#F781BF", # Set1 pink
+    #"Epithelial and B cells": "#4DAF4A",  # Set1 green
+    #"Neutrophils and Other": "#F781BF", # Set1 pink
 
-    "Unknown": "#525252",          # dark gray
+    "Other": "#525252",          # dark gray
 }
 
-MIXED_COLOR = "#bdbdbd"  # light gray for Mixed
 
-annotation_json_path = Path(
-    "/registered_report/cluster_annotations.json"
-)
+MIXED_COLOR = "#BDBDBD"  # light gray for Mixed
+
+annotation_json_path = Path("/registered_report/cluster_annotations.json")
 output_root = Path("/registered_report/output")
 input_dir = Path("/registered_report/input/h5ad")
 
@@ -44,16 +44,22 @@ custom_order = [
 slide_to_condition = {f"slide_{int(b.split('_')[1]):02d}": b for b in custom_order}
 condition_to_slide = {v: k for k, v in slide_to_condition.items()}
 
+
 def reduce_annotation_for_category(label: str) -> str:
-    if label == "Unknown":
-        return "Unknown"
+    """
+    Keep known labels from CELLTYPE_COLOR, convert unknown-but-nonempty to Mixed,
+    preserve explicit 'Other'.
+    """
+    if label == "Other":
+        return "Other"
     if label in CELLTYPE_COLOR:
         return label
     return "Mixed"
 
-#remove Artifacts from plotting
+# --- Remove Artifacts from plotting ---
 with open(annotation_json_path) as f:
     annotations_all = json.load(f)
+
 for slide, cluster_dict in annotations_all.items():
     for k in list(cluster_dict.keys()):
         if cluster_dict[k] == "Artifacts":
@@ -90,7 +96,7 @@ for slide_key, annotations in annotations_all.items():
     counts = manager.summary_df.annotation[manager.summary_df.annotation != ""].value_counts()
     per_slide_annotation_counts[slide_key] = {k: int(v) for k, v in counts.items()}
 
-# reduce to actual labels + mixed + unknown
+# --- Reduce to (actual labels) + Mixed + Other ---
 reduced_annotation_counts: dict[str, dict[str, int]] = {}
 for slide, counts in per_slide_annotation_counts.items():
     agg: dict[str, int] = {}
@@ -104,29 +110,66 @@ for slide, counts in per_slide_annotation_counts.items():
 reduced_df = pd.DataFrame(reduced_annotation_counts).T.fillna(0)
 reduced_df_frac = reduced_df.div(reduced_df.sum(axis=1), axis=0).fillna(0)
 
-# slide order by condition, keeping only present
+# --- Slide order by condition (keep only present) ---
 ordered_slide_ids = [
     condition_to_slide[c] for c in custom_order
     if c in condition_to_slide and condition_to_slide[c] in reduced_df_frac.index
 ]
 reduced_df_frac = reduced_df_frac.loc[ordered_slide_ids]
 
-# label order
-defined_order = [lab for lab in CELLTYPE_COLOR.keys()
-                 if lab in reduced_df_frac.columns and lab != "Unknown"]
+# --- Label order ---
+# 1) Core cell types (everything except the tail group and Other)
+core_order = [lab for lab in CELLTYPE_COLOR.keys()
+              if lab in reduced_df_frac.columns
+              and lab not in {"Other", "Neutrophils and Other", "Epithelial and B cells"}]
 
-tail = [lab for lab in ["Mixed", "Unknown"] if lab in reduced_df_frac.columns]
-label_list = defined_order + tail
+# 2) Tail group (place these next to Mixed/Other on the right)
+tail_like = [lab for lab in ["Epithelial and B cells", "Neutrophils and Other"] if lab in reduced_df_frac.columns]
 
+# 3) True tail
+tail1 = [lab for lab in ["Mixed"] if lab in reduced_df_frac.columns]
+tail2 = [lab for lab in ["Other"] if lab in reduced_df_frac.columns]
+
+label_list = tail2 + tail1 + core_order
 reduced_df_frac = reduced_df_frac.reindex(columns=label_list, fill_value=0)
--
+
+# -------- CSV export: counts + fractions for Mixed and Other --------
+counts_df = reduced_df.reindex(index=ordered_slide_ids).fillna(0)
+counts_df = counts_df.astype(int)
+
+mixed_counts = counts_df.get("Mixed", pd.Series(0, index=counts_df.index))
+unknown_counts = counts_df.get("Other", pd.Series(0, index=counts_df.index))
+
+# Total annotated cells per slide (after removing Artifacts)
+total_counts = counts_df.sum(axis=1)
+
+# Fractions from the same data used for the plot
+mixed_frac = (mixed_counts / total_counts).fillna(0)
+unknown_frac = (unknown_counts / total_counts).fillna(0)
+
+export_df = pd.DataFrame({
+    "Condition": [slide_to_condition.get(slide_id, slide_id) for slide_id in counts_df.index],
+    "TotalCells": total_counts.astype(int),
+    "MixedCount": mixed_counts.astype(int),
+    "OtherCount": unknown_counts.astype(int),
+    "MixedFraction": mixed_frac,
+    "OtherFraction": unknown_frac,
+})
+
+csv_path = output_root / "mixed_unknown_counts_and_fractions_by_slide.csv"
+export_df.to_csv(csv_path, index_label="slide_id")
+print(f"Saved CSV with counts and fractions: {csv_path}")
+
+
+# --- Colors aligned to label_list ---
 label_color_map = {
-    **{lab: mcolors.to_rgb(CELLTYPE_COLOR[lab]) for lab in defined_order},
+    **{lab: mcolors.to_rgb(CELLTYPE_COLOR[lab]) for lab in CELLTYPE_COLOR if lab in label_list and lab != "Other"},
     "Mixed": mcolors.to_rgb(MIXED_COLOR),
-    "Unknown": mcolors.to_rgb(CELLTYPE_COLOR["Unknown"]),
+    "Other": mcolors.to_rgb(CELLTYPE_COLOR["Other"]),
 }
 color_list = [label_color_map[l] for l in label_list]
 
+# --- Plot ---
 ax = reduced_df_frac.plot(
     kind="bar",
     stacked=True,
@@ -136,7 +179,8 @@ ax = reduced_df_frac.plot(
     linewidth=0.4,
 )
 plt.ylabel("Fraction of annotated cells")
-plt.title("Annotation Breakdown: Actual Labels vs Mixed vs Unknown (per slide)")
+plt.xlabel("Conditions ranked from best to worst (left to right) based on CV values")  # requested x label
+plt.title("Annotated cell types per condition")
 plt.xticks(rotation=90)
 plt.ylim(0, 1.0)
 plt.legend(
@@ -147,4 +191,37 @@ plt.legend(
 )
 plt.tight_layout()
 plt.savefig(output_root / "annotation_mixed_vs_single_vs_unknown.svg", bbox_inches="tight")
+plt.close()
+
+# --- Plot ---
+ax = reduced_df_frac.plot(
+    kind="bar",
+    stacked=True,
+    figsize=(18, 8),
+    color=color_list,
+    edgecolor="black",
+    linewidth=0.4,
+)
+
+# Reverse the legend order
+handles, labels = ax.get_legend_handles_labels()
+
+plt.ylabel("Fraction of annotated cells")
+plt.xlabel("Conditions ranked from best to worst (left to right) based on CV values")
+plt.title("Annotated cell types per condition")
+plt.xticks(rotation=90)
+plt.ylim(0, 1.0)
+
+# Apply reversed handles and labels
+plt.legend(
+    handles[::-1], 
+    labels[::-1],
+    title="Annotation",
+    bbox_to_anchor=(1.02, 1),
+    loc="upper left",
+    fontsize="small",
+)
+
+plt.tight_layout()
+plt.savefig(output_root / "annotation_mixed_vs_single_vs_unknown_reversed.svg", bbox_inches="tight")
 plt.close()
