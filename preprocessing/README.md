@@ -27,7 +27,7 @@ pip install deepcell  # For Mesmer segmentation
 
 ## Inputs
 
-- **Raw QPTIFF images**: Download from [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (accession TBD)
+- **Raw QPTIFF images**: Download from [BioImage Archive (S-BIAD2491)](https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD2491)
 - **FOV coordinates**: Defined in the script's `crop_coords_dict` or reference [`Master_metadata_Mesmer.csv`](../Master_metadata_Mesmer.csv)
 
 ## Configuration
@@ -103,4 +103,4 @@ interior_threshold = 0.2   # Cell boundary threshold
 
 ## Note
 
-Pre-generated CSV outputs are available on [Zenodo](https://zenodo.org/) (TBD). Most users can skip this preprocessing step and download the CSVs directly for use with Stage 2 R workflows.
+Pre-generated CSV outputs are available on [Zenodo (17843231)](https://zenodo.org/records/17843231). Most users can skip this preprocessing step and download the CSVs directly for use with Stage 2 R workflows.

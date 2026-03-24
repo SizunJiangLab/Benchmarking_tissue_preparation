@@ -40,8 +40,8 @@ Large data files are hosted externally due to size. Download and place in the ap
 
 | Data Type                | Location                                                          | Description                                                                                             |
 | ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Raw Images & Annotations | [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/) (TBD) | Input for Stage 1 preprocessing: QPTIFF images, segmentation masks, cropped FOVs, cell outlines         |
-| Single-cell Features     | [Zenodo](https://zenodo.org/) (TBD)                               | Input for Stage 2 analysis: per-cell marker intensities → place in `data_mesmer/` or `data_cellXpress/` |
+| Raw Images & Annotations | [BioImage Archive (S-BIAD2491)](https://www.ebi.ac.uk/biostudies/bioimages/studies/S-BIAD2491) | Input for Stage 1 preprocessing: QPTIFF images, segmentation masks, cropped FOVs, cell outlines         |
+| Single-cell Features     | [Zenodo (17843231)](https://zenodo.org/records/17843231)                                       | Input for Stage 2 analysis: per-cell marker intensities → place in `data_mesmer/` or `data_cellXpress/` |
 
 ### Workflow Documentation
 
