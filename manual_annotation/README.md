@@ -132,3 +132,63 @@ python 05_enrichment_plots.py
 ```bash
 sbatch 05_submit_enrichment.slurm
 ```
+
+---
+
+## 6️⃣ 06_umap_all_slides.py
+
+**Purpose:**  
+Concatenates all 24 slides, attaches PhenoGraph cluster IDs and cell-type
+annotations from the per-slide clustering CSVs, and runs UMAP. Provides the
+resolved cell-type annotations on dimensionality-reduction plots requested by
+the reviewers. Two analysis modes are produced: `all_cells` and
+`filtered_annotations` (keeping only cells with a definite annotation:
+CD8+ T cells, CD8- T cells, Tregs, B cells, Epithelial, Macrophages).
+SVGs are exported with editable text for Illustrator.
+
+**Inputs:**  
+- `input/h5ad/slide_{XX}_adata.h5ad`  
+- `output/slide_{XX}_adata_k=200/clustering_results/*.csv`  
+
+**Outputs:**  
+- `output/umap/all_cells/` and `output/umap/filtered_annotations/`, each with:  
+  - `combined_umap.h5ad` — combined AnnData object for the analysis mode
+  - `umap_by_cluster.svg` — UMAP colored by PhenoGraph cluster ID
+  - `umap_by_annotation.svg` — UMAP colored by cell-type annotation
+  - `umap_by_slide.svg` — UMAP colored by slide ID for batch checking
+  - `umap_marker_expression_grid.svg` — grid of UMAPs colored by marker intensity
+
+**Run manually:**  
+Paths default to this folder's `input/` and `output/`. To point at data stored
+elsewhere, set `REGISTERED_REPORT_DIR` (no paths are hard-coded in the script);
+column names can still be adjusted in the `CONFIG` block. Then run:
+```bash
+python 06_umap_all_slides.py
+```
+
+---
+
+## 7️⃣ 07_umap_all_slides_individual_stitched.py
+
+**Purpose:**  
+Generates UMAP visualizations for each slide individually and stitches them
+into A4 pages for side-by-side comparison across conditions. Each per-slide
+panel pairs a cell-type annotation UMAP with a marker-expression grid.
+
+**Inputs:**  
+- `input/h5ad/slide_{XX}_adata.h5ad`  
+- `output/slide_{XX}_adata_k=200/clustering_results/*.csv`  
+
+**Outputs:**  
+- `output/umap/slide_{XX}/`  
+  - `slide_{XX}_umap.h5ad` — slide-specific AnnData with UMAP coordinates and metadata
+  - `slide_{XX}_umap_annotation_and_markers.svg` — annotation UMAP (left) plus marker-expression panels (right)
+- `output/umap/slides_01_04_A4.svg` … `slides_21_24_A4.svg` — A4 portrait pages stitching four slides each
+
+**Run manually:**  
+Paths default to this folder's `input/` and `output/`. To point at data stored
+elsewhere, set `REGISTERED_REPORT_DIR` (no paths are hard-coded in the script);
+column names can still be adjusted in the `CONFIG` block. Then run:
+```bash
+python 07_umap_all_slides_individual_stitched.py
+```

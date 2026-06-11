@@ -44,9 +44,14 @@ def reduce_annotation_for_category(label: str) -> str:
 
 
 # Paths
-annotation_json_path = Path("/registered_report/cluster_annotations.json")
-output_root = Path("/registered_report/output")
-input_dir = Path("/registered_report/input/h5ad")
+import os
+
+# Base directory holding cluster_annotations.json, input/ and output/.
+# Defaults to this script's folder; override with REGISTERED_REPORT_DIR.
+BASE_DIR = Path(os.environ.get("REGISTERED_REPORT_DIR", Path(__file__).resolve().parent))
+annotation_json_path = BASE_DIR / "cluster_annotations.json"
+output_root = BASE_DIR / "output"
+input_dir = BASE_DIR / "input" / "h5ad"
 
 # Load annotations
 with open(annotation_json_path) as f:

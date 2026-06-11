@@ -46,8 +46,13 @@ markers_all = [
 slide_index = int(sys.argv[1])  # e.g., 1, 2, ..., 24
 slide_filename = f"slide_{slide_index:02d}_adata.h5ad"
 
-input_dir = Path("/registered_report/input/h5ad")
-output_root = Path("/registered_report/output")
+import os
+
+# Base directory holding input/ and output/. Defaults to this script's folder;
+# override with REGISTERED_REPORT_DIR to point at data stored elsewhere.
+BASE_DIR = Path(os.environ.get("REGISTERED_REPORT_DIR", Path(__file__).resolve().parent))
+input_dir = BASE_DIR / "input" / "h5ad"
+output_root = BASE_DIR / "output"
 
 h5ad_path = input_dir / slide_filename
 
@@ -129,10 +134,8 @@ heatmap_vmin_vmax = plot_clustering_heatmap_2(
 heatmap_vmin_vmax.savefig(f"{output_dir}/heatmap_{slide_name}_dual_vmin_vmax.png", dpi=300, bbox_inches="tight")
 
 for prefix in matches:
-    print(f"/registered_report/input/geojson/{prefix}.geojson")
-    geojson_file = Path(
-        f"/registered_report/input/geojson/{prefix}.geojson"
-    )
+    geojson_file = BASE_DIR / "input" / "geojson" / f"{prefix}.geojson"
+    print(geojson_file)
     update_geojson_from_clustering_result(
         geojson_file,
         clustering_result,
@@ -146,7 +149,7 @@ for prefix in matches:
 
     in_path = matches[0]
     gdf = gpd.read_file(in_path)
-    out_dir = Path(f"/registered_report/output/{slide_name}_k=200/per_class_geojson")
+    out_dir = output_root / f"{slide_name}_k=200" / "per_class_geojson"
     out_dir.mkdir(parents=True, exist_ok=True)
 
 
