@@ -9,7 +9,7 @@ library(readr)
 library(presto)
 library(svglite)
 library(qs)
-source("helper.R")
+source("R/helper.R")
 
 # Create results folder if it doesn't exist
 dir.create("./results", showWarnings = FALSE, recursive = TRUE)
