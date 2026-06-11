@@ -11,4 +11,8 @@
 ml Miniforge3
 conda activate clustering_3.11
 
+# Data root for input/, output/, and cluster_annotations.json.
+# Override by exporting REGISTERED_REPORT_DIR before sbatch; defaults to the cluster path.
+export REGISTERED_REPORT_DIR="${REGISTERED_REPORT_DIR:-/registered_report}"
+
 python ./04_stacked_bar_plots.py

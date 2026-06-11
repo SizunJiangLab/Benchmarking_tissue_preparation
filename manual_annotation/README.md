@@ -1,5 +1,22 @@
 # How to run:
 
+## Data location
+
+All seven scripts resolve their `input/`, `output/`, and `cluster_annotations.json`
+under a single base directory controlled by the `REGISTERED_REPORT_DIR` environment
+variable. If it is not set, the base defaults to this `manual_annotation/` folder.
+Point it at wherever the data actually lives, e.g.:
+
+```bash
+export REGISTERED_REPORT_DIR=/registered_report
+```
+
+The provided `*.slurm` submit scripts already export this (defaulting to
+`/registered_report`), so the `sbatch` workflow below works out of the box; set the
+variable yourself when running the scripts manually with `python ...`.
+
+---
+
 ## 1️⃣ 01_clustering.py
 
 **Purpose:**  
