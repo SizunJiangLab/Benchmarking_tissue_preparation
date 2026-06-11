@@ -57,9 +57,10 @@ _Mesmer and CellXpress are independent segmentation platforms—choose based on 
 
 | Workflow                         | Script / Folder                   | Documentation                                              |
 | -------------------------------- | --------------------------------- | ---------------------------------------------------------- |
-| Mesmer segmentation analysis     | `Mesmer_dataSlide_workflow.R`     | [data_mesmer/README.md](data_mesmer/README.md)             |
-| CellXpress segmentation analysis | `cellXpress_dataSlide_workflow.R` | [data_cellXpress/README.md](data_cellXpress/README.md) ([CellXpress2 download](https://cellxpress.org/download)) |
-| Signal intensity ratio analysis  | `Mesmer_SignalNoise_workflow.R`   | [data_mesmer/README.md](data_mesmer/README.md)             |
+| Mesmer segmentation analysis     | `workflows/mesmer_dataslide.R`    | [data_mesmer/README.md](data_mesmer/README.md)             |
+| CellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([CellXpress2 download](https://cellxpress.org/download)) |
+| Signal intensity ratio analysis  | `workflows/mesmer_signalnoise.R`  | [data_mesmer/README.md](data_mesmer/README.md)             |
+| CellXpress SNR analysis          | `workflows/cellxpress_snr.R`      | [data_cellXpress/README.md](data_cellXpress/README.md)     |
 | Manual cell type annotation      | `manual_annotation/`              | [manual_annotation/README.md](manual_annotation/README.md) |
 | Balagan spatial heterogeneity    | `balagan_analysis/`               | [balagan_analysis/README.md](balagan_analysis/README.md)   |
 
@@ -78,9 +79,9 @@ flowchart TD
     end
 
     subgraph stage2["Stage 2: R Analysis"]
-        F --> G["Mesmer_dataSlide_workflow.R"]
-        F --> H["cellXpress_dataSlide_workflow.R"]
-        F --> I["Mesmer_SignalNoise_workflow.R"]
+        F --> G["workflows/mesmer_dataslide.R"]
+        F --> H["workflows/cellxpress_dataslide.R"]
+        F --> I["workflows/mesmer_signalnoise.R"]
         G --> J[("Heatmaps & Statistics")]
         H --> J
         I --> J
@@ -94,7 +95,7 @@ flowchart TD
 
 > **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs from Zenodo. Stage 1 is only needed if you want to process raw images from BioImage Archive.
 
-**Typical entry point:** Download CSVs from Zenodo → place in `data_mesmer/` → run `Mesmer_dataSlide_workflow.R` (see [data_mesmer/README.md](data_mesmer/README.md)).
+**Typical entry point:** Download CSVs from Zenodo → place in `data_mesmer/` → run `workflows/mesmer_dataslide.R` from the repo root (see [data_mesmer/README.md](data_mesmer/README.md)).
 
 ## Dependency Installation
 
@@ -121,10 +122,14 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 ├── manual_annotation/              # Cell type annotation
 ├── Master_metadata_Mesmer.csv      # Mesmer workflow metadata
 ├── Master_metadata_cellXpress.csv  # CellXpress workflow metadata
-├── Mesmer_dataSlide_workflow.R     # Main Mesmer workflow
-├── Mesmer_SignalNoise_workflow.R   # Signal intensity ratio analysis
-├── cellXpress_dataSlide_workflow.R # Main CellXpress workflow
-├── helper.R                        # Shared R functions
+├── workflows/                      # Entry-point analyses (run from repo root)
+│   ├── mesmer_dataslide.R          # Main Mesmer workflow
+│   ├── mesmer_signalnoise.R        # Signal intensity ratio analysis
+│   ├── cellxpress_dataslide.R      # Main CellXpress workflow
+│   └── cellxpress_snr.R            # CellXpress SNR analysis
+├── scripts/                        # One-off utilities
+├── R/
+│   └── helper.R                    # Shared R functions
 └── requirements.txt                # Python dependencies
 ```
 

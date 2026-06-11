@@ -10,7 +10,7 @@ library(presto)
 library(svglite)
 library(cowplot)
 
-source("helper.R")
+source("R/helper.R")
 
 # Create results folder if it doesn't exist
 dir.create("./results", showWarnings = FALSE, recursive = TRUE)
