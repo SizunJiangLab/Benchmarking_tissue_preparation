@@ -82,9 +82,11 @@ flowchart TD
         F --> G["workflows/mesmer_dataslide.R"]
         F --> H["workflows/cellxpress_dataslide.R"]
         F --> I["workflows/mesmer_signalnoise.R"]
+        F --> M["workflows/cellxpress_snr.R"]
         G --> J[("Heatmaps & Statistics")]
         H --> J
         I --> J
+        M --> J
     end
 
     subgraph stage2b["Stage 2: Python Annotation"]
@@ -105,7 +107,7 @@ pip install -r requirements.txt
 pip install deepcell  # For Mesmer segmentation
 
 # R packages
-Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "devtools", "qs"))'
+Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "cowplot", "devtools", "qs"))'
 Rscript -e 'devtools::install_github("immunogenomics/presto")'
 ```
 
