@@ -746,12 +746,15 @@ plot_heatmaps <- function(df_trans, out_folder, excluded_values, remove_values, 
   # 4. Heatmap of raw CV values (without Z-score transformation)
   cv_min <- min(cv_long$CV, na.rm = TRUE)
   cv_max <- max(cv_long$CV, na.rm = TRUE)
+  cv_p95 <- quantile(cv_long$CV, 0.95, na.rm = TRUE)
   cv_heatmap <- ggplot(cv_long, aes(x = Staining_condition, y = Marker, fill = CV)) +
     geom_tile(color = "black", lwd = 0.4) +
     geom_text(aes(label = sprintf("%.2f", CV)), size = 2.5) +
     scale_fill_gradientn(
-      colors = c("white", "#FBEDF6", "#F5D0E6", "#EAB2D5", "#D378B4", "#C11C84"),
-      values = c(0, 0.4, 0.6, 0.75, 0.85, 1),
+      colors = c("white", "#FFF5F0", "#FEE0D2", "#FCBBA1",
+                 "#FC9272", "#FB6A4A", "#DE2D26", "#A50F15"),
+      limits = c(0, cv_p95),
+      oob = scales::squish,
       na.value = "grey60"
     ) +
     theme_minimal() +
