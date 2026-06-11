@@ -50,3 +50,10 @@ data_cellXpress/**
 *.tar
 *.tar.gz
 *.tgz
+
+# Agent / tooling state (machine-local, not part of the project)
+.omc/
+.claude/
+
+# Python packaging artifacts
+*.egg-info/
