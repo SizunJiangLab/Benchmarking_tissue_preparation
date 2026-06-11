@@ -36,7 +36,9 @@ celltype_colors_rgb = {ct: mcolors.to_rgb(hx) for ct, hx in PALETTE.items()}
 legend_elements = [Patch(facecolor=col, label=ct, edgecolor="black")
                    for ct, col in celltype_colors_rgb.items()]
 
-BASE = "/registered_report"
+# Base directory holding input/ and output/. Defaults to this script's folder;
+# override with REGISTERED_REPORT_DIR to point at data stored elsewhere.
+BASE = os.environ.get("REGISTERED_REPORT_DIR", os.path.dirname(os.path.abspath(__file__)))
 
 def pad_slide(slide_num: int) -> str:
     if not (1 <= slide_num <= 24):
