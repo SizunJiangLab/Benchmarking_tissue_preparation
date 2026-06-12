@@ -61,6 +61,7 @@ _Mesmer and CellXpress are independent segmentation platforms—choose based on 
 | CellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([CellXpress2 download](https://cellxpress.org/download)) |
 | Signal intensity ratio analysis  | `workflows/mesmer_signalnoise.R`  | [data_mesmer/README.md](data_mesmer/README.md)             |
 | CellXpress SNR analysis          | `workflows/cellxpress_snr.R`      | [data_cellXpress/README.md](data_cellXpress/README.md)     |
+| Factorial CV reanalysis          | `workflows/factorial_cv_model.R` → `workflows/factorial_cv_figures.R` | per-site factor effects on CV (η², adjusted mean CV, ranking table) |
 | Manual cell type annotation      | `manual_annotation/`              | [manual_annotation/README.md](manual_annotation/README.md) |
 | Balagan spatial heterogeneity    | `balagan_analysis/`               | [balagan_analysis/README.md](balagan_analysis/README.md)   |
 
@@ -87,6 +88,9 @@ flowchart TD
         H --> J
         I --> J
         M --> J
+        J --> N["workflows/factorial_cv_model.R"]
+        N --> O["workflows/factorial_cv_figures.R"]
+        O --> P[("Factor effects: η², adjusted mean CV, ranking table")]
     end
 
     subgraph stage2b["Stage 2: Python Annotation"]
@@ -109,6 +113,8 @@ pip install deepcell  # For Mesmer segmentation
 # R packages
 Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "cowplot", "devtools", "qs"))'
 Rscript -e 'devtools::install_github("immunogenomics/presto")'
+# Additional packages for the factorial CV reanalysis (workflows/factorial_cv_*.R)
+Rscript -e 'install.packages(c("car", "effectsize", "emmeans", "patchwork", "ggtext", "funkyheatmap", "ragg"))'
 ```
 
 Then follow the [Workflow Documentation](#workflow-documentation) for your analysis of interest.
@@ -128,7 +134,9 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 │   ├── mesmer_dataslide.R          # Main Mesmer workflow
 │   ├── mesmer_signalnoise.R        # Signal intensity ratio analysis
 │   ├── cellxpress_dataslide.R      # Main CellXpress workflow
-│   └── cellxpress_snr.R            # CellXpress SNR analysis
+│   ├── cellxpress_snr.R            # CellXpress SNR analysis
+│   ├── factorial_cv_model.R        # Factorial models of CV → effect size + adjusted mean CV tables
+│   └── factorial_cv_figures.R      # Panel C (adjusted mean CV), Panel D (η² bubble), ranking table
 ├── scripts/                        # One-off utilities
 ├── R/
 │   └── helper.R                    # Shared R functions
