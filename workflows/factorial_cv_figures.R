@@ -48,7 +48,7 @@ save_fig <- function(plot, stem, w, h) {
 # =============================================================================
 FACTOR_LABEL <- c("HIER duration" = "HIER duration",
                   "Staining" = "Ab staining", "Buffer" = "HIER buffer")
-FACTOR_ORDER <- c("HIER duration", "Ab staining", "HIER buffer")  # top -> bottom
+FACTOR_ORDER <- c("HIER buffer", "Ab staining", "HIER duration")  # top -> bottom
 
 build_panel_c <- function(site) {
   col <- SITE_COL[[site]]
@@ -58,15 +58,14 @@ build_panel_c <- function(site) {
            factor = factor(factor, levels = intersect(FACTOR_ORDER, unique(factor))),
            level = str_replace(level, "overnight", "O/N"))  # match figure abbreviation
 
+  grand <- mean(d$adjusted_cv)
+
   # within each factor: lowest CV (best) at the TOP -> y levels = descending CV
+  # circle (halo) = any level whose adjusted CV is below the overall (grand) mean
   d <- d %>%
-    group_by(factor) %>%
-    mutate(is_best = adjusted_cv == min(adjusted_cv)) %>%
-    ungroup() %>%
+    mutate(is_below_mean = adjusted_cv < grand) %>%
     arrange(factor, desc(adjusted_cv)) %>%
     mutate(level = fct_inorder(level))
-
-  grand <- mean(d$adjusted_cv)
 
   # alternating background bands (1st & 3rd factor grey, 2nd white)
   bands <- tibble(factor = levels(d$factor)) %>%
@@ -81,13 +80,17 @@ build_panel_c <- function(site) {
                colour = "#7A7A7A", linewidth = 0.35) +
     geom_linerange(aes(xmin = lower_cl, xmax = upper_cl),
                    colour = col, linewidth = 0.7) +
-    # best level: open halo ring behind the dot
-    geom_point(data = dplyr::filter(d, is_best),
+    # below-mean levels: open halo ring behind the dot
+    geom_point(data = dplyr::filter(d, is_below_mean),
                shape = 21, size = 4.4, fill = NA, colour = col, stroke = 0.9) +
     geom_point(size = 2.4, shape = 21, fill = col, colour = "white", stroke = 0.4) +
     facet_grid(factor ~ ., scales = "free_y", space = "free_y", switch = "y") +
     scale_x_continuous(labels = label_number(accuracy = 0.01)) +
-    labs(title = paste0("Adjusted Mean CV for Each Factor at ", SITE_TITLE[[site]]),
+    labs(title = str_wrap(paste0(
+           "Adjusted Mean CV with Lower and Upper Confidence Interval for Each Factor at ",
+           SITE_TITLE[[site]]), 50),
+         subtitle = paste0("<span style='color:", col,
+                           "'>&#9673;</span> indicates lower than overall average CV (dotted line)"),
          x = "Adjusted mean CV (lower = better)", y = NULL) +
     theme_classic(base_size = 11) +
     theme(
@@ -98,6 +101,8 @@ build_panel_c <- function(site) {
       axis.line.y       = element_blank(),
       axis.ticks.y      = element_blank(),
       plot.title        = element_text(face = "bold", size = 12, hjust = 0.5),
+      plot.subtitle     = ggtext::element_markdown(hjust = 0.5, size = 9,
+                                                   margin = margin(b = 4)),
       plot.title.position = "plot"
     )
 }
@@ -205,6 +210,29 @@ SITE_TBL_TITLE <- c(
 W_RANK <- 1.4; W_DURATION <- 3.2; W_STAINING <- 4.0; W_BAR <- 4.0; W_LABEL <- 1.4
 POS_ARGS <- position_arguments(expand_xmax = 4, col_annot_offset = 4.2)
 
+# Shared "Performance" gradient (matches the funkyheatmap bar fill) + a standalone
+# horizontal colorbar legend keyed to the ACTUAL Avg Score range for each site.
+PERF_COLORS <- c("#DEEBF7", "#9ECAE1", "#4292C6", "#08519C")
+
+make_perf_legend <- function(site) {
+  rng <- range(master$avg_score_exact[master$site == site])
+  p <- ggplot(tibble(v = rng), aes(x = v, y = 1, fill = v)) +
+    geom_tile() +
+    scale_fill_gradientn(
+      colours = PERF_COLORS, limits = rng,
+      breaks = rng, labels = sprintf("%.1f", rng),
+      name = "Avg Score (lower = better)",
+      guide = guide_colourbar(title.position = "top", title.hjust = 0, ticks = FALSE,
+                              barwidth = grid::unit(36, "pt"),
+                              barheight = grid::unit(6, "pt"))) +
+    theme_void(base_size = 8) +
+    theme(legend.position = "bottom",
+          legend.justification = "left",
+          legend.title = element_text(size = 8, face = "bold"),
+          legend.text  = element_text(size = 7))
+  cowplot::get_legend(p)
+}
+
 build_funky <- function(site) {
   is_bidmc <- site == "BIDMC"
   d <- master %>% filter(site == !!site) %>% arrange(rank)
@@ -237,7 +265,7 @@ build_funky <- function(site) {
     ~group,      ~palette, ~level1,
     "condition", "perf",   "Condition (HIER + antibody staining)",
     "score",     "perf",   "Performance")
-  palettes <- list(perf = c("#DEEBF7", "#9ECAE1", "#4292C6", "#08519C"))
+  palettes <- list(perf = PERF_COLORS)
 
   g <- funky_heatmap(data = data, column_info = column_info, column_groups = column_groups,
                      palettes = palettes,
@@ -279,8 +307,10 @@ for (s in sites) {
   hm_h <- g$height; w <- g$width
   title <- cowplot::ggdraw() +
     cowplot::draw_label(SITE_TBL_TITLE[[s]], fontface = "bold", size = 9.5, x = 0.018, hjust = 0)
-  th <- 0.45; h <- hm_h + th
-  final <- cowplot::plot_grid(title, g, ncol = 1, rel_heights = c(th, hm_h))
+  lg <- cowplot::ggdraw() +
+    cowplot::draw_grob(make_perf_legend(s), x = 0.035, width = 0.93)
+  th <- 0.45; lh <- 0.4; h <- hm_h + th + lh
+  final <- cowplot::plot_grid(title, g, lg, ncol = 1, rel_heights = c(th, hm_h, lh))
   stem <- file.path(io_dir, paste0("ranking_table_", s))
   ggsave(paste0(stem, ".pdf"), final, width = w, height = h, device = grDevices::cairo_pdf)
   ggsave(paste0(stem, ".svg"), final, width = w, height = h, device = svglite::svglite)
