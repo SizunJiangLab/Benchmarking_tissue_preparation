@@ -51,9 +51,16 @@ data_cellXpress/**
 *.tar.gz
 *.tgz
 
+# Manuscript revision materials: unpublished text, figures and reviewer
+# correspondence. This repository is public and is the URL cited by the paper,
+# so none of it may be tracked here.
+rebuttal/
+
 # Agent / tooling state (machine-local, not part of the project)
 .omc/
 .claude/
+AGENTS.md
+REORG_PLAN.md
 
 # Python packaging artifacts
 *.egg-info/
