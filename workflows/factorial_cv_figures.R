@@ -212,14 +212,20 @@ POS_ARGS <- position_arguments(expand_xmax = 4, col_annot_offset = 4.2)
 
 # Shared "Performance" gradient (matches the funkyheatmap bar fill) + a standalone
 # horizontal colorbar legend keyed to the ACTUAL Avg Score range for each site.
+# funkyheatmap maps a bar's numeric colour by *discrete* palette index
+# (round(value * (n-1)) + 1), so a 4-colour palette yields only ~3 visible shades.
+# Interpolating to a 100-step ramp makes the bars a smooth gradient that matches
+# the legend. The bars are coloured via a separate `perf_color` column rescaled to
+# the observed score range, so light->dark spans min->max exactly like the legend.
 PERF_COLORS <- c("#DEEBF7", "#9ECAE1", "#4292C6", "#08519C")
+PERF_RAMP   <- grDevices::colorRampPalette(PERF_COLORS)(100)
 
 make_perf_legend <- function(site) {
   rng <- range(master$avg_score_exact[master$site == site])
   p <- ggplot(tibble(v = rng), aes(x = v, y = 1, fill = v)) +
     geom_tile() +
     scale_fill_gradientn(
-      colours = PERF_COLORS, limits = rng,
+      colours = PERF_RAMP, limits = rng,
       breaks = rng, labels = sprintf("%.1f", rng),
       name = "Avg Score (lower = better)",
       guide = guide_colourbar(title.position = "top", title.hjust = 0, ticks = FALSE,
@@ -240,6 +246,9 @@ build_funky <- function(site) {
   d <- d %>% mutate(
     tie = ifelse(is.na(tie), "", tie),
     performance = avg_score_exact / bmax,
+    # bar fill spans the full observed score range (min -> lightest, max -> darkest),
+    # matching the colorbar legend; bar *length* stays = performance.
+    perf_color = scales::rescale(avg_score_exact, to = c(0, 1)),
     avg_label = paste0("  ", avg_score),
     rank_lab = paste0(rank, tie),
     example_val = dplyr::case_when(rank == 1 ~ 1L, rank == 2 ~ 2L, rank == 3 ~ 3L,
@@ -247,25 +256,25 @@ build_funky <- function(site) {
   buf_w <- max(nchar(d$hier_buffer)) * 0.34 + 0.6
 
   data <- d %>% transmute(id = rank_lab, hier_duration, hier_buffer, ab_staining,
-                          performance, avg_label)
+                          performance, perf_color, avg_label)
 
   column_info <- tribble(
-    ~id,            ~name,           ~geom, ~group,      ~palette, ~width,     ~hjust,
-    "id",           "Rank",          "text","condition", NA,       W_RANK,     0,
-    "hier_duration","HIER duration", "text","condition", NA,       W_DURATION, 0,
-    "hier_buffer",  "HIER buffer",   "text","condition", NA,       buf_w,      0,
-    "ab_staining",  "Ab staining",   "text","condition", NA,       W_STAINING, 0,
-    "performance",  "Avg Score",     "bar", "score",     "perf",   W_BAR,      NA,
-    "avg_label",    "",              "text","score",     NA,       W_LABEL,    0)
+    ~id,            ~name,           ~geom, ~group,      ~palette, ~id_color,    ~width,     ~hjust,
+    "id",           "Rank",          "text","condition", NA,       NA,           W_RANK,     0,
+    "hier_duration","HIER duration", "text","condition", NA,       NA,           W_DURATION, 0,
+    "hier_buffer",  "HIER buffer",   "text","condition", NA,       NA,           buf_w,      0,
+    "ab_staining",  "Ab staining",   "text","condition", NA,       NA,           W_STAINING, 0,
+    "performance",  "Avg Score",     "bar", "score",     "perf",   "perf_color", W_BAR,      NA,
+    "avg_label",    "",              "text","score",     NA,       NA,           W_LABEL,    0)
   column_info <- column_info %>% mutate(options = lapply(seq_len(n()), function(i) {
     o <- list(width = width[i]); if (!is.na(hjust[i])) o$hjust <- hjust[i]; o
-  })) %>% select(id, name, geom, group, palette, options)
+  })) %>% select(id, name, geom, group, palette, id_color, options)
 
   column_groups <- tribble(
     ~group,      ~palette, ~level1,
     "condition", "perf",   "Condition (HIER + antibody staining)",
     "score",     "perf",   "Performance")
-  palettes <- list(perf = PERF_COLORS)
+  palettes <- list(perf = PERF_RAMP)
 
   g <- funky_heatmap(data = data, column_info = column_info, column_groups = column_groups,
                      palettes = palettes,
