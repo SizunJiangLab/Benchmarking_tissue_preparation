@@ -51,10 +51,11 @@ cv_rank_data <- data.frame(
 # --- Process 2: Alpha Rank ---
 cat("Loading Stable Alpha data...\n")
 alpha_rank_data <- read_csv(alpha_data_file, show_col_types = FALSE) %>%
-  # Create the same "slideX" key for joining
-  mutate(Slide_Name = paste0("slide", gsub(".*slide(\\d+).*", "\\1", Slide)), median_alpha_slope=median_alpha_slope*-1) %>%
-  # Rank the slides based on their slope
-  # A lower (more negative) slope is ranked first (Rank 1)
+  # Create the same "slideX" key for joining.
+  # median_alpha_slope is already the positive heterogeneity exponent: script 01
+  # negates the raw log-log slope before taking the median. Do not negate again.
+  mutate(Slide_Name = paste0("slide", gsub(".*slide(\\d+).*", "\\1", Slide))) %>%
+  # Rank the slides by alpha (Rank 1 = least heterogeneous)
   mutate(alpha_slope_rank = rank(median_alpha_slope, ties.method = "min")) %>%
   select(Slide_Name, alpha_slope_rank, median_alpha_slope)
 

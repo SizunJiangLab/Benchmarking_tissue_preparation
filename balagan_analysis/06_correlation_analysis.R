@@ -60,11 +60,18 @@ cat("Loading core datasets...\n")
 alpha_slope_file <- file.path(consistency_dir, "AGGREGATE_stable_alpha_slopes.csv")
 stable_alpha_slopes <- read_csv(alpha_slope_file, show_col_types = FALSE) %>%
   mutate(Slide_Name = paste0("slide", gsub(".*slide(\\d+).*", "\\1", Slide))) %>%
-  mutate(Alpha = median_alpha_slope * -1) %>%  # Convert to positive exponent
+  # 01_check_consistency_and_calc_alpha.R already negates the raw log-log slope
+  # before taking the median, so this column is the positive heterogeneity
+  # exponent. Do not negate it again.
+  mutate(Alpha = median_alpha_slope) %>%
   select(Slide_Name, Alpha, sd_alpha_slope)
 
 # --- Balagan Metrics: Tau Ranks ---
-tau_rank_file <- file.path(tau_rank_dir, "TABLE_stable_MEAN_rank_stability.csv")
+# 05_calculate_tau_rank_stability.R writes both a MEAN- and a MEDIAN-based table.
+# The MEDIAN one is the published metric: tau is pooled across the 100 runs by
+# median before the slides are ranked at each FOV width (mean_rank then averages
+# those ranks over the 10 FOV widths, in both tables).
+tau_rank_file <- file.path(tau_rank_dir, "TABLE_stable_MEDIAN_rank_stability.csv")
 stable_tau_ranks <- read_csv(tau_rank_file, show_col_types = FALSE) %>%
   dplyr::rename(Average_Tau_Rank = mean_rank) %>%
   select(Slide_Name, Average_Tau_Rank, stability_sd, stability_iqr)
