@@ -205,7 +205,10 @@ for (src in all_sources) {
 # Validation - Stanford IMC:
 #   "Stanford_IMC_OSCC_cellXpress", "Stanford_IMC_Tonsil_cellXpress"
 
-current_config_name <- "Stanford_IMC_Tonsil_cellXpress"
+current_config_name <- Sys.getenv(
+  "BTP_CONFIG_NAME",
+  unset = "Stanford_IMC_Tonsil_cellXpress"
+)
 current_config <- configurations[[current_config_name]]
 
 # Validate configuration exists
@@ -224,13 +227,17 @@ if (is.null(current_config)) {
 # Set up working environment
 data_folder <- current_config$data_folder
 out_folder <- current_config$out_folder
+output_root <- Sys.getenv("BTP_OUTPUT_ROOT", unset = "")
+if (nzchar(output_root)) {
+  out_folder <- paste0(file.path(output_root, current_config_name), .Platform$file.sep)
+}
 input_filenames <- current_config$input_filenames
 input_note <- current_config$input_note
 pairs <- current_config$pairs
 excluded_values <- current_config$excluded_values
 remove_values <- current_config$remove_values
 
-dir.create(out_folder, showWarnings = FALSE)
+dir.create(out_folder, showWarnings = FALSE, recursive = TRUE)
 
 # Save configuration details for reference
 write_csv(

@@ -29,6 +29,12 @@ BIDMC,BIDMC_Slide22,DCSIGN
 BIDMC,BIDMC_Slide23,DCSIGN
 BIDMC,BIDMC_Slide24,DCSIGN
 BIDMC,BIDMC_Slide21,CD138
+BIDMC_Tonsil,BIDMC_tonsil_30,CD4
+BIDMC_Tonsil,BIDMC_tonsil_31,CD4
+BIDMC_Tonsil,BIDMC_tonsil_32,CD4
+BIDMC_DLBCL,BIDMC_LymphNode_1,CD4
+BIDMC_DLBCL,BIDMC_LymphNode_2,CD4
+BIDMC_DLBCL,BIDMC_LymphNode_3,CD4
 Stanford,Stanford_Slide8,PD-L1
 Stanford,Stanford_Slide8,PDL1
 Stanford_MIBI_Colon,Stanford_MIBI_Colon_Tris_40min,Mast Cell Tryptase

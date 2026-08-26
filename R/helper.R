@@ -853,6 +853,23 @@ load_signal_ratio_data <- function(data_folder, input_filenames, input_note) {
   }
 }
 
+# Summarise condition scores using every marker, including penalised exclusions.
+summarise_condition_scores <- function(cv_ranked, penalty_score) {
+  cv_ranked %>%
+    group_by(Staining_condition) %>%
+    summarise(
+      Total_Markers = n_distinct(Marker),
+      Working_Markers = sum(!is.na(CV) & !Is_Excluded),
+      Excluded_Markers = sum(Is_Excluded),
+      NonWorking_Markers = sum(is.na(CV) & !Is_Excluded),
+      Total_Score = sum(Score, na.rm = TRUE),
+      Average_Score = Total_Score / Total_Markers,
+      Average_Rank = Average_Score,
+      Penalty_Count = sum(Score == penalty_score, na.rm = TRUE)
+    ) %>%
+    arrange(Average_Score)
+}
+
 # Function to implement the scoring system directly as described
 implement_scoring_system <- function(df_trans, out_folder, excluded_values = list(), remove_values = c(), penalty_score = 10, marker_sequence = NULL, current_config_name = NULL) {
   # Select column names (markers)
@@ -1026,19 +1043,7 @@ implement_scoring_system <- function(df_trans, out_folder, excluded_values = lis
     )
   
   # Calculate summary statistics for each condition
-  condition_summary <- cv_ranked %>%
-    group_by(Staining_condition) %>%
-    summarise(
-      Total_Markers = n_distinct(Marker),
-      Working_Markers = sum(!is.na(CV) & !Is_Excluded),
-      Excluded_Markers = sum(Is_Excluded),
-      NonWorking_Markers = sum(is.na(CV) & !Is_Excluded),
-      Total_Score = sum(Score, na.rm = TRUE),
-      Average_Score = Total_Score / Total_Markers,
-      Average_Rank = mean(Rank, na.rm = TRUE),
-      Penalty_Count = sum(Score == penalty_score)
-    ) %>%
-    arrange(Average_Score) # Sort from best to worst
+  condition_summary <- summarise_condition_scores(cv_ranked, penalty_score)
   
   # Calculate summary statistics for each marker
   marker_summary <- cv_ranked %>%
@@ -1254,15 +1259,22 @@ process_excluded_markers <- function(source) {
   return(result)
 }
 # Function to create a combined visualization with average scores above CV heatmap
-create_combined_cv_plot <- function(condition_summary, cv_z_long, condition_order) {
+create_combined_cv_plot <- function(condition_summary, cv_z_long, condition_order, score_digits = 1) {
   # Prepare the condition summary data for plotting
   rank_data <- condition_summary %>%
     mutate(Staining_condition = factor(Staining_condition, levels = condition_order))
+
+  # Markers with fewer than two working conditions have no computable Z-score.
+  heatmap_data <- cv_z_long %>%
+    group_by(Marker) %>%
+    filter(any(!is.na(Z_score))) %>%
+    ungroup()
+  score_label_format <- paste0("%.", score_digits, "f")
   
   # Create the top barplot for average scores
   p_ranks <- ggplot(rank_data, aes(x = Staining_condition, y = Average_Score)) +
     geom_bar(stat = "identity", fill = "steelblue", width = 0.7) +
-    geom_text(aes(label = sprintf("%.1f", Average_Score)), vjust = -0.3, size = 4.5) + # Increased font size, one decimal place
+    geom_text(aes(label = sprintf(score_label_format, Average_Score)), vjust = -0.3, size = 4.5) +
     theme_minimal() +
     theme(
       axis.title.x = element_blank(),
@@ -1276,17 +1288,17 @@ create_combined_cv_plot <- function(condition_summary, cv_z_long, condition_orde
     scale_y_continuous(expand = expansion(mult = c(0, 0.2)))
   
   # Create the bottom CV z-score heatmap
-  p_heatmap <- ggplot(cv_z_long, aes(x = Staining_condition, y = Marker, fill = Z_score)) +
+  p_heatmap <- ggplot(heatmap_data, aes(x = Staining_condition, y = Marker, fill = Z_score)) +
     geom_tile(color = "black", lwd = 0.4) +
     scale_fill_gradientn(
       colors = c("#4D9221", "#A1D76A", "#E6F5D0", 
                  "#FFFFFF",  # Pure white at zero
                  "#FDE0EF", "#E9A3C9", "#C51B7D"),
-      values = scales::rescale(c(min(cv_z_long$Z_score, na.rm = TRUE), 
+      values = scales::rescale(c(min(heatmap_data$Z_score, na.rm = TRUE),
                                  -0.5, -0.35, 
                                  0,  # Zero point
                                  0.35, 0.5, 
-                                 max(cv_z_long$Z_score, na.rm = TRUE))),
+                                 max(heatmap_data$Z_score, na.rm = TRUE))),
       na.value = "grey60",
       guide = "colorbar"
     ) +

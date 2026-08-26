@@ -194,7 +194,10 @@ for (source in all_sources) {
 #          "Stanford_MIBI_LymphNode_pooled_all", "StorageConditionsExpt_all",
 #          "Stanford_IMC_Tonsil_all", "Stanford_IMC_OSCC_all",
 #          "LyophilizationTest_FigS2_all", "Reimagedslide_FigS5_all"
-current_config_name <- "LyophilizationTest_FigS2_all"
+current_config_name <- Sys.getenv(
+  "BTP_CONFIG_NAME",
+  unset = "LyophilizationTest_FigS2_all"
+)
 
 ########################################## Configuration End ###############################################################
 
@@ -207,13 +210,17 @@ if (is.null(current_config)) {
 # Set up working environment
 data_folder <- current_config$data_folder
 out_folder <- current_config$out_folder
+output_root <- Sys.getenv("BTP_OUTPUT_ROOT", unset = "")
+if (nzchar(output_root)) {
+  out_folder <- paste0(file.path(output_root, current_config_name), .Platform$file.sep)
+}
 input_filenames <- current_config$input_filenames
 input_note <- current_config$input_note
 pairs <- current_config$pairs
 excluded_values <- current_config$excluded_values
 remove_values <- current_config$remove_values
 
-dir.create(out_folder, showWarnings = FALSE)
+dir.create(out_folder, showWarnings = FALSE, recursive = TRUE)
 
 # Save configuration details for reference
 write_csv(

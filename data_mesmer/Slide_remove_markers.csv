@@ -19,11 +19,9 @@ Stanford,Marker,03_ArgoFluor520
 Stanford,Marker,05_ArgoFluor548
 Stanford,Marker,06_AF2
 Stanford,Marker,16_ArgoFluor760
-BIDMC_Tonsil,Marker,CD4
 BIDMC_Tonsil,Marker,CD56
 BIDMC_Tonsil,Marker,DCSIGN
 BIDMC_Tonsil,Marker,DC.SIGN
-BIDMC_DLBCL,Marker,CD4
 BIDMC_DLBCL,Marker,CD56
 BIDMC_DLBCL,Marker,DCSIGN
 BIDMC_DLBCL,Marker,DC.SIGN
