@@ -76,7 +76,7 @@ flowchart TD
 
     subgraph S1["Stage 1 · Preprocessing (optional)"]
         B["<b>preprocessing/</b><br/>crop FOVs → Mesmer → features"]
-        X["<b>cellXpress 2</b><br/>(external software)"]
+        X["<b>cellXpress2</b><br/>(external software)"]
     end
 
     A --> B & X
