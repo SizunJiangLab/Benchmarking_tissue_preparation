@@ -32,15 +32,20 @@ pip install deepcell  # For Mesmer segmentation
 
 ## Configuration
 
-Edit these variables in `crop_mesmer_featureextraction_signaltonoise.py`:
+`DATA_FOLDER` (folder of .qptiff files) and `OUT_FOLDER` (output folder) set the paths for
+both the script and the notebook. They default to `preprocessing/data/` and
+`preprocessing/out/`. End both values with `/`: the notebook joins paths by string
+concatenation. `manual_annotation/` uses `REGISTERED_REPORT_DIR` instead (see its README);
+the R workflows use `BTP_OUTPUT_ROOT` and `BTP_CONFIG_NAME`.
+
+```bash
+DATA_FOLDER=/path/to/qptiff/ OUT_FOLDER=/path/to/output/ \
+  python crop_mesmer_featureextraction_signaltonoise.py
+```
+
+Edit the crop coordinates and marker list in `crop_mesmer_featureextraction_signaltonoise.py`:
 
 ```python
-# Path to folder containing .qptiff files
-data_folder = "/path/to/qptiff/files"
-
-# Output directory for results
-output_folder = "/path/to/output"
-
 # FOV crop coordinates: {slide_key: {"FOV1": (x_min, x_max, y_min, y_max), "FOV2": ...}}
 crop_coords_dict = {
     "1": {

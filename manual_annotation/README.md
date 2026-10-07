@@ -8,12 +8,11 @@ variable. If it is not set, the base defaults to this `manual_annotation/` folde
 Point it at wherever the data actually lives, e.g.:
 
 ```bash
-export REGISTERED_REPORT_DIR=/registered_report
+export REGISTERED_REPORT_DIR=/path/to/manual_annotation_data
 ```
 
-The provided `*.slurm` submit scripts already export this (defaulting to
-`/registered_report`), so the `sbatch` workflow below works out of the box; set the
-variable yourself when running the scripts manually with `python ...`.
+The `*.slurm` submit scripts do not set it: `sbatch` passes an exported value through.
+Run `sbatch` from inside `manual_annotation/`.
 
 ---
 

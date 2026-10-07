@@ -13,9 +13,7 @@
 ml Miniforge3
 conda activate clustering_3.11
 
-# Data root for input/, output/, and cluster_annotations.json.
-# Override by exporting REGISTERED_REPORT_DIR before sbatch; defaults to the cluster path.
-export REGISTERED_REPORT_DIR="${REGISTERED_REPORT_DIR:-/registered_report}"
+# REGISTERED_REPORT_DIR, if exported before sbatch, is passed through; unset, the scripts use manual_annotation/.
 
 # The script will read SLURM_ARRAY_TASK_ID and zero-pad it to 01–24
 python ./03_phenotype_map.py

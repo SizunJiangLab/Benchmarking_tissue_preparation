@@ -144,7 +144,10 @@ def extract_sc_features(
     return data, dataScaleSize, cell_props, cellSizes
 
 if __name__ == "__main__":
-    img = read_qtiff_image("/home/ubuntu/project/temp/Benchmarking_tissue_preparation_data/Slide 1_20 min HIER 1h RT stain_Scan1.qptiff")
+    import sys
+    if len(sys.argv) != 2:
+        sys.exit(f"usage: python {path.basename(__file__)} <image.qptiff>")
+    img = read_qtiff_image(sys.argv[1])
     n, m = generate_nuclear_and_membrane(img)
     print(n)
     print(m)
