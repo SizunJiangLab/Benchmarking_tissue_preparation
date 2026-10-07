@@ -17,7 +17,7 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 
 **Key features:**
 
-- Compare marker signal intensities across conditions (Mesmer/CellXpress workflows)
+- Compare marker signal intensities across conditions (Mesmer/cellXpress workflows)
 - Calculate signal intensity ratios inside vs outside cell masks
 - Perform manual cell type annotation (Python pipeline)
 - Quantify spatial heterogeneity (Balagan analysis)
@@ -32,11 +32,11 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 - **FOV coordinates**: Used by Stage 1 preprocessing; documented here for reference
 - **File paths**: Relative paths to BioImage Archive assets (masks, OME-TIFFs, GeoJSONs)
 
-**[`Master_metadata_cellXpress.csv`](Master_metadata_cellXpress.csv)** contains region-level metadata for CellXpress workflows, with one row per tile/region including coordinates and dimensions.
+**[`Master_metadata_cellXpress.csv`](Master_metadata_cellXpress.csv)** contains region-level metadata for cellXpress workflows, with one row per tile/region including coordinates and dimensions.
 
 ### External Data Repositories
 
-Large data files are hosted externally due to size. Download and place in the appropriate folders before running workflows.
+Large data files are hosted externally due to size. Before you run a workflow, download the files that it needs and place them as its README describes.
 
 | Data Type                | Location                                                          | Description                                                                                             |
 | ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -53,14 +53,14 @@ Large data files are hosted externally due to size. Download and place in the ap
 
 **Stage 2: Analysis**
 
-_Mesmer and CellXpress are independent segmentation platforms—choose based on your data source. Signal intensity ratios use Mesmer segmentation masks only._
+_Mesmer and cellXpress are independent segmentation platforms—choose based on your data source. Signal intensity ratios use Mesmer segmentation masks only._
 
 | Workflow                         | Script / Folder                   | Documentation                                              |
 | -------------------------------- | --------------------------------- | ---------------------------------------------------------- |
 | Mesmer segmentation analysis     | `workflows/mesmer_dataslide.R`    | [data_mesmer/README.md](data_mesmer/README.md)             |
-| CellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([CellXpress2 download](https://cellxpress.org/download)) |
+| cellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([cellXpress2 download](https://cellxpress.org/download)) |
 | Signal intensity ratio analysis  | `workflows/mesmer_signalnoise.R`  | [data_mesmer/README.md](data_mesmer/README.md)             |
-| CellXpress SNR analysis          | `workflows/cellxpress_snr.R`      | [data_cellXpress/README.md](data_cellXpress/README.md)     |
+| cellXpress SNR analysis          | `workflows/cellxpress_snr.R`      | [data_cellXpress/README.md](data_cellXpress/README.md)     |
 | Factorial CV reanalysis          | `workflows/factorial_cv_model.R` → `workflows/factorial_cv_figures.R` | per-site factor effects on CV (η², adjusted mean CV, ranking table) |
 | Manual cell type annotation      | `manual_annotation/`              | [manual_annotation/README.md](manual_annotation/README.md) |
 | Balagan spatial heterogeneity    | `balagan_analysis/`               | [balagan_analysis/README.md](balagan_analysis/README.md)   |
@@ -101,7 +101,11 @@ flowchart TD
 
 > **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs from Zenodo. Stage 1 is only needed if you want to process raw images from BioImage Archive.
 
-**Typical entry point:** Download CSVs from Zenodo → place in `data_mesmer/` → run `workflows/mesmer_dataslide.R` from the repo root (see [data_mesmer/README.md](data_mesmer/README.md)).
+**Typical entry point:**
+
+1. Download the CSVs from Zenodo.
+2. Put the Mesmer CSVs in `data_mesmer/`, in the folder layout that [data_mesmer/README.md](data_mesmer/README.md) shows.
+3. From the repo root, run `workflows/mesmer_dataslide.R`.
 
 ## Dependency Installation
 
@@ -125,16 +129,16 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 .
 ├── preprocessing/                  # Image preprocessing
 ├── data_mesmer/                    # Mesmer data
-├── data_cellXpress/                # CellXpress data
+├── data_cellXpress/                # cellXpress data
 ├── balagan_analysis/               # Spatial analysis
 ├── manual_annotation/              # Cell type annotation
 ├── Master_metadata_Mesmer.csv      # Mesmer workflow metadata
-├── Master_metadata_cellXpress.csv  # CellXpress workflow metadata
+├── Master_metadata_cellXpress.csv  # cellXpress workflow metadata
 ├── workflows/                      # Entry-point analyses (run from repo root)
 │   ├── mesmer_dataslide.R          # Main Mesmer workflow
 │   ├── mesmer_signalnoise.R        # Signal intensity ratio analysis
-│   ├── cellxpress_dataslide.R      # Main CellXpress workflow
-│   ├── cellxpress_snr.R            # CellXpress SNR analysis
+│   ├── cellxpress_dataslide.R      # Main cellXpress workflow
+│   ├── cellxpress_snr.R            # cellXpress SNR analysis
 │   ├── factorial_cv_model.R        # Factorial models of CV → effect size + adjusted mean CV tables
 │   └── factorial_cv_figures.R      # Panel C (adjusted mean CV), Panel D (η² bubble), ranking table
 ├── scripts/                        # One-off utilities
