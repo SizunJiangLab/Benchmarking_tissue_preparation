@@ -72,10 +72,10 @@ _Manual annotation requires Stage 1 outputs (OME-TIFFs + segmentation masks from
 ```mermaid
 flowchart TD
     A[("Raw QPTIFF images<br/>BioImage Archive")]
-    D[("Annotation inputs<br/>h5ad, GeoJSON, masks<br/>BioImage Archive")]
+    D[("Annotation inputs<br/>BioImage Archive")]
 
     subgraph S1["Stage 1 · Preprocessing (optional)"]
-        B["<b>preprocessing/</b><br/>crop FOVs → Mesmer → features"]
+        B["<b>preprocessing/</b><br/>crop FOVs → Mesmer →<br/>features & intensity ratios"]
         X["<b>cellXpress2</b><br/>(external software)"]
     end
 
@@ -87,9 +87,9 @@ flowchart TD
         G["<b>workflows/</b><br/>mesmer_dataslide.R<br/>cellxpress_dataslide.R"]
         I["<b>workflows/</b><br/>mesmer_signalnoise.R<br/>cellxpress_snr.R"]
         N["<b>workflows/</b><br/>factorial_cv_model.R<br/>factorial_cv_figures.R"]
-        Q["<b>balagan_analysis/</b>"]
+        Q["<b>balagan_analysis/</b><br/>(Mesmer only)"]
         G --> J[("CV heatmaps<br/>& CV scores")]
-        J -- Mesmer CVs --> N --> P[("Partial η², EMM CV<br/>& ranking tables")]
+        J -- Mesmer CVs --> N --> P[("Partial η², adjusted mean CV<br/>& ranking tables")]
         I --> K[("Signal intensity<br/>ratios")]
         J --> Q
         Q --> R[("Spatial<br/>heterogeneity")]
