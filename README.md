@@ -58,7 +58,7 @@ _Mesmer and cellXpress are independent segmentation platforms—choose based on 
 | Workflow                         | Script / Folder                   | Documentation                                              |
 | -------------------------------- | --------------------------------- | ---------------------------------------------------------- |
 | Mesmer segmentation analysis     | `workflows/mesmer_dataslide.R`    | [data_mesmer/README.md](data_mesmer/README.md)             |
-| cellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([cellXpress 2 download](https://cellxpress.org/download)) |
+| cellXpress segmentation analysis | `workflows/cellxpress_dataslide.R`| [data_cellXpress/README.md](data_cellXpress/README.md) ([cellXpress2 download](https://cellxpress.org/download)) |
 | Signal intensity ratio analysis  | `workflows/mesmer_signalnoise.R`  | [data_mesmer/README.md](data_mesmer/README.md)             |
 | cellXpress SNR analysis          | `workflows/cellxpress_snr.R`      | [data_cellXpress/README.md](data_cellXpress/README.md)     |
 | Factorial CV reanalysis          | `workflows/factorial_cv_model.R` → `workflows/factorial_cv_figures.R` | per-site factor effects on CV (η², adjusted mean CV, ranking table) |
