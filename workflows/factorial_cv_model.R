@@ -8,11 +8,6 @@
 #   Roche    : CV ~ buffer + hier_duration + Marker              (6,  25 C 1 h only)
 # Type II ANOVA -> partial eta-squared (effect size); emmeans -> adjusted mean CV.
 #
-# Consolidated R-only port of:
-#   rebuttal/scripts/R1_5_factorial_model_all_sites.R   (the statistical core)
-#   rebuttal/scripts/R3_build_viz_input.py              (pure relabel, no modeling)
-#   rebuttal/scripts/R3_fig3_master_table.py            (ranking + traffic-light colors)
-#
 # Run from the repo root:  Rscript workflows/factorial_cv_model.R
 # Inputs  (gitignored, produced by the main Mesmer workflow with *_all configs):
 #   results/out_{BIDMC,Stanford,Roche}_all/cv_values_long.csv
@@ -39,7 +34,7 @@ PLATFORM <- c(
   Roche    = "Akoya PhenoCycler-Fusion"
 )
 
-# Staining display labels: EMM panel (R1_5) vs ranking table (R3_fig3_master).
+# Staining display labels: EMM panel vs ranking table.
 STAIN_EMM <- c("4C_ON" = "4 °C overnight", "25C_1h" = "25 °C 1 h",
                "25C_ON" = "25 °C overnight", "37C_1h" = "37 °C 1 h")
 STAIN_TBL <- c("4C_ON" = "4 °C, O/N", "25C_1h" = "25 °C, 1 h",
@@ -218,7 +213,7 @@ emm_frames$Roche <- bind_rows(
 ) %>% mutate(site = "Roche", platform = PLATFORM[["Roche"]])
 
 # =============================================================================
-# Write effect_size.csv + adjusted_mean_cv.csv  (folds R3_build_viz_input.py)
+# Write effect_size.csv + adjusted_mean_cv.csv
 # =============================================================================
 site_order <- c("BIDMC", "Stanford", "Roche")
 
@@ -232,7 +227,7 @@ adjusted_mean_cv <- bind_rows(emm_frames[site_order]) %>%
 write_csv(adjusted_mean_cv, file.path(out_dir, "adjusted_mean_cv.csv"))
 
 # =============================================================================
-# Write ranking_master_table.csv  (folds R3_fig3_master_table.py)
+# Write ranking_master_table.csv
 # =============================================================================
 fmt_score <- function(v) ifelse(v >= 10, sprintf("%.1f", v), sprintf("%.2f", v))
 

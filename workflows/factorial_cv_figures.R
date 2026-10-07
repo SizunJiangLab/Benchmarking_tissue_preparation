@@ -2,16 +2,13 @@
 # =============================================================================
 # Factorial CV reanalysis - Stage 2: figures
 #
-# Reads the tidy tables from Stage 1 (results/factorial_cv/*.csv) and renders the
-# three promoted Figure-3 deliverables, one per site where applicable:
-#   - adjusted_mean_cv_{site}   Panel C: EMM dot + 95% CI per factor level
+# Reads the tidy tables from Stage 1 (results/factorial_cv/*.csv) and renders,
+# one per site where applicable:
+#   - adjusted_mean_cv_{site}   EMM dot + 95% CI per factor level
 #                               (left factor strips, alternating bands,
 #                                grand-mean dashed line, best level haloed)
-#   - effect_size_bubble        Panel D: cross-site partial-eta^2 bubble matrix
+#   - effect_size_bubble        cross-site partial-eta^2 bubble matrix
 #   - ranking_table_{site}      funkyheatmap "Conditions Ranked Top->Bottom" table
-#
-# Consolidated R-only port of A_importance_matrix.R, the build_emm panel of
-# R3_stats_v3_funky_consistent.R, and R3_concept1_funky.R.
 #
 # Run from the repo root (after factorial_cv_model.R):
 #   Rscript workflows/factorial_cv_figures.R
@@ -42,7 +39,7 @@ save_fig <- function(plot, stem, w, h) {
 }
 
 # =============================================================================
-# PANEL C - Adjusted mean CV (EMM dot + 95% CI) per factor, per site
+# Adjusted mean CV (EMM dot + 95% CI) per factor, per site
 # Factor rows: HIER duration / Ab staining / HIER buffer; best level haloed;
 # grand-mean dashed reference; alternating grey factor bands; left strip labels.
 # =============================================================================
@@ -116,7 +113,7 @@ for (s in sites) {
 }
 
 # =============================================================================
-# PANEL D - "Which prep knob matters" importance matrix (port of A_importance_matrix.R)
+# Importance matrix (partial eta^2 per factor and site)
 # rows = HIER buffer / Ab staining / HIER duration; cols = 3 sites;
 # dot AREA = partial eta^2, colored by site; absent cells render "n/a".
 # =============================================================================
@@ -200,7 +197,7 @@ message("Panel D: importance matrix")
 save_fig(build_panel_d(), file.path(io_dir, "effect_size_bubble"), w = 6.7, h = 5.5)
 
 # =============================================================================
-# FUNKY RANKING TABLE  (port of R3_concept1_funky.R)
+# FUNKY RANKING TABLE
 # =============================================================================
 SITE_TBL_TITLE <- c(
   BIDMC    = "Conditions Ranked from Top to Bottom for BIDMC-Harvard/Akoya PhenoCycler-Fusion",
