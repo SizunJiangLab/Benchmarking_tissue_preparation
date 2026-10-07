@@ -36,7 +36,7 @@ This repository provides analysis workflows to benchmark tissue preparation and 
 
 ### External Data Repositories
 
-Large data files are hosted externally due to size. Before you run a workflow, download the files and put them in the folders that the Description column names.
+Large data files are hosted externally due to size. Before you run a workflow, download the files that it needs and place them as its README describes.
 
 | Data Type                | Location                                                          | Description                                                                                             |
 | ------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -104,8 +104,8 @@ flowchart TD
 **Typical entry point:**
 
 1. Download the CSVs from Zenodo.
-2. Put the CSVs in `data_mesmer/`.
-3. From the repo root, run `workflows/mesmer_dataslide.R` (see [data_mesmer/README.md](data_mesmer/README.md)).
+2. Put the Mesmer CSVs in `data_mesmer/`, in the folder layout that [data_mesmer/README.md](data_mesmer/README.md) shows.
+3. From the repo root, run `workflows/mesmer_dataslide.R`.
 
 ## Dependency Installation
 
