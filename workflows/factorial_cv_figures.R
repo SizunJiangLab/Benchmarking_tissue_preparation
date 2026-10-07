@@ -113,7 +113,7 @@ for (s in sites) {
 }
 
 # =============================================================================
-# Effect-size bubble matrix (partial eta^2 per factor and site)
+# Importance matrix (partial eta^2 per factor and site)
 # rows = HIER buffer / Ab staining / HIER duration; cols = 3 sites;
 # dot AREA = partial eta^2, colored by site; absent cells render "n/a".
 # =============================================================================
