@@ -71,32 +71,36 @@ _Manual annotation requires Stage 1 outputs (OME-TIFFs + segmentation masks from
 
 ```mermaid
 flowchart TD
-    subgraph stage1["Stage 1: Python Preprocessing"]
-        A[("Raw QPTIFF Images<br/>(BioImage Archive)")] --> B["preprocessing/"]
-        B --> C["Crop FOVs<br/>(coords from Master_metadata_Mesmer.csv)"]
-        C --> D["Mesmer Segmentation"]
-        D --> E["Extract Features & Intensity Ratios"]
-        E --> F[("CSV Data Files<br/>(Zenodo)")]
+    A[("Raw QPTIFF images<br/>BioImage Archive")]
+    D[("Annotation inputs<br/>BioImage Archive")]
+
+    subgraph S1["Stage 1 · Preprocessing (optional)"]
+        B["<b>preprocessing/</b><br/>crop FOVs → Mesmer →<br/>features & intensity ratios"]
+        X["<b>cellXpress2</b><br/>(external software)"]
     end
 
-    subgraph stage2["Stage 2: R Analysis"]
-        F --> G["workflows/mesmer_dataslide.R"]
-        F --> H["workflows/cellxpress_dataslide.R"]
-        F --> I["workflows/mesmer_signalnoise.R"]
-        F --> M["workflows/cellxpress_snr.R"]
-        G --> J[("Heatmaps & Statistics")]
-        H --> J
-        I --> J
-        M --> J
-        J --> N["workflows/factorial_cv_model.R"]
-        N --> O["workflows/factorial_cv_figures.R"]
-        O --> P[("Factor effects: η², adjusted mean CV, ranking table")]
+    A --> B & X
+    B --> C[("Per-cell feature tables<br/>Zenodo")]
+    X --> C
+
+    subgraph S2["Stage 2 · R analysis"]
+        G["<b>workflows/</b><br/>mesmer_dataslide.R<br/>cellxpress_dataslide.R"]
+        I["<b>workflows/</b><br/>mesmer_signalnoise.R<br/>cellxpress_snr.R"]
+        N["<b>workflows/</b><br/>factorial_cv_model.R<br/>factorial_cv_figures.R"]
+        Q["<b>balagan_analysis/</b><br/>(Mesmer only)"]
+        G --> J[("CV heatmaps<br/>& CV scores")]
+        J -- Mesmer CVs --> N --> P[("Partial η², adjusted mean CV<br/>& ranking tables")]
+        I --> K[("Signal intensity<br/>ratios")]
+        J --> Q
+        Q --> R[("Spatial<br/>heterogeneity")]
     end
 
-    subgraph stage2b["Stage 2: Python Annotation"]
-        F --> K["manual_annotation/ pipeline"]
-        K --> L[("Cell Type Maps & Enrichment")]
+    subgraph S3["Stage 2 · Python annotation"]
+        M["<b>manual_annotation/</b>"] --> L[("Cell type maps<br/>& enrichment")]
     end
+
+    C --> G & I & Q
+    D --> M
 ```
 
 > **Note:** Most users can skip Stage 1 by downloading the pre-generated CSVs from Zenodo. Stage 1 is only needed if you want to process raw images from BioImage Archive.
