@@ -13,7 +13,7 @@ Raw QPTIFF Images → Crop FOVs → Mesmer Segmentation → Single-cell CSVs
 ## Requirements
 
 ```bash
-pip install ..  # repo root; Python 3.9-3.10, dependencies in pyproject.toml
+pip install ..  # repo root; Python 3.10, dependencies in pyproject.toml
 ```
 
 ## Scripts
