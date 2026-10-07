@@ -211,8 +211,10 @@ def process_and_segment(data_folder, output_folder, crop_coords_dict, markers, f
 # CONFIGURATION
 # =============================================================================
 
-data_folder = "/mnt/nfs/storage/Fusion_Registered_Report/Initial_Optimization_Stage2/BIDMC"
-output_folder = "/mnt/nfs/home/jialelee/Registered_Report/Initial Optimization/BIDMC/CheckSNR_Normalizedbyarea/Output"
+# Set DATA_FOLDER (folder of .qptiff files) and OUT_FOLDER to override the defaults.
+SCRIPT_DIR = Path(__file__).resolve().parent
+data_folder = os.environ.get("DATA_FOLDER", str(SCRIPT_DIR / "data"))
+output_folder = os.environ.get("OUT_FOLDER", str(SCRIPT_DIR / "out"))
 
 # Crop coordinates: {slide_key: {"FOV1": (x_min, x_max, y_min, y_max), "FOV2": (...)}}
 crop_coords_dict = {
