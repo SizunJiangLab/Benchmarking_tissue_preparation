@@ -13,8 +13,7 @@ Raw QPTIFF Images → Crop FOVs → Mesmer Segmentation → Single-cell CSVs
 ## Requirements
 
 ```bash
-pip install -r ../requirements.txt
-pip install deepcell  # For Mesmer segmentation
+pip install ..  # repo root; Python 3.9-3.10, dependencies in pyproject.toml
 ```
 
 ## Scripts

@@ -1,0 +1,25 @@
+[project]
+name = "benchmarking-tissue-preparation"
+version = "0.1.0"
+description = "Analysis workflows benchmarking tissue preparation and staining conditions for multiplexed imaging of FFPE tissue"
+readme = "README.md"
+license = "MIT"
+# tensorflow 2.8 (required by deepcell 0.12) has wheels only up to Python 3.10.
+requires-python = ">=3.9,<3.11"
+dependencies = [
+    "deepcell==0.12.10",
+    "imagecodecs==2024.6.1",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "scikit-image==0.24.0",
+    "tensorflow==2.8.4",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+# The repository is a set of scripts, not an importable package.
+[tool.setuptools]
+packages = []
+py-modules = []

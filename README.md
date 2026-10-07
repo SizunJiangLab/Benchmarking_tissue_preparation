@@ -114,9 +114,8 @@ flowchart TD
 ## Dependency Installation
 
 ```bash
-# Python (for preprocessing and manual annotation)
-pip install -r requirements.txt
-pip install deepcell  # For Mesmer segmentation
+# Python 3.9-3.10 (for preprocessing), from the repo root; dependencies are in pyproject.toml
+pip install .
 
 # R packages
 Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "cowplot", "devtools", "qs"))'
@@ -148,7 +147,7 @@ Then follow the [Workflow Documentation](#workflow-documentation) for your analy
 ├── scripts/                        # One-off utilities
 ├── R/
 │   └── helper.R                    # Shared R functions
-└── requirements.txt                # Python dependencies
+└── pyproject.toml                  # Python dependencies
 ```
 
 ## Contributors
