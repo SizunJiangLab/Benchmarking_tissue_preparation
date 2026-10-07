@@ -156,8 +156,7 @@ sbatch 05_submit_enrichment.slurm
 **Purpose:**  
 Concatenates all 24 slides, attaches PhenoGraph cluster IDs and cell-type
 annotations from the per-slide clustering CSVs, and runs UMAP. Provides the
-resolved cell-type annotations on dimensionality-reduction plots requested by
-the reviewers. Two analysis modes are produced: `all_cells` and
+resolved cell-type annotations on dimensionality-reduction plots. Two analysis modes are produced: `all_cells` and
 `filtered_annotations` (keeping only cells with a definite annotation:
 CD8+ T cells, CD8- T cells, Tregs, B cells, Epithelial, Macrophages).
 SVGs are exported with editable text for Illustrator.
