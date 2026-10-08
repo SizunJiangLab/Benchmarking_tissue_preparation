@@ -1,0 +1,43 @@
+[project]
+name = "benchmarking-tissue-preparation"
+version = "0.1.0"
+description = "Analysis workflows benchmarking tissue preparation and staining conditions for multiplexed imaging of FFPE tissue"
+readme = "README.md"
+license = "MIT"
+# Install each extra in its own environment: tensorflow 2.8 (preprocessing) stops at
+# Python 3.10, and the annotation pins need Python 3.11.
+requires-python = ">=3.9,<3.12"
+dependencies = [
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+]
+
+[project.optional-dependencies]
+preprocessing = [
+    "deepcell==0.12.10",
+    "imagecodecs==2024.6.1",
+    "matplotlib==3.9.2",
+    "scikit-image==0.24.0",
+    "tensorflow==2.8.4",
+    "tifffile==2024.8.30",
+    "tqdm==4.66.5",
+]
+annotation = [
+    "anndata==0.12.16",
+    "geopandas==1.1.3",
+    "ipython==9.14.1",
+    "matplotlib==3.11.0",
+    "scanpy==1.11.5",
+    "svgutils==0.3.4",
+    "tifffile==2026.3.3",
+    "tqdm==4.68.2",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+# The repository is a set of scripts, not an importable package.
+[tool.setuptools]
+packages = []
+py-modules = []
