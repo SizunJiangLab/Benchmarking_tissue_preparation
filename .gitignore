@@ -10,6 +10,8 @@
 # Python/Jupyter artifacts
 __pycache__/
 *.pyc
+build/
+dist/
 .ipynb_checkpoints/
 
 # Cached inputs

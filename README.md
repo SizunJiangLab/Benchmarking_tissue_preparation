@@ -114,9 +114,10 @@ flowchart TD
 ## Dependency Installation
 
 ```bash
-# Python 3.10, from the repo root; dependencies are in pyproject.toml
-pip install .                   # preprocessing
-pip install ".[annotation]"     # preprocessing + manual_annotation
+# Python, from the repo root; dependencies are in pyproject.toml.
+# Use a separate environment for each:
+pip install ".[preprocessing]"  # Python 3.9-3.10
+pip install ".[annotation]"     # manual_annotation/, Python 3.11
 
 # R packages
 Rscript -e 'install.packages(c("dplyr", "tidyverse", "matrixStats", "ggcorrplot", "ggpubr", "tidyr", "rstatix", "readr", "svglite", "cowplot", "devtools", "qs"))'
